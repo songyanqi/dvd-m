@@ -3,8 +3,6 @@
 
 首先切换私有源，参考 http://wiki.bravetime.net/pages/viewpage.action?pageId=20381771    
 
-联系孙伟光增加权限
-
 然后在项目跟目录运行 
 ```shell
 npm install
