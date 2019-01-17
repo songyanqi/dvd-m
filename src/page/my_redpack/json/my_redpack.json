@@ -1,0 +1,108 @@
+{
+  "code": 0,
+  "data_version": "3632fd02543df19f721e4f74af488b07",
+  "suggestDomain": "",
+  "forceDomain": "haba.davdian.com",
+  "shop_url": "http:\/\/haba.davdian.com",
+  "visitor_status": 3,
+  "sess_key": "5b26969eb566e508e719fe1fb800b47d049c7a73",
+  "sys_time": 1519880638,
+  "data": {
+    "coupon": [
+      {
+        "bonusTitle": "1同仁堂黑糖专属红包",
+        "createTime": "1519610000",
+        "beginTime": "1519790000",
+        "endTime": "1519883256",
+        "limitDesc": "全场通用",
+        "bonusMoney": "1.2",
+        "minAmount": "120"
+      },
+      {
+        "bonusTitle": "2同仁堂黑糖专属红包",
+        "createTime": "1519610000",
+        "beginTime": "1519790000",
+        "endTime": "1519883256",
+        "limitDesc": "全场通用",
+        "bonusMoney": "1.2",
+        "minAmount": "120"
+      },
+      {
+        "bonusTitle": "3同仁堂黑糖专属红包",
+        "createTime": "1519610000",
+        "beginTime": "1519790000",
+        "endTime": "1519883256",
+        "limitDesc": "全场通用",
+        "bonusMoney": "1.2",
+        "minAmount": "120"
+      },
+      {
+        "bonusTitle": "4同仁堂黑糖专属红包",
+        "createTime": "1519610000",
+        "beginTime": "1519790000",
+        "endTime": "1519883256",
+        "limitDesc": "全场通用",
+        "bonusMoney": "1.2",
+        "minAmount": "120"
+      },
+      {
+        "bonusTitle": "5同仁堂黑糖专属红包",
+        "createTime": "1519610000",
+        "beginTime": "1519790000",
+        "endTime": "1519883256",
+        "limitDesc": "全场通用",
+        "bonusMoney": "1.2",
+        "minAmount": "120"
+      },
+      {
+        "bonusTitle": "6同仁堂黑糖专属红包",
+        "createTime": "1519610000",
+        "beginTime": "1519790000",
+        "endTime": "1519883256",
+        "limitDesc": "全场通用",
+        "bonusMoney": "1.2",
+        "minAmount": "120"
+      },
+      {
+        "bonusTitle": "7同仁堂黑糖专属红包",
+        "createTime": "1519610000",
+        "beginTime": "1519790000",
+        "endTime": "1519883256",
+        "limitDesc": "全场通用",
+        "bonusMoney": "1.2",
+        "minAmount": "120"
+      },
+      {
+        "bonusTitle": "8同仁堂黑糖专属红包",
+        "createTime": "1519610000",
+        "beginTime": "1519790000",
+        "endTime": "1519883256",
+        "limitDesc": "全场通用",
+        "bonusMoney": "1.2",
+        "minAmount": "120"
+      },
+      {
+        "bonusTitle": "9同仁堂黑糖专属红包",
+        "createTime": "1519610000",
+        "beginTime": "1519790000",
+        "endTime": "1519883256",
+        "limitDesc": "全场通用",
+        "bonusMoney": "1.2",
+        "minAmount": "120"
+      },
+      {
+        "bonusTitle": "10同仁堂黑糖专属红包",
+        "createTime": "1519610000",
+        "beginTime": "1519790000",
+        "endTime": "1519883256",
+        "limitDesc": "全场通用",
+        "bonusMoney": "1.2",
+        "minAmount": "120"
+      }
+    ],
+    "hasMore": "1",
+    "useableNum": "11",
+    "usedNum": "0",
+    "expireNum": "0"
+  }
+}

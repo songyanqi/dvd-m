@@ -1,0 +1,36 @@
+@import "../../../common/css/util";
+
+.app {
+  background: white;
+  .info-box{
+    margin-top: .8rem;
+  }
+  .wechat-img{
+    width: .6rem;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+  }
+  p{
+    text-align: center;
+    color: #666;
+  }
+  .wechat-name{
+    font-size: .14rem;
+    padding-top: .2rem;
+  }
+  .wechat-number{
+    font-size: .14rem;
+    padding-top: .05rem;
+  }
+  .tip{
+    width: 100%;
+    position: fixed;
+    bottom: .4rem;
+    font-size: .12rem;
+  }
+  /* 安卓hack */
+  &.android {
+
+  }
+}

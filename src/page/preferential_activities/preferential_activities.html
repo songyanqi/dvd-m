@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/preferential_activities/css/preferential_activities.css[[v]]">
+</head>
+<body>
+<div class="app" v-if="res" v-cloak>
+  <!--标题-->
+  <com-top-title back title="优惠活动" share :back-refresh="ua.isDvdApp()" :back="ua.isDvdApp()"></com-top-title>
+
+
+  <div v-if="sysTime > activityIn.start_time && sysTime < activityIn.end_time">
+    <!--活动提示标题-->
+    <div class="act-title" v-if="dataList.length != 0">以下商品{{activityIn.rule_info}}</div>
+    <!--双排列表-->
+    <div class="list-wapper" v-if="dataList.length != 0">
+      <div class="list" v-for="(item,index) in dataList" :key="item.act_id || item.goods_id" @click="goGoodsMessage(item)">
+        <div class="goods-list">
+          <div class="goods_img_container">
+            <img v-lazy="item.goodsImg">
+            <div class="good_list_sell_out" v-if="item.status == 1">
+              <span>售罄</span>
+            </div>
+            <!--商品活动信息-->
+            <span v-if="item.goods_label !='' " class="img_label">{{item.goods_label}}</span>
+          </div>
+          <div class="content-wapper">
+            <div class="content">
+              <span class="type_box" v-if="item.attrs && item.attrs.length !==0" :class="{android_type_box: ua.isAndroid()}"><span class="type-icon">{{item.attrs[0].attrInfo}}</span></span>
+              {{item.title}}
+            </div>
+            <!--会员-->
+            <div class="price-box">
+              <div class="price-wapper">
+                <div class="shop-price">
+                  <em>¥</em>
+                  <span>{{(item.nowPrice + "").split(".")[0]}}</span>
+                  <span class="last" v-if="(item.nowPrice +'').split('.').length == 2">.{{(item.nowPrice + "").split(".")[1]}}</span>
+                </div>
+                <div class="vip-return" v-if="isSeller">
+                  <span>会员返</span>
+                  <em>¥</em>
+                  <span class="last">{{item.income}}</span>
+                </div>
+              </div>
+              <div class="goods-car" @click.stop="showCar(item)">
+                <img src="//9i.dvmama.com/free/2017816/shoppingCart.png" alt="购物车">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--商品不存在-->
+    <div v-if="dataList.length == 0">
+      <div class="no-act" >
+        <img src="//9i.dvmama.com/free/2017816/error_pic.png" alt="">
+      </div>
+      <p class="content-act">该活动下暂无商品</p>
+    </div>
+    <!--返回顶部-->
+    <com-to-top-icon></com-to-top-icon>
+    <!--分页效果图-->
+    <div v-show="loading" class="no_more">
+      正在加载更多数据
+      <img src="//9i.dvmama.com/free/loading_03252.svg">
+    </div>
+    <div v-show="no_more" class="no_more no_moreStyle" v-if="dataList.length != 0">
+      <span>已经到底啦～</span>
+    </div>
+
+    <!--底部footer-->
+    <div class="footer-btn" v-if="dataList.length != 0">
+      <div class="footer-left">
+        <div class="footer-left-top">
+          <span>小计：</span>
+          <span>¥</span>
+          <span>{{(priceData.subtotal + "").split(".")[0]}}</span>
+          <span class="last" v-if="(priceData.subtotal +'').split('.').length == 2">.{{(priceData.subtotal + "").split(".")[1]}}</span>
+        </div>
+        <div class="footer-left-bottom">{{priceData.act_info}}</div>
+      </div>
+      <div class="footer-right" @click="returnCar">返回购物车</div>
+    </div>
+    <!--多规格弹窗-->
+    <div class="mask-popup-bg" v-show="maskPopupFlag" @click="maskPopupHide">
+      <div class="mask-popup" @click.stop :class="{ 'mask-popup-open': maskPopupFlag == true, 'mask-popup-close': maskPopupFlag == false}">
+        <!--关闭按钮-->
+        <div class="flag" @click="maskPopupHide">
+          <span></span>
+        </div>
+        <!--商品图片-->
+        <div class="mask-goods-pic"><img :src="image" alt=""></div>
+        <!--商品信息价钱-->
+        <div class="titleInfo">
+          <div class="titleM5">
+            <span class="summary_p_icon">¥</span>
+            <span class="summary_price">{{price}}</span>
+            <!--<span class="summary_activity">限时购</span>-->
+          </div>
+          <!--选择-->
+          <div class="summary_select">
+            <span class="summar_select_title">选择</span>
+            <span class="summary_m15">
+            <span>{{titleColor}}</span>
+            <span>{{titleSize}}</span>
+          </span>
+          </div>
+        </div>
+        <div class="h-split-list"></div>
+        <!--商品规格-->
+        <div class="sku-control">
+          <ul v-if="tags[0]">
+            <li>
+              <div class="s-decision_title">{{tags[0].title}}</div>
+              <div class="items">
+                <span v-for="(list,index) in tags[0].detail" :key="list.id" @click="checkColorNum(list, list.num)" :class="[{ activieType: list.id == chooseColorId  && (!list.num || list.num && list.num > 0), isDisabled: list.num <= 0 && colorUseNum}]">{{list.title}}</span>
+              </div>
+            </li>
+            <div class="h-split"></div>
+          </ul>
+
+          <ul v-if="tags[1]">
+            <li>
+              <div class="s-decision_title">{{tags[1].title}}</div>
+              <div class="items">
+                <!--{{list.title + ' ' + (list.num ? list.num : '')}}-->
+                <span v-for="(list,index) in tags[1].detail" :key="list.id" @click="checkSizeNum(list, list.num)" :class="[{ activieType: list.id == chooseSizeId && (!list.num || list.num && list.num > 0),isDisabled: list.num <= 0 && sizeUseNum}]">{{list.title}}</span>
+              </div>
+            </li>
+            <div class="h-split"></div>
+          </ul>
+
+          <div class="summary_number">
+            <div class="summary_d_title">数量</div>
+            <div class = "summary_number_cont">
+              <div class = "isLimit" v-show="messagePrompt"><span>库存不足</span></div>
+              <!--数量-->
+              <div class="good_number_container">
+                <div class="input_control">
+                  <div class="minus" @click="minChange" :class="{'disable': counter == 1 }">-</div>
+                  <input type="tel" v-model="counter">
+                  <div class="plus" @click="addChange" :class="{'disable': counter == goodsStock }">+</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-bottom">
+            <div class="confirm-btn" @click="confirmBtn()">确定</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!--活动结束页面-->
+  <div v-else >
+    <div class="no-act">
+      <img src="//9i.dvmama.com/free/2017816/error_pic.png" alt="">
+    </div>
+    <p class="content-act">来晚啰，活动已结束～</p>
+  </div>
+</div>
+
+@@include('node_modules/dvd-base-build/html-inc/body.inc')
+<script src="[[static]]/common/js/common.js[[v]]"></script>
+<script src="[[static]]/page/preferential_activities/js/preferential_activities.js[[v]]"></script>
+</body>
+</html>

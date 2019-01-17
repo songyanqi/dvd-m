@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>绑定微信号</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/bindWechatInfo/css/bindWechatInfo.css[[v]]">
+</head>
+<body>
+  <div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+    <!--标题-->
+    <dvd-service-com-title title="绑定微信号" back :back-click="back"></dvd-service-com-title>
+    <div class="info-box">
+      <img class="wechat-img" :src="wechatImg" alt="">
+      <p class="wechat-name">{{wechatName}}</p>
+      <p class="tip">*暂不支持更换绑定微信号哟</p>
+    </div>
+
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/bindWechatInfo/js/bindWechatInfo.js[[v]]"></script>
+</body>
+</html>

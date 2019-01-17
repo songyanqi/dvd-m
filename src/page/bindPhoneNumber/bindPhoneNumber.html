@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>绑定手机号</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/bindPhoneNumber/css/bindPhoneNumber.css[[v]]">
+</head>
+<body class="loaded">
+  <div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+    <!--标题-->
+
+    <dvd-service-com-title back :back-click="back"></dvd-service-com-title>
+    <div class="wrap">
+      <header class="title">绑定手机号</header>
+      <p class="sub-title">为了您的账户安全，请绑定手机号</p>
+      <div class="input-box">
+        <input type="tel" placeholder="请输入手机号" class="phone" v-model.trim="phone">
+        <transition name="fade">
+          <img class="clear-value" src="//9i.dvmama.com/free/2018/04/14/clearInput.png" alt="" v-show="phone.length" @click="phone=''">
+        </transition>
+      </div>
+      <div class="input-box">
+        <input type="number" placeholder="请输入验证码" class="code" v-model.trim="code">
+        <div id="codeBtn" class="btn code-btn" :class="{'disabled':!phone.length}" @click="getCode(1)">{{codeText}}</div>
+      </div>
+      <p class="code-tip">
+        <span @click="getCode(2)">短信收不到？试试语音验证</span>
+      </p>
+      <div id="bindBtn" class="btn login-btn" :class="{'disabled':!loginFlag}" @click="bindPhoneNumber">绑定手机号</div>
+      <p class="enroll-tip" id="enrollTip">继续操作，即表示已阅读并同意大V店《<a href="/admin_topic.html?topicId=20010">用户注册协议</a>》</p>
+    </div>
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/bindPhoneNumber/js/bindPhoneNumber.js[[v]]"></script>
+</body>
+</html>

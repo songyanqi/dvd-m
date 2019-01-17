@@ -1,0 +1,353 @@
+@import "../../../common/css/util";
+
+body {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.pt-115 {
+  padding-top: r(115);
+}
+
+.t-50-d {
+  top: r(-50);
+}
+
+.op-02 {
+  opacity: 0.2;
+}
+
+.app {
+  background-image: url("//pic.davdian.com/free/2018/06/08/bg.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  font-size: 0;
+  .act{
+    animation: act 1000ms;
+  }
+  .ui-bg {
+    width: 100%;
+    min-height: r(609);
+    position: relative;
+    > * {
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      position: absolute;
+      //animation: act 1000ms;
+    }
+    .ui-shareUser-box-l {
+      width: r(335);
+      height: r(70);
+      padding: 0 r(20);
+      margin-top: r(47);
+      z-index: 4;
+      animation: act 1000ms;
+      .ui-portrait-l {
+        width: r(70);
+        height: r(70);
+        border: solid r(3) #ffffff;
+        border-radius: r(50);
+        float: left;
+        img {
+          border-radius: r(50);
+        }
+      }
+      .ui-portrait-s{
+        width: r(60);
+        height: r(60);
+      }
+      .ui-text-l {
+        max-width: r(250);
+        height: r(70);
+        margin-left: r(9);
+        float: left;
+        p:nth-child(1) {
+          margin-top: r(15);
+          font-size: r(19);
+        }
+        p:nth-child(2) {
+          margin-top: r(10);
+          font-size: r(14);
+        }
+      }
+      .ui-text-l-3 {
+        height: r(84);
+        margin-left: r(12);
+        float: left;
+        position: relative;
+        margin-top: r(-5);
+        p:nth-child(1) {
+          font-size: r(26);
+        }
+        p:nth-child(2) {
+          margin-top: r(4);
+          font-size: r(26);
+        }
+        p:nth-child(3) {
+          margin-top: r(9);
+          font-size: r(18);
+        }
+      }
+    }
+    .ui-shareUser-box-s {
+      width: r(335);
+      height: r(60);
+      padding: 0 r(20);
+      margin-top: r(47);
+      .ui-portrait-s {
+        width: r(60);
+        height: r(60);
+        border: solid r(3) #ffffff;
+        border-radius: r(50);
+        float: left;
+        animation: act 1000ms;
+        img {
+          border-radius: r(50);
+        }
+      }
+      .ui-text-s {
+        height: r(60);
+        margin-left: r(12);
+        float: left;
+        p:nth-child(1) {
+          margin-top: r(10);
+          font-size: r(16);
+        }
+        p:nth-child(2) {
+          margin-top: r(10);
+          font-size: r(12);
+        }
+      }
+    }
+    .ui-green-mountain {
+      width: 100%;
+      height: r(97);
+      margin-top: r(165);
+      background-image: url("//pic.davdian.com/free/2018/06/08/green.png");
+      z-index: 2;
+    }
+    .ui-character {
+      width: 100%;
+      height: r(242);
+      background-image: url("//pic.davdian.com/free/2018/06/07/Group4.png");
+      margin-top: r(236);
+      z-index: 2;
+    }
+    .ui-redPack {
+      width: r(236);
+      height: r(208);
+      margin-top: r(208);
+      left: 50%;
+      margin-left: r(-118);
+      z-index: 1;
+      animation: act 1000ms
+    }
+    .hasTaken {
+      margin-top: r(145);
+      z-index: 3;
+    }
+    .ui-ticket {
+      width: r(356);
+      height: r(100);
+      padding: 0 r(9) 0 r(10);
+      background-image: url("//pic.davdian.com/free/2018/06/08/ticket.png");
+      margin-top: r(319);
+      z-index: 3;
+      animation: act 1000ms;
+      div {
+        float: left;
+      }
+      .ui-ticket-price {
+        width: r(74);
+        height: r(42);
+        line-height: r(42);
+        color: #ffffff;
+        text-align: center;
+        margin-left: r(2);
+        margin-top: r(17);
+        span:nth-child(1) {
+          font-size: r(20);
+        }
+        span:nth-child(2) {
+          font-size: r(30);
+        }
+      }
+      .ui-ticket-txt {
+        width: r(220);
+        height: r(70);
+        margin-left: r(58);
+        margin-top: r(15);
+        p {
+          width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        p:nth-child(1) {
+          height: r(22);
+          font-size: r(16);
+        }
+        p:nth-child(2) {
+          margin-top: r(5);
+          height: r(17);
+          font-size: r(12);
+          color: #666666;
+        }
+        p:nth-child(3) {
+          margin-top: r(10);
+          height: r(16);
+          font-size: r(11);
+          color: #999999;
+        }
+      }
+    }
+    .ui-has-overTime {
+      width: r(114);
+      height: r(92);
+      background-image: url("//pic.davdian.com/free/2018/06/08/overTime.png");
+      left: 50%;
+      margin-left: r(-56);
+      margin-top: r(280);
+      z-index: 3;
+    }
+    .ui-price-box {
+      width: r(153);
+      height: r(81);
+      margin-top: r(237);
+      left: 50%;
+      margin-left: r(-76.6);
+      color: #FD457A;
+      z-index: 2;
+      text-align: center;
+      .ui-price {
+        height: r(81);
+        line-height: r(81);
+        font-size: r(56);
+        display: inline-block;
+
+      }
+      .ui-price-text {
+        height: r(81);
+        display: inline-block;
+        p:nth-child(1) {
+          height: r(25);
+          line-height: r(25);
+          margin-top: r(13);
+          font-size: r(18);
+        }
+        p:nth-child(2) {
+          height: r(29);
+          line-height: r(29);
+          font-size: r(21);
+        }
+      }
+    }
+    .hasTaken4 {
+      margin-top: r(181);
+      z-index: 3;
+    }
+    .ui-ovt-tip {
+      width: 100%;
+      text-align: center;
+      font-size: r(12);
+      margin-top: r(382);
+      z-index: 3;
+    }
+    .ui-hasTaken-ticket {
+      width: r(356);
+      height: r(100);
+      margin-left: r(10);
+      margin-top: r(348);
+      z-index: 4;
+      background-image: url("//pic.davdian.com/free/2018/06/08/ticket2.png");
+      .ui-hasTaken-ticket-box {
+        width: r(316);
+        height: r(50);
+        margin-left: r(20);
+        margin-top: r(25);
+        .ui-hasTaken-ticket-user {
+          .ui-hasTaken-ticket-userIcon {
+            width: r(44);
+            height: r(44);
+            border-radius: r(50);
+            background-color: #ffffff;
+            border: solid r(3) #ffffff;
+            float: left;
+            img {
+              border-radius: r(50);
+            }
+          }
+          .ui-hasTaken-ticket-txt {
+            float: left;
+            width: r(150);
+            height: r(50);
+            margin-left: r(10);
+            p {
+              width: 100%;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              margin-top: r(10);
+            }
+            p:nth-child(1) {
+              font-size: r(16);
+            }
+            p:nth-child(2) {
+
+              font-size: r(11);
+              color: #999999;
+            }
+          }
+          .ui-hasTaken-ticket-price {
+            float: left;
+            width: r(74);
+            height: r(50);
+            line-height: r(50);
+            text-align: center;
+            color: #FD457A;
+            margin-left: r(30);
+            span:nth-child(1) {
+              font-size: r(20);
+            }
+            span:nth-child(2) {
+              font-size: r(30);
+            }
+          }
+        }
+      }
+    }
+    .ui-btn {
+      width: r(275);
+      height: r(40);
+      line-height: r(40);
+      margin-top: r(501);
+      left: 50%;
+      margin-left: r(-137.5);
+      border-radius: r(25);
+      background: linear-gradient(to right, #ff595b, #fa1861);
+      z-index: 1;
+      color: #ffffff;
+      text-align: center;
+      span {
+        font-size: r(14);
+        letter-spacing: r(2)
+      }
+    }
+    .ui-dis-btn{
+      background: linear-gradient(to right, #fbcaca, #fa9e9e);
+    }
+  }
+
+  @keyframes act {
+    0% {
+      opacity: 0
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  /* 安卓hack */
+  &.android {
+
+  }
+}

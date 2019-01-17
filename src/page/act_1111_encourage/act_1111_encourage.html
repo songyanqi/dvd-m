@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/act_1111_encourage/css/act_1111_encourage.css[[v]]">
+</head>
+<body>
+<div class="app" v-cloak v-if="response">
+  <!--标题-->
+  <com-top-title back title="预定商品，赢鼓励金" home></com-top-title>
+
+  <!--头图-->
+  <div class="g-head">
+    <img src="[[static]]/page/act_1111_encourage/img/head-bg.png[[v]]">
+    <div class="rule"><a href="/t-15514.html">活动规则>></a></div>
+  </div>
+
+  <!--内容-->
+  <div class="g-content">
+    <!--鼓励金总计-->
+    <div class="g-total">
+      <div class="total" v-if="response.data.double === '2'">累计鼓励金: {{response.data.awardPriceTotal * 2}}={{response.data.awardPriceTotal}}*2</div>
+      <div class="total" v-else>累计鼓励金: ¥{{response.data.awardPriceTotal}}</div>
+    </div>
+
+    <!--鼓励金-未领取列表-->
+    <div class="g-receiving-wrapper">
+      <ul class="g-receive-list receiving">
+        <li v-for="(item, i) in response.data.dataList" @click="receive(item.awardId);" v-if="!item.awardPrice">
+          <div class="title">待领取鼓励金</div>
+          <div class="desc">{{item.payTime}} 预定商品：{{item.goodsName}}</div>
+        </li>
+        <!--没有待领取鼓励金时，展示去预定-->
+        <div class="go-subscribe" v-if="response.data.receivingCount <= 0">
+          <a href="/act_1111_main.html">
+            <img src="[[static]]/page/act_1111_encourage/img/to-receive-double.png[[v]]" v-if="response.data.double === '2'">
+            <img src="[[static]]/page/act_1111_encourage/img/to-receive.png[[v]]" v-else>
+          </a>
+        </div>
+      </ul>
+    </div>
+
+    <!--加倍卡-->
+    <div class="g-double-wrapper">
+      <img class="g-double" src="[[static]]/page/act_1111_encourage/img/double.png[[v]]" v-if="response.data.double === '2'">
+      <img class="g-double" src="[[static]]/page/act_1111_encourage/img/no-double.png[[v]]" v-else>
+      <img class="link link-1" src="[[static]]/page/act_1111_encourage/img/link.png[[v]]">
+      <img class="link link-2" src="[[static]]/page/act_1111_encourage/img/link.png[[v]]">
+      <img class="link link-3" src="[[static]]/page/act_1111_encourage/img/link.png[[v]]">
+      <img class="link link-4" src="[[static]]/page/act_1111_encourage/img/link.png[[v]]">
+    </div>
+
+    <!--鼓励金-已领取列表-->
+    <ul class="g-receive-list">
+      <li v-for="(item, i) in response.data.dataList" v-if="item.awardPrice">
+        <div class="title">鼓励金：{{item.awardPrice}}</div>
+        <div class="desc">{{item.payTime}} 预定商品：{{item.goodsName}}</div>
+      </li>
+    </ul>
+    <!--底部logo-->
+    <img class="g-bottom-logo" src="[[static]]/page/act_1111_encourage/img/bottom-logo.png[[v]]">
+
+    <!--中奖弹窗-->
+    <div class="g-prize-pop" @touchmove.prevent.stop @mousewheel.prevent.stop @click="receiveShow = false;receiveInfo = {};" v-if="receiveShow">
+      <div class="wrapper">
+        <div class="info double" v-if="receiveInfo.double == '2'">
+          <img class="prize-title" src="[[static]]/page/act_1111_encourage/img/prize-title-double.png[[v]]">
+          <div class="text">
+            获得{{receiveInfo.awardPrice}}元鼓励金<br>
+            同时获得加倍卡<br>
+            可将全部鼓励金加倍哦~
+          </div>
+        </div>
+        <div class="info" v-else>
+          <img class="prize-title" src="[[static]]/page/act_1111_encourage/img/prize-title.png[[v]]">
+          <div class="text">获得{{receiveInfo.awardPrice}}元鼓励金</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--返回顶部-->
+  <com-to-top-icon></com-to-top-icon>
+</div>
+
+
+@@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+<script src="[[static]]/page/act_1111_encourage/js/act_1111_encourage.js[[v]]"></script>
+</body>
+</html>

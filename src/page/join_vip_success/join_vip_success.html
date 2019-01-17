@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>加入成功</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/join_vip_success/css/join_vip_success.css[[v]]">
+</head>
+<body class="loaded">
+  <div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+    <!--标题-->
+    <dvd-service-com-title title="学习卡激活成功" back></dvd-service-com-title>
+    <img src="//9i.dvmama.com/free/kdbg.png" class="bg">
+    <div class="kd_text">
+        <img src="//9i.dvmama.com/free/kd_text.png">
+    </div>
+    <div class="go_home">
+      <a href="/">
+        <img src="//9i.dvmama.com/free/button_index.png">
+      </a>
+    </div>
+    <!--单次提示用户下载APP和关注公众号-->
+      <div class="downAppWrap">
+        <div class="downApp" v-on:click.stop="events">
+          <img v-if="isWechart" src="//9i.dvmama.com/free/index_erweima1.png">
+          <img v-else src="//9i.dvmama.com/free/index_erweima1.png" alt="" @touchstart="tipstouchstart"
+               @touchmove="tipstouchmove" @touchend="tipstouchend">
+          <a href="https://itunes.apple.com/cn/app/dav-dian-rang-ma-ma-qing-song/id1042582462?l=en&mt=8"></a>
+          <a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.davdian.seller"></a>
+          <!-- <div class="close8" @click="closeTips"></div> -->
+        </div>
+      </div>
+    <!--返回顶部-->
+    <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+  </div>
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/join_vip_success/js/join_vip_success.js[[v]]"></script>
+</body>
+</html>

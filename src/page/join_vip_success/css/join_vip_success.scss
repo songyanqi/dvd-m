@@ -1,0 +1,88 @@
+@import "../../../common/css/util";
+
+.app {
+  background: white;
+
+height:80vh;
+  /* 安卓hack */
+  &.android {
+
+  }
+}
+
+.downAppWrap {
+  position: fixed;
+  z-index: 15;
+  width: 100%;
+  height: 100%;
+  max-width: 640px;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+}
+.downApp{
+  width: 100%;
+  min-height: 20px;
+  overflow: hidden;
+  position: fixed;
+  bottom: -2px;
+  left: 0;
+  max-width: 640px;
+  margin: auto auto;
+  right: 0;
+}
+.downApp img{
+  width: 100%;
+}
+.downApp a{
+  display: inline-block;
+  height: 12%;
+  width: 25%;
+  position:absolute;
+  bottom:13.76%
+}
+.downApp a:nth-of-type(1){
+  left:4%;
+}
+.downApp a:nth-of-type(2){
+  left:31.2%;
+}
+.downApp .close8{
+    position: absolute;
+  right:0;
+  top:0;
+  height: 15%;
+  width: 10%;
+}
+
+.bg{
+  max-width:640px;
+  width:100%;
+
+}
+.go_home{
+    z-index:16;
+    position: fixed;
+    bottom: 2.2rem;
+    width: 100%;
+    text-align: center;
+    max-width: 640px;
+    a{
+    display:block;
+    }
+  img{
+    width:2.57rem;
+  }
+}
+.kd_text{
+  position: absolute;
+    width: 100%;
+    top: 80px;
+    text-align: center;
+    img{
+      width:2rem;
+    }
+}

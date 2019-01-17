@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <link rel="stylesheet" href="[[static]]/page/guinness_album/css/guinness_album.css[[v]]">
+</head>
+<body>
+  <div class="app" v-if="response" v-cloak>
+    <!--标题-->
+    <com-top-title back title="大V店挑战吉尼斯记录相册集" back></com-top-title>
+    <div class="head-wrapper">
+      <img class="head-pic" src="[[static]]/page/guinness_album/img/head-pic.png" />
+      <p class="head-title">收集照片{{response.length}}张</p>
+    </div>
+    <ul class="album-items">
+      <li class="item" v-for="pic in picGroup">
+        <img class="pic" v-lazy="response[pic]+'?x-oss-process=image/resize,h_800/quality,Q_80'" v-if="response[pic]"/>
+        <!--<img class="pic" :src="'https://9i.dvmama.com/guinness/all4/' + pic" />-->
+        <!--<ul>-->
+          <!--<li class="item" v-for="item in items">-->
+            <!--<img class="pic" :src="'http://9i.dvmama.com/supplier/2018/03/24/1200_1200_7b63b8474dedb8c1b4d705e6efbdd5fe.jpg?x-oss-process=image/format,webp' + (pic-19)" />-->
+          <!--</li>-->
+        <!--</ul>-->
+      </li>
+    </ul>
+    <div v-if="no_more === 1" class="no_more_style"> 没有更多了 </div>
+    <div v-else class="no_more_style"> 更多照片加载中... </div>
+    <!--返回顶部-->
+    <com-to-top-icon></com-to-top-icon>
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/guinness_album/js/guinness_album.js[[v]]"></script>
+</body>
+</html>

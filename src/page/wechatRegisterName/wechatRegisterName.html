@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/wechatRegisterName/css/wechatRegisterName.css[[v]]">
+</head>
+<body class="loaded">
+  <div class="app" v-cloak>
+    <!--标题-->
+    <com-top-title back title="登记微信群"></com-top-title>
+    <main class="main">
+      <p>请填写您的微信昵称，<br/>让顾问为您提供更好的服务</p>
+      <input type="text"/ autofocus v-model.trim="nickName">
+      <div class="btn" @click="saveName">完成</div>
+    </main>
+    <!--返回顶部-->
+    <com-to-top-icon></com-to-top-icon>
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/wechatRegisterName/js/wechatRegisterName.js[[v]]"></script>
+</body>
+</html>

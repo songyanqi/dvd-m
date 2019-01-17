@@ -1,0 +1,228 @@
+@import "../../../common/css/common.scss";
+.app {
+
+}
+.pull-right {
+	font-size: 14px;
+	color: #FF4A7D;
+	display: block;
+  padding-right: 15px;
+}
+.listWrapper {
+  height: 0.45rem;
+}
+.lists {
+  .listNav {
+    margin-bottom: 0.1rem;
+    // padding: 0 0.2rem;
+    background: #fff;
+    .goodsTitle {
+      padding-top: 0.18rem;
+      font-size: 0.2rem;
+      font-weight: bold;
+      padding-left: 0.2rem;
+      padding-right: 0.2rem;
+    }
+    .ruleWrapper {
+      padding: 0 0.2rem;
+    }
+    .awardWrapper {
+      padding: 0 0.2rem;
+    }
+  }
+  .cuntDown {
+    margin: 0.1rem 0 0.15rem;
+    padding: 0 0.2rem;
+  }
+  .ruleCont {
+    margin-top: -0.1rem;
+  }
+  .upTitle {
+    text-align: right;
+  }
+  .upDot,.downDot {
+    width: 0.68rem;
+    height: 0.2rem;
+    display: inline-block;
+  }
+  .upDot {
+    background: url(//9i.dvmama.com/reward/upDot.png) no-repeat;
+    background-size: 100%;
+  }
+  .downDot {
+    background: url(//9i.dvmama.com/reward/downDot.png) no-repeat;
+    background-size: 100%;
+  }
+  .upCont {
+    padding: 0.1rem 0.14rem;
+    padding-right: 0.3rem;
+    // border-radius: 0.05rem;
+    border-top-left-radius: 0.05rem;
+    border-bottom-left-radius: 0.05rem;
+    border-bottom-right-radius: 0.05rem;
+    margin-top: -0.04rem;
+    background: #F9F9F9;
+    .ruleTime {
+      white-space: nowrap;
+    }
+    .ruleList,.ruleDemo {
+      position: relative;
+      font-size: 0.12rem;
+      font-weight: bold;
+      margin-left: 0.1rem;
+      line-height: 0.22rem;
+      .timeList {
+        white-space: nowrap;
+      }
+    }
+    .ruleDemo {
+      font-weight: normal;
+    }
+    .ruleList:after {
+      position: absolute;
+      left: -0.1rem;
+      top: 0.07rem;
+      content: "";
+      width: 0.05rem;
+      height: 0.05rem;
+      background: #333;
+      border-radius: 50%;
+    }
+  }
+  //
+  .rewardNCont {
+    padding: 0.1rem 0 0.2rem;
+    .fb {
+      font-weight: bold;
+    }
+    .fc {
+      color: #FF447C;
+    }
+    .reDetail {
+      border-top-left-radius: 0.05rem;
+      border-top-right-radius: 0.05rem;
+      background: linear-gradient(to right, rgba(255, 92, 92, .8), rgba(250, 24, 98, .8));
+      background: -moz-linear-gradient(right, rgba(255, 92, 92, .8), rgba(250, 24, 98, .8));
+      background: -o-linear-gradient(right, rgba(255, 92, 92, .8), rgba(250, 24, 98, .8));
+      background: -webkit-linear-gradient(left, rgba(255, 92, 92, .8), rgba(250, 24, 98, .8));
+      color: #fff;
+      padding: 0.1rem 0.15rem;
+      .fw {
+        font-size: 0.11rem;
+      }
+    }
+    .reNumMore {
+      font-size: 0.12rem;
+      line-height: 0.17rem;
+      color: #333;
+      background: #FFE8EC;
+      padding: 0.05rem 0.15rem;
+      border-bottom-left-radius: 0.05rem;
+      border-bottom-right-radius: 0.05rem;
+      .reNumTips {
+        display: block;
+      }
+    }
+    .reNumTips {
+      color: #333;
+    }
+  }
+  // 商品列表
+  .goodsCont {
+    background: #fff;
+    font-size: 0.14rem;
+    .moreGoods {
+      text-align: center;
+      color: #ccc;
+      padding: 0.1rem;
+      font-size: 0.14rem;
+    }
+    .fgray {
+      color: #E1E1E1;
+    }
+    .fc {
+      color: #FF447C;
+    }
+    .goodList {
+      position: relative;
+      display: flex;
+      // margin-top: 0.1rem;
+      padding: 0.1rem 0.2rem;
+      overflow: hidden;
+      .goodImg {
+        width: 1rem;
+        height: 1rem;
+        img {
+          width: 100%;
+        }
+      }
+      .goodsInfo {
+        position: relative;
+        margin-left: 0.1rem;
+        flex: 1;
+        .goodTitle {
+          // padding-right: 0.2rem;
+          line-height: 0.17rem;
+          height: 0.32rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 2;
+          display: -webkit-box;
+          line-height: 0.17rem;
+          -webkit-box-orient: vertical;
+        }
+      }
+      .goodsInfo:after {
+        // position: absolute;
+        // content: "";
+        // bottom: 0;
+        // border-bottom: 1px solid #E1E1E1;
+        // right: -0.2rem;
+        // width: 107%;
+        // transform: scaleY(0.5);
+        // transform-origin: left top;
+      }
+      .goodPrice {
+        margin: 0.17rem 0 0.08rem;
+        color: #FF4A7D;
+        font-size: 0.14rem;
+        .f16 {
+          font-size: 0.16rem;
+        }
+      }
+      .goodsNum {
+        display: flex;
+        font-size: 0.12rem;
+        .saleNum {
+          flex: 1;
+        }
+        .goodsShare {
+          margin-top: -0.05rem;
+          width: 0.6rem;
+          height: 0.3rem;
+          background: url(//9i.dvmama.com/reward/shareIcon.png) no-repeat;
+          background-size: 0.14rem;
+          background-position-x: right;
+          background-position-y: center;
+        }
+      }
+    }
+    .goodList:after {
+      position: absolute;
+      content: "";
+      right: -1.2rem;
+      bottom: 0;
+      border-bottom: 1px solid #e1e1e1;
+      transform: scaleY(.5);
+      width: 100%;
+    }
+    .goodList:nth-last-child(1) {
+      .goodsInfo {
+        position: static;
+      }
+    }
+  }
+}
+.currentList {
+  display: block;
+}

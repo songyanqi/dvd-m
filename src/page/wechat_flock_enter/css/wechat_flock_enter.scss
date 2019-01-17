@@ -1,0 +1,66 @@
+@import "../../../common/css/util";
+
+.app {
+  background: white;
+
+  /* 安卓hack */
+  &.android {
+
+  }
+
+  .we-title {
+    padding-left: r(40);
+    padding-top: r(40);
+    width: 100%;
+    height: 0.54rem;
+  }
+
+  .we-icon {
+    width: r(50);
+    height: r(50);
+    float: left;
+  }
+
+  .we-name {
+    margin-left: r(10);
+    font-size: r(14);
+    color: #333333;
+    float: left;
+    margin-top: r(17);
+  }
+
+  .we-qrcode-parent{
+    //margin-top: r(30);
+    width: 100%;
+    height: auto;
+    text-align: center;
+  }
+
+  .we-qrcode{
+    width: 80%;
+    height: auto;
+  }
+
+  .we-tip-parent{
+    padding-top: r(15);
+    width: 100%;
+    height: auto;
+    text-align: center;
+  }
+
+  .tip{
+    font-size: r(14);
+  }
+
+  .we-qrcode-parent2{
+    margin-top: r(30);
+    width: 100%;
+    height: auto;
+    text-align: center;
+  }
+
+  .we-qrcode2{
+    width: 50%;
+    height: auto;
+  }
+}

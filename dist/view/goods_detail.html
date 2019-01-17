@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<script>(function(){var b=window.designWidth;delete window.designWidth;function a(e){e=e||b||375;var f=document.documentElement.clientWidth;if(f>640){f=640}else{if(f<320){f=320}}var c=(f/e)*100;document.documentElement.style.fontSize=c+"px";var d=window.getComputedStyle(document.documentElement).fontSize.replace("px","");if(d!==c){document.documentElement.style.fontSize=c*c/d+"px"}}a();window.addEventListener("resize",a,false)})();</script>
+<link rel="stylesheet" href="//cdn-ws.davdian.com/normalize/7.0.0/normalize.min.css">
+<link rel="stylesheet" href="//fe-ws.davdian.com/m/static/dist/static/common/css/common.css?v=2018-06-27_11:19:26">
+  <link rel="stylesheet" href="//fe-ws.davdian.com/m/static/dist/static/common/css/common.css?v=2018-06-27_11:19:26">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>商品详情</title>
+  <link rel="stylesheet" href="//fe-ws.davdian.com/m/static/dist/static/../../stylesheet/base.css?v=2018-06-27_11:19:26">
+  <link rel="stylesheet" href="//fe-ws.davdian.com/m/static/dist/static/../../stylesheet/model.css?v=2018-06-27_11:19:26">
+  <link rel="stylesheet" href="//fe-ws.davdian.com/m/static/dist/static/page/goodsDetail/css/detail.css?v=2018-06-27_11:19:26">
+  <link rel="stylesheet" href="//fe-ws.davdian.com/m/static/dist/static/page/goodsDetail/css/goods_detail.css?v=2018-06-27_11:19:26">
+  <link rel="stylesheet" href="//cdn-ws.davdian.com/swiper/4.0.7/swiper.min.css">
+  <style>
+    body{
+      padding-top: 0;
+    }
+    .firstPageImg1{
+      position: absolute;top:0;left: 0;width: 40px;height: 44px;
+    }
+    .firstPageImg2{
+      position: absolute;top:0;right: 0;width: 40px;height: 44px;
+    }
+    .firstPageBtnAll{
+      position: fixed;bottom:0px;width: 100%;height: 49px; background: #f9f7f8;
+      font-size:14px;max-width:640px;z-index: 1
+    }
+    .firstPageBtn1{
+      float: right; width: 27%;height: 100%;line-height:49px;text-align: center;
+      color: #fff;
+      background: linear-gradient(to right, #FF5B5B, #FA1862);
+      background: -moz-linear-gradient(right, #FF5B5B, #FA1862);
+      background: -o-linear-gradient(right, #FF5B5B, #FA1862);
+      background: -webkit-linear-gradient(left, #FF5B5B, #FA1862);
+    }
+    .firstPageBtn2{
+      float: right; width: 27%;height: 100%;line-height:49px;text-align: center;
+      color: #fff;
+      background: linear-gradient(to right, #FFB21A, #FF7C31);
+      background: -moz-linear-gradient(right, #FFB21A, #FF7C31);
+      background: -o-linear-gradient(right, #FFB21A, #FF7C31);
+      background: -webkit-linear-gradient(left, #FFB21A, #FF7C31);
+    }
+    .firstPageCart{
+      float: left;
+      width: 15%;
+      height: 100%;
+      display: inline-block;
+      position: relative;
+      text-align: center;
+      line-height: 12px;
+    }
+    .firstPageShowWidth{
+      /*position: absolute;*/
+      /*top:0;*/
+      width: 1px;
+      float:left;
+      height: 100%;
+      color: #ddd;
+      background: #ddd;
+      -webkit-transform: scaleX(0.5);
+      -ms-transform: scaleX(0.5);
+      transform: scaleX(0.5);
+      display: inline-block;
+    }
+    .firstPageCartImg{
+      background: url(//9i.dvmama.com/free/goodsDetail/shoppingCart.png) no-repeat;
+      background-size: 100%;
+      width: 21px;
+      height: 22px;
+      display: inline-block;
+      margin-top: 6px;
+    }
+    .firstPageCartImg1{
+      background: url(//9i.dvmama.com/free/goodsDetail/collect_icon.png) no-repeat;
+      background-size: 100%;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      margin-top: 7px;
+      margin-bottom: 1px;
+    }
+    .firstPageCartText{
+      font-size: 10px;
+      color: #999;
+      margin-top: 3px;
+      width: 100%;
+      text-align: center;
+      display: inline-block;
+    }
+    .firstPageShow{
+      width: 100%;height: 43px; background: #fff;padding-left: 10px;
+      color: #999;line-height: 44px;position: relative;
+    }
+    .firstPageShowBorder{
+      width: 100%;
+      height: 1px;
+      color: #eee;
+      background: #eee;
+      -webkit-transform: scaleY(0.5);
+      -ms-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+    }
+    #firstPageShowShopCart{
+      position: relative;
+      max-width: 640px;
+    }
+    #firstPageIsShow1{
+      display: none
+    }
+    #firstPageIsShow2{
+      display: none
+    }
+  </style>
+</head>
+<body id="detail" class="scroll_flag">
+  <div id="goodsDetail">
+    <goods-detail></goods-detail>
+  </div>
+
+  <div id='firstPageShowShopCart'>
+    <img src="//9i.dvmama.com/free/goodsDetail/backRound.png" class='firstPageImg1' id='firstPageIsShow1'>
+    <img src="//9i.dvmama.com/free/goodsDetail/homeRound.png" class='firstPageImg2' id='firstPageIsShow2'>
+    <div class='firstPageBtnAll'>
+      <div class='firstPageCart'>
+        <span class='firstPageCartImg'></span>
+        <span class='firstPageCartText'>购物车</span>
+      </div>
+      <div class='firstPageShowWidth'></div>
+
+      <div class='firstPageCart'>
+        <span class='firstPageCartImg1'></span>
+        <span class='firstPageCartText'>收藏</span>
+      </div>
+      <div class='firstPageBtn1'>立即购买</div>
+      <div class='firstPageBtn2'>加入购物车</div>
+    </div>
+    <div style='width: 100%;height: 375px; background: #fff;'></div>
+    <div style='width: 100%;height: 127px; background: #fff'></div>
+
+    <div class='firstPageShow' style='margin-top:10px;'></div>
+    <div class='firstPageShowBorder'></div>
+    <div class='firstPageShow'></div>
+    <div class='firstPageShowBorder'></div>
+    <div class='firstPageShow'></div>
+    <div class='firstPageShowBorder'></div>
+    <div class='firstPageShow'></div>
+    <div class='firstPageShowBorder'></div>
+    <div class='firstPageShow'></div>
+    <div class='firstPageShowBorder'></div>
+    <div class='firstPageShow'></div>
+  </div>
+
+  <script src="//cdn-ws.davdian.com/ali-oss/5.1.1/aliyun-oss-sdk.min.js"></script>
+  <script src="//cdn-ws.davdian.com/swiper/4.0.7/swiper.min.js" integrity="sha256-iaMF/XO0lN7DFg+wwQ6Ac2xp8dCgbt+hN8k45KY9cTk=" crossorigin="anonymous"></script>
+  <!--loading动画-->
+<div class="page-loading">
+  <div class="mask">
+    <div class="center">
+      <div class="point"></div>
+      <div class="point"></div>
+      <div class="point"></div>
+      <div class="point"></div>
+      <div class="point"></div>
+      <div class="point"></div>
+      <div class="point"></div>
+      <div class="point"></div>
+    </div>
+    <!--<img class="gif" src="//fe-ws.davdian.com/m/static/dist/static/common/img/loading.gif?v=2018-06-27_11:19:26">-->
+  </div>
+  <script>
+    // 使page-loading的圆点变圆（因宽高有小数时有棱角）
+    (function () {
+      /**
+       * 插入css规则
+       * @param rule {String} css文本
+       */
+      function insertStyle(rule) {
+        var style = document.createElement('style');
+        style.appendChild(document.createTextNode(rule));
+        document.head.appendChild(style);
+      }
+
+      // 除去小数
+      var selector = '.page-loading .mask .center .point';
+      var point = document.querySelector(selector);
+      if (point) {
+        var computedStyle = window.getComputedStyle(point);
+        if (computedStyle && computedStyle.width) {
+          var width = parseInt(computedStyle.width);
+          insertStyle(selector + '{width: ' + width + 'px !important; height: ' + width + 'px !important;}');
+        }
+      }
+    })()
+  </script>
+</div>
+<script crossorigin="anonymous" integrity="sha256-WRc/eG3R84AverJv0zmqxAmdwQxstUpqkiE+avJ3WSo=" src="//cdn-ws.davdian.com/babel-polyfill/6.26.0/polyfill.min.js"></script>
+<script crossorigin="anonymous" integrity="sha256-CaFg/YykXqx3pn0h0oVBc6u5glps1fubTHqe/gHi/pA=" src="//cdn-ws.davdian.com/vue/2.4.2/vue.js"></script>
+<script crossorigin="anonymous" integrity="sha256-fMNK/+4LyoLY5kldi0tEXinECS/O0UAoKBoCMrsqzQ0=" src="//cdn-ws.davdian.com/vue-lazyload/1.0.3/vue-lazyload.js"></script>
+<script crossorigin="anonymous" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" src="//cdn-ws.davdian.com/jquery/3.2.0/jquery.min.js"></script>
+<script crossorigin="anonymous" integrity="sha256-fKZuSDjJDMGPVNpUcSgczN3zf+07Bjw6xHRVy2o6oP8=" src="//cdn-ws.davdian.com/vconsole/3.0.0/vconsole.min.js"></script>
+<script crossorigin="anonymous" integrity="sha256-0jsEcb9GTEfQk8Q8S+uV/BlFlyAAZWAtENQe+f4RLKw=" src="//cdn-ws.davdian.com/growingIO/growingIO.davdian.v4.js"></script>
+  <script src="//fe-ws.davdian.com/m/static/dist/static/common/js/common.js?v=2018-06-27_11:19:26"></script>
+  <script src="//fe-ws.davdian.com/m/static/dist/static/page/goodsDetail/js/goodsDetail.js?v=2018-06-27_11:19:26"></script>
+  <script src="//3n.dvmama.com/wx_jssdk/jweixin-1.0.0.js"></script>
+
+</body>
+</html>

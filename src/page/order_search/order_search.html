@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/order_search/css/order_search.css[[v]]">
+</head>
+<body>
+<div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}">
+  <!--头部-->
+  <div class="search_top clearfix">
+    <a class="left_icon_container" @click="orderback"></a>
+    <form type="search" action="">
+      <div class="order-input-wrapper">
+        <div class="order-input-border">
+          <span class="search-icon"></span>
+          <input type="text" placeholder="商品名称" class="order-input" v-model="keywords" @keydown="search($event)"/>
+          <span class="search-delete" v-if="keywords" @click="keywords = ''"></span>
+        </div>
+      </div>
+      <span class="search_btn" @click="getData(1)">搜索</span>
+    </form>
+  </div>
+
+  <div class="order_list_container" @click="needSession">
+    <!--查询到订单-->
+    <div v-if='allkind' class="order_list_item dav-shadow" v-for="item in list_type" :data-for-id="item.id" data-for='11' :data-for-delivery-id="item.delivery_id">
+      <div class="order_name">
+        <a :href="item.shop_url"><span class="shop_icon"></span><span
+          class="shop_title">{{ item.shop_name }}</span><span class="shop_arrow"></span></a>
+        <!--订单状态-->
+        <span class="pull-right dav-red" v-show="item.type == 2 && item.cancel_type != 1 && !item.is_new_seller_order">待发货</span>
+        <span class="pull-right dav-red" v-show="item.type == 2 && item.cancel_type != 1 && item.is_new_seller_order && item.is_expire != 1">赠品待领取</span>
+        <span class="pull-right dav-red" v-show="item.type == 4">已关闭</span>
+        <span class="pull-right dav-red" v-show="item.type == 1 && item.complete_status == 1 && !item.is_new_seller_order">已完成</span>
+        <span class="pull-right dav-red" v-show="item.type == 1 && item.complete_status == 1  && item.is_new_seller_order && item.is_expire != 1">赠品待领取</span>
+        <span class="pull-right dav-red" v-show="item.type == 2 && item.cancel_type == 1">已冻结</span>
+
+        <span class="pull-right dav-red" v-show="item.type == 3 && !item.is_presale_order">待付款</span>
+        <span class="pull-right dav-red" v-show="item.type == 1 && item.shipping_status == 4">部分发货</span>
+        <span class="pull-right dav-red" v-show="item.type == 1 && item.shipping_status == 1 && item.complete_status == 0  && !item.is_new_seller_order">待收货</span>
+        <span class="pull-right dav-red" v-show="item.type == 1 && item.shipping_status == 1 && item.complete_status == 0  && item.is_new_seller_order && item.is_expire != 1">赠品待领取</span>
+        <span class="pull-right dav-red" v-show="item.is_expire && item.is_new_seller_order">已关闭</span>
+        <!-- 预定商品 -->
+        <span class="pull-right dav-red" v-show="item.type == 3 && item.is_presale_order && item.presale_info.type == 'reserve'">待支付定金</span>
+        <span class="pull-right dav-red" v-show="item.type == 3 && item.is_presale_order && item.presale_info.type == 'final'">待支付尾款</span>
+      </div>
+      <!--<a class="order_good_list" :href="'/o-'+item.order_id+'.html'" v-if='!item.is_delivery' v-bind='handleCurrentPage'>-->
+      <a class="order_good_list" :href="'/o-'+item.order_id+'.html'" v-if='!item.is_delivery'>
+        <div class="img_container">
+          <div class="img_container_inner">
+            <img v-for='items in item.goods' :src="items.goods_pic" style="display: inline;">
+          </div>
+          <!--<div class="order_good_info_container dav-small" v-if="item.goods | last">-->
+          <div class="order_good_info_container dav-small" v-if="last(item.goods)">
+            <div class="order_good_name" style="word-break: break-all ">{{item.goods[0].goods_name}}</div>
+            <div class="order_good_price">￥{{ item.goods[0].goods_price }} X {{ item.goods[0].amount }}</div>
+          </div>
+        </div>
+      </a>
+      <!--<a class="order_good_list" :href="'/o-'+item.order_id+'.html?did='+item.delivery_id" v-if='item.is_delivery' v-bind='handleCurrentPage'>-->
+      <a class="order_good_list" :href="'/o-'+item.order_id+'.html?did='+item.delivery_id" v-if='item.is_delivery'>
+        <div class="img_container">
+          <div class="img_container_inner">
+            <img v-for='items in item.goods' :src="items.goods_pic" style="display: inline;">
+          </div>
+          <!--<div class="order_good_info_container dav-small" v-if="item.goods | last">-->
+          <div class="order_good_info_container dav-small" v-if="last(item.goods)">
+            <div class="order_good_name" style="word-break: break-all ">{{item.goods[0].goods_name}}</div>
+            <div class="order_good_price">￥{{ item.goods[0].goods_price }} X {{ item.goods[0].amount }}</div>
+          </div>
+        </div>
+      </a>
+      <!--待预定-->
+      <div class="sum">
+        <span v-if="item.is_presale_order && (item.type == '3' || item.type == '4') ">
+            <span>共{{ item.goods_list_num }}件</span>
+            <span v-if="item.presale_info.type == 'reserve'">
+              <span>应付定金：</span>
+              <span class="payment"><span class="fz_12">￥</span>{{item.presale_info.reserve_info.payment}}</span>
+            </span>
+            <span v-if="item.presale_info.type == 'final'">
+              <span>应付尾款：</span>
+              <span class="payment"><span class="fz_12">￥</span>{{item.presale_info.final_info.payment}}</span>
+            </span>
+        </span>
+        <span v-else>
+          <span>金额：</span>
+          <span class="payment"><span class="fz_12">￥</span>
+            <span v-if="item.is_presale_order">{{ changeAddNum(item.presale_info.final_info.payment,item.presale_info.reserve_info.payment) }}</span>
+            <span v-else>{{item.payment}}</span>
+          </span>
+        </span>
+      </div>
+      <div v-if="isFinalBtn(item)" class="order_buttons order_list_buttons clearfix">
+        <!-- 预定 支付定金 -->
+        <a v-show="orderReserve(item)" v-if='item.order_type !=1 && item.order_type !=2' class="dav-btn btn-white order-btn-red pull-right  order-buy-once-more" :href="'/checkout.html?order_id='+item.id">支付定金</a>
+        <!-- 支付尾款，显示按钮 -->
+        <a v-show="orderFinalBtn(item)" v-if='item.order_type !=1 && item.order_type !=2' class="dav-btn btn-white order-btn-red pull-right  order-buy-once-more" href="javascript:void(0)" @click="pay_weikuan(item.pay_url)">支付尾款</a>
+        <!--该显示哪些信息-->
+        <a v-show="close(item)" v-if='item.order_type !=1 && item.order_type !=2' class="dav-btn btn-white order-btn-red pull-right  order-buy-once-more" :href="'/cart.html?rebuy_order_id='+item.id">再次购买</a>
+        <a v-show="again(item)" v-if='item.order_type !=1 && item.order_type !=2' class="dav-btn btn-white order-btn-red pull-right  order-buy-once-more" :href="'/cart.html?rebuy_order_id='+item.id">再次购买</a>
+        <a v-show="item.can_comment==1&&item.goods_list_num!=1" class="dav-btn btn-white pull-right" :data-href="item.comment_link" @click="evaluatelist">评价</a>
+        <a v-show="item.can_comment==2&&item.goods_list_num!=1" class="dav-btn btn-white pull-right" :data-href="item.comment_link" @click="evaluatelist">追加评价</a>
+        <a v-show="item.can_comment==1&&item.goods_list_num==1" class="dav-btn btn-white pull-right" :data-href="item.comment_link" @click="evaluate">评价</a>
+        <a v-show="item.can_comment==2&&item.goods_list_num==1" class="dav-btn btn-white pull-right" :data-href="item.comment_link" @click="evaluate">追加评价</a>
+        <!--<a v-show = "item | confirm" class="dav-btn btn-white order-btn-red pull-right order-buy-once-more" href="/o-{{item.id}}.html?did={{item.delivery_id}}">确认收货</a>-->
+        <a v-show="confirm(item)" class="dav-btn btn-white order-btn-red pull-right order-buy-once-more" @click="orderArrive">确认收货</a>
+        <a v-show="pay(item)" class="dav-btn btn-white order-btn-red pull-right order-btn-pay" @click="reloadSet(item.id)">立即支付</a>
+        <a v-show="receive(item)" class="dav-btn btn-white order-btn-red pull-right" :href="'/change_address.html?order_id='+item.id+'&goal=get'" v-if='item.is_expire==0'>领取会员赠品</a>
+<a v-show="checkship(item)" class="dav-btn btn-white pull-right order-check-wl" :href="'/m/logistics_information.html?oid='+item.id+'&did='+item.delivery_id">查看物流</a>
+<a v-show="shipping(item)" class="dav-btn btn-white pull-right order-check-wl" :href="'/m/logistics_information.html?oid='+item.id+'&did='+item.delivery_id">查看物流</a>
+        <a class="dav-btn btn-white pull-right order-delete-order" v-if='(item.is_expire==1 && item.is_new_seller_order==1 && item.no_address==1)|| item.type == 4' @click="deleteOrder">删除订单</a>
+        <!-- <a v-show = "item | deleted" class="dav-btn btn-white pull-right order-delete-order" @click = "deleteOrder">删除订单</a> -->
+        <!-- <a v-show = "item | close" class="dav-btn btn-white pull-right order-delete-order" @click = "deleteOrder">删除订单</a> -->
+        <a v-show="pay1(item)" class="dav-btn btn-white pull-right" :href="'/index.php?c=AgentPay&a=index&order_id='+item.id">找人代付</a>
+
+        <a v-show="cancel(item)" :data-deliveryid="item.delivery_id" :data-id="item.id" :class="'dav-btn btn-white pull-right  order-cancel'+ ' cancle_'+item.id" @click="cancelOrder($event,item)">取消订单</a>
+
+        <a v-show="cancel1(item)" class="dav-btn btn-white pull-right  btn-disable">取消审核中</a>
+        <a v-show="cancel2(item)" class="dav-btn btn-white pull-right  btn-disable">取消成功</a>
+        <a v-show="cancel3(item)" class="dav-btn btn-white pull-right  btn-disable">取消失败</a>
+        <!-- 申请售后 -->
+        <a v-show="applySale(item)" :data-deliveryid="item.delivery_id" :data-id="item.id" class="dav-btn btn-white pull-right" @click="orderApplay">申请售后</a>
+        <!-- 售后进度 -->
+        <a v-show="applyProgress(item)" :data-deliveryid="item.delivery_id" :data-id="item.id" :data-cancel-id="item.cancel_id" :class="'dav-btn btn-white pull-right'+' cancle_'+item.id" @click="afterSale">查看售后进度</a>
+      </div>
+      <!-- 支付尾款，显示日期 -->
+      <div v-show="orderFinal(item)" class="order_presale"><span v-if="item.presale_info && item.presale_info.final_info">{{ item.presale_info.final_info.paytime_start | changeDate }}</span> 开始支付尾款</div>
+
+    </div>
+    <div class="order_list_item type_4 dav-shadow" v-if='other'>
+      <ul class="be_evaluated_list">
+        <li v-for='item in list_type' :data-goods_id="item.goods_id">
+          <a :href="'/'+item.goods_id+'.html'" class="goods_pic">
+            <img :src = 'item.goods_img'>
+          </a>
+          <div class="goods_con">
+            <a :href="'/'+item.goods_id+'.html'" class="goods_title">{{ item.goods_name }}</a>
+            <a :data-href="'/grade-'+item.delivery_id+'-'+item.goods_id+'.html'" @click="evaluate" class="evaluate_btn pull-right" data-dav-tj="order_list|grade|grade|1|grade@order_list">评价</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div v-show='no_more' class="refresh">没有更多订单</div>
+    <!-- 取消订单弹框 -->
+    <div class="modalMask" @click="handleCloseModal" :class="{ showMask: isModal || isOrderConfirm }"></div>
+    <div class="modaOrderlWrapper" v-show="isModal">
+      <div class="modalCloseWrapper" @click="handleCloseModal">
+        <span class="modal-close"></span>
+      </div>
+      <div class="modalTitle">请选择取消订单的理由</div>
+      <div class="modalCont" v-if="reasonData">
+        <label :data-id="item.reasonId" v-for="item of reasonData.data.reasonList" class='navLabel' :for="item.reasonId">
+          <div
+            @click = "handleReason"
+            :data-name = "item.reasonName"
+            :data-id = "item.reasonId"
+            class = 'navList'>
+            <div :data-name = "item.reasonName"
+                 :data-id = "item.reasonId"
+                 class = "flex1">{{ item.reasonName }}</div>
+            <div>
+              <input class = 'reasonIpt'
+                     :data-name = "item.reasonName"
+                     :data-id = "item.reasonId"
+                     :id = "item.reasonId"
+                     type='radio' name = 'reason'>
+              <i></i>
+            </div>
+          </div>
+        </label>
+      </div>
+      <div @click="handleConfirm" class="disabledModal" :class="{ modalConfirm: !isConfirm }">确定</div>
+    </div>
+    <div class="order_toast"></div>
+
+    <!-- 弹框 -->
+    <div class="modalOrder" :class="{orderModalShow: isOrderConfirm}">
+      <!-- <div class="modalCloseWrapper orderClose" @click = "handleCloseModal">
+              <span class="modal-close"></span>
+          </div> -->
+      <div class="orderTitle">该订单为预定订单，定金不退哦，确认要取消么？</div>
+      <div class="orderBtns">
+        <div class="orderCancle" @click="handleCloseModal">取消</div>
+        <div class="orderConfirm" @click="handleOrderPresale">确定</div>
+      </div>
+    </div>
+  </div>
+
+  <!--没有查询到订单-->
+  <div class="no-order" v-if="noOrder">
+    <img src="//9i.dvmama.com/free/Pictures/no-order.png" class="no-order-pic"/>
+    <p class="no-order-text">未查询到相关订单</p>
+  </div>
+  <div v-show='loading' class="refresh">
+    <div class="uil-default-css-normal" style="-webkit-transform:scale(0.15);-moz-transform:scale(0.15);-webkit-transform-origin: 0 0;-moz-transform-origin: 0 0;width:30px;height: 30px;display: inline-block;">
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+    </div>
+    <div>数据加载中...</div>
+  </div>
+  <div v-show='loading2' class="refresh showOn">
+    <div class="uil-default-css-normal" style="-webkit-transform:scale(0.15);-moz-transform:scale(0.15);-webkit-transform-origin: 0 0;-moz-transform-origin: 0 0;width:30px;height: 30px;display: inline-block;">
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+      <div style="top:80px;left:93px;width:14px;height:40px;background:#333;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;"></div>
+    </div>
+    <div>数据加载中...</div>
+  </div>
+
+  <!--返回顶部-->
+  <dvd-service-com-go-page-top></dvd-service-com-go-page-top>
+</div>
+
+@@include('node_modules/dvd-base-build/html-inc/body.inc')
+<!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+<script src="[[static]]/common/js/common.js[[v]]"></script>
+<script src="[[static]]/page/order_search/js/order_search.js[[v]]"></script>
+</body>
+</html>

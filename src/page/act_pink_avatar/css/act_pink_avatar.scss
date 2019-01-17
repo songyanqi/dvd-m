@@ -1,0 +1,121 @@
+@import "../../../common/css/common.scss";
+.app{
+	height:100vh;
+	background: #f35067;
+}
+.avatarWrapper {
+	// background: url(http://9i.dvmama.com/free/Zhuanti/modify_bkg.png) repeat;
+	background: #f35067;
+	padding-bottom: 20px;
+	.avatarTitle {
+		position: relative;
+		img {
+			width: 100%;
+			vertical-align: middle;
+		}
+		.uploadIpt {
+			position: absolute;
+		    width: 2rem;
+		    bottom: 1.65rem;
+		    left: .9rem;
+		    height: 2rem;
+		    opacity: 0;
+		}
+		.act_rule {
+			position: absolute;
+			bottom: 0.4rem;
+			color: #ff316f;
+			font-size: 0.14rem;
+			text-align: center;
+			width: 100%;
+			text-decoration: underline;
+		}
+		.show{
+			position: absolute;
+		    width: 2rem;
+		    bottom: 1.65rem;
+		    left: .9rem;
+		    height: 2rem;
+		}
+	}
+	.avatarStep {
+		padding-top: 11.8%;
+		img {
+			width: 100%;
+			vertical-align: middle;
+		}
+	}
+
+	.avatarTips {
+		padding: 20px 0;
+		line-height: 20px;
+		color: #fff;
+		font-size: 14px;
+		text-align: center;
+	}
+	.avatarPoster {
+		text-align: center;
+		.avatarTitleTips {
+			text-align: center;
+			color: #a15809;
+			padding: 15px 0;
+		}
+		.AvatarPosterCont {
+			margin: 0 20px;
+			display: inline-block;
+			background: #f3cba0;
+			border-radius: 10px;
+			img {
+				width: 100%;
+				padding: 0 15px 15px 15px;
+				box-sizing: border-box;
+			}
+		}
+	}
+	.avatarCont {
+		// background: #f3cba0;
+		// padding: 20px;
+		// margin: 10px 20px;
+		border-radius: 10px;
+		.avatarListTips {
+			text-align: center;
+			color: #fff;
+			font-size: 14px;
+			padding-bottom: 0.15rem;
+			padding-top: 0.1rem;
+		}
+	}
+	.avatarLists {
+		height: 148px;
+		overflow: hidden;
+		position: relative;
+		// padding-top: 10px;
+		img {
+			// width: 14%;
+			// height: 71%;
+			width: 0.5rem;
+			height: 0.5rem;
+			background: #fff;
+    	margin-left: 2%;
+			margin-bottom: 10px;
+			vertical-align: top;
+			border-radius: 50%;
+		}
+		// @media screen and (min-width: 630px) {
+		// 	img {
+		// 		height: 120%;
+		// 	}
+		// }
+		.avatarListDot {
+			position: absolute;
+			text-align: center;
+			bottom: 0.04rem;
+			right: 6%;
+			font-size: 25px;
+			color: #fff;
+			width: 14%;
+			// padding-left: 1.5%;
+	    background: #ff3370;
+		}
+	}
+}

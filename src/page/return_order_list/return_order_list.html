@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+	<title>售后列表</title>
+	<link rel="stylesheet" href="[[static]]/page/return_order_list/css/return_order_list.css[[v]]">
+</head>
+<body class='loaded'>
+	<div class = "app" :class = "{ bodypd0: isapp }">
+    <!--<order-top-title v-if = "!isapp" titletext = "售后列表"></order-top-title>-->
+    <com-top-title back title="售后列表" home></com-top-title>
+    <keep-alive>
+      <return-list></return-list>
+    </keep-alive>
+	</div>
+
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/return_order_list/js/return_order_list.js[[v]]"></script>
+</body>
+</html>

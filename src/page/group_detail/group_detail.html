@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>大V店限时组团</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/group_detail/css/group_detail.css[[v]]">
+</head>
+<body>
+<div class="app" v-if="response" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+  <!--标题-->
+  <dvd-service-com-title title="大V店限时组团" back home share></dvd-service-com-title>
+
+  <!--PHP控制页面跳转逻辑-->
+  <div class="php-redirect-tip" v-if="type == '3'">
+    <img v-lazy="'http://9i.dvmama.com/free/prompt_ico_2015918_2x.png'">
+    <a :href="redirectUrl">您已有这个商品的组团记录，点击跳转到您的组团界面!</a>
+    <i></i>
+  </div>
+
+  <!--商品信息-->
+  <a :href="groupInfo.goodsInfoUrl">
+    <div class="goods-info">
+          <span class="pic">
+            <img class="goods-img" v-lazy="selectedImg || groupInfo.goodsImgUrl">
+            <!--<group-state-icon v-if="response.data.groupStatus == '1'" type="success" :src="groupInfo.founderAvater"></group-state-icon>-->
+            <!--<group-state-icon v-if="response.data.groupStatus == '0'" type="wait" :src="groupInfo.founderAvater"></group-state-icon>-->
+            <!--<group-state-icon v-if="response.data.groupStatus == '2'" type="fail" :src="groupInfo.founderAvater"></group-state-icon>-->
+            <img class="group-state-img" v-if="groupStatus == '1'"
+                 src="http://9i.dvmama.com/free/group/group-status-success.png">
+            <img class="group-state-img" v-if="groupStatus == '0'"
+                 src="http://9i.dvmama.com/free/group/group-status-wait.png">
+            <img class="group-state-img" v-if="groupStatus == '2'"
+                 src="http://9i.dvmama.com/free/group/group-status-fail.png">
+          </span>
+      <span class="info">
+            <div class="top">
+              <span class="num">[{{groupInfo.pepoleNumber}}人团]</span> {{groupInfo.goodsName}}
+            </div>
+            <div class="middle">
+
+              <span class="group-price" v-if="hasParma === false">¥ <span
+                class="big">{{groupInfo.goodsPrice}}</span></span>
+              <span class="group-price" v-else>¥ <span class="big">{{selectPrice}}</span></span>
+
+              <template v-if="response.visitor_status == '3'">
+                <span class="income"
+                      v-if="groupInfo.sellerIncome && groupInfo.sellerIncome != '0' && hasParma === false">团长返 ¥ {{groupInfo.sellerIncome}}</span>
+                <span class="income" v-if="selectIncome && selectIncome != '0' && hasParma === true">团长返 ¥ {{selectIncome}}</span>
+
+                <span class="income-times" v-if="groupInfo.sellerRadio && groupInfo.sellerRadio != '0'">*{{groupInfo.sellerRadio}}倍</span>
+              </template>
+            </div>
+
+          <div class="bottom" v-if="hasParma === false">单价买: ¥ {{groupInfo.realShopPrice}}</div>
+          <div class="bottom" v-else>单价买: ¥ {{selectShopPrice}}</div>
+
+          </span>
+    </div>
+  </a>
+
+  <!--组团信息-->
+  <div class="group-info">
+    <!--组团人数-->
+    <div class="group">
+      <template v-if="type == '8' || type == '10'">
+        <div class="title">
+          还有<span class="num">{{groupInfo.leaveNumber}}</span>个名额，赶快参团吧～
+        </div>
+      </template>
+      <template v-else>
+        <div class="title" v-if="groupStatus == '1'">
+          {{groupInfo.pepoleNumber}}人团已组团成功，好棒哦~
+        </div>
+        <div class="title" v-if="groupStatus == '0' || groupStatus == '2'">
+          还差 <span class="num">{{groupInfo.leaveNumber}}</span> 人，快喊小伙伴一起组团吧~
+        </div>
+      </template>
+      <div class="heads">
+        <!--团长或团员(最多5个)-->
+        <group-head-portrait
+          v-for="(member, i) in groupInfo.tourList"
+          v-if="i < 5"
+          :type="member.parendId === '0' ? 'leader' : 'normal'"
+          :src="member.founderAvater"></group-head-portrait>
+        <!--空位置(算上团员最多5个)-->
+        <group-head-portrait
+          v-for="(value, i) in emptyGroupNum"
+          type="empty"></group-head-portrait>
+        <!--更多-->
+        <!--v-if="groupInfo.tourList.length > 5"-->
+        <group-head-portrait
+          v-if="parseInt(groupInfo.pepoleNumber) - parseInt(groupInfo.leaveNumber) > 5"
+          type="more"
+          :href="'/m/group_detail_all.html?group_id='+(groupId||'')+'&reverse_id='+(reverseId||'')">
+        </group-head-portrait>
+      </div>
+    </div>
+
+    <!--倒计时-->
+    <com-count-down :remain-second="groupInfo.countDown" :group-status="groupStatus"></com-count-down>
+
+    <!--展开组团详情-->
+    <div class="detail-list" :class="{show: detailIsShow}" v-if="groupInfo.tourList.length > 0">
+      <div class="title" @click="detailIsShow = !detailIsShow">
+        <template v-if="!detailIsShow">展开组团详情</template>
+        <template v-if="detailIsShow">收起组团详情</template>
+        <span class="arrow"></span>
+      </div>
+      <div class="line"></div>
+      <div class="list">
+        <div class="arrow"></div>
+        <ul>
+          <!--团员-->
+          <template v-for="(member, i) in groupInfo.tourList" v-if="i < 5">
+            <div class="split-line" v-if="i !== 0"></div>
+            <li>
+              <group-head-portrait :type="member.parendId === '0' ? 'leader' : 'normal'"
+                                   :src="member.founderAvater"></group-head-portrait>
+              <span class="nickname">{{member.founderName}}</span>
+              <span class="begin-time">{{member.uTime}} {{member.parendId === '0' ? '开团' : '参团'}}</span>
+            </li>
+          </template>
+          <!--更多-->
+          <template v-if="groupInfo.tourList.length >= 5">
+            <div class="split-line"></div>
+            <li class="more">
+              <a
+                :href="'/group_detail_all.html?group_id='+(groupId||'')+'&reverse_id='+(reverseId||'')">查看更多</a>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!--热门组团-->
+  <div class="hot-groups">
+    <div class="title">
+      <i class="arrow"></i>
+      <span class="text">热门组团</span>
+    </div>
+    <ul class="list">
+      <li v-for="(hot,i) in hotList">
+        <a :href="hot.command.content" @click="hotGroupsItemClick">
+          <img class="pic" v-lazy="hot.imgUrl">
+          <div class="goods-name">
+            <span class="num">[{{hot.pepoleNumber}}人团]</span> {{hot.goodsName}}
+          </div>
+          <div class="goods-price">
+            <span class="group-price">￥{{hot.goodsPrice}}</span>
+            <span class="single-price">单买价￥{{hot.realShopPrice}}</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!--底部购买按钮-->
+  <group-bottom-btns :btn-array="groupInfo.clickBtn"
+                     :is-login="isLogin"
+                     :is-intercept="groupInfo.isIntercept"
+                     :selected-id="selectedId"
+                     :select-shop-price="selectShopPrice"
+                     :select-price="selectPrice"
+                     :goods-price="groupInfo.goodsPrice"
+                     :has-parma="hasParma"
+                     @sgroup="startGroup"
+  ></group-bottom-btns>
+
+
+  <!-- 多规格面板 -->
+  <group-parma-model v-if="hasParma === true"
+                     :is-show="showModel"
+                     :selected-id="selectedId"
+                     :goods-id="goodsId"
+                     :model-type="modelType"
+                     :sku-list="skuList"
+                     :btn-array="groupInfo.clickBtn"
+                     :json-data="jsonData"
+                     @change="chooseChild"
+                     @hidden="hiddenModel()"
+                     @gparma="postParma"
+                     @confirmtobuy="confirmToBuy"
+  ></group-parma-model>
+  <!--返回顶部-->
+  <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+</div>
+
+@@include('node_modules/dvd-base-build/html-inc/body.inc')
+<!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+<script src="[[static]]/common/js/common.js[[v]]"></script>
+<script src="[[static]]/page/group_detail/js/group_detail.js[[v]]"></script>
+</body>
+</html>

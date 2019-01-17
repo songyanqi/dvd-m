@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+	<!-- <title>绘本节专属头像</title> -->
+	<link rel="stylesheet" href="[[static]]/page/act_pink_avatar/css/act_pink_avatar.css[[v]]">
+</head>
+<body class="loaded">
+	<div class = "app" :class = "{ bodypd0: isapp }">
+		<com-top-title back title="绘本节专属头像" home share></com-top-title>
+		<avatar-upload :avatarimg = "avatarImg" :isshowdot = "isShowDot" :response = "response" :isshow = "isShow"></avatar-upload>
+	</div>
+
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]//page/act_pink_avatar/js/act_pink_avatar.js[[v]]"></script>
+</body>
+</html>

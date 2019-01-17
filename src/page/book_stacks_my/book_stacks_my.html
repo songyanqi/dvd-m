@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    @@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+    <link rel="stylesheet" href="[[static]]/page/book_stacks_my/css/book_stacks_my.css[[v]]">
+</head>
+
+<body>
+    <div class="app">
+        <!--标题-->
+        <com-top-title back title="我的小书库" bottomLine>
+          <a v-if="response" class="pull-right invitebtn" href="/index.php?c=ShopGoods&a=index&id=623534" slot="right">邀请好友</a>
+        </com-top-title>
+
+        <stacks-main></stacks-main>
+        <!--返回顶部-->
+        <com-to-top-icon></com-to-top-icon>
+    </div>
+
+     @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+    <script src="[[static]]/page/book_stacks_my/js/book_stacks_my.js[[v]]"></script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+	<!-- <title>测测少女心</title> -->
+	<link rel="stylesheet" href="[[static]]/page/avatar_add_v/css/avatar_add_v.css[[v]]">
+</head>
+<body>
+	<div class = "app" :class = "{ bodypd0: isapp }">
+		<com-top-title back title="测测少女心" bottomLine>
+			<a v-if="response" class="pull-right invitebtn" href="/act_pink_avatar.html?repeat=1" slot="right">重新上传</a >
+		</com-top-title>
+		<avatar-upload :avatarimg = "avatarImg" :isshowdot = "isShowDot" :response = "response"></avatar-upload>
+	</div>
+
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]//page/avatar_add_v/js/avatar_add_v.js[[v]]"></script>
+</body>
+</html>

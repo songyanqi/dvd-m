@@ -1,0 +1,512 @@
+body {
+  background: #ffe4f0;
+}
+.app {
+  background: #ffe4f0;
+  // padding-bottom: 0.44rem;
+}
+.com-popup-base {
+  z-index: 100!important;
+}
+.com-top-title {
+  z-index: 1000!important;
+}
+.clearfix:after {
+  display: block;
+  clear: both;
+  content: "";
+}
+.workInfo {
+  .no_title {
+    text-align: center;
+    position: relative;
+    .no_pic {
+      margin-top: 0.17rem;
+      width: 3.1rem;
+    }
+  }
+  .no_rule {
+    position: absolute;
+    bottom: .3rem;
+    width: 0.8rem;
+    left: 1.5rem;
+    height: 0.3rem;
+    z-index: 50;
+  }
+  .haveWork {
+    position: relative;
+  }
+  .no_bkg {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    left: 0;
+  }
+  .act_rule {
+    position: relative;
+    z-index: 5;
+    margin-bottom: 0.3rem;
+    top: 0.28rem;
+    img {
+      width: 100%;
+    }
+
+    .rule_t {
+      position: relative;
+      .rule_grade {
+        position: absolute;
+        // bottom: 0.22rem;
+        bottom: 0.13rem;
+        z-index: 10;
+        right: 1.45rem;
+        border-bottom: 10px solid #fff;
+        height: 0;
+        width: 0;
+        border-top: 6px solid transparent;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+      }
+      .rule_grade_down {
+        position: absolute;
+        bottom: 0.06rem;
+        z-index: 10;
+        right: 1.45rem;
+        border-bottom: 6px solid transparent;
+        height: 0;
+        width: 0;
+        border-top: 10px solid #fff;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+      }
+    }
+    .act_rule_tltle {
+      position: relative;
+      // width: 99.5%;
+    }
+    .act_rule_cont {
+      position: relative;
+      z-index: 5;
+      top: -0.05rem;
+    }
+    .ruleLInk {
+      position: absolute;
+      z-index: 5;
+      width: 1rem;
+      height: 0.3rem;
+      bottom: 0.45rem;
+      left: 1.4rem;
+    }
+  }
+  // 规则
+  .act_rule_o {
+    position: relative;
+    z-index: 5;
+    margin-bottom: 0.3rem;
+    top: 0.28rem;
+    .act_rule_up {
+      width: 100%;
+    }
+    .act_rule_down {
+      width: 100%;
+      margin-top: 0.07rem;
+      // position: relative;
+      // top: -0.089rem;
+    }
+    .act_margin {
+      margin-top: -0.09rem;
+    }
+    .rule_line {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0.01rem;
+      width: 1rem;
+      height: 0.5rem;
+      z-index: 10;
+    }
+    .ruleLInk {
+      position: absolute;
+      z-index: 5;
+      width: 1rem;
+      height: 0.3rem;
+      bottom: 0.5rem;
+      left: 1.3rem;
+    }
+  }
+
+  // 上传作品
+
+  .uploadCont {
+    position: fixed;
+    bottom: 0;
+    z-index: 50;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    max-width: 640px;
+    font-size: 0.14rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    .upLoad {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      flex: 1;
+      line-height: 0.17rem;
+      padding: 0.16rem 0;
+      background: linear-gradient(to right, #fe535d, #fb2061);
+      background: -moz-linear-gradient(right, #fe535d, #fb2061);
+      background: -o-linear-gradient(right, #fe535d, #fb2061);
+      background: -webkit-linear-gradient(left, #fe535d, #fb2061);
+    }
+    .addFrame {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      flex: 1;
+      line-height: 0.17rem;
+      padding: 0.16rem 0;
+      background: linear-gradient(to right, #FFB21A, #FF7C31);
+      background: -moz-linear-gradient(right, #FFB21A, #FF7C31);
+      background: -o-linear-gradient(right, #FFB21A, #FF7C31);
+      background: -webkit-linear-gradient(left, #FFB21A, #FF7C31);
+    }
+  }
+  .uploadCont:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    border-top: 1px solid #fff;
+    transform-origin: left top;
+    transform: scaleY(0.5);
+    width: 100%;
+  }
+  .workList {
+    margin-top: 0.3rem;
+    background: url([[static]]/page/act_year_wish/img/list_bkg_05.png);
+    background-size: 100%;
+    border-top-right-radius: 0.07rem;
+    border-top-left-radius: 0.07rem;
+    padding-bottom: 0.66rem;
+    position: relative;
+    z-index: 1;
+    .list_t_pic {
+      text-align: center;
+      padding: 0.3rem 0 0.35rem 0;
+      img {
+        width: 2.1rem;
+      }
+    }
+    .list_nav_cont {
+      padding: 0 0.05rem;
+    }
+    .list_nav {
+      position: relative;
+      float: left;
+      padding: 0.025rem;
+      width: 33%;
+      box-sizing: border-box;
+      .list_n {
+        background: #fff;
+        padding: 0.07rem;
+        border-radius: 0.05rem;
+      }
+      .list_rank {
+        position: absolute;
+        left: -0.02rem;
+        z-index: 10;
+        background: #ffb016;
+        padding: 0.02rem 0.05rem;
+        line-height: 0.17rem;
+        padding-bottom: 0rem;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        color: #fff;
+        font-size: 0.12rem;
+      }
+      .list_pic {
+        position: relative;
+        width: 1rem;
+        height: 1rem;
+        // width: 100%;
+        border-radius: 0.05rem;
+        overflow: hidden;
+        img {
+          width: 100%;
+        }
+        .list_thumbs {
+          position: absolute;
+          bottom: -0.01rem;
+          left: 0;
+          font-size: 0.12rem;
+          line-height: 0.15rem;
+          padding-top: 0.04rem;
+          padding-bottom: 0.04rem;
+          background-image: url([[static]]/page/act_year_wish/img/hert_icon.png);
+          background-repeat: no-repeat;
+          background-size: 0.17rem;
+          background-color: rgba(0,0,0,.6);
+          border-top-right-radius: 0.05rem;
+          color: #fff;
+          padding-left: 0.25rem;
+          padding-right: 0.08rem;
+          background-position: 0.05rem;
+        }
+      }
+
+    }
+  }
+  .upListTop {
+    margin-top: 0.5rem;
+  }
+
+  // 头像
+  .avatar_cont {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 0.15rem 0.1rem 0.1rem 0.1rem;
+    .avatar_info {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      flex: 1;
+      color: #333;
+      font-size: 0.16rem;
+    }
+    .avatar_pic {
+      display: inline-block;
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 50%;
+      overflow: hidden;
+      vertical-align: middle;
+      margin-right: 0.1rem;
+      img {
+        width: 100%;
+      }
+    }
+    .repeat_upload {
+      position: relative;
+      padding-right: 0.15rem;
+      .arrowIcon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: url([[static]]/page/act_year_wish/img/arrowIcon.png) no-repeat;
+        background-size: 100%;
+        width: 0.1rem;
+        height: 0.16rem;
+      }
+    }
+    // .repeat_upload:after {
+    //   content: " ";
+    //   display: inline-block;
+    //   height: 10px;
+    //   width: 10px;
+    //   border-width: 2px 2px 0 0;
+    //   border-color: #999;
+    //   border-style: solid;
+    //   -webkit-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+    //   -ms-transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+    //   transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+    //   position: relative;
+    //   top: -2px;
+    //   position: absolute;
+    //   top: 50%;
+    //   margin-top: -6px;
+    //   right: 0;
+    // }
+  }
+
+  // 分享和点赞
+  .workImg {
+    margin: 0.1rem;
+    padding-top: 0;
+    box-shadow: 0 0 0.1rem rgba(118,15,81,0.4);
+    border-radius: 0.05rem;
+    overflow: hidden;
+    img {
+      width: 100%;
+      vertical-align: middle;
+    }
+  }
+  .workOperate {
+    text-align: center;
+    padding: 0.25rem 0;
+    position: relative;
+    z-index: 10;
+    .workZan,.workShare {
+      display: inline-block;
+      padding: 0.12rem 0;
+      background-color: #fff;
+      border-radius: 0.3rem;
+      color: #333;
+      background-repeat: no-repeat;
+      background-position: 0.35rem;
+      font-size: 0.2rem;
+      // padding-left: 0.5rem;
+      padding-left: 0.6rem;
+      padding-right: 0.3rem;
+      box-shadow: 0 0 0.05rem rgba(118,15,81,0.3);
+    }
+    .workZan {
+      background-image: url([[static]]/page/act_year_wish/img/no_zan.png);
+      // background-size: 0.22rem;
+      margin-right: 0.2rem;
+      padding-left: 0.58rem;
+
+      min-width: 1.2rem;
+      box-sizing: border-box;
+      background-size: 0.2rem;
+      background-position: 0.43rem;
+    }
+
+    .workShare {
+      background-image: url([[static]]/page/act_year_wish/img/share_icon.png);
+      background-size: 0.18rem;
+    }
+    .workZanH5 {
+      padding: 0.12rem 0;
+      background-color: #fff;
+      border-radius: 0.3rem;
+      color: #333;
+      background-repeat: no-repeat;
+      background-position: 0.9rem;
+      font-size: 0.2rem;
+      padding-left: 0.5rem;
+      padding-right: 0.3rem;
+      box-shadow: 0 0 0.05rem rgba(118, 15, 80, 0.3);
+      background-image: url([[static]]/page/act_year_wish/img/no_zan.png);
+      background-size: 0.22rem;
+      width: 1.6rem;
+      margin: auto;
+    }
+    .h5Tips {
+      color: #333;
+      font-size: 0.14rem;
+      padding-top: 0.15rem;
+    }
+    .alreadyAan {
+      background-image: url([[static]]/page/act_year_wish/img/already_zan.png);
+      background-size: 0.22rem;
+      margin-right: 0.2rem;
+    }
+    .alreadyAanH5 {
+      background-image: url([[static]]/page/act_year_wish/img/already_zan.png);
+      background-size: 0.3rem;
+    }
+    .goMain {
+      text-align: center;
+      font-size: 0.14rem;
+      color: #fb2d66;
+      padding-top: 0.2rem;
+    }
+  }
+
+  .workFlower {
+    text-align: center;
+    position: relative;
+  }
+  .lookRule {
+    position: relative;
+    .lookWork {
+      position: absolute;
+      width: 2rem;
+      z-index: 50;
+      height: 0.5rem;
+      bottom: 0.4rem;
+      left: 0.9rem;
+    }
+  }
+  .lookWork {
+    .lookFlower {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      left: 0;
+      top: -0.3rem;
+    }
+    .lookImg {
+      width: 3.1rem;
+    }
+  }
+
+  .self_img {
+    position: absolute;
+    bottom: -1.25rem;
+    img {
+      width: 100%;
+    }
+  }
+
+  // modal框
+  .modalCont {
+    position: relative;
+    .weui-mask {
+      position: fixed;
+      width: 100%;
+      max-width: 640px;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 0;
+      background: rgba(0,0,0,.5);
+      height: 100%;
+      z-index: 55;
+    }
+    .weui-cont {
+      position: fixed;
+      width: 3rem;
+      margin: auto;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      background: #fff;
+      border-radius: 0.05rem;
+      z-index: 60;
+      overflow: hidden;
+      .modal_img {
+        position: relative;
+        padding-bottom: 0.2rem;
+        margin: 0 0.2rem;
+        margin-top: 0.3rem;
+        overflow-y: auto;
+      }
+      .modal_img:after {
+        position: absolute;
+        content: "";
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+        transform: scaleY(0.5);
+        -webkit-transform-origin: top left;
+        transform-origin: top left;
+      }
+      img {
+        width: 100%;
+      }
+      .img_tips {
+        text-align: center;
+        margin: 0.2rem;
+        color: #FF4A7D;
+      }
+    }
+    .modal_colse {
+      background: url(//9i.dvmama.com/free/goodsDetail/clearInput_icon.png) center no-repeat;
+      background-size: 0.16rem;
+      position: absolute;
+      background-position-y: center;
+      z-index: 100;
+      top: 0;
+      right: 0;
+      width: 0.3rem;
+      height: 0.3rem;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>使用浏览器打开</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/supervisorClass/css/supervisorClass.css[[v]]">
+</head>
+<body>
+  <div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+    <!--标题-->
+    <div class="alert-img">
+      <img src="//9i.dvmama.com/free/2018/07/13/123123.jpg" alt="">
+    </div>
+
+
+    <!--返回顶部-->
+    <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/supervisorClass/js/supervisorClass.js[[v]]"></script>
+</body>
+</html>

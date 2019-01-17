@@ -1,0 +1,50 @@
+@import "../../../common/css/common.scss";
+
+.app {
+  background: url([[static]]/page/act_1111_video/img/bg.png[[v]]) no-repeat;
+  text-align: center;
+  background-size:100%;
+  min-height: 6rem;
+
+  .title-1 {
+    margin: r(15) auto auto;
+    width: 100%;
+  }
+  .words {
+    color: white;
+    line-height: 1.5;
+    position: relative;
+    top: 0.3rem;
+    font-size: r(12);
+  }
+  .tv {
+    margin: r(-10) auto auto;
+    padding: r(75) 0 0;
+    width: 100%;
+    height: r(210);
+    background: url([[static]]/page/act_1111_video/img/tv.png[[v]]) no-repeat;
+    background-size: 100%;
+    position: relative;
+    video {
+      width: 78%;
+      height: r(166);
+    }
+    .start {
+      position: absolute;
+      top: 43%;
+      left: 42%;
+      @include square(r(70));
+      cursor: pointer;
+    }
+  }
+  .go-main{
+    display: block;
+    margin: r(10) auto 0;
+    width: 60%;
+  }
+
+  .footer {
+    background: url([[static]]/page/act_1111_video/img/footer.png[[v]]) no-repeat;
+    background-size:100% 100%;
+  }
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/sale_change_page/css/sale_change_page.css[[v]]">
+</head>
+<body>
+  <div class="app">
+    <!--标题-->
+    <com-top-title back title="选择服务类型">
+      <template>
+        <div slot='right'>
+          <a style='font-size: 12px; color: #FF4A7D;margin-right: 10px;' href='/policy.html'>售后政策</a>
+        </div>
+      </template>
+    </com-top-title>
+    <sale-change-page></sale-change-page>
+
+    <!--返回顶部-->
+    <!-- <com-to-top-icon></com-to-top-icon> -->
+  </div>
+
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/sale_change_page/js/sale_change_page.js[[v]]"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+@import "../../../common/css/util/all.scss";
+
+[v-cloak] {
+  display:none;
+}
+.app {
+  .head-wrapper {
+    position:relative;
+    .head-pic {
+      width:100%;
+      display:block;
+    }
+    .head-title {
+      position:absolute;
+      top:r(77);
+      left:r(119);
+      padding:r(3) r(14);
+      border-radius:r(20);
+      font-size:r(12);
+      color:#fff;
+      background-color:#42D8C9;
+    }
+  }
+  //.album-items {
+  //  padding:r(10) r(20) r(20);
+  //  background:linear-gradient(#C1B5FF,#97A4FF);
+  //  overflow:hidden;
+  //  .item {
+  //    float:left;
+  //    width:r(77);
+  //    height:r(84);
+  //    box-sizing:border-box;
+  //    padding:r(4) r(4) r(10);
+  //    border-radius:r(2);
+  //    background-color:#fff;
+  //    &:not(:nth-child(4n+0)) {
+  //      margin-right:r(8);
+  //    }
+  //    margin-bottom:r(20);
+  //
+  //    .pic {
+  //      width:r(69);
+  //      height:r(69);
+  //      border-radius:r(2);
+  //    }
+  //  }
+  //}
+
+  //吉尼斯规定照片最小为300*300px
+  .album-items {
+    padding:10px 6px 20px;
+    background:linear-gradient(#C1B5FF,#97A4FF);
+    overflow:hidden;
+    .item {
+      width:300px;
+      height:300px;
+      padding:4px 4px 10px;
+      border-radius:2px;
+      background-color:#fff;
+      margin-bottom:20px;
+      display:inline-block;
+      &:not(:nth-child(2n+0)) {
+        margin:0 12px 20px 0;
+      }
+
+      .pic {
+        width:300px;
+        height:300px;
+        border-radius:2px;
+      }
+    }
+  }
+  @media screen and (max-width: 639px){
+    .album-items {
+      .item {
+        margin:0 auto 20px!important;
+        display:block;
+      }
+    }
+  }
+  .no_more_style{
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    bottom: 0.1rem;
+    text-align: center;
+    width: 100%;
+  }
+}

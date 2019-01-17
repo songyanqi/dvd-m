@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>免费课程券</title>
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="screen-orientation" content="portrait">
+  <meta name="x5-orientation" content="portrait">
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/free_course_code/css/free_course_code.css[[v]]">
+</head>
+<body>
+<div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight + 'px'}">
+  <!--标题-->
+  <!--<dvd-service-com-title title="免费课程码" back home></dvd-service-com-title>-->
+  <div class="ui-bg">
+    <div class="ui-bg-img-box">
+      <div class="ui-card" :class="{'t9':is_X}"></div>
+      <div class="ui-reminder-box" v-if="pageStatus === 5"></div>
+      <div class="ui-top-box" :class="{'pt9':is_X}">
+        <div class="ui-user-icon" :style="{backgroundImage: 'url(' + userIcon + ')'}"></div>
+        <div class="ui-top-name">{{userName}}</div>
+        <div class="ui-top-txt">送你一张免费听课券，领取后免费听该节课</div>
+      </div>
+
+      <div class="ui-pageStatus status" v-if="pageStatus === 0 || pageStatus === 1">
+        <div class="ui-ticket-box">
+          <img src="//9i.dvmama.com/free/2018/05/16/course_share_take.png" width="100%">
+        </div>
+        <div class="ui-take-btn" @click="getTicket()"></div>
+        <div class="ui-price-text">价格：{{price}}</div>
+      </div>
+
+
+      <div class="ui-pageStatus status" v-if="pageStatus === 2">
+        <div class="ui-ticket-text-box">
+          <span>您已报名过该节课，无需领券</span>
+        </div>
+        <div class="ui-price-text">
+          <span>已报名 </span>
+          <span class="ui-color-666">原价：{{price}}</span>
+        </div>
+      </div>
+
+      <div class="ui-pageStatus status" v-if="pageStatus === 3">
+        <div class="ui-ticket-text-box">
+          <span>免费听课券已经被使用</span>
+        </div>
+        <div class="ui-price-text">
+          <span>价格：{{price}}</span>
+        </div>
+      </div>
+
+      <div class="ui-pageStatus status" v-if="pageStatus === 4">
+        <div class="ui-isVip">您是大V店会员</div>
+        <div class="ui-ticket-text-box ui-isVip-text">
+          <span>付费课程免费听，无需领券</span>
+        </div>
+        <div class="ui-price-text">
+          <span>已免费 </span>
+          <span class="ui-color-666 ui-decoration">原价：{{price}}</span>
+        </div>
+      </div>
+
+      <div class="ui-pageStatus status" style="margin-top: 0.35rem" v-if="pageStatus === 5 || pageStatus === 9">
+        <div class="ui-ticket-box" style="position: relative;top: 0.03rem">
+          <img src="//9i.dvmama.com/free/2018/05/16/course_ticket.png" width="100%">
+        </div>
+        <div class="ui-price-text" style="margin-top: 0.23rem">
+          <span>价格：{{price}}</span>
+        </div>
+      </div>
+
+      <div class="ui-pageStatus status" v-if="pageStatus === 6">
+        <div class="ui-ticket-box">
+          <img src="//9i.dvmama.com/free/2018/05/16/ticket_tacked.png" width="100%">
+        </div>
+        <div class="ui-price-text">
+          <span>已免费 </span>
+          <span class="ui-color-666 ui-decoration">原价：{{price}}</span>
+        </div>
+      </div>
+
+      <div class="ui-link-btn" @click="toDetail()">
+        <span>立即听课</span>
+        <div></div>
+      </div>
+
+      <div class="ui-cnt-img" @click="toDetail()">
+        <img v-lazy="cntImg" width="100%" height="100%">
+      </div>
+      <div class="ui-remind-text" v-if="pageStatus === 6">*相同账号在APP也可免费听该课程</div>
+    </div>
+
+
+    <!--<div class="ui-bottom" v-if="is_X"></div>-->
+  </div>
+  <div class="ui-bottom-txt" :class="{'ui-mt-45':pageStatus === 5 && is_S !== true,'ui-mt-30':pageStatus !== 5 && is_S === true}"></div>
+  <!--返回顶部-->
+  <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+</div>
+
+@@include('node_modules/dvd-base-build/html-inc/body.inc')
+<!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+<!--<script src="[[vendor]]/clipboard/clipboard.min.js"></script>-->
+<script src="[[static]]/common/js/common.js[[v]]"></script>
+<script src="[[static]]/page/free_course_code/js/free_course_code.js[[v]]"></script>
+</body>
+</html>

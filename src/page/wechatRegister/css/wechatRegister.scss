@@ -1,0 +1,30 @@
+@import "../../../common/css/util/all.scss";
+.app {
+    [v-cloak] {
+      display: none;
+    }
+    .top-info{
+        padding: .2rem .2rem;
+        background: #fff;
+        margin-bottom: .2rem;
+    }
+    .adviser-group-list{
+        padding: 0 .2rem;
+        background: #fff;
+    }
+    .adviser-group-item{
+        padding: .15rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        a{
+            padding: .05rem .1rem;
+            color: #FF4A7D;
+            border: .01rem solid #FF4A7D;
+            border-radius: .05rem;
+        }
+        &:not(:last-child){
+            border-bottom: 1px solid #ccc;
+        }
+    }
+}

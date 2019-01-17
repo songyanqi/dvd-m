@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/after_sale/css/after_sale.css[[v]]">
+</head>
+<body>
+  <div class="app">
+    <!--标题-->
+    <com-top-title back :title = "titleTop">
+      <template>
+        <div slot='right'>
+          <a style='font-size: 12px; color: #FF4A7D;margin-right: 10px;' href='/policy.html'>售后政策</a>
+        </div>
+      </template>
+    </com-top-title>
+    <order-top :data = "progressList"></order-top>
+    <after-sale v-if='data' :list = "data"></after-sale>
+
+
+    <!--返回顶部-->
+    <!-- <com-to-top-icon></com-to-top-icon> -->
+  </div>
+
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <script src="[[vendor]]/ali-oss/5.1.1/aliyun-oss-sdk.min.js"></script>
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/after_sale/js/after_sale.js[[v]]"></script>
+</body>
+</html>

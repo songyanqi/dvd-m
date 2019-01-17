@@ -1,0 +1,101 @@
+{
+  "code":"0",
+  "data_version":"xxxxxx",
+  "shop_url":"https://15201663952.davdian.com",
+  "visitor_status":"1",
+  "sess_key":"48a275a991a0a6295706e6d9f8c3a784b62a4bbc",
+  "sys_time":"1505357646",
+  "data":
+  {
+    "typeList": [
+      {
+        "typeId": "0",
+        "typeName": "总榜单"
+      },
+      {
+        "typeId": "1",
+        "typeName": "绘本图画书"
+      },
+      {
+        "typeId": "3",
+        "typeName": "儿童文学"
+      },
+      {
+        "typeId": "4",
+        "typeName": "儿童文学"
+      },
+      {
+        "typeId": "5",
+        "typeName": "儿童文学"
+      },
+      {
+        "typeId": "6",
+        "typeName": "绘本图画书"
+      }
+    ],
+    "banner": {
+      "image": "http://9i.dvmama.com/free/member/banner.jpg",
+      "linkto": "http://www.baidu.com/"
+    },
+    "ageGroupList": [
+      {
+        "ageGroupId": "0",
+        "ageGroupName": "总排名"
+      },
+      {
+        "ageGroupId": "1",
+        "ageGroupName": "0-2岁"
+      },
+      {
+        "ageGroupId": "2",
+        "ageGroupName": "3-6岁"
+      }
+    ],
+    "bookList": [
+      {
+        "goodsId": "100056",
+        "bookImage": "http://9i.dvmama.com/goods/2016/03/24/640_640_51cefebdaf58009e4a6377a3f2385793.jpg?x-oss-process=image/resize,m_fill,w_210,h_210/quality,Q_90",
+        "bookTitle": "猩猩小宝贝：会动的灰石头",
+        "bookIntro": "让孩子学会自信，XXXX出品",
+        "price": "100.80",
+        "saleStatus": "售罄",
+        "goodsLabel": "满立减",
+        "commentVol": "999+"
+      },
+      {
+        "goodsId": "100056",
+        "bookImage": "http://9i.dvmama.com/goods/2016/03/24/640_640_51cefebdaf58009e4a6377a3f2385793.jpg?x-oss-process=image/resize,m_fill,w_210,h_210/quality,Q_90",
+        "bookTitle": "猩猩小宝贝：会动的灰石头",
+        "bookIntro": "让孩子学会自信，XXXX出品",
+        "price": "100.80",
+        "saleStatus": "已售罄",
+        "commentVol": "999+"
+      },
+      {
+        "goodsId": "100056",
+        "bookImage": "http://9i.dvmama.com/goods/2016/03/24/640_640_51cefebdaf58009e4a6377a3f2385793.jpg?x-oss-process=image/resize,m_fill,w_210,h_210/quality,Q_90",
+        "bookTitle": "猩猩小宝贝：会动的灰石头",
+        "bookIntro": "让孩子学会自信，XXXX出品",
+        "price": "100.80",
+        "saleStatus": "售罄",
+        "goodsLabel": "满立减",
+        "commentVol": "999+"
+      },
+      {
+        "goodsId": "100056",
+        "bookImage": "http://9i.dvmama.com/goods/2016/03/24/640_640_51cefebdaf58009e4a6377a3f2385793.jpg?x-oss-process=image/resize,m_fill,w_210,h_210/quality,Q_90",
+        "bookTitle": "猩猩小宝贝：会动的灰石头",
+        "bookIntro": "让孩子学会自信，XXXX出品",
+        "price": "100.80",
+        "saleStatus": "售罄",
+        "goodsLabel": "满立减",
+        "commentVol": "999+"
+      }
+    ],
+    "more":"0",
+    "referer":{
+      "rp":"best_top",
+      "rl":"list"
+    }
+  }
+}

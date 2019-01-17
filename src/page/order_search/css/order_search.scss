@@ -1,0 +1,2962 @@
+@import "../../../common/css/util";
+
+
+[v-cloak] {
+  display:none;
+}
+.app {
+  background: #F1F1F1;
+  min-height:100vh;
+
+  .toastCont {
+    position: fixed;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -o-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    min-width: 100px;
+    text-align: center;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .search_top {
+    height: 44px;
+    background-color: #FAFAFA;
+    position: relative;
+
+    .order-input-wrapper {
+      padding: 7px 48px 0 44px;
+      position:relative;
+
+      .order-input-border {
+        position:relative;
+        padding:1px;
+
+        &:after {
+          content: '';
+          position:absolute;
+          width:200%;
+          height:200%;
+          top:0;
+          left:0;
+          border:1px solid #ddd;
+          transform:scale(0.5,0.5);
+          border-radius: 40px;
+          box-sizing: border-box;
+          transform-origin: left top;
+        }
+        .search-icon {
+          width:14px;
+          height:16px;
+          background:url(//9i.dvmama.com/free/Pictures/search-icon.png) no-repeat;
+          background-size:14px;
+          position:absolute;
+          top:8px;
+          left:10px;
+          z-index:11;
+        }
+        .search-delete {
+          width:34px;
+          height:34px;
+          background:url(//9i.dvmama.com/free/Pictures/search-delete.png) no-repeat;
+          background-size:16px;
+          position:absolute;
+          top:-1px;
+          right:10px;
+          z-index:11;
+          background-position:right;
+        }
+      }
+
+      .order-input {
+        width: 100%;
+        height: 30px;
+        box-sizing: border-box;
+        font-size: 12px;
+        color: #666;
+        padding-left: 34px;
+        border-radius: 20px;
+        border: none;
+        position: relative;
+        z-index: 10;
+      }
+    }
+  }
+  .search_top:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    background: #eee;
+    width: 100%;
+    height: 1px;
+  }
+  /*订单列表*/
+  .order_list_container, .order_delivery_container {
+    padding-bottom: 30px;
+  }
+
+  .order_list_container .order_list_switcher {
+    background-color: #fff;
+    font-size: 0;
+    display: table;
+    width: 100%;
+
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    max-width: 640px;
+    margin-top:44px;
+  }
+  .order_list_container .order_list_switcher:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    border-bottom: 1px solid #e1e1e1;
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+  }
+
+  .order_list_container .no-order {
+    color: #666666;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .order_list_container .order_list_switcher .switcher_item {
+    /*line-height: 38px;*/
+    line-height: 14px;
+    padding: 14px 0;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    display: table-cell;
+  }
+
+  .order_list_container .order_list_switcher .switcher_item.selected {
+    color: #FF4A7D;
+    border-bottom: 2px solid #FF4A7D;
+  }
+
+  .order_list_container .order_list_item {
+    background-color: #fff;
+    margin-top: 10px;
+  }
+  .order_list_container .order_conts {
+    margin-top: 54px;
+  }
+
+  .order_list_container .order_name {
+    padding: 0px 10px;
+    line-height: 40px;
+    border-bottom: #f1f1f1 solid 1px;
+    color: #666;
+    height: 40px;
+
+    span {
+      font-size:14px;
+    }
+  }
+
+  .order_list_container .order_name a {
+    display: inline-block;
+  }
+
+  .order_list_container .order_good_list {
+    padding: 14px 76px 14px 10px;
+    display: block;
+    border-bottom: #f1f1f1 solid 1px;
+    background-color: #fff;
+  }
+
+  .order_list_container .order_good_list.single_good {
+    padding-right: 10px;
+  }
+
+  .order_delivery_container .single_goods .order_good_list {
+    padding: 14px 0 14px 0;
+    display: block;
+    border-bottom: #f1f1f1 solid 1px;
+    background-color: #fff;
+  }
+
+  .order_delivery_container .order_good_list {
+    padding: 14px 62px 14px 0;
+    display: block;
+    border-bottom: #f1f1f1 solid 1px;
+    background-color: #fff;
+  }
+
+  .order_delivery_container .img_container {
+    height: 60px;
+    overflow: hidden;
+    padding-left: 10px;
+  }
+
+  .order_list_container .img_container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .order_list_container .img_container img, .order_delivery_container .img_container img {
+    width: 58px;
+    height: 58px;
+    border: #eee solid 1px;
+    margin-right: 5px;
+  }
+
+  .order_list_container .order_buttons {
+    padding: 0px 10px;
+    height: 44px;
+    line-height: 44px;
+    color: #333;
+  }
+
+  .order_list_container .order_list_buttons {
+    padding: 0px 10px;
+    height: inherit!important;
+    line-height: inherit;
+  }
+  .order_list_container .order_presale {
+    font-size: 12px;
+    color: #333;
+    padding: 10px;
+    padding-top: 0;
+    text-align: right;
+  }
+
+  .order_list_container .order_buttons span {
+    line-height: 24px;
+  }
+
+  .order_list_container .order_buttons a.dav-btn {
+    margin: 0 0 10px 10px;
+    min-width: 50px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 24px;
+    padding: 0px 7px;
+  }
+
+  .order_delivery_container .order_good_list .text-container {
+    border: #eee solid 1px;
+    line-height: 16px;
+    width: 58px;
+    text-align: center;
+    padding: 13px 0;
+    margin-right: -52px;
+    margin-top: -60px;
+    font-size: 12px;
+    color: #666;
+  }
+  .order_list_container .sum {
+    text-align: right;
+    padding: 10px;
+    font-size: 12px;
+    color: #999;
+  }
+  .order_list_container .sum .payment{
+    font-size:14px;
+    color: #333;
+  }
+  .order_list_container .sum .payment .fz_12{
+    font-size:12px;
+  }
+  .order_list_container .order_good_list .text-container {
+    border: #eee solid 1px;
+    line-height: 16px;
+    width: 58px;
+    text-align: center;
+    padding: 13px 0;
+    margin-right: -66px;
+    margin-top: -60px;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .order_list_container .good_title {
+    position: absolute;
+    margin-left: 72px;
+    margin-top: -50px;
+    height: 3em;
+    overflow: hidden;
+    line-height: 1.5;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+  }
+
+  .order_list_container .order_list_group {
+    display: block;
+  }
+
+  .order_list_container .order_good_info_container {
+    position: absolute;
+    left: 68px;
+    top: 0;
+  }
+
+  .order_list_container .order_good_info_container .order_good_name {
+    height: 33px;
+    overflow: hidden;
+    line-height:18px;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+  }
+
+  .order_list_container .order_good_price {
+    margin-top: 8px;
+  }
+
+  .order_list_container .single_good .img_container_inner {
+    width: 72px;
+  }
+
+  .order_goods_inf_none {
+    background-color: #fff;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .presale_shop {
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    padding-top: 8px !important;
+  }
+
+  .sale_prompt_text {
+    width: 52px;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    height: 15px;
+    font-size: 12px;
+    background: rgba(9, 10, 10, 0.5);
+    color: #fff;
+    line-height: 15px;
+    z-index: 10;
+  }
+
+  .order_handle {
+    padding: 15px 12px;
+    background: #fff;
+  }
+  .order_handle .orderFlex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+  }
+  .order_handle .flex1 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+  }
+
+  .order_handle li {
+    border-left: 2px solid #cccccc;
+    margin-left: 16px;
+    padding-top: 8px;
+  }
+
+  .order_handle li:first-child {
+    border-left: 2px solid #cccccc;
+    margin-left: 16px;
+    padding-top: 0px;
+  }
+
+  .order_handle li:last-child {
+    margin-left: 16px;
+    border-left: 2px solid transparent;
+    position: relative;
+    padding-bottom: 0px;
+  }
+
+  .order_handle li:last-child .line {
+    width: 2px;
+    height: 16px;
+    display: inline-block;
+    background-color: #ccc;
+    position: absolute;
+    top: -8px;
+    left: -2px;
+  }
+
+  .order_handle li .left {
+    width: 32px;
+    height: 32px;
+    border-radius: 32px;
+    float: left;
+    padding-right: 9px;
+    margin-left: -17px;
+  }
+
+  .order_handle li .right {
+    border-bottom: 1px solid #eeeeee;
+    margin-left: 22px;
+    padding-bottom: 8px;
+  }
+
+  .order_handle li:last-child .right {
+    padding-bottom: 0px;
+    border-bottom: 0px;
+  }
+
+  .fz_14 {
+    font-size: 14px;
+  }
+
+  .shop_icon {
+    // background-image: url("//9i.dvmama.com/free/shop_icon_40_36.png");
+    background-image: url("//mamaj-oss.oss-cn-beijing.aliyuncs.com/free/advanced/newshop_icon.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    margin-right: 5px;
+    float: left;
+    margin-top: 14px;
+  }
+
+  .shop_arrow {
+    display: inline-block;
+    vertical-align: 0;
+    margin-left: 2px;
+    width: 9px;
+    height: 9px;
+    border-top: 1px solid #999;
+    border-right: 1px solid #999;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  @media screen and(min-width: 640px){
+    .shop_arrow {
+      vertical-align: middle;
+      margin-top:-4px;
+    }
+  }
+
+  .shop_title {
+    table-layout: fixed;
+    max-width: 10em;
+    font-size:14px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+  }
+
+  #to-top {
+    bottom: 40px;
+  }
+
+  .dav_icon_up2top_80_80 {
+    width: 44px;
+    height: 44px;
+    background-size: 44px;
+    background-image: url("//9i.dvmama.com/free/back_top_icon_0803.png");
+  }
+
+  body {
+    padding-bottom: 0;
+  }
+
+  .order_list_container {
+    padding-top: 44px;
+    padding-bottom: 0;
+  }
+
+  .order_detail_kd {
+    background-color: #fff;
+    padding: 1px 0;
+  }
+
+  .search_orderDelivery_btn {
+    width: 74px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background-color: #FF4A7D;
+    color: #fff;
+    font-size: 12px;
+    display: inline-block;
+    border-radius: 3px;
+    margin: 5px 0;
+  }
+
+  .current_address {
+    background-color: #FFF6DB;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .be_evaluated_list {
+
+  }
+
+  .be_evaluated_list li {
+    padding: 10px;
+    min-height: 70px;
+    position: relative;
+  }
+  .be_evaluated_list li:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    background: #E1E1E1;
+    width: 100%;
+    height: 1px;
+  }
+
+  .be_evaluated_list li:last-child:after {
+    display: none;
+  }
+
+  .be_evaluated_list li .goods_pic {
+    width: 70px;
+    height: 70px;
+    position: absolute;
+  }
+
+  .be_evaluated_list li .goods_con {
+    margin-left: 80px;
+    font-size: 12px;
+  }
+
+  .be_evaluated_list li .goods_con .goods_title {
+    text-overflow: ellipsis;
+    white-space: pre-line;
+    height: 33px;
+    line-height: 18px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    overflow: hidden;
+  }
+
+  .be_evaluated_list li .goods_con .evaluate_btn {
+    width: 64px;
+    height: 24px;
+    line-height: 24px;
+    color: #FF4A7D;
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    right:10px;
+  }
+
+  .be_evaluated_list li .goods_con .evaluate_btn:after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    border: 1px solid #FF4A7D;
+    width: 100%;
+    height: 100%;
+    border-radius:50px;
+  }
+  .be_evaluated_list li .goods_con .view_evaluate_btn{
+    width: 64px;
+    height: 24px;
+    line-height: 24px;
+    color: #333;
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    right:84px;
+  }
+  .be_evaluated_list li .goods_con .view_evaluate_btn1{
+    width: 64px;
+    height: 24px;
+    line-height: 24px;
+    color: #333;
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    right:10px;
+  }
+  .be_evaluated_list li .goods_con .view_evaluate_btn:after,.be_evaluated_list li .goods_con .view_evaluate_btn1:after{
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 100%;
+    border-radius:50px;
+  }
+  .publish_comment_top{
+    padding-top: 5px;
+    background: #fff;
+  }
+  .publish_comment_top li {
+    padding: 10px;
+    min-height: 60px;
+    position: relative;
+  }
+  .publish_comment_top li:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    background: #E1E1E1;
+    width: 100%;
+    height: 1px;
+  }
+  .publish_comment_top li .goods_pic {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+  }
+
+  .publish_comment_top li .goods_con {
+    margin-left: 70px;
+    font-size: 12px;
+  }
+
+  .publish_comment_top li .goods_con .goods_title {
+    text-overflow: ellipsis;
+    white-space: pre-line;
+    height: 33px;
+    line-height: 18px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    overflow: hidden;
+    margin-top: 5px;
+  }
+  .publish_comment {
+    background: #fff;
+  }
+
+  .publish_comment_con {
+    padding: 6px 0 10px;
+  }
+
+  .publish_comment_con .comment_title {
+    font-size: 15px;
+    color: #333;
+    padding:9px 10px 11px;
+  }
+
+  .publish_comment_con .comment_title .text {
+    padding-right: 10px;
+  }
+
+  .publish_comment_con .comment_title li {
+    width: 18px;
+    height: 18px;
+    float: left;
+    background: url(//9i.dvmama.com/free/2017/04/01/36_36_f70171db9a25e8ede24f3d346b796bbc.png);
+    display: inline-block;
+    background-size: 18px;
+    margin-right:15px;
+  }
+
+  .publish_comment_con .comment_title li.hover {
+    background: url(//9i.dvmama.com/free/2017/04/01/36_36_f92caafa1b989cb61db6fcd59bbe713f.png);
+    background-size:18px;
+  }
+
+  .publish_comment_textarea_con {
+    position: relative;
+    margin: 11px 10px 0 10px;
+    background: #F9F9F9;
+    padding: 10px;
+  }
+
+  .publish_comment_textarea {
+    border-radius: 4px;
+    min-height: 65px;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    resize: none;
+    overflow: auto;
+    background: #F9F9F9;
+    margin-bottom: 10px;
+    line-height: 21px;
+  }
+
+  .publish_comment_textarea_num {
+    position: absolute;
+    bottom: 6px;
+    font-size: 10px;
+    color: #999;
+    right: 8px;
+  }
+
+  .publish_btn {
+    width: 160px;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+    margin: 20px auto;
+    background: #FF4A7D;
+    border-radius: 3px;
+  }
+
+  .publish_pic_view {
+    position: fixed;
+    background: #000;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+  }
+
+  @media screen and (min-width: 640px) {
+    .publish_pic_view {
+      left: 50%;
+      margin-left: -320px;
+      max-width: 640px;
+    }
+  }
+
+  .publish_pic_preview img {
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    top: 0;
+    margin: auto auto;
+  }
+
+  .publish_pic_preview_bottom {
+    background-color: rgba(0, 0, 0, .4);
+    position: absolute;
+    bottom: 0;
+    height: 44px;
+    line-height: 44px;
+    color: #fff;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 3;
+
+  }
+
+  .publish_pic_preview_bottom .back {
+    padding: 0 33px;
+    position: absolute;
+    left: 0;
+  }
+
+  .back_arrow {
+    display: inline-block;
+    vertical-align: 0;
+    width: 14px;
+    height: 14px;
+    border-left: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    position: absolute;
+    top: 15px;
+    left: 17px;
+  }
+
+  .publish_pic_preview_bottom .num {
+    text-align: center
+  }
+
+  .publish_pic_preview_bottom .delete_btn {
+    position: absolute;
+    right: 0;
+    padding: 11px;
+    background: url(//9i.dvmama.com/free/comment_delete_icon.png) no-repeat center;
+    width: 22px;
+    height: 22px;
+    background-size: 22px;
+    top: 0;
+  }
+
+  .anonymous_comment {
+    line-height: 20px;
+    font-size: 14px;
+    color: #666;
+    position: relative;
+    padding: 12px 35px;
+  }
+  .anonymous_comment:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -1px;
+    background: #E1E1E1;
+    width: 100%;
+    height: 1px;
+  }
+
+  .anonymous_comment_icon {
+    border: 1px solid #ddd;
+    width: 18px;
+    height: 18px;
+    border-radius:18px;
+    display: table-row-group;
+    position: absolute;
+    left: 10px;
+    top: 12px;
+  }
+
+  .anonymous_comment_icon.checked {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: url(//9i.dvmama.com/free/2017/04/01/40_40_a37457d5cb470f331efdf6a8743aff8b.png) no-repeat;
+    background-size:20px;
+    border: none;
+    border-radius: inherit;
+  }
+  .comment_wl_title{
+    position: relative;
+    line-height: 20px;
+    padding: 10px 12px;
+    border-top: 10px solid #f0f0f0;
+    margin-bottom: 6px;
+  }
+  .comment_wl_title i.wlicon{
+    width:13px;
+    height: 13px;
+    background: url("//9i.dvmama.com/free/2017/04/01/26_26_5346a57371eef14ebee2a2789636ac3a.png") no-repeat;
+    background-size: 13px;
+    display: inline-block;
+    margin-right: 5px;
+    position: relative;
+    top: 2px;
+  }
+  .comment_wl_title:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    background: #E1E1E1;
+    width: 100%;
+    height: 1px;
+  }
+  .comment_zj_title{
+    position: relative;
+    line-height: 20px;
+    padding: 10px 12px 0;
+    border-top: 10px solid #f0f0f0;
+  }
+  .comment_zj_title i.zjicon{
+    width:13px;
+    height: 13px;
+    background: url("//9i.dvmama.com/free/2017/04/01/26_24_df83138ebb3be963e0a58c4726bbd759.png") no-repeat;
+    background-size: 13px;
+    display: inline-block;
+    margin-right: 5px;
+    position: relative;
+    top: 3px;
+  }
+  .comment_first_con{
+    padding: 10px 0;
+  }
+  .comment_first_con .title{
+    padding:0 10px 10px;
+  }
+  .comment_first_con .star{
+    padding: 0 10px;
+    line-height: 21px;
+    height: 21px;
+  }
+  .comment_first_con .star ul {
+    float: left;
+    padding-top: 5px;
+  }
+  .comment_first_con .star ul li {
+    width: 11px;
+    height: 11px;
+    float: left;
+    background: url(//9i.dvmama.com/free/comment_star_small_icon.png);
+    display: inline-block;
+    background-size: 11px;
+    margin-right: 1px;
+  }
+  .comment_first_con .star ul li.hover {
+    background: url(//9i.dvmama.com/free/comment_star_small_hover_icon.png);
+    background-size: 11px;
+  }
+  .comment_first_con .date{
+    font-size:12px;
+    color: #999;
+    float: right;
+  }
+  .comment_first_con .img{
+    padding: 6px 8px 0 8px;
+  }
+  .comment_first_con .img li{
+    width: 25%;
+    float: left;
+    padding-left: 2px;
+    padding-right: 2px;
+    box-sizing: border-box;
+    margin-top: 4px;
+  }
+  .mb_10 {
+    margin-bottom: 10px;
+  }
+
+  .mb_20 {
+    margin-bottom: 20px;
+  }
+
+
+  .return_refund_container .add_comment_con {
+    width: 100%;
+    padding-left: 10px;
+    box-sizing: border-box;
+    position: relative;
+    margin-top: 10px;
+  }
+
+  .add_comment_con {
+    width: 100%;
+    padding-left: 10px;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  .add_comment_con li {
+    width: 25%;
+    float: left;
+    padding-right: 20px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .add_comment_con li img {
+    border-radius:2px;
+  }
+
+  .orderList_comment_list_con .add_comment_con{
+    padding: 6px 8px 0;
+  }
+  .orderList_comment_list_con .add_comment_con li {
+    width: 25%;
+    float: left;
+    padding-right:2px;
+    padding-left: 2px;
+    box-sizing: border-box;
+    margin-top:4px;
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  .orderList_comment_list_con .add_comment_con li  img {
+    border-radius:inherit;
+  }
+
+
+  .add_pic_illustrate {
+    font-size: 13px;
+    height: 13px;
+    color: #999;
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+  }
+
+  .add_pic_input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .orderList_publish_comment_success {
+    border-bottom: 10px solid #f1f1f1;
+    text-align: center;
+  }
+
+  .orderList_publish_comment_success .success_con{
+    padding: 20px 0;
+    min-height: 42px;
+  }
+  .orderList_publish_comment_success .success_con:before{
+    content: "";
+    background: url("//9i.dvmama.com/free/2017/04/01/104_82_71591f7501bae91692c8f4f06eb12a6c.png") no-repeat;
+    width: 52px;
+    height: 42px;
+    background-size: 52px;
+    display: inline-block;
+    position: absolute;
+  }
+
+  .orderList_publish_comment_success .title {
+    color: #FF4A7D;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left:67px;
+  }
+
+  .orderList_publish_comment_success .view {
+    font-size: 12px;
+    height: 12px;
+    color: #666;
+    margin-left: -42px;
+  }
+  .orderList_publish_comment_success .againview{
+    font-size: 12px;
+    height: 12px;
+    color: #666;
+    margin-left:54px;
+  }
+
+  .orderList_publish_comment_success .view a,.orderList_publish_comment_success .againview a {
+    text-decoration: underline;
+  }
+
+  .orderArriveSuccess{
+    border-bottom: 10px solid #f1f1f1;
+    text-align: center;
+  }
+
+  .orderArriveSuccess .success_con{
+    padding: 20px 0;
+    min-height: 39px;
+    background: #fff;
+  }
+  .orderArriveSuccess .success_con:before{
+    content: "";
+    background: url("//9i.dvmama.com/free/2017/04/05/92_78_7f04653e3ecd538f615d96e37d52616a.png") no-repeat;
+    width: 46px;
+    height:39px;
+    background-size:46px;
+    display: inline-block;
+    position: absolute;
+  }
+
+  .orderArriveSuccess .title {
+    color: #FF4A7D;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left:56px;
+    line-height: 39px;
+  }
+
+  .orderList_comment_list_top {
+    padding-top: 25px;
+    padding-bottom: 29px;
+    border-bottom: 10px solid #f1f1f1;
+    text-align: center;
+    color: #333;
+    font-size: 15px;
+  }
+
+  .orderList_comment_list_top .num {
+    color: #FF4A7D;
+    font-size: 18px;
+    padding-left: 12px;
+  }
+
+  .orderList_comment_list_con {
+    width: 100%;
+  }
+
+  .orderList_comment_list_con .list {
+    padding: 15px 0;
+    position: relative;
+    border: none;
+  }
+
+  .orderList_comment_list_con .list:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #F1F1F1;
+    width: 100%;
+    height: 1px;
+  }
+
+  .orderList_comment_list_con .list:last-child:after {
+    display: none;
+  }
+
+  .orderList_comment_list_con .list .top {
+    padding: 0 10px 0;
+    height:31px;
+    line-height: 20px;
+  }
+
+  .orderList_comment_list_con .list .top .head {
+    width: 30px;
+    height: 30px;
+    border-radius:30px;
+    float: left;
+    margin-right: 10px;
+  }
+
+  .orderList_comment_list_con .list .top .head img {
+    border-radius: 24px;
+  }
+
+  .orderList_comment_list_con .list .top .shopname {
+    font-size: 14px;
+    color: #666;
+  }
+
+  .orderList_comment_list_con .list .top .comment_date {
+    font-size: 12px;
+    color: #999;
+    padding-left: 7px;
+    float: right;
+  }
+  .orderList_comment_list_con .list .top li {
+    width: 11px;
+    height: 11px;
+    float: left;
+    background: url(//9i.dvmama.com/free/comment_star_small_icon.png);
+    display: inline-block;
+    background-size: 11px;
+    margin-right: 1px;
+  }
+
+  .orderList_comment_list_con .list .top li.hover {
+    background: url(//9i.dvmama.com/free/comment_star_small_hover_icon.png);
+    background-size: 11px;
+  }
+
+  .orderList_comment_list_con .list .comment_con {
+    padding: 10px 10px 0;
+    font-size: 14px;
+    line-height: 20px;
+    word-break: break-all;
+  }
+
+  .orderList_comment_list_con .list .goods_property {
+    font-size: 12px;
+    color: #999;
+    padding: 5px 10px 0;
+    line-height: 17px;
+  }
+
+  .ustomer_service_reply{
+    margin: 17px 10px 0;
+    padding: 10px;
+    position: relative;
+    background: #F9F9F9;
+    font-size: 12px;
+    line-height: 17px;
+    color: #666;
+  }
+  .ustomer_service_reply .up_arrow {
+    position: absolute;
+    top: -7px;
+    left: 24px;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #F9F9F9;
+    border-top: transparent;
+  }
+  .additionalDate{
+    font-size: 12px;
+    color: #FF4A7D;
+    height: 15px;
+    line-height: 15px;
+    padding: 10px 10px 0;
+    position: relative;
+  }
+  .additionalDate_line{
+    position: relative;
+    margin: 15px 10px 0;
+  }
+  .additionalDate_line:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #F1F1F1;
+    width: 100%;
+    height: 1px;
+  }
+  /*Retina屏为2的时候调用下面的样式*/
+  @media
+  only screen and (-webkit-min-device-pixel-ratio:2),
+  only screen and (min-device-pixel-ratio:2),
+  only screen and (min--moz-device-pixel-ratio:2),
+  only screen and (-o-min-device-pixel-ratio:4/2),
+  only screen and (min-resolution:2dppx)
+  {
+    .be_evaluated_list li:after,.publish_comment_top li:after,.anonymous_comment:after,.comment_wl_title:after,.additionalDate_line:after {
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+    }
+  }
+
+  .dav-btn.btn-white {
+    position: relative;
+    border: none;
+  }
+
+  .dav-btn:after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 100%;
+    border-radius:50px;
+  }
+  .dav-btn:after {
+    top: 0;
+    left: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 200%;
+    height: 200%;
+    transform: scale(0.5);
+    transform-origin: left top;
+
+    -ms-transform: scale(0.5); /* IE 9 */
+    -ms-transform-origin: left top; /* IE 9 */
+
+    -webkit-transform: scale(0.5); /* Safari 和 Chrome */
+    -webkit-transform-origin: left top; /* Safari 和 Chrome */
+
+    -moz-transform: scale(0.5); /* Firefox */
+    -moz-transform-origin: left top; /* Firefox */
+
+    -o-transform: scale(0.5); /* Opera */
+    -o-transform-origin: left top; /* Opera */
+    border-radius:50px;
+  }
+  .order_goods_group_wl_id .pull-right .dav-btn:after{
+    border:0;
+  }
+  .order-btn-red:after {
+    border: 1px solid #FF4A7D;
+    color: #FF4A7D;
+  }
+
+
+  /*Retina屏为2的时候调用下面的样式*/
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 4/2), only screen and (min-resolution: 2dppx) {
+    .orderList_comment_list_con .list:after {
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+    }
+
+    .be_evaluated_list li .goods_con .evaluate_btn:after,.be_evaluated_list li .goods_con .view_evaluate_btn:after, .be_evaluated_list li .goods_con .view_evaluate_btn1:after{
+      top: 0;
+      left: 0;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 200%;
+      height: 200%;
+      transform: scale(0.5);
+      transform-origin: left top;
+
+      -ms-transform: scale(0.5); /* IE 9 */
+      -ms-transform-origin: left top; /* IE 9 */
+
+      -webkit-transform: scale(0.5); /* Safari 和 Chrome */
+      -webkit-transform-origin: left top; /* Safari 和 Chrome */
+
+      -moz-transform: scale(0.5); /* Firefox */
+      -moz-transform-origin: left top; /* Firefox */
+
+      -o-transform: scale(0.5); /* Opera */
+      -o-transform-origin: left top; /* Opera */
+      border-radius:50px;
+    }
+
+
+    .order-btn-red:after {
+      border: 1px solid #FF4A7D;
+      color: #FF4A7D;
+    }
+    .order_detail_container .order_goods_state:after, .order_delivery_container .order_goods_state:after {
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+    }
+  }
+
+  .publish_pic_preview {
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .publish_pic_preview .swiper-slide {
+    height: 100%;
+    flex-shrink: 0;
+  }
+
+  .loading_container {
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  body.in_app .top0 {
+    display: none;
+  }
+
+  .be_evaluated_list, .publish_comment_con, .orderList_publish_comment_success, .orderList_comment_list_top, .orderList_comment_list_con {
+    background-color: #fff;
+  }
+
+  body.orderDetail, body.orderDelivery {
+    padding-bottom: 49px;
+    margin:0 auto;
+  }
+
+  /*退货退款*/
+  .return_box {
+    position:relative;
+    border: 1px solid #EEE;
+    background: #FAFAFA;
+    padding: 10px;
+    font-size: 12px;
+  }
+  .return_box span input{
+    height: 32px;
+    margin: -10px 0;
+    width: 200px;
+    line-height: 32px;
+    /*word-wrap:break-word;*/
+    /*word-break:break-all;*/
+    /*overflow: hidden;*/
+  }
+  .return_box span{
+    white-space: pre-wrap
+  }
+  .return_box .back-arrow {
+    position: absolute;
+    right: 15px;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-bottom: 1px solid #333;
+    border-right: 1px solid #333;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .good_price_add {
+    line-height: 20px
+  }
+
+  .good_number_container {
+    position: relative;
+    height: 26px
+  }
+
+  .input_control {
+    margin: 0;
+    overflow: hidden;
+    line-height: 24px;
+    font-size: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    border: 1px solid #bbb;
+    text-align: center;
+    box-sizing: content-box;
+    height: 24px;
+    position: absolute;
+    left: 50px;
+    top: 7px;
+  }
+
+  .input_control div, .input_control input {
+    float: left
+  }
+
+  .minus, .plus {
+    width: 24px;
+    color: #666;
+    height: 24px;
+    box-sizing: content-box
+  }
+
+  .minus {
+    border-right: 1px solid #bbb;
+    line-height: 22px
+  }
+
+  .plus {
+    border-left: 1px solid #bbb;
+    line-height: 21px
+  }
+
+  .disable {
+    color: #bbb;
+    cursor: not-allowed;
+    background-color: #eee
+  }
+
+  .input_control input {
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    width: 40px;
+    height: 24px;
+    line-height: 24px
+  }
+
+  .return_remark {
+    margin: 0px;
+    height: 110px;
+    width: 100%;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 13px;
+    resize: none;
+    background-color: #FAFAFA;
+  }
+
+  .return_remark_num {
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+  }
+
+  .return_tips {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 12px;
+    color: #666666;
+    line-height: 15px;
+  }
+
+  .setting_container .user_menu_group .user_menu_item {
+    display: block;
+    border-bottom: #eee solid 1px;
+    line-height: 40px;
+    padding-left: 10px;
+  }
+
+  .setting_container .user_menu_group .user_menu_item .child {
+    padding-top: 6px;
+  }
+
+  .setting_container .user_menu_group .user_menu_item span {
+    display: inline-block;
+    height: 27px;
+    line-height: 27px;
+  }
+
+  .setting_container .user_menu_group .user_menu_item .child i.icon {
+    display: inline-block;
+    vertical-align: 0;
+    width: 8px;
+    height: 8px;
+    border-top: 1px solid #999;
+    border-right: 1px solid #999;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin-right: 10px;
+    background: none;
+  }
+
+  .handle_tips {
+    font-size: 14px;
+    padding: 10px;
+    line-height: 22px;
+    color: #666666;
+  }
+
+  .handle_title {
+    padding: 20px 10px 10px;
+    font-size: 15px;
+  }
+
+  .handle_title div {
+    /*padding-left: 27px;*/
+  }
+
+  .icon.return_goods {
+    background-image: url(//9i.dvmama.com/free/commodity.png);
+    background-size: 100%;
+  }
+
+  .icon.deliverys {
+    background-image: url(//9i.dvmama.com/free/delivery.png);
+    background-size: 100%;
+  }
+
+  .icon.waits {
+    background-image: url(//9i.dvmama.com/free/wait.png);
+    background-size: 100%;
+  }
+
+  .icon.boxreloads {
+    background-image: url(//9i.dvmama.com/free/boxreload.png);
+    background-size: 100%;
+  }
+
+  .icon.wallets {
+    background-image: url(//9i.dvmama.com/free/wallet.png);
+    background-size: 100%;
+  }
+
+  .icon.alertOffs {
+    background-image: url(//9i.dvmama.com/free/2016/11/07/40_40_d059771df5382e9cc9229c5de330ce01.png);
+    background-size: 100%;
+  }
+  .pdtop0{
+    padding-top: 0;
+  }
+  .refund_buttons{
+    width: 80px;
+    height: 30px;
+    font-size: 14px;
+    display: inline-block;
+    border: 1px solid #000;
+    line-height: 30px;
+    border-radius: 3px;
+    margin: 30px 0;
+  }
+  .theEndPageWoman{
+    margin: 80px auto 0;
+    width: 101px;
+    height: 149px;
+    background-image: url(//9i.dvmama.com/activity/2016/11/02/200_294_8962f43ad6785baa4f7e4c40de18350c.png);
+    background-position:center center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+  .prlist{
+    padding: 12px 10px;
+  }
+  .historyImg ul li{
+    width: 13.5%;
+  }
+  .boxWapper {
+    position: relative;
+    border-bottom: #eee solid 1px;
+  }
+  .returnGoodsMoneyButton{
+    white-space: nowrap;
+    padding: 0 10px;
+    height: 20px;
+    border: 1px solid #DDDDDD;
+    text-align: center;
+    display: inline-block;
+    border-radius: 12px 12px 12px 12px;
+    line-height: 20px;
+    position: relative;
+    bottom: 30px;
+    right: 10px;
+    float: right;
+  }
+  #shouhou {
+    white-space: nowrap;
+    padding: 0 10px;
+    height: 20px;
+    border: 1px solid #DDDDDD;
+    text-align: center;
+    display: inline-block;
+    border-radius: 12px 12px 12px 12px;
+    line-height: 20px;
+    position: absolute;
+    bottom: 7px;
+    right: 10px;
+  }
+
+  .backNone{
+    background: none;
+  }
+  .return_btn{
+    width: 160px;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+    margin: 20px auto;
+    background: #FF4A7D;
+    border-radius: 3px;
+  }
+  .number_none::-webkit-outer-spin-button,.number_none::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0;
+  }
+  .number_none[type="number"] {
+    -moz-appearance: textfield;
+  }
+  .add_comment_con .img .closeBtn {
+    width: 40px;
+    height: 40px;
+    background: url(//9i.dvmama.com/free/2017/04/01/40_40_7c423e206433bfb989b51ee3b5553ba7.png);
+    background-size: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: -17px;
+    top: -17px;
+    z-index: 1;
+  }
+  .add_comment_con .img{
+    position: relative;
+  }
+
+  .add_comment_con .img .img_con{
+    position: relative;
+  }
+
+
+  .Contact_Customer_Service{
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    background: #fff;
+  }
+  .Contact_Customer_Service span{
+    background: url(//9i.dvmama.com/free/OrderDeatail_CustomerService_img.png) no-repeat 0;
+    background-size: 30px;
+    display: inline-block;
+    padding-left: 30px;
+  }
+
+  .alertStyleMask{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #000;
+    opacity: 0.5;
+    z-index: 200;
+  }
+  .alertStyle{
+    position: fixed;
+    top: 50%;
+    bottom: 0;
+    left: 50%;
+    right: 0;
+    width: 2.7rem;
+    height: 2.87rem;
+    margin-left: -1.35rem;
+    margin-top: -1.435rem;
+    z-index: 201;
+  }
+  .alertStyleTopImg{
+    width: 2.7rem;
+  }
+  .alertStyleContainer{
+    width: 2.7rem;
+    height: 1.56rem;
+    background: #fff;
+    border-bottom-right-radius: 9px;
+    border-bottom-left-radius: 9px;
+  }
+  .alertStyleContainerP1{
+    width: 100%;
+    height: 0.24rem;
+    line-height: 0.24rem;
+    font-size: 0.16rem;
+    padding-top: 0.3rem;
+    text-align: center;
+    color: #333;
+    font-weight: 500;
+  }
+  .alertStyleContainerP2{
+    width: 100%;
+    height: 0.72rem;
+    line-height: 0.23rem;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    margin-top: 0.1rem;
+    text-align: center;
+    color: #666666;
+    font-size: 0.14rem;
+    box-sizing: border-box;
+  }
+  .alertStyleContainerBtn{
+    width: 100%;
+    height: 0.45rem;
+    line-height: 0.45rem;
+    text-align: center;
+    color: #FF4A7D;
+    font-size: 0.14rem;
+    margin-top: 0.2rem;
+    border-top: 0.5px solid #DDDDDD;
+    display: none;
+  }
+  .alertStyle1{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 2.7rem;
+    height: 3.76rem;
+    z-index: 201;
+  }
+  .alertStyleContainer1{
+    width: 100%;
+    height: 2.45rem;
+    background: #fff;
+    border-bottom-right-radius: 9px;
+    border-bottom-left-radius: 9px;
+    text-align: center;
+  }
+  .alertStyleContainerP3{
+    width: 100%;
+    height: 0.4rem;
+    margin-top: 0.1rem;
+    text-align: center;
+  }
+  .alertStyleContainerP3 p{
+    width: 100%;
+    height: 0.2rem;
+    color: #666666;
+    font-size: 0.14rem;
+  }
+  .alertStyleTopImg2{
+    width: 90%;
+  }
+  .alertStyleContainerP4{
+    width: 100%;
+    height: 0.16rem;
+    font-size: 0.11rem;
+    color: #999999;
+  }
+
+
+  /*新增*/
+
+
+
+  .newConfirmModal {
+    position: absolute;
+    display: none;
+    width: 100%;
+  }
+  .newMask {
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: rgba(0,0,0,.5);
+  }
+  .newDialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    width: 72%;
+    max-width: 270px;
+    box-sizing: border-box;
+    z-index: 20;
+    padding: 15px 0;
+    font-size: 14px;
+    background: #fff;
+  }
+  .newTips {
+    padding: 0 15px 15px 15px;
+    color: #666;
+  }
+  .newKnow {
+    text-align: center;
+    padding-top: 11px;
+    position: relative;
+    color: #FF4A7D;
+    font-size: 16px;
+  }
+  .newKnow:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    border-top: 1px solid #E1E1E1;
+    -webkit-transform: scaleY(.5);
+    -moz-transform: scaleY(.5);
+    -ms-transform: scaleY(.5);
+    -o-transform: scaleY(.5);
+    transform: scaleY(.5);
+  }
+
+  .icon.newWaits {
+    background-image: url(//9i.dvmama.com/free/returnMoney/waitProcessing.png);
+    background-size: 100%;
+  }
+  .icon.newSpeedReturn {
+    background-image: url(//9i.dvmama.com/free/returnMoney/speedRefund.png);
+    background-size: 100%;
+  }
+  .icon.newSpeedWallets {
+    background-image: url(//9i.dvmama.com/free/returnMoney/successfulRefund_icon.png);
+    background-size: 100%;
+  }
+  .icon.new_return_goods {
+    background-image: url(//9i.dvmama.com/free/returnMoney/return.png);
+    background-size: 100%;
+  }
+  .icon.newEnterSpeed {
+    background-image: url(//9i.dvmama.com/free/returnMoney/speedRefund_icon1.png);
+    background-size: 100%;
+  }
+  .icon.newReturnBack {
+    background-image: url(//9i.dvmama.com/free/returnMoney/commodity.png);
+    background-size: 100%;
+  }
+  .icon.newWaiting {
+    background-image: url(//9i.dvmama.com/free/returnMoney/waitProcessing_icon.png);
+    background-size: 100%;
+  }
+  .icon.newBoxreloads {
+    background-image: url(//9i.dvmama.com/free/returnMoney/Slice.png);
+    background-size: 100%;
+  }
+  .icon.newReSuccess {
+    background-image: url(//9i.dvmama.com/free/returnMoney/reSuccess.png);
+    background-size: 100%;
+  }
+  .icon.newReturnIcon {
+    background-image: url(//9i.dvmama.com/free/goodsDetail/newReturning1_icon.jpg);
+    background-size: 100%;
+  }
+  /*等待退款灰色*/
+  .icon.newReturnIcon {
+    background-image: url(//9i.dvmama.com/free/goodsDetail/sliceRefuned.png);
+    background-size: 100%;
+  }
+  .newPull_right_icon {
+    display: inline-block;
+    vertical-align: 0;
+    width: 8px;
+    height: 8px;
+    border-top: 1px solid #999;
+    border-right: 1px solid #999;
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin-right: 10px;
+    background: none;
+  }
+  .flexCont {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+  }
+  .flexLeft {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+  }
+  .newSpeedTips {
+    font-size: 15px;
+    color: #333;
+  }
+  .lookTips {
+    font-size: 12px;
+  }
+  .newConfirm_Cont {
+    padding: 15px 0;
+    text-align: center;
+    background: #fff;
+  }
+  .newReturn_btn {
+    display: inline-block;
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    background: linear-gradient(to right,#FF5B5B,#FA1862);
+    background: -moz-linear-gradient(right, #FF5B5B,#FA1862);
+    background: -o-linear-gradient(right, #FF5B5B,#FA1862);
+    background: -webkit-linear-gradient(left, #FF5B5B,#FA1862);
+    font-size: 14px;
+    text-align: center;
+    border-radius: 15px;
+  }
+  .newHistoryImg ul li{
+    width: 13.8%;
+    padding-right: 10px;
+  }
+  .newRefund_progress {
+    position: relative;
+    background: #fff;
+    padding: 10px 0;
+    color: #333;
+    margin: 10px 0;
+  }
+  .newRefund_progress_tips {
+    font-size: 14px;
+    padding:0 10px;
+    margin-bottom: 10px;
+  }
+  .newRefund_progress_cont {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    padding: 0 10.7%;
+    font-size: 12px;
+  }
+  .newRefund_line {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    margin: 0 10.7%;
+    padding: 0 54px;
+    margin-bottom: 3px;
+    font-size: 12px;
+  }
+  .progress_one {
+    text-align: center;
+  }
+  .progress_two {
+    text-align: center;
+  }
+  .progress_one_date,.progress_two_date {
+    font-size: 10px;
+  }
+  .progress_line {
+    position: relative;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+  }
+  .progress_one_dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background: #FF4A7D;
+    border-radius: 50%;
+    border: 2px solid #FFA4BE;
+  }
+  .progress_two_dot {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #E1E1E1;
+  }
+  .progress_line_dot {
+    position: relative;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+  }
+  .progress_line_dot:after {
+    position: absolute;
+    top: 4.5px;
+    content: '';
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px solid rgba(225, 225, 225,.95);
+    color:  rgba(225, 225, 225,.95);
+  }
+
+  .bodyFix {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+  .com-popup-toast {
+    z-index: 100;
+  }
+
+  .modalMask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    tap-highlight-color: rgba(0, 0, 0, 0);
+    z-index: -1;
+  }
+  .showMask {
+    opacity: 1;
+    z-index: 15;
+  }
+
+  .modalWrapper {
+    display: none;
+    background: #fff;
+    position: fixed;
+    z-index: 50;
+    bottom: 0;
+    width: 100%;
+    max-width: 640px;
+    height: 64.2%;
+    // padding-top: 15px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    overflow: hidden;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+  }
+  .showModal {
+    display: block;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  .modalTitle,
+  .chooseTitle {
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+    padding: 0 10px;
+    line-height: 44px;
+    height: 44px;
+  }
+  .modalCloseWrapper,
+  .chooseCloseWrapper {
+    position: absolute;
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    top: 0;
+    right: 0;
+  }
+  .modalCont,
+  .chooseCont{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 49px;
+    top: 44px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: auto;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .modalCont input[type="radio"]+i,
+  .chooseCont input[type="radio"]+i{
+    position: absolute;
+    top: 10px;
+    width: 20px;
+    height: 20px;
+    right: 10px;
+    z-index: 5;
+  }
+  .modalCont input[type="radio"],
+  .chooseCont input[type="radio"]{
+    position: absolute;
+    // z-index: 10;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    display: none;
+  }
+  .modalCont input[type="radio"]:not(:checked)+i,
+  .chooseCont input[type="radio"]:not(:checked)+i{
+    background: url(http://mamaj-oss.oss-cn-beijing.aliyuncs.com/orderList/unselected.png) no-repeat center;
+    background-size: 100%;
+  }
+  .modalCont input[type="radio"]:checked+i,
+  .chooseCont input[type="radio"]:checked+i{
+    background: url(http://mamaj-oss.oss-cn-beijing.aliyuncs.com/orderList/select.png) no-repeat center;
+    background-size: 100%;
+  }
+
+  .chooseCont .listBtn input[type="radio"]+i{
+    background: url(http://mamaj-oss.oss-cn-beijing.aliyuncs.com/orderList/unselected.png) no-repeat center;
+    background-size: 100%;
+  }
+  .chooseCont .listBtn.active input[type="radio"]+i{
+    background: url(http://mamaj-oss.oss-cn-beijing.aliyuncs.com/orderList/select.png) no-repeat center;
+    background-size: 100%;
+  }
+
+  .navList,
+  .listBtn{
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    padding: 12px 10px;
+    height: 20px;
+    line-height: 20px;
+  }
+  .navList:after,
+  .listBtn:after{
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #e5e5e5;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    left: 10px;
+    z-index: 2;
+  }
+  .navLabel {
+    // -webkit-box-flex: 1;
+    // -webkit-flex: 1;
+    // flex: 1;
+    // text-align: right;
+    // position: relative;
+  }
+  .modalCloseWrapper .modal-close,
+  .chooseCloseWrapper .choose-close{
+    position: absolute;
+    z-index: 10;
+    top: 10px;
+    right: 10px;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+  }
+  .modalCloseWrapper .modal-close:after,
+  .chooseCloseWrapper .choose-close:after{
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 17px;
+    top: 50%;
+    background: #999;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  .modalCloseWrapper .modal-close:before,
+  .chooseCloseWrapper .choose-close:before{
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    content: '';
+    position: absolute;
+    height: 1px;
+    width: 17px;
+    top: 50%;
+    background: #999;
+  }
+  .modalConfirm,.disabledModal {
+    position: absolute;
+    z-index: 5;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 49px;
+    line-height: 49px;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+  }
+  .disabledModal {
+    background: linear-gradient(to right, #C1C1C1, #999);
+    background: -moz-linear-gradient(right, #C1C1C1, #999);
+    background: -o-linear-gradient(right, #C1C1C1, #999);
+    background: -webkit-linear-gradient(left, #C1C1C1, #999);
+  }
+  .modalConfirm {
+    background: linear-gradient(to right, #FF5C5C, #FA1862);
+    background: -moz-linear-gradient(right, #FF5C5C, #FA1862);
+    background: -o-linear-gradient(right, #FF5C5C, #FA1862);
+    background: -webkit-linear-gradient(left, #FF5C5C, #FA1862);
+  }
+
+  .modaOrderlWrapper {
+    // background: #fff;
+    // position: fixed;
+    // width: 80.2%;
+    // left: 50%;
+    // top: 50%;
+    // z-index: 50;
+    // max-width: 640px;
+    // height: 64.2%;
+    // -webkit-box-sizing: border-box;
+    // box-sizing: border-box;
+    // font-size: 14px;
+    // overflow: hidden;
+    // -webkit-transform: translate(-50%,-50%);
+    // transform: translate(-50%,-50%);
+    // -webkit-transition-property: -webkit-transform;
+    // transition-property: -webkit-transform;
+    // transition-property: transform;
+    // transition-property: transform, -webkit-transform;
+    // -webkit-transition-duration: 300ms;
+    // transition-duration: 300ms;
+
+
+    display: block;
+    background: #fff;
+    position: fixed;
+    z-index: 50;
+    bottom: 0;
+    width: 80.2%;
+    left: 10%;
+    top: 20%;
+    max-width: 640px;
+    height: 64.2%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    overflow: hidden;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+  }
+  @media screen and (min-width: 500px) {
+    .modaOrderlWrapper {
+      width: 513.8px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+    }
+  }
+
+
+
+  .order_detail_container .order_presale {
+    /*padding: 15px 10px;*/
+    background: linear-gradient(to right, rgba(255, 92, 92,.6), rgba(250, 24, 98,.6));
+    background: -moz-linear-gradient(right, rgba(255, 92, 92,.6), rgba(250, 24, 98,.6));
+    background: -o-linear-gradient(right, rgba(255, 92, 92,.6), rgba(250, 24, 98,.6));
+    background: -webkit-linear-gradient(left, rgba(255, 92, 92,.6), rgba(250, 24, 98,.6));
+    color: #fff;
+  }
+  .order_detail_container .order_count_down {
+    padding: 15px 10px;
+    font-weight: bold;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    padding-bottom: 10px;
+    line-height: 21px;
+  }
+  .order_detail_container .oder_cut {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+  }
+  .order_detail_container .order_presale_tips {
+    font-size: 12px;
+    line-height: 22px;
+  }
+  .order_detail_container .overCutDown {
+    text-align: center;
+    padding: 30px 0;
+    font-weight: bold;
+  }
+  .order_detail_container .orderSuccess {
+    display: none;
+    background: linear-gradient(to right, rgba(255, 92, 92,.6), rgba(250, 24, 98,.6));
+    background: -moz-linear-gradient(right, rgba(255, 92, 92,.6), rgba(250, 24, 98,.6));
+    background: -o-linear-gradient(right, rgba(255, 92, 92,.6), rgba(250, 24, 98,.6));
+    background: -webkit-linear-gradient(left, rgba(255, 92, 92,.6), rgba(250, 24, 98,.6));
+    color: #fff;
+  }
+  .order_detail_container .orderIcon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -2px;
+    width: 15px;
+    height: 15px;
+    margin-right: 3px;
+    background: url(http://mamaj-oss-ws.oss-cn-beijing.aliyuncs.com/free/goodsDetail/select.png) no-repeat;
+    background-size: 100%;
+  }
+  .order_detail_container .orderSuccess_time {
+    text-align: center;
+    margin-bottom: 10px;
+    padding-top: 15px;
+  }
+  .order_detail_container .orderSuccess_title {
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 21px;
+  }
+  .order_detail_container .orderSuccess_tips {
+    font-size: 12px;
+    padding: 0 10px 15px 10px;
+  }
+
+
+  .order_detail_container .stageCont {
+    padding: 10px 0 0 0;
+    background: #fff;
+    margin: 10px 0;
+  }
+  .order_detail_container .stageList {
+    display: -webkit-box;
+    display: -webkit-flex;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 12px;
+    line-height: 17px;
+    padding-bottom: 10px;
+    color: #666;
+  }
+  .order_detail_container .colorLight {
+    color: #FF4A7D;
+  }
+  .order_detail_container .stageTips {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    color: #666;
+  }
+  .order_detail_container .stageF14 {
+    font-size: 14px;
+    padding-bottom: 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  .order_detail_container .colorGray {
+    color: #999;
+  }
+  .order_detail_container .stages {
+    position: relative;
+  }
+  .order_detail_container .stages:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: "";
+    border-bottom: 1px solid #e1e1e1;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+
+  }
+  .modalOrder {
+    display: none;
+    background: #fff;
+    position: fixed;
+    z-index: 50;
+    width: 270px;
+    left: 50%;
+    top: 50%;
+    max-width: 640px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    overflow: hidden;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fff;
+    z-index: 50;
+    color: #333;
+  }
+  .orderModalShow {
+    display: block;
+  }
+  .modalOrder .modalCloseWrapper {
+    display: none;
+  }
+  .modalOrder .orderBtns {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+  }
+  .modalOrder .orderConfirm {
+    position: relative;
+    padding: 12px;
+    color: #FF4A7D;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+  }
+  .modalOrder .orderCancle {
+    padding: 12px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+  }
+  .modalOrder .orderConfirm:after {
+    position: absolute;
+    content: "";
+    width: 200%;
+    height: 200%;
+    left: 0;
+    right: 0;
+    top: 0;
+    border-left: 1px solid #e1e1e1;
+    -webkit-transform: scale(0.5,0.5);
+    transform: scale(0.5,0.5);
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+  }
+  .modalOrder .orderTitle {
+    padding: 30px 15px 15px 15px;
+    text-align: left;
+  }
+  .modalOrder .orderBtns:after {
+    position: absolute;
+    content: "";
+    border-top: 1px solid #e1e1e1;
+    left: 0;
+    right: 0;
+    top: 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+  }
+  .modalOrder .orderClose {
+    right: 5px;
+  }
+  .order_list_container .margin44 {
+    top: 44px;
+  }
+
+  /*选择退款原因弹窗*/
+  .chooseResourt {
+    display:none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 15;
+    -webkit-transition: opacity 400ms;
+    transition: opacity 400ms;
+  }
+  .typeMarkWapper {
+    display:none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 99999;
+    -webkit-transition: opacity 400ms;
+    transition: opacity 400ms;
+  }
+  .chooseWapper {
+    display: none;
+    background: #fff;
+    position: fixed;
+    z-index: 50;
+    bottom: 0;
+    width: 100%;
+    max-width: 640px;
+    height: 64.2%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    overflow: hidden;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+  }
+  .return-content {
+    font-size: 12px;
+  }
+  #selectZ,
+  #selectY {
+    display: none;
+  }
+  .back-icon {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-top: 1px solid #999;
+    border-right: 1px solid #999;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 6px;
+  }
+  .fee-type {
+    position: relative;
+    border-top: 1px solid #eee;
+  }
+  .fee-type p {
+    display: inline-block;
+    font-size: 14px;
+    color: #333;
+  }
+  .fee-type .toRight {
+    float: right;
+    right: 10px;
+    top: 10px;
+    display: inline-block;
+    font-size: 12px;
+    color: #999999;
+  }
+  .typeBtnWapper {
+    display: none;
+    position: fixed;
+    z-index: 100000;
+    bottom: 0.1rem;
+    right:0;
+    left:0;
+    margin:auto;
+    width: 90%;
+    max-width: 580px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    overflow: hidden;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+  }
+  .typeBtn {
+    width: 100%;
+    background: #FCFCFC;
+    border-radius: 0.15rem;
+    text-align: center;
+  }
+  .typeBtn p {
+    height:32px;
+    line-height: 32px;
+    font-size: 12px;
+    border-bottom: 1px solid #ccc;
+    color: #999999;
+  }
+  .typeBtn div {
+    height: 54px;
+    line-height: 54px;
+    font-size: 16px;
+    color: #333333;
+  }
+  .typeBtn div:nth-child(2){
+    border-bottom: 1px solid #ccc;
+  }
+  .typeBtn div:last-child{
+    border-bottom: none;
+    height:54px;
+    line-height: 54px;
+  }
+  .cancleBtn {
+    width: 100%;
+    height: 54px;
+    line-height: 54px;
+    background: #fff;
+    text-align: center;
+    color: #007AFF;
+    font-size: 16px;
+    border-radius: 15px;
+    margin-top: 10px;
+  }
+  /*解决弹窗不居中问题*/
+  .fiexAuto {
+    position: fixed;
+    left:0;
+    right:0;
+    margin:auto;
+  }
+  .hideAnto {
+    position: inherit;
+  }
+  /* 去除number 的默认样式*/
+  input[type=number] {
+    -moz-appearance:textfield;
+  }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .orderMessage {
+    background: #ffffff;
+    margin-top: 10px;
+  }
+  .orderMessage .title {
+    border-bottom: 1px solid #dddddd;
+    padding: 10px;
+    font-size: 14px;
+    color: #666666;
+  }
+  .orderMessageBox {
+    position: relative;
+    width:100%;
+  }
+  .orderMessageBox .pl {
+    padding:10px;
+    padding-bottom: 0;
+    /*border-bottom: 1px solid #dddddd;*/
+  }
+  .orderMessageBox .first {
+    left:0;
+    color: #FF4A7D;
+    font-size: 12px;
+  }
+  .orderMessageBox .last {
+    position: absolute;
+    right:10px;
+    color: #999999;
+    font-size: 12px;
+  }
+  .orderMessageBox p {
+    width:100%;
+    font-size: 12px;
+    color: #999999;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dddddd;
+    text-justify: auto;
+  }
+  /*新增样式改变MUI的样式*/
+  input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea {
+    line-height: normal;
+    padding: 0;
+    border: 0;
+    background: #FAFAFA;
+    font-size: 12px;
+    margin-bottom:0;
+  }
+  select::-ms-expand{display:none;}
+  select {
+    width:200px;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background: #FAFAFA;
+  }
+  .mui-dtpicker, .mui-poppicker {
+    background: #ffffff;
+  }
+  .mui-btn-blue, .mui-btn-primary, input[type=submit] {
+    color: #FF4A7D;
+    border:none;
+    background: red;
+  }
+  .mui-btn, button, input[type=button], input[type=reset], input[type=submit] {
+    background: #f1f1f1;
+    color: #FF4a7d;
+    border:none;
+  }
+  .mui-picker {
+    background: #ffffff;
+  }
+  .mui-poppicker-body {
+    border-top: 0;
+  }
+  p {
+    font-size: inherit;
+  }
+  .mui-poppicker-header {
+    background: #f1f1f1;
+  }
+  .mui-backdrop {
+    background-color:rgba(0,0,0,0.5);
+  }
+  /*媒体查询*/
+  @media screen and (max-width: 320px) {
+    .return_box span input {
+      width:174px;
+    }
+  }
+  .mui-pciker-list li {
+    font-size: 16px;
+  }
+  .mui-poppicker.mui-active {
+    position: fixed;
+    z-index: 100000;
+    bottom: 0;
+    right:0;
+    left:0;
+    margin:auto;
+    width: 100%;
+    max-width: 640px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    overflow: hidden;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform, -webkit-transform;
+    -webkit-transition-duration: 300ms;
+    transition-duration: 300ms;
+  }
+  #city_id {
+    display: inline-block;
+    color: #666;
+  }
+  .back-icon_add {
+    position: absolute;
+    right:6px;
+    top: 16px;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-top: 1px solid #999;
+    border-right: 1px solid #999;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .dvd-service-com-title {
+    z-index: 3 !important;
+  }
+  //订单列表结束
+  //base.css
+  .pull-right {
+    float: right;
+  }
+  .dav-red {
+    color: #FF4A7D;
+  }
+  .clearfix:before, .clearfix:after {
+    display: table;
+    line-height: 0;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both;
+  }
+  .order_list_container .order-btn-red {
+    color: #FF4A7D !important;
+    border-color: #FF4A7D;
+  }
+  .dav-small {
+    font-size: 12px;
+  }
+  /*Retina屏为2的时候调用下面的样式*/
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 4/2), only screen and (min-resolution: 2dppx) {
+    .search_top:after {
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+    }
+  }
+  .search_top .left_icon_container {
+    left: 0;
+    z-index: 10;
+    position: absolute;
+    height: 44px;
+    width: 40px;
+    background: url(//9i.dvmama.com/free/mobile/src/common/img/title-btn-back.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .search_top .search_btn {
+    right: 0;
+    top: 0;
+    z-index: 10;
+    font-size: 14px;
+    color: #666;
+    position: absolute;
+    line-height: 44px;
+    width: 48px;
+    text-align: center;
+    border: none;
+    background: none;
+    padding: 0;
+    outline: none;
+  }
+
+  .modalOrder {
+    display: none;
+    background: #fff;
+    position: fixed;
+    z-index: 50;
+    width: 270px;
+    left: 50%;
+    top: 50%;
+    max-width: 640px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px;
+    overflow: hidden;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+    background: #fff;
+    z-index: 50;
+    color: #333;
+  }
+  .orderModalShow {
+    display: block;
+  }
+  .modalOrder .modalCloseWrapper {
+    display: none;
+  }
+  .modalOrder .orderBtns {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+  }
+  .modalOrder .orderConfirm {
+    position: relative;
+    padding: 12px;
+    color: #FF4A7D;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+  }
+  .modalOrder .orderCancle {
+    padding: 12px;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+  }
+  .modalOrder .orderConfirm:after {
+    position: absolute;
+    content: "";
+    width: 200%;
+    height: 200%;
+    left: 0;
+    right: 0;
+    top: 0;
+    border-left: 1px solid #e1e1e1;
+    -webkit-transform: scale(0.5,0.5);
+    transform: scale(0.5,0.5);
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+  }
+  .modalOrder .orderTitle {
+    padding: 30px 15px 15px 15px;
+    text-align: left;
+  }
+  .modalOrder .orderBtns:after {
+    position: absolute;
+    content: "";
+    border-top: 1px solid #e1e1e1;
+    left: 0;
+    right: 0;
+    top: 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    -webkit-transform-origin: left top;
+    transform-origin: left top;
+  }
+  .modalOrder .orderClose {
+    right: 5px;
+  }
+
+  .no-order {
+    text-align:center;
+
+    .no-order-pic {
+      width:r(120);
+      height:r(120);
+      padding:r(100) 0 r(30);
+    }
+    .no-order-text {
+      font-size:r(14);
+      color:#666;
+      @include height(r(20));
+    }
+  }
+  .order_list_item {
+    background-color: #fff;
+    margin-top: 10px;
+  }
+  .refresh {
+    text-align: center;
+    margin: 12px;
+    position:relative;
+    z-index:1;
+  }
+  .order_list_container {
+    padding-top:0;
+  }
+  .dav-btn.btn-white {
+    border:none;
+  }
+  .refresh.showOn {
+    position: absolute;
+    top:200px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:20;
+  }
+  /* 安卓hack */
+  &.android {
+
+  }
+}

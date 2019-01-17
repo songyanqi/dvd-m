@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>物流详情</title>
+    @@include('node_modules/dvd-base-build/html-inc/head.inc')
+    <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+    <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+    <link rel="stylesheet" href="[[static]]/page/logistics_information/css/logistics_information.css[[v]]">
+</head>
+
+<body>
+    <div class="app" v-cloak :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}" :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+        <!--标题-->
+        <dvd-service-com-title title="物流详情" back home></dvd-service-com-title>
+        <!-- 内容主体部分 -->
+        <div class="order_delivery_container" v-if="response">
+            <!-- 订单详情 -->
+            <div class="order_index dav-shadow">
+                <div class="order_id">
+                    <span class="dav-color6">订单编号：</span>
+                    <span>{{response.orderInfo.orderSn}}</span>
+                    <!-- 订单状态 -->
+                    <span class='pull-right dav-red' v-if="response.orderInfo.orderStatusName">{{response.orderInfo.orderStatusName}}</span>
+                </div>
+                <div class="order_id" v-if="response.orderInfo.deliverySn">
+                    <span class="dav-color6">发货单号：</span>
+                    <span>{{response.orderInfo.deliverySn}}</span>
+                </div>
+                <div class="order_date">
+                    <span class="dav-color6">订单日期：</span>
+                    <span>{{response.orderInfo.orderDateTime}}</span>
+                </div>
+            </div>
+
+            <!-- 如果订单中的商品 订单中的商品分属多个发货方 -->
+            <div v-if="response.orderInfo.deliveryNum > 1" class="order_delivery_info mt12">温馨提示：订单中的商品分属多个发货方，所以进行了拆分发货</div>
+            <!-- 商品列表 -->
+            <div class="order_list_child mt12 single_goods with_delivery">
+                <a class="order_child_inner dav-shadow" :href="'/o-'+orderId+'.html?did='+deliveryId">
+                    <div v-if="response.goodsList.length" class="order_good_list">
+                        <section v-if="response.goodsList.length > 1">
+                            <div class="img_container">
+                                <div class="img_container_inner">
+                                    <img v-for="item in response.goodsList" :src="item.thumbImg">
+                                </div>
+                            </div>
+                        </section>
+                        <section v-else v-for="item in response.goodsList">
+                            <div class="order_good_img_container">
+                                <img :src="item.thumbImg">
+                            </div>
+                            <div class="order_good_info_container dav-small">
+                                <div class="order_good_name">{{item.goodsName}}</div>
+                                <div class="order_good_price">￥{{item.goodsPrice}} X {{item.sendNum}}</div>
+                            </div>
+                        </section>
+                    </div>
+                </a>
+                <div class="orderMessage">
+                    <p class="title">物流问题处理进展</p>
+                    <div class="orderMessageBox">
+                    </div>
+                </div>
+                <div class="order_good_state">
+                    <span class="dav-small dav-color-6">由{{response.orderInfo.supplierName}}发货</span>
+                    <span v-if="response.orderInfo.deliveryOrderStatus == 1" class="dav-btn btn-white btn-small pull-right order-tx" @click="remindingTheShipments">提醒发货</span>
+                    <span class="dav-small dav-red pull-right">{{response.orderInfo.deliveryOrderStatusName}}</span>
+                </div>
+                <div v-for="deliveryItem in response.deliveryInfo" v-show="showList" class="order_goods_group_wl_container dav-color-6 dav-small">
+                    <!-- 可展开收起部分 物流详情列表 -->
+                    <div class="order_goods_group_wl_con dav-shadow">
+                        <div class="order_goods_group_wl_id">
+                            <span>承运人：{{deliveryItem.logisticName}}</span>
+                            <span class="pull-right">
+                <span style="width: auto">快递单号：</span>
+                            <!-- 快递单号点击可跳转到百度查询 -->
+                            <a :href="'https://www.baidu.com/s?wd='+deliveryItem.logisticCode">
+                                <span class="btn-white" style="padding:0px 10px;text-decoration:none;width: auto;color: #FF4A7D">{{deliveryItem.logisticCode}}</span>
+                            </a>
+                            </span>
+                            <!-- 物流投诉按钮 -->
+                            <a :href="'/orderComplain.html?did='+deliveryId+'&logisticsCode='+deliveryItem.shipperCode+':'+deliveryItem.logisticCode">
+                                <span class="orderServer">物流投诉</span>
+                            </a>
+                        </div>
+                        <div v-for="(traces,index) in deliveryItem.traces" class="order_goods_group_wl_item">
+                            <div v-if="index == 0" class="line_img" style="background: url(//9i.dvmama.com/free/2017/11/23/o_shipping_line22.png) no-repeat;background-size: cover;"></div>
+                            <div v-else-if="index == deliveryItem.traces.length - 1" class="line_img" style="background: url(//9i.dvmama.com/free/2017/11/23/o_shipping_line11.png) no-repeat;background-size: cover;"></div>
+                            <div v-else class="line_img" style="background: url(//9i.dvmama.com/free/2017/11/23/o_shipping_line33.png) no-repeat;background-size: cover;"></div>
+                            <div class="order_goods_group_wl_inner">
+                                <div class="order_goods_group_wl_text">
+                                    <div class="dav-normal">{{traces.acceptStation}}</div>
+                                    <div>{{traces.acceptTime}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 点击收起/展开物流信息 -->
+                <div @click="showList = !showList" class="order_goods_group_button dav-green">
+                    <span>{{showList ? '收起物流信息' : '展开物流信息'}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include('node_modules/dvd-base-build/html-inc/body.inc')
+    <!--<script src="[[vendor]]/swiper/swiper-3.3.1.min.js"></script>-->
+    <script src="[[static]]/common/js/common.js[[v]]"></script>
+    <script src="[[static]]/page/logistics_information/js/logistics_information.js[[v]]"></script>
+</body>
+
+</html>

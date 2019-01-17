@@ -1,0 +1,219 @@
+@import "../../../common/css/util";
+
+.app {
+  background: white;
+  .wrap{
+    padding: .24rem .15rem 0;
+  }
+  .card{
+    padding: .15rem;
+    box-shadow: 0 .02rem .14rem rgba(0,0,0,.1);
+    border-radius: .08rem;
+  }
+  .statistic-card{
+    .header{
+      padding: .05rem 0 0 .2rem;
+      font-size: .16rem;
+      font-weight: bold;
+      background: url('//9i.dvmama.com/free/2018/05/15/icon_all.png') 0 70% no-repeat;
+      background-size: auto 70%;
+    }
+    .card-title{
+      font-size: .14rem;
+      color: #666;
+      padding-top: .1rem;
+    }
+    p{
+      color: #666;
+      line-height: 1.5;
+      &:nth-of-type(1){
+        padding-top: .08rem;
+      }
+    }
+    a{
+      color: #FC4053;
+      padding-top: .08rem;
+      display: block;
+    }
+    .btn-box{
+      padding-top: .06rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      span{
+        display: block;
+      }
+    }
+    .btn-tip{
+      font-size: .12rem;
+      color: #bbb;
+      padding-right: .1rem;
+    }
+    .btn{
+      display: inline-block;
+      width: .38rem;
+      height: .15rem;
+      background: #80DEEA;
+      border-radius: .13rem;
+      position: relative;
+      transition: all .5s ease;
+      &:after{
+        content: "";
+        width: .2rem;
+        height: .2rem;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 0 .04rem .01rem #91F4F2;
+        position: absolute;
+        top: -.03rem;
+        left: .18rem;
+        transition: all .5s ease;
+      }
+      &.off{
+        background: #DDDDDD;
+        &:after{
+          box-shadow: 0 0 .04rem .01rem #DDDDDD;
+          left: -.03rem;
+          right: inherit;
+        }
+      }
+    }
+  }
+  .title{
+    font-size: .16rem;
+    font-weight: bold;
+    color: #999;
+    padding: .2rem 0 .15rem;
+  }
+  .user-card{
+    display: flex;
+    & + .user-card{
+      margin-top: .15rem;
+    }
+    .user-img img{
+      width: .6rem;
+      height: .6rem;
+      border-radius: 50%;
+    }
+    .info{
+      flex: 1;
+      width: 0;
+      padding-left: .12rem;
+      box-sizing: border-box;
+      .phone{
+        display: flex;
+        align-items: center;
+        span{
+          display: block;
+        }
+      }
+      .phone-number{
+        font-size: .16rem;
+        padding-right: .07rem;
+      }
+      .copy-btn{
+        background: #FFAD5A url('//9i.dvmama.com/free/2018/05/15/icon_copy.png') .1rem center no-repeat;
+        background-size: auto 70%;
+        color: #fff;
+        font-size: .1rem;
+        border-radius: .1rem;
+        padding: .05rem .1rem .03rem .25rem;
+        box-sizing: border-box;
+        transform: translateY(-.03rem);
+      }
+      .user-name{
+        height: .18rem;
+        box-sizing: border-box;
+        color: #666;
+        padding-top: .05rem;
+      }
+      .sub-info{
+        padding-top: .08rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        span{
+          display: block;
+          &:first-child{
+            color: #999999;
+          }
+        }
+      }
+      .elide-btn{
+        font-size: .1rem;
+        padding: .06rem .1rem .03rem;
+        color: #FFB74D;
+        border: 1px solid #FFB74D;
+        border-radius: .5rem;
+        &.null{
+          color: #BBBBBB;
+          border-color: #BBBBBB;
+        }
+      }
+    }
+  }
+  .mask{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,.5);
+  }
+  .copy-list{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #eee;
+    .phone{
+      user-select: text;
+    }
+    li{
+      line-height: .44rem;
+      font-size: .16rem;
+      text-align: center;
+      background: #fff;
+      &:not(:last-child){
+        margin-bottom: 1px;
+      }
+      &.tip{
+        margin-bottom: .05rem;
+      }
+    }
+  }
+  .no-more-tip{
+    text-align: center;
+    padding: .3rem 0 .2rem;
+  }
+  .no-data-tip{
+    padding-top: .6rem;
+    img{
+      display: block;
+      width: 1.5rem;
+      margin: 0 auto;
+    }
+    p{
+      width: 2rem;
+      padding-top: .1rem;
+      margin: 0 auto;
+      line-height: 1.4;
+      color: #999;
+    }
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+  .slide-enter-active, .slide-leave-active {
+    transition: all .5s;
+  }
+  .slide-enter, .slide-leave-to {
+    transform: translateY(2rem);
+  }
+  /* 安卓hack */
+  &.android {
+
+  }
+}

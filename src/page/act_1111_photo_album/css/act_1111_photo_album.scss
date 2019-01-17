@@ -1,0 +1,58 @@
+@import "../../../common/css/common.scss";
+
+.app {
+  background:#fe1456 url([[static]]/page/act_1111_photo_album/img/friend-circle-bg.png[[v]]) no-repeat;
+  text-align: center;
+  background-size:100%;
+  padding-bottom:0.2rem;
+
+  .friend-circle {
+    background:url([[static]]/page/act_1111_photo_album/img/friend-circle.png[[v]]) no-repeat;
+    background-size:100%;
+    height:r(350);
+    margin-top: r(180);
+
+    .pic-wrapper {
+      position: relative;
+      top: 0.485rem;
+      height: 2.9rem;
+      overflow: hidden;
+    }
+    .friend-circle-pic {
+      width:r(220);
+    }
+  }
+
+  .goods-wrapper {
+    padding: 0.15rem 0.6rem;
+    overflow: hidden;
+    position: relative;
+
+    .goods-pic {
+      width: 0.8rem;
+      float: left;
+      height: 0.8rem;
+      border-radius: 0.05rem;
+    }
+    .goods-right-wrapper {
+      position: absolute;
+      top: 50%;
+      right: 0.5rem;
+      transform: translateY(-50%);
+      width:1.75rem;
+    }
+    .goods-name {
+      font-size: 0.16rem;
+      color: #FFF;
+      line-height: 0.2rem;
+      padding-bottom: 0.06rem;
+    }
+    .goods-btn {
+      width:1.4rem;
+    }
+  }
+
+  .footer-logo {
+    width:40%;
+  }
+}

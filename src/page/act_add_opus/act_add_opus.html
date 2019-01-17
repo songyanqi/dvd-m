@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+	<link rel="stylesheet" href="[[static]]/page/act_add_opus/css/act_add_opus.css[[v]]">
+</head>
+<body>
+	<div class = "app" :class = "{ bodypd0: isapp }">
+		<com-top-title back title="大V店 | 画出新年愿望，赢666元愿望基金" home share></com-top-title>
+		<div class = "work_info" v-if = "response"  style="display: none;" :style="{display: response ? null : 'none'}">
+			<div class = "uploadPic">
+				<div class = "uploadPicCont">
+					<img
+							class = "uploadImg"
+							:class = "{ isUploadPic: isuploading }"
+							@touchstart = "handleTouchStart"
+							@touchmove = "handleTouchMove"
+							@touchend = "handleTouchEnd"
+							@touchcancle = "handleTouchCancle" :src="uploadPic">
+					<div class = "workWrapper"  v-if = "workInfo.age != '请选择' || workInfo.name || workInfo.yarWish">
+						<div class = "workageCont"><span class = "workSpace">{{ workInfo.name }}</span><span v-if = "workInfo.age != '请选择'">{{ workInfo.age }}岁</span></div>
+						<div class = "workYear">{{ workInfo.yearWish }}</div>
+					</div>
+					<div class = "uploadBtn">
+						<input @change = "handleUpload" class = "uploadIpt" type="file" accept="image/*" name="">
+						<img v-if = "isUploadPic" class = "uploadPics" src="[[static]]/page/act_add_opus/img/upLoading.png">
+					</div>
+				</div>
+				<div class = "pic_des">
+						<div class = "pic_info">
+							<div class = "paint_info">画出新年愿望，赢666元愿望基金</div>
+							<div>
+								<img class = "logo_dvd" src="[[static]]/page/act_add_opus/img/davdian_logo.png" alt="">
+								<span class = "logo_info">长按识别二维码支持TA</span>
+							</div>
+						</div>
+						<!-- <img class = "pic_er" src="[[static]]/page/act_add_opus/img/erweima.png" alt=""> -->
+						<img class = "pic_er" :src="response.data.qrCode" alt="">
+					</div>
+			</div>
+
+			<div class = "upload_tips">*提示：建议用A4纸画，拍照的图片不超过5M，最多能制作3次哦~</div>
+			<div class = "work_cont">
+				<div class = "work_common"> <span>宝宝名称：</span><input @input = "handleName" placeholder="不超过8个字" class = "work_input" type="text" v-model = "workInfo.name"></div>
+				<div class = "work_wish work_common"><span>新年愿望：</span><input @input = "handleWish" placeholder="不超过12个字" class = "work_input" type="text" v-model = "workInfo.yearWish"></div>
+				<div class = "work_age work_common"><span>宝宝年龄：</span>
+				<!--  v-model = "workInfo.age" -->
+					<select v-model = "workInfo.age" @change = "handleChange($event)" class = "weui_selected" name="" id="">
+						<template v-for = "item of ageList">
+							<option v-if = "item == workInfo.age" selected :value="item" :key = "item">
+								<span v-if = "item == '请选择'">{{ item }}</span>
+								<span v-else>{{ item }}岁</span>
+							</option>
+							<option v-else :value="item" :key = "item">
+								<span v-if = "item == '请选择'">{{ item }}</span>
+								<span v-else>{{ item }}岁</span>
+							</option>
+						</template>
+					</select>
+				</div>
+				<!-- <div class = "work_age work_common"><span>宝宝年龄：</span><input class = "work_input" type="text" v-model = "workInfo.age"></div> -->
+			</div>
+			<div @click = "handleSubmit" class = "workSubmit" :class = "{confirmBtn: isSubmit}">提交</div>
+		</div>
+		<com-popup-loading v-if = "isLoading"></com-popup-loading>
+	</div>
+
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]//page/act_add_opus/js/act_add_opus.js[[v]]"></script>
+</body>
+</html>

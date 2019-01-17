@@ -1,0 +1,199 @@
+@import "../../../common/css/common.scss";
+
+body,body .dvd-service-com-title .panel{
+    background: white;
+}
+body .dvd-service-com-title .panel.bottom-line:after{
+    display: none;
+}
+::-webkit-input-placeholder {
+  color: #C0C0C0;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #C0C0C0;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #C0C0C0;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: #C0C0C0;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s ease-out;
+}
+.fade-leave-active {
+    position: absolute;
+   
+}
+.eye-box .fade-leave-active{
+    left: 0;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+.app {
+    .wrap{
+        padding: 0 .3rem;
+    }
+    .title{
+        font-size: .3rem;
+        padding: .12rem 0;
+    }
+    .sub-title{
+        font-size: .12rem;
+        padding-bottom: .2rem;
+    }
+    .input-box{
+        width: 100%;
+        height: .4rem;
+        margin-bottom: .1rem;
+        position: relative;
+        input{
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: #F9F9F9;
+            border-radius: .3rem;
+            border: 0;
+            box-sizing: border-box;
+            padding-left: .2rem;
+            &.code{
+                padding-right: 1.07rem;
+            }
+            &.phone{
+                padding-right: .3rem;
+                &+.clear-value{
+                    position: absolute;
+                    right: .12rem;
+                    top: .12rem;
+                }
+            }
+            &.password{
+                padding-right: .75rem;
+            }
+        }
+        .code-btn{
+            width: 1.07rem;
+            height: .3rem;
+            line-height: .3rem;
+            border-radius: .15rem;
+            position: absolute;
+            right: 0;
+            top: .05rem;
+        }
+        .clear-value{
+            width: .16rem;
+        }
+        .pwd-tool{
+            position: absolute;
+            top: .12rem;
+            right: 0;
+            display: flex;
+            width: .75rem;
+            .clear-box{
+                flex: 1;
+                width: 0;
+                div{
+                    padding-right: .12rem;
+                    border-right: 1px solid #CDCDCD;
+                }
+            }
+            .eye-box{
+                padding: 0 .12rem;
+                img{
+                    width: .2rem;
+                }
+                .hide{
+                    margin-top: .04rem;
+                }
+                .show{
+                    margin-top: .01rem;
+                }
+            }
+        }
+    }
+    .code-tip{
+        text-align: right;
+        font-size: .12rem;
+        color: #999;
+        margin-bottom: .3rem;
+        &.mb-10{
+            margin-bottom: .1rem;
+        }
+    }
+    .login-btn{
+        width: 100%;
+        height: .4rem;
+        line-height: .4rem;
+        margin-bottom: .2rem;
+        border-radius: .31rem;
+    }
+    .login-type{
+        font-size: .12rem;
+        &:after{
+            content: "";
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border: 5px solid transparent;
+            border-left-color: #DBDBDB;
+            margin-left: .03rem;
+            margin-top: -3px;
+        }
+    }
+    .btn{
+        background: #FF4A7D;
+        color: white;
+        font-size: .12rem;
+        font-weight: 300;
+        text-align: center;
+        transition: all .3s ease-out;
+        &.disabled{
+            background: #DBDBDB;
+        }
+    }
+    .wechat-box{
+        padding: .4rem .3rem 0;
+        .title{
+            font-size: .14rem;
+            text-align: center;
+            position: relative;
+            span{
+                padding: 0 .1rem;
+                background: white;
+                position: relative;
+                z-index: 1;
+            }
+            &:after{
+                content: "";
+                width: 100%;
+                height: 1px;
+                background: #CFCFCF;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+            }
+        }
+        img{
+            width: .5rem;
+            display: block;
+            margin: .15rem auto 0;
+        }
+    }
+    .enroll-tip{
+        position: fixed;
+        left: 0;
+        bottom: .3rem;
+        color: #666;
+        font-size: .12rem;
+        text-align: center;
+        width: 100%;
+        a{
+            text-decoration: underline;
+        }
+    }
+}

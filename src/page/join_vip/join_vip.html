@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>邀请您开通好妈妈学习卡</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/join_vip/css/join_vip.css[[v]]">
+</head>
+<body class="loaded">
+  <div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+    <!--标题-->
+
+    <join-vip :card="cardId" :response="response"></join-vip>
+    <!--返回顶部-->
+    <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/join_vip/js/join_vip.js[[v]]"></script>
+</body>
+</html>

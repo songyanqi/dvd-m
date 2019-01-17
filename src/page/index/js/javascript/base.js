@@ -1,0 +1,2469 @@
+import $ from 'jquery';
+
+// 弹窗组件
+if (typeof require == "function") {
+  window.popup = require("dvd-service-js-popup").default;
+}
+
+//商品详情页及文章详情未开店用户提示开店
+if ($(".kd_prompt_con").length) {
+  $(".kd_prompt_con .close").on("click", function() {
+    $(".kd_prompt_con").addClass("hide");
+  });
+}
+
+var js = document.scripts;
+for (var i = 0; i < js.length; i++) {
+  var src = js[i].src;
+  if (src.indexOf("base.js") > -1) {
+    var baseFeUrl = src.substring(0, src.indexOf("/javascript/base.js"));
+    window.baseFeUrl = baseFeUrl;
+  }
+  if (src.indexOf("dist") > -1) {
+    var baseFeUrl = src.substring(0, src.indexOf("/dist"));
+    window.baseFeUrl = baseFeUrl;
+  }
+}
+window.Units = window.Units || {};
+var u = navigator.userAgent;
+Units.getQuery = function(name) {
+  var reg = new RegExp("(^|&?)" + name + "=([^&]*)(&|$)", "i");
+  var r = window.location.search.match(reg);
+  if (r != null) return decodeURIComponent(r[2]);
+  return null;
+};
+Units.setTitle = function(name) {
+  // document.title = name
+  // if (/ip(hone|od|ad)/i.test(navigator.userAgent)) {
+  //     var  i = document.createElement('iframe')
+  //     i.src = '/favicon.ico'
+  //     i.style.display = 'none'
+  //     i.onload = function() {
+  //       setTimeout(function(){
+  //         i.remove();
+  //       }, 10)
+  //     }
+  //     document.body.appendChild(i)
+  // }
+  document.title = name;
+  if (/ip(hone|od|ad)/i.test(navigator.userAgent)) {
+    var i = document.createElement("iframe");
+    i.src = "/favicon.ico";
+    i.style.display = "none";
+    i.onload = function() {
+      setTimeout(function() {
+        i.remove();
+      }, 9);
+    };
+    document.body.appendChild(i);
+  }
+};
+Units.getDeviceToken = function(name) {
+  var reg = new RegExp("(/)" + name + "=([^&]*)(&|$)", "i");
+  var r = u.match(reg);
+  if (r != null) return decodeURIComponent(r[2]);
+  return "";
+};
+
+Units.isIOS = function() {
+  if (u.match(/ios/i)) {
+    return true;
+  }
+  return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+};
+Units.isWechat = function() {
+  var ua = window.navigator.userAgent.toLowerCase();
+  if (ua.match(/MicroMessenger/i) == "micromessenger") {
+    return true;
+  } else {
+    return false;
+  }
+};
+Units.isMobileIOS = function() {
+  return /iPhone|iPad|iPod/i.test(u);
+};
+Units.getAppVersion = function() {
+  // 空格分所有
+  var versionStr =
+    u.match(/(ios|android)\.davdian\.com\/([\d\.]+)/i) ||
+    u.match(/(ios|android)\.bravetime\.net\/([\d\.]+)/i) ||
+    u.match(/(ios|android)\.vyohui\.cn\/([\d\.]+)/i);
+  if (versionStr == null) {
+    return 0;
+  } else {
+    var v = versionStr[2].split(".").reduce(function(a, b) {
+      return +a * 10 + +b;
+    });
+  }
+  return +v;
+};
+Units.isAndroid = function() {
+  if (u.match(/(android|linux)/i)) {
+    return true;
+  }
+  return u.indexOf("Android") > -1 || u.indexOf("Linux") > -1;
+};
+Units.isApp = function() {
+  return !!u.match(/davdian|bravetime|vyohui/);
+};
+
+$(document).ready(function() {
+  window.iosInterface = window.iosInterface || {};
+
+  // add by swg ios新内核返回上一页回调js
+  window.iosInterface.nativeWebviewBack = function() {
+    window.bravetime.initHead();
+  };
+  window.iosInterface.refreshPreviousPageData = function() {
+    backNewData.$children[0].appUpData();
+  };
+  window.iosInterface.alreadyCached = function() {
+    window.backNewData.$children[0].cache = true;
+  };
+  window.iosInterface.getAudioState = function(obj) {
+    if (window.allsclool) {
+      window.allsclool.$children.map(function(item) {
+        if (item.name == "allSchool") {
+          item.$children.map(function(item2) {
+            if (item2.childrenName == "feedList") {
+              item2.$children.map(function(item3) {
+                if (item3.childrenName == "bd_study_0") {
+                  item3.albumId = obj.albumId;
+                  item3.sortNo = obj.sortNo;
+                  item3.btnStatus = obj.state;
+                }
+              });
+            }
+          });
+        }
+      });
+    }
+  };
+
+  window.iosInterface.setCookie = function(_name, _value) {
+    var setCookie = function(name, value) {
+      console.log("_before set:" + document.cookie);
+      var domainList = location.hostname.split(".");
+      var domainStr =
+        "." +
+        domainList[domainList.length - 2] +
+        "." +
+        domainList[domainList.length - 1];
+      document.cookie = name + "=" + value + ";domain=" + domainStr;
+      console.log("_after set:" + document.cookie);
+    };
+    var getCookie = function(name) {
+      var cookieObj = {};
+      var cookieList = document.cookie.split(";");
+      for (var i = 0, item; (item = cookieList[i++]); ) {
+        var k = item.split("=")[0].replace(" ", ""),
+          v = item.split("=")[1];
+        cookieObj[k] = v;
+      }
+      return cookieObj[name];
+    };
+
+    try {
+      if (getCookie(_name) == _value) {
+        return JSON.stringify({ code: 0, msg: "success" });
+      } else {
+        setCookie(_name, _value);
+
+        if (getCookie(_name) == _value) {
+          location.reload();
+          return JSON.stringify({ code: 0, msg: "success" });
+        } else {
+          return JSON.stringify({ code: 1, msg: "set fail" });
+        }
+      }
+    } catch (e) {
+      return JSON.stringify({ code: -1, msg: e.message });
+    }
+  };
+
+  window.iosInterface.getHeadAndFootData = function() {
+    var defaultData = {
+      showHead: 1, // 是否展示头部
+      showFoot: 0, // 是否展示底部
+      backOnHead: 1, // 头部返回按钮
+      homeOnHead: 0, // 头部首页按钮
+      shareOnHead: 0, // 头部分享按钮
+      btnOnHead: 0, // 头部文字按钮
+      btnText: "", // 头部文字按钮文字
+      btnLink: "" // 头部文字按钮链接
+    };
+    var formatData = {
+      showHead: 0, // 是否展示头部
+      showFoot: 0, // 是否展示底部
+      backOnHead: 1, // 头部返回按钮
+      homeOnHead: 0, // 头部首页按钮
+      shareOnHead: 0, // 头部分享按钮
+      btnOnHead: 0, // 头部文字按钮
+      btnText: "", // 头部文字按钮文字
+      btnLink: "" // 头部文字按钮链接
+    };
+    if (window.appData) {
+      return JSON.stringify($.extend(formatData, window.appData));
+    } else {
+      return JSON.stringify(defaultData);
+    }
+  };
+  window.getNewLineLink = function(href) {
+    if (
+      href &&
+      href.length > 5 &&
+      href.substring(0, 4) &&
+      href.substring(0, 5)
+    ) {
+      var str = href.substring(0, 4);
+      var str1 = href.substring(0, 5);
+      // console.log(str =='http' && str1 != 'https')
+      if (str == "http" && str1 != "https") {
+        return href.replace("http", "https");
+      } else {
+        return href;
+      }
+    }
+  };
+  window.lineLink = getNewLineLink(window.lineLink);
+  window.iosInterface.getShareInfo = function() {
+    var shareInfo = {
+      title: window.shareTitle || "MAMA+|大V店",
+      desc: window.descContent || "MAMA+|大V店",
+      link: window.lineLink || window.location.href,
+      imgUrl: window.imgUrl
+        ? window.imgUrl.replace("https", "http")
+        : "//9i.dvmama.com/free/index0925_icon1.png?x-oss-process=image/resize,m_fill,w_80"
+    };
+    return JSON.stringify($.extend(shareInfo, window.moreShareInfo));
+  };
+
+  window.iosInterface.netWorkGetShareInfo = window.iosInterface.getShareInfo;
+
+  window.bravetime = window.bravetime || {};
+
+  /**
+   * 调用原生方法
+   * @param callback
+   * @param error
+   * @param className
+   * @param method
+   * @param argumentsList
+   */
+  window.bravetime.callNative = function(
+    callback,
+    error,
+    className,
+    method,
+    argumentsList
+  ) {
+    var t = Date.now();
+    window["callback_" + t] = callback;
+    window["error_" + t] = error;
+    var str =
+      "neng://call.app.com?v=" +
+      [
+        encodeURIComponent("callback_" + t),
+        encodeURIComponent("error_" + t),
+        className,
+        method,
+        JSON.stringify(argumentsList)
+      ]
+        .join("|||")
+        .replace(/\"/g, "'");
+    window.bravetime.goto(str);
+  };
+
+  window.bravetime.callNative2 = function(
+    host,
+    action,
+    params,
+    callback,
+    minv,
+    minCallback
+  ) {
+    var callback = callback || function() {};
+
+    if (
+      window.Units &&
+      Units.getAppVersion() >=
+        minv.split(".").reduce(function(a, b) {
+          return +a * 10 + +b;
+        })
+    ) {
+      var t = Date.now() + "_" + Math.round(Math.random() * 10000);
+      window["callback_" + t] = callback;
+      var str =
+        "davdian://call." +
+        host +
+        ".com?action=" +
+        encodeURIComponent(action) +
+        "&params=" +
+        encodeURIComponent(JSON.stringify(params)) +
+        "&callback=" +
+        encodeURIComponent("callback_" + t) +
+        "&minv=" +
+        encodeURIComponent(minv);
+      window.bravetime.goto(str);
+    } else {
+      if (minCallback) {
+        minCallback();
+      } else {
+        console.log("1请升级您的APP");
+        console.trace();
+        bravetime.newAlert("请升级您的APP");
+      }
+    }
+  };
+
+  window.bravetime.callAPPNative = function(host, action, para) {
+    if (window.Units && Units.isIOS()) {
+      var href = location.href;
+      var baseHref;
+      if (href.indexOf("davdian.com") > 0) {
+        baseHref = "davdian.com";
+      } else if (href.indexOf("vyohui.cn") > 0) {
+        baseHref = "vyohui.cn";
+      } else {
+        baseHref = "bravetime.net";
+      }
+      window.d_callback = function() {};
+
+      location.href =
+        "https://invoke." +
+        baseHref +
+        "?cmd=" +
+        encodeURIComponent(
+          "davdian://call." +
+            host +
+            ".com?action=" +
+            action +
+            "&params=" +
+            encodeURIComponent(JSON.stringify(para)) +
+            "&callback=d_callback&minv=2.5.0"
+        );
+    } else if (window.Units && Units.isAndroid() && !Units.isWechat()) {
+      var baseHref = "davdian.com";
+      window.d_callback = function() {};
+      location.href =
+        "davdian://invoke." +
+        baseHref +
+        "?cmd=" +
+        encodeURIComponent(
+          "davdian://call." +
+            host +
+            ".com?action=" +
+            action +
+            "&params=" +
+            encodeURIComponent(JSON.stringify(para)) +
+            "&callback=d_callback&minv=2.5.0"
+        );
+      setTimeout(function() {
+        location.href =
+          "//open.davdian.com/httpurl?url=http://a.app.qq.com/o/simple.jsp?pkgname=com.davdian.seller";
+      }, 1500);
+    } else {
+      location.href =
+        "//open.davdian.com/httpurl?url=http://a.app.qq.com/o/simple.jsp?pkgname=com.davdian.seller";
+    }
+  };
+
+  /**
+   * app外唤起大V课
+   */
+  window.bravetime.callAppEnteroom = function(courseId) {
+    bravetime.callAPPNative("VoiceLive", "enterRoom", { courseId: courseId });
+  };
+
+  window.bravetime.callAppLive = function() {
+    var para = {
+      liveId: window.liveId,
+      isPlaying: "1", // 1表示直播中，2是回放，3是整理中
+      fromPush: "0" // 0表示不来自于推送，1表示来自推送
+    };
+    bravetime.callAPPNative("LiveVideo", "enterRoom", para);
+  };
+
+  window.bravetime.setHead = function(opt, callback) {
+    setTimeout(function() {
+      bravetime.callNative2("Browser", "setHead", opt, callback, "2.6.0");
+    }, 100);
+  };
+
+  window.bravetime.selectIdentity = function(callback, mincallback) {
+    var cardName = {
+      cardName: sessionStorage.getItem("Addressee")
+    };
+    bravetime.callNative2(
+      "Browser",
+      "selectIdentity",
+      cardName,
+      callback,
+      "3.7.0",
+      mincallback
+    );
+  };
+
+  window.bravetime.enterVoiceRoom = function(courseId) {
+    // if (!window.enterVoiceRoomFlag) {
+    // window.enterVoiceRoomFlag = true;
+    bravetime.callNative2(
+      "VoiceLive",
+      "enterRoom",
+      { courseId: courseId },
+      function() {
+        // location.reload();
+      },
+      "3.4.0"
+    );
+    // }
+  };
+
+  window.bravetime.nativeLogin = function(callback, minCallback) {
+    bravetime.callNative2(
+      "Account",
+      "login",
+      {},
+      callback,
+      "2.4.0",
+      minCallback
+    );
+  };
+
+  /**
+   * app支付
+   */
+  window.bravetime.nativePay = function(url, callback) {
+    var option = {};
+    option.url = encodeURIComponent(url);
+    if (url.split("app_pay/").length > 1) {
+      var list = url.split("app_pay/")[1].split("&");
+      for (var i = 0; i < list.length; i++) {
+        var key = list[i].split("=")[0];
+        var value = list[i].split("=")[1];
+        option[key] = value;
+      }
+    }
+
+    var callFunction = function(result) {
+      if (typeof result == "string") {
+        result = JSON.parse(result);
+      }
+      callback(+result.code, result.order_id);
+    };
+    bravetime.callNative2(
+      "Browser",
+      "pay",
+      option,
+      callFunction,
+      "3.1.0",
+      function() {
+        bravetime.goto(url);
+      }
+    );
+  };
+
+  /**
+   * 回到app首页
+   */
+  window.bravetime.goAppHome = function() {
+    bravetime.callNative(
+      function() {},
+      function() {
+        alert("系统异常，请退出app重试");
+      },
+      "base",
+      "home",
+      []
+    );
+  };
+
+  window.bravetime.openNewPage = function(opt, callback) {
+    bravetime.callNative2(
+      "Browser",
+      "open",
+      opt,
+      callback,
+      "3.1.0",
+      function() {
+        bravetime.goto(opt.url);
+      }
+    );
+  };
+  /**
+   * 回到上一个页面
+   * @constructor
+   */
+  window.bravetime.Nativeback = function() {
+    var callback = function() {};
+    bravetime.callNative2(
+      "BrowserTouch",
+      "goBackToRootPage",
+      {},
+      callback,
+      "3.9.0"
+    );
+  };
+
+  window.bravetime.initHead = function(callback) {
+    if (
+      window.dataUrl == "index.php?c=Index&a=getCatNavList" ||
+      window.tj_id == 55
+    ) {
+      return false;
+    }
+    bravetime.callNative2(
+      "Browser",
+      "initHead",
+      { content: JSON.parse(iosInterface.getHeadAndFootData()) },
+      callback,
+      "3.4.0",
+      function() {}
+    );
+  };
+
+  /**
+   * 旧版分享
+   * @param opt
+   */
+  window.bravetime.callAppShare = function(opt) {
+    bravetime.callNative(
+      function() {
+        var result = JSON.parse(r);
+        var code = result["code"];
+        if (code == 0) {
+          // 分享成功
+          bravetime.info("分享成功");
+        } else if (code == 1) {
+          bravetime.info("分享失败");
+        } else {
+          alert("系统异常，请重试");
+        }
+      },
+      function() {
+        alert("系统异常，请退出app重试");
+      },
+      "base",
+      "share",
+      []
+    );
+  };
+
+  /**
+   * 新版分享
+   * @param type
+   * @param info
+   * @param callback
+   * @param errorCallback
+   */
+  window.bravetime.callAppShareInfo = function(
+    type,
+    info,
+    callback,
+    errorCallback
+  ) {
+    var shartInfo = window.iosInterface.netWorkGetShareInfo();
+    var option = info || JSON.parse(shartInfo);
+    option.shareType = "0";
+    if (type == -1) {
+      option.show = "1";
+    } else {
+      option.show = "0";
+      option.sharePlatform = type + "";
+    }
+
+    var callFunction = function(code) {
+      if (code == 0) {
+        errorCallback && errorCallback();
+      } else {
+        callback && callback();
+      }
+    };
+
+    bravetime.callNative2("Share", "shareInfo", option, callFunction, "3.3.0");
+  };
+
+  window.bravetime.callAppShareImg = function(
+    type,
+    imgUrl,
+    callback,
+    errorCallback
+  ) {
+    var shartInfo = window.iosInterface.netWorkGetShareInfo();
+
+    var option = JSON.parse(shartInfo);
+    option.bigImageUrl = imgUrl;
+    option.shareType = "1";
+
+    if (type == -1) {
+      option.show = "1";
+    } else {
+      option.show = "0";
+      option.sharePlatform = type + "";
+    }
+
+    var callFunction = function(result) {
+      var code = result.code,
+        msg = result.msg;
+      if (code == 0) {
+        errorCallback && errorCallback(msg);
+      } else {
+        callback && callback();
+      }
+    };
+
+    bravetime.callNative2(
+      "Share",
+      "shareInfo",
+      option,
+      callFunction,
+      "3.3.0",
+      function() {
+        bravetime.newAlert(
+          "当前版本过低不支持此功能，请尽快升级，或长按保存图片"
+        );
+      }
+    );
+  };
+
+  window.bravetime.callAppShareToTimeline = function() {
+    bravetime.callNative(
+      function() {
+        var result = JSON.parse(r);
+        var code = result["code"];
+        if (code == 0) {
+          // 分享成功
+          bravetime.info("分享成功");
+        } else if (code == 1) {
+          bravetime.info("分享失败");
+        } else {
+          alert("系统异常，请重试");
+        }
+      },
+      function() {
+        alert("系统异常，请退出app重试");
+      },
+      "base",
+      "share_to_wechat_timeline",
+      []
+    );
+  };
+
+  window.bravetime.callAppShareToFriend = function() {
+    bravetime.callNative(
+      function() {
+        var result = JSON.parse(r);
+        var code = result["code"];
+        if (code == 0) {
+          // 分享成功
+          bravetime.info("分享成功");
+        } else if (code == 1) {
+          bravetime.info("分享失败");
+        } else {
+          alert("系统异常，请重试");
+        }
+      },
+      function() {
+        alert("系统异常，请退出app重试");
+      },
+      "base",
+      "share_to_wechat_friend",
+      []
+    );
+  };
+
+  window.bravetime.callNativeHoldPic = function(src) {
+    bravetime.callNative(function() {}, function() {}, "base", "savePic", [
+      src
+    ]);
+  };
+
+  /**
+   * app分享卡
+   */
+  window.bravetime.callCardShare = function(courseId) {
+    var callback = function() {};
+    bravetime.callNative2(
+      "Share",
+      "cardShare",
+      { courseId: courseId },
+      callback,
+      "3.4.0"
+    );
+  };
+
+  window.bravetime.callNativeReady = function() {
+    // 如果是订单确认页,而且是等待刷新的,就不发这个了
+    if (window.tj_id == 21 && $.cookie && $.cookie("no_refresh")) {
+      $.removeCookie("no_refresh");
+      return false;
+    }
+    bravetime.callNative(function() {}, function() {}, "base", "ready", []);
+  };
+
+  /**
+   * 调用原生确认框
+   * @param msg
+   * @param opt
+   */
+  window.bravetime.callNativeConfirm = function(msg, opt) {
+    bravetime.callNative(opt.okLink, opt.cancelLink, "base", "confirm", [
+      msg,
+      JSON.stringify(opt)
+    ]);
+  };
+
+  if (window.Units && Units.isApp()) {
+    setTimeout(function() {
+      $("img").each(function(index, element) {
+        var flag = false,
+          timer = null,
+          already = false;
+        $(element).on("touchstart", function() {
+          already = false;
+          flag = true;
+          timer = setTimeout(function() {
+            if (flag) {
+              already = true;
+              window.bravetime.callNativeHoldPic($(element).attr("src"));
+            }
+          }, 500);
+        });
+        $(element).on("touchend", function() {
+          flag = false;
+          clearTimeout(timer);
+        });
+        $(element).on("touchmove", function() {
+          flag = false;
+          clearTimeout(timer);
+        });
+        $(element).on("touchcancel", function() {
+          flag = false;
+          clearTimeout(timer);
+        });
+        var a = $(element).parents("a");
+        a.on("touchend", function(e) {
+          if (already) {
+            e.preventDefault();
+            return false;
+          }
+        });
+        a.on("click", function(e) {
+          if (already) {
+            e.preventDefault();
+            return false;
+          }
+        });
+      });
+    }, 1);
+  }
+
+  function singlePicHold(dom) {
+    var flag = false,
+      timer = null,
+      already = false;
+    $(dom).on("touchstart", function() {
+      flag = true;
+      timer = setTimeout(function() {
+        if (flag) {
+          window.bravetime.callNativeHoldPic($(dom).attr("src"));
+        }
+      }, 500);
+    });
+    $(dom).on("touchend", function() {
+      flag = false;
+      clearTimeout(timer);
+    });
+    $(dom).on("touchmove", function() {
+      flag = false;
+      clearTimeout(timer);
+    });
+    $(dom).on("touchcancel", function() {
+      flag = false;
+      clearTimeout(timer);
+    });
+    var a = $(dom).parents("a");
+    a.on("touchend", function(e) {
+      if (already) {
+        e.preventDefault();
+        return false;
+      }
+    });
+  }
+
+  window.singlePicHold = singlePicHold;
+
+  /**
+   * 自定义确认框
+   * @param msg 提示信息
+   * @param opt 配置信息  b
+   * @returns {boolean} 返回值
+   */
+
+  /**
+   * 自定义确认框
+   * @param msg 提示信息
+   * @param opt 配置信息  b
+   * @returns {boolean} 返回值
+   */
+  window.bravetime.newConfirm = function(msg, opt) {
+    var msg = msg || "",
+      opt = opt || {},
+      okText = opt.okText || "确定",
+      cancelText = opt.cancelText || "取消",
+      callback = opt.okLink || function() {},
+      cancelCallback = opt.cancelLink || function() {},
+      hideCancel = opt.hideCancel || false,
+      hideOkAndCancel = opt.hideOkAndCancel || false,
+      showPrompt = opt.showPrompt || false,
+      closeButton = opt.hasClostButton || false,
+      hideOnClick = opt.hideOnClick || false,
+      promptInput;
+
+    var $elAlert = $(".modal_dialog_wrap");
+    if ($elAlert.length < 1) {
+      $(
+        [
+          '<div class="dialog_mask" style="display:block">',
+          '<div class="modal_dialog_wrap">',
+          '<div class="modal_dialog">',
+          '<div class="modal_body"></div>',
+          '<div class="modal_footer">',
+          '<a class="confirm">确定</a>',
+          '<a class="cancel">取消</a>',
+          "</div>",
+          "</div>",
+          "</div>",
+          "</div>"
+        ].join("")
+      ).appendTo(document.body);
+
+      $elAlert = $(".modal_dialog_wrap");
+      $elAlert.find(".confirm").click(function() {
+        $(".dialog_mask").hide();
+        var callback = $(this).data("callback");
+        if (callback) {
+          if (typeof callback === "string") {
+            window.bravetime.goto(callback);
+          } else {
+            promptInput = $(".prompt");
+            if (showPrompt && promptInput.val()) {
+              callback(promptInput.val());
+            } else {
+              callback();
+            }
+          }
+        }
+      });
+      $elAlert.find(".cancel").click(function() {
+        var callback = $(this).data("cancel_callback");
+        if (callback) {
+          if (typeof callback === "string") {
+            window.bravetime.goto(callback);
+          } else {
+            callback();
+          }
+        }
+        $(".dialog_mask").hide();
+      });
+    } else {
+      $(".dialog_mask").css("display", "block");
+    }
+    if (hideOnClick) {
+      $(".dialog_mask").click(function(e) {
+        if ($(e.target).hasClass("dialog_mask")) {
+          $(".dialog_mask").hide();
+        }
+      });
+    }
+    $elAlert.toggleClass("modal_dialog_confirm_wrap", !hideCancel);
+    $elAlert.toggleClass("modal_dialog_info_wrap", hideOkAndCancel);
+    $elAlert.find(".modal_body").html(msg);
+    if (showPrompt) {
+      promptInput = $("<input>").addClass("prompt");
+      if (opt.placeholder) {
+        promptInput.attr("placeholder", opt.placeholder);
+      }
+      $elAlert
+        .find(".modal_body")
+        .append(
+          $("<div class='input_container that_input'></div>").append(
+            promptInput
+          )
+        );
+      promptInput
+        .focus(function() {
+          if (window.Units && Units.isWechat() && Units.isIOS()) {
+            $(".top0").addClass("hide");
+          }
+        })
+        .blur(function() {
+          setTimeout(function() {
+            $(".top0").removeClass("hide");
+          }, 50);
+        });
+    }
+    if (closeButton) {
+      var closeBtn = $('<div class="modal_close"></div>');
+      $elAlert.find(".modal_body").append(closeBtn);
+      closeBtn.click(function() {
+        $(".dialog_mask").hide();
+      });
+    }
+    $elAlert
+      .find(".confirm")
+      .html(okText)
+      .data("callback", callback || null);
+    $elAlert
+      .find(".cancel")
+      .html(cancelText)
+      .data("cancel_callback", cancelCallback || null);
+    $elAlert.css("margin-top", $elAlert.height() * -0.5);
+  };
+
+  window.bravetime.newAlert = function(msg, callback) {
+    if (typeof callback == "function") {
+      window.bravetime.newConfirm(msg, {
+        hideCancel: true,
+        okLink: callback
+      });
+    } else {
+      var opt = callback || {};
+      opt["hideCancel"] = true;
+      window.bravetime.newConfirm(msg, opt);
+    }
+  };
+
+  window.bravetime.newInfo = function(msg, opt) {
+    var o = opt || {};
+    o.hideOkAndCancel = true;
+    window.bravetime.newConfirm(msg, o);
+  };
+
+  window.bravetime.newPrompt = function(msg, opt) {
+    var o = opt || {};
+    o.showPrompt = true;
+    window.bravetime.newConfirm(msg, o);
+  };
+
+  window.bravetime.hideNew = function() {
+    $(".dialog_mask").hide();
+  };
+
+  window.bravetime.info = function(msg) {
+    if (!msg) {
+      return false;
+    }
+    if (window.popup && window.Vue) {
+      window.popup.toast(msg);
+    } else {
+      /*
+       var delayTime = Math.max(1500, msg.length * 150);
+       var infoContainer = $(".bravetime-info");
+       if (infoContainer.length) {
+       infoContainer.removeClass("hide").find('.inner').html(msg);
+       } else {
+       infoContainer = $('<div style="width:100%;z-index: 99999;max-width:640px;position: fixed;top: 200px;text-align: center;"><div class="inner" style="display:inline-block;padding:12px 14px;max-width:80%;background: #FF4A7D;color:#fff;border-radius: 3px;">' + msg + '</div></div>')
+       .addClass("bravetime-info");
+       $("body").append(infoContainer);
+       }
+       clearTimeout(window.st1);
+       clearTimeout(window.st2);
+       infoContainer.css("opacity", 1).stop();
+       window.st1 = setTimeout(function () {
+       infoContainer.css("opacity", 1).animate({opacity: 0}, 500);
+       window.st2 = setTimeout(function () {
+       infoContainer.css("opacity", 1).addClass("hide");
+       }, 1000);
+       }, delayTime);*/
+      var html =
+        '<div class="com-popup-toast">' +
+        '<div class="cell">' +
+        '<div class="box">' +
+        '<div class="html">' +
+        msg +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "</div>";
+      var div = document.createElement("div");
+      div.innerHTML = html;
+      var toast = document.body.appendChild(
+        div.querySelector(".com-popup-toast")
+      );
+      setTimeout(function() {
+        toast.parentNode.removeChild(toast);
+      }, 2000);
+    }
+  };
+
+  window.bravetime.addLoader = function(opt) {
+    var h = window.screen.availHeight;
+    opt = opt || {};
+    if ($(".loader_container").length) {
+      $(".loader_container").removeClass("hide");
+    } else {
+      $("body").append(
+        $(
+          "<div class='loader_container'><div class='loader'><div class='uil-default-css-normal' style='-webkit-transform:scale(0.25);-moz-transform:scale(0.25);-webkit-transform-origin: 0 0;-moz-transform-origin: 0 0;'><div style='top:80px;left:93px;width:14px;height:40px;background:#fff;-webkit-transform:rotate(0deg) translate(0,-60px);transform:rotate(0deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#fff;-webkit-transform:rotate(30deg) translate(0,-60px);transform:rotate(30deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#fff;-webkit-transform:rotate(60deg) translate(0,-60px);transform:rotate(60deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#fff;-webkit-transform:rotate(90deg) translate(0,-60px);transform:rotate(90deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#fff;-webkit-transform:rotate(120deg) translate(0,-60px);transform:rotate(120deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#fff;-webkit-transform:rotate(150deg) translate(0,-60px);transform:rotate(150deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#fff;-webkit-transform:rotate(180deg) translate(0,-60px);transform:rotate(180deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#fff;-webkit-transform:rotate(210deg) translate(0,-60px);transform:rotate(210deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#fff;-webkit-transform:rotate(240deg) translate(0,-60px);transform:rotate(240deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#fff;-webkit-transform:rotate(270deg) translate(0,-60px);transform:rotate(270deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#fff;-webkit-transform:rotate(300deg) translate(0,-60px);transform:rotate(300deg) translate(0,-60px);border-radius:10px;position:absolute;'></div><div style='top:80px;left:93px;width:14px;height:40px;background:#fff;-webkit-transform:rotate(330deg) translate(0,-60px);transform:rotate(330deg) translate(0,-60px);border-radius:10px;position:absolute;'></div></div></div>"
+        )
+      );
+      $(".loader_container")
+        .css("height", h + "px")
+        .click(window.bravetime.removeLoader);
+    }
+    var little = opt["little"] || opt["small"] || false;
+    if (little) {
+      $(".loader_container").addClass("little");
+    } else {
+      $(".loader_container").removeClass("little");
+    }
+  };
+  window.bravetime.removeLoader = function() {
+    $(".loader_container").addClass("hide");
+  };
+
+  window.bravetime.goto = function(url) {
+    window.location.href = url;
+  };
+
+  window.bravetime.ajaxError = function(c, info, callback) {
+    var code = c || 0,
+      info = info || "网络异常，请稍后重试";
+    bravetime.newAlert(info, callback);
+    var e1 = new Error("netWorkError");
+    e1.stack = "Error: network_error";
+    window.bughd && bughd("notifyException", e1, { code: code, info: info });
+  };
+
+  // 滚动到顶部
+  if ($("body.scroll_flag").length) {
+    $(window).on("scroll", function() {
+      var scrollTop = $(document).scrollTop();
+      if (scrollTop > 200) {
+        if ($(".to-top").length == 0) {
+          $("body").append(
+            '<div class="to-top"><a href="javascript:void(0);" id="to-top"><i class="icon dav_icon_up2top_80_80" style="width:44px;height:44px;"></i></a></div>'
+          );
+          $("#to-top").on("click", function() {
+            $("html,body").animate({ scrollTop: 0 }, 500);
+            if (
+              window.up2topCallback &&
+              typeof window.up2topCallback == "function"
+            ) {
+              up2topCallback(scrollTop);
+            }
+          });
+        }
+      } else {
+        $(".to-top").remove();
+      }
+    });
+  }
+  // 分享模块
+  var shareButton = $(".share_to_web");
+  if (shareButton && shareButton.length) {
+    shareToWeb(shareButton);
+  }
+
+  function shareToWeb(shareButton) {
+    if (window.Units && Units.isApp()) {
+      var useMMB = 0;
+      shareButton.click(function() {
+        if (window.moreShareInfo && window.moreShareInfo.cmd) {
+          bravetime.goto(moreShareInfo.cmd);
+          return false;
+        }
+        bravetime.callAppShare({
+          title: shareTitle, // 分享标题
+          link: useMMB
+            ? lineLink.replace("davdian.com", "mamamba.net")
+            : lineLink, // 分享链接
+          imgUrl: imgUrl.replace("https", "http"), // 分享图标
+          success: function() {
+            // 用户确认分享后执行的回调函数
+            if (
+              window.appShareCallback &&
+              typeof window.appShareCallback == "function"
+            ) {
+              window.appShareCallback();
+            }
+          },
+          cancel: function() {
+            // 用户取消分享后执行的回调函数
+            if (
+              window.appShareCallbackCancel &&
+              typeof window.appShareCallbackCancel == "function"
+            ) {
+              window.appShareCallbackCancel();
+            }
+          }
+        });
+        // bravetime.tj.pvSend(window.tj_path + "_share")
+      });
+
+      return false;
+    }
+
+    if (window.Units && Units.isWechat()) {
+      var msk = $(
+        '<div class="mask-to-web">' +
+          '<div class="pointer"></div>' +
+          "<p>点击右上角“分享”按钮</p>" +
+          "<p>选择“发送给朋友”或者“分享到朋友圈”" +
+          (!!window.disableCopyToShare
+            ? ""
+            : "或者“复制链接”后发送链接给朋友") +
+          "</p>" +
+          (window.shareStr && window.shareStr != ""
+            ? '<p class="big">推荐语：</p><p>' +
+              window.shareStr +
+              "</p><p>（长按选中后复制推荐语）</p>"
+            : "") +
+          "</div>"
+      );
+    } else if (window.Units && Units.isQQ()) {
+      var msk = $(
+        '<div class="mask-to-web">' +
+          '<div class="pointer"></div>' +
+          "<p>点击右上角“分享”按钮</p>" +
+          "<p>选择QQ好友、QQ空间、微信、朋友圈进行分享" +
+          (!!window.disableCopyToShare
+            ? ""
+            : "或者“复制链接”后发送链接给朋友") +
+          "</p>" +
+          (window.shareStr && window.shareStr != ""
+            ? '<p class="big">推荐语：</p><p>' +
+              window.shareStr +
+              "</p><p>（长按选中后复制推荐语）</p>"
+            : "") +
+          "</div>"
+      );
+    } else {
+      var msk = $(
+        '<div class="mask-to-web">' +
+          '<div class="pointer"></div>' +
+          "<p>复制链接分享</p>" +
+          "<p>复制地址栏链接，将链接发送给朋友</p>" +
+          "</div>"
+      );
+    }
+    $("body").append(msk.addClass("hide"));
+    shareButton.click(function() {
+      msk.removeClass("hide");
+      if (
+        window.shareButtonClickCallback &&
+        typeof window.shareButtonClickCallback == "function"
+      ) {
+        window.shareButtonClickCallback();
+      }
+      // bravetime.tj.pvSend(window.tj_path + "_share")
+    });
+    msk.click(function(event) {
+      msk.addClass("hide");
+    });
+  }
+
+  // 收藏模块
+  var favButton = $(".favorite_to_web");
+  if (favButton && favButton.length) {
+    favToWeb(favButton);
+  }
+  function favToWeb(favButton) {
+    if (window.Units && Units.isWechat()) {
+      var msk = $(
+        '<div class="mask-to-favorite">' +
+          '<div class="fake fake-favorite-we">' +
+          '<div class="top">' +
+          '<div class="favorite-title">微信中如何收藏店铺?</div> ' +
+          '<div class="favorite-con">右上角按钮选择“收藏”</div>' +
+          "</div>" +
+          '<div class="bottom">' +
+          '<div class="favorite-title">以后如何访问?</div>' +
+          '<div class="favorite-con">' +
+          '<img src="//9i.dvmama.com/free/fav-wechat_2x.png">' +
+          '<div class="fav-text">点击微信底部菜单中的“我”，在菜单中选择“收藏”，即可看到已经收藏的店铺。</div>' +
+          " </div>" +
+          "</div>" +
+          "</div>" +
+          "</div>"
+      );
+    } else if (window.Units && Units.isQQ()) {
+      var msk = $(
+        '<div class="mask-to-favorite">' +
+          '<div class="fake fake-favorite-qq">' +
+          '<div class="top">' +
+          '<div class="favorite-title">手机QQ如何收藏店铺?</div> ' +
+          '<div class="favorite-con">点击下方<div class="icon-small-qq-fav"></div>收藏</div>' +
+          "</div>" +
+          '<div class="bottom">' +
+          '<div class="favorite-title">以后如何访问?</div>' +
+          '<div class="favorite-con">' +
+          '<img src="//9i.dvmama.com/free/fav-qq_2x.png">' +
+          '<div class="fav-text">在手机QQ中点击左上角自己头像，在菜单中选择“我的收藏”，即可看到已经收藏的店铺。</div>' +
+          " </div>" +
+          "</div>" +
+          "</div>" +
+          "</div>"
+      );
+    } else {
+      var msk = $(
+        '<div class="mask-to-favorite">' +
+          '<div class="fake fake-favorite-bro">' +
+          '<div class="top">' +
+          '<div class="favorite-title">浏览器中如何收藏?</div> ' +
+          '<div class="favorite-con">在浏览器菜单中选择“收藏”或者“发送到主屏幕”、“桌面”。不同的浏览器，操作方法不同。</div>' +
+          "</div>" +
+          '<div class="bottom">' +
+          '<div class="favorite-title">以后如何访问?</div>' +
+          '<div class="favorite-con">在浏览器中找到收藏页面或者点击桌面的图标（如果有）访问</div>' +
+          "</div>" +
+          "</div>" +
+          "</div>"
+      );
+    }
+    $("body").append(msk.addClass("hide"));
+    favButton.click(function() {
+      msk.removeClass("hide");
+      if (
+        window.favButtonClickCallback &&
+        typeof window.favButtonClickCallback == "function"
+      ) {
+        window.favButtonClickCallback();
+      }
+    });
+    msk.click(function(event) {
+      msk.addClass("hide");
+    });
+  }
+
+  // 微信里面分享
+  if (window.wx) {
+    if (window.shareTitle) {
+      if (window.wx_token === undefined) {
+        var url = window.location.href;
+        $.ajax({
+          url: "./wechatJsToken",
+          type: "GET",
+          dataType: "json",
+          data: { url: encodeURIComponent(url) },
+          success: function(result) {
+            if (result["error"] == 0) {
+              wx.config({
+                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: result["data"]["appId"], // 必填，公众号的唯一标识
+                timestamp: result["data"]["timestamp"], // 必填，生成签名的时间戳
+                nonceStr: result["data"]["nonceStr"], // 必填，生成签名的随机串
+                signature: result["data"]["signature"], // 必填，签名，见附录1
+                jsApiList: [
+                  "onMenuShareTimeline",
+                  "onMenuShareAppMessage",
+                  "onMenuShareQQ",
+                  "onMenuShareWeibo"
+                ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+              });
+            }
+          },
+          error: function() {
+            console.log("Error");
+          }
+        });
+      } else if (window.wx_token) {
+        wx.config({
+          debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+          appId: window.wx_appid, // 必填，公众号的唯一标识
+          timestamp: window.wx_timestamp, // 必填，生成签名的时间戳
+          nonceStr: window.wx_nonceStr, // 必填，生成签名的随机串
+          signature: window.wx_signature, // 必填，签名，见附录1
+          jsApiList: [
+            "onMenuShareTimeline",
+            "onMenuShareAppMessage",
+            "onMenuShareQQ",
+            "onMenuShareWeibo"
+          ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+      }
+      wx.ready(function() {
+        window.imgUrl = window.imgUrl.replace("https", "http");
+        var useMMB = 0;
+        if (window.doNotShare) {
+          return false;
+        }
+        // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+        wx.onMenuShareTimeline({
+          title: shareTitle, // 分享标题
+          link: useMMB
+            ? lineLink.replace("davdian.com", "mamamba.net")
+            : lineLink, // 分享链接
+          imgUrl: imgUrl, // 分享图标
+          success: function() {
+            // 用户确认分享后执行的回调函数
+            if (
+              window.tlShareCallback &&
+              typeof window.tlShareCallback == "function"
+            ) {
+              window.tlShareCallback();
+            }
+          },
+          cancel: function() {
+            // 用户取消分享后执行的回调函数
+            if (
+              window.tlShareCallbackCancel &&
+              typeof window.tlShareCallbackCancel == "function"
+            ) {
+              window.tlShareCallbackCancel();
+            }
+          }
+        });
+        wx.onMenuShareAppMessage({
+          title: shareTitle, // 分享标题
+          desc: descContent, // 分享描述
+          link: useMMB
+            ? lineLink.replace("davdian.com", "mamamba.net")
+            : lineLink, // 分享链接
+          imgUrl: imgUrl, // 分享图标
+          success: function() {
+            // 用户确认分享后执行的回调函数
+            if (
+              window.sendShareCallback &&
+              typeof window.sendShareCallback == "function"
+            ) {
+              window.sendShareCallback();
+            }
+          },
+          cancel: function() {
+            // 用户取消分享后执行的回调函数
+            if (
+              window.sendShareCallbackCancel &&
+              typeof window.sendShareCallbackCancel == "function"
+            ) {
+              window.sendShareCallbackCancel();
+            }
+          }
+        });
+        wx.onMenuShareQQ({
+          title: shareTitle, // 分享标题
+          desc: descContent, // 分享描述
+          link: useMMB
+            ? lineLink.replace("davdian.com", "mamamba.net")
+            : lineLink, // 分享链接
+          imgUrl: imgUrl, // 分享图标
+          success: function() {
+            // 用户确认分享后执行的回调函数
+            if (
+              window.QQShareCallback &&
+              typeof window.QQShareCallback == "function"
+            ) {
+              window.QQShareCallback();
+            }
+          },
+          cancel: function() {
+            // 用户取消分享后执行的回调函数
+            if (
+              window.QQShareCallbackCancel &&
+              typeof window.QQShareCallbackCancel == "function"
+            ) {
+              window.QQShareCallbackCancel();
+            }
+          }
+        });
+        wx.onMenuShareWeibo({
+          title: shareTitle, // 分享标题
+          desc: descContent, // 分享描述
+          link: useMMB
+            ? lineLink.replace("davdian.com", "mamamba.net")
+            : lineLink, // 分享链接
+          imgUrl: imgUrl, // 分享图标
+          success: function() {
+            // 用户确认分享后执行的回调函数
+            if (
+              window.weiboShareCallback &&
+              typeof window.weiboShareCallback == "function"
+            ) {
+              window.weiboShareCallback();
+            }
+          },
+          cancel: function() {
+            // 用户取消分享后执行的回调函数
+            if (
+              window.weiboShareCallbackCancel &&
+              typeof window.weiboShareCallbackCancel == "function"
+            ) {
+              window.weiboShareCallbackCancel();
+            }
+          }
+        });
+        wx.onMenuShareQZone({
+          title: shareTitle, // 分享标题
+          desc: descContent, // 分享描述
+          link: useMMB
+            ? lineLink.replace("davdian.com", "mamamba.net")
+            : lineLink, // 分享链接
+          imgUrl: imgUrl, // 分享图标
+          success: function() {
+            // 用户确认分享后执行的回调函数
+            if (
+              window.qZoneShareCallback &&
+              typeof window.qZoneShareCallback == "function"
+            ) {
+              window.qZoneShareCallback();
+            }
+          },
+          cancel: function() {
+            // 用户取消分享后执行的回调函数
+            if (
+              window.qZoneShareCallbackCancel &&
+              typeof window.qZoneShareCallbackCancel == "function"
+            ) {
+              window.qZoneShareCallbackCancel();
+            }
+          }
+        });
+
+        window.relink = function() {
+          // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+          wx.onMenuShareTimeline({
+            title: shareTitle, // 分享标题
+            link: useMMB
+              ? lineLink.replace("davdian.com", "mamamba.net")
+              : lineLink, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function() {
+              // 用户确认分享后执行的回调函数
+              if (
+                window.tlShareCallback &&
+                typeof window.tlShareCallback == "function"
+              ) {
+                window.tlShareCallback();
+              }
+            },
+            cancel: function() {
+              // 用户取消分享后执行的回调函数
+              if (
+                window.tlShareCallbackCancel &&
+                typeof window.tlShareCallbackCancel == "function"
+              ) {
+                window.tlShareCallbackCancel();
+              }
+            }
+          });
+          wx.onMenuShareAppMessage({
+            title: shareTitle, // 分享标题
+            desc: descContent, // 分享描述
+            link: useMMB
+              ? lineLink.replace("davdian.com", "mamamba.net")
+              : lineLink, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function() {
+              // 用户确认分享后执行的回调函数
+              if (
+                window.sendShareCallback &&
+                typeof window.sendShareCallback == "function"
+              ) {
+                window.sendShareCallback();
+              }
+            },
+            cancel: function() {
+              // 用户取消分享后执行的回调函数
+              if (
+                window.sendShareCallbackCancel &&
+                typeof window.sendShareCallbackCancel == "function"
+              ) {
+                window.sendShareCallbackCancel();
+              }
+            }
+          });
+          wx.onMenuShareQQ({
+            title: shareTitle, // 分享标题
+            desc: descContent, // 分享描述
+            link: useMMB
+              ? lineLink.replace("davdian.com", "mamamba.net")
+              : lineLink, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function() {
+              // 用户确认分享后执行的回调函数
+              if (
+                window.QQShareCallback &&
+                typeof window.QQShareCallback == "function"
+              ) {
+                window.QQShareCallback();
+              }
+            },
+            cancel: function() {
+              // 用户取消分享后执行的回调函数
+              if (
+                window.QQShareCallbackCancel &&
+                typeof window.QQShareCallbackCancel == "function"
+              ) {
+                window.QQShareCallbackCancel();
+              }
+            }
+          });
+          wx.onMenuShareQZone({
+            title: shareTitle, // 分享标题
+            desc: descContent, // 分享描述
+            link: useMMB
+              ? lineLink.replace("davdian.com", "mamamba.net")
+              : lineLink, // 分享链接
+            imgUrl: imgUrl, // 分享图标
+            success: function() {
+              // 用户确认分享后执行的回调函数
+              if (
+                window.qZoneShareCallback &&
+                typeof window.qZoneShareCallback == "function"
+              ) {
+                window.qZoneShareCallback();
+              }
+            },
+            cancel: function() {
+              // 用户取消分享后执行的回调函数
+              if (
+                window.qZoneShareCallbackCancel &&
+                typeof window.qZoneShareCallbackCancel == "function"
+              ) {
+                window.qZoneShareCallbackCancel();
+              }
+            }
+          });
+        };
+      });
+    }
+  }
+  $("a.need_confirm[data-confirm-content]").click(function(event) {
+    var href = $(this).attr("href");
+    var con = $(this).attr("data-confirm-content");
+    bravetime.newConfirm(con, {
+      okLink: href
+    });
+    event.preventDefault();
+  });
+
+  var warning_time;
+  window.warning_info = function(text, position) {
+    if ($(".warning-info").length > 0) {
+      clearTimeout(warning_time);
+      $(".warning-info").remove();
+    }
+    var windowHeight = $(window).height();
+    var bottom;
+    switch (position || "middle") {
+      case "top":
+        bottom = windowHeight - 100;
+        break;
+      case "middle":
+        bottom = windowHeight / 2;
+        break;
+      case "bottom":
+        bottom = 50;
+        break;
+      default:
+        bottom = windowHeight / 2;
+        break;
+    }
+    $("body").append(
+      "<div class='warning-info' style='position:fixed;width:100%;text-align:center;bottom:" +
+        bottom +
+        "px;z-index:999;'><div class='label label-warning'>" +
+        text +
+        "</div></div>"
+    );
+    $(".label-warning")
+      .css("background-color", "#f89406")
+      .css("display", "inline")
+      .css("padding", "2px 5px")
+      .css("border-radius", "8px");
+    warning_time = setTimeout(function() {
+      $(".warning-info").fadeOut(2000);
+    }, 500);
+  };
+
+  /**
+   * 点击立即购买按钮
+   */
+  window.buy_now = function(goodsId) {
+    var goods = {};
+    var spec_arr = [];
+    var number = document.getElementById("goods_number").value;
+    var quick = 0;
+
+    goods.quick = quick;
+    goods.spec = spec_arr;
+    goods.goods_id = goodsId;
+    goods.number = number;
+    goods.sag_id = sag_id;
+    goods.price = goods_price;
+    goods.name = goods_name;
+
+    $.post(
+      "index.php?m=default&c=flow&a=add_to_cart",
+      {
+        goods: JSON.stringify(goods)
+      },
+      function(data) {
+        if (data.error > 0) {
+          window.bravetime.newAlert(data.message);
+        } else {
+          var callback = "index.php?m=default&c=flow&a=cart";
+          window.bravetime.goto(callback);
+        }
+      },
+      "json"
+    );
+    if (window.buyCallback && typeof window.buyCallback == "function") {
+      window.buyCallback(goodsId);
+    }
+  };
+
+  /**
+   * 点击 加入购物车 后弹出
+   */
+  window.cart = function(goodsId) {
+    var goods = {};
+    var spec_arr = [];
+    var number = document.getElementById("goods_number").value;
+    var quick = 1;
+
+    goods.quick = quick;
+    goods.spec = spec_arr;
+    goods.goods_id = goodsId;
+    goods.number = number;
+    goods.sag_id = sag_id;
+    goods.price = goods_price;
+    goods.name = goods_name;
+
+    $.post(
+      "index.php?m=default&c=flow&a=add_to_cart",
+      {
+        goods: JSON.stringify(goods)
+      },
+      function(data) {
+        if (data.error > 0) {
+          if (data.error == 2) {
+            window.bravetime.confirm("商品已经在购物车中", {
+              okText: "再逛逛",
+              // okLink:"/", //点击再逛逛跳到的链接
+              cancelText: "去购物车",
+              cancelLink: "/cart.html" //点击去结算跳到的链接
+            });
+          } else {
+            window.bravetime.newAlert(data.message);
+          }
+        } else {
+          // 先ajax发送数据，成功后调用以下语句
+          window.bravetime.newConfirm("商品已经加入购物车", {
+            okText: "再逛逛",
+            // okLink:"/", //点击再逛逛跳到的链接
+            cancelText: "去结算",
+            cancelLink: "/cart.html" //点击去结算跳到的链接
+          });
+          $(".detail_bottom .cart_link").html(
+            '<i class="menu-i menu-i-3"></i><b>' + data["cart_number"] + "</b>"
+          );
+        }
+      },
+      "json"
+    );
+
+    if (window.cartCallback && typeof window.cartCallback == "function") {
+      window.cartCallback(goodsId);
+    }
+  };
+
+  // 团购列表
+  var tuanListCon = $(".tuan_list");
+  if (tuanListCon && tuanListCon.length) {
+    tuanListCon.find("a").each(function(index, el) {
+      var $el = $(el);
+      var second = +$el.attr("data-remain-second");
+      var href = $(el).attr("href");
+      $el.attr("data-url", href);
+      $el.find(".time").html(calculateTime(second));
+      $el.find(".dao_time span").html(calculateTime(second));
+      $el.attr("data-remain-second", second - 1);
+      $el.click(function() {
+        if (
+          window.tuanItemClickCallback &&
+          typeof window.tuanItemClickCallback == "function"
+        ) {
+          window.tuanItemClickCallback($el, index);
+          // return false;
+        }
+      });
+    });
+    if (
+      tuanListCon.find("a").find(".dao_time span").length ||
+      tuanListCon.find("a").find(".time").length
+    ) {
+      window.tuanInterval = setInterval(function() {
+        var flag = false;
+        tuanListCon.find("a").each(function(index, el) {
+          var second = +$(el).attr("data-remain-second");
+          if (second > 0) {
+            if (second < 60 * 60 * 24) {
+              $(el)
+                .find(".dao_time span")
+                .html(calculateTime(second));
+              $(el)
+                .find(".time")
+                .html(calculateTime(second));
+              $(el).attr("data-remain-second", second - 1);
+              flag = true;
+            }
+          } else {
+            $(el)
+              .find(".dao_time")
+              .html("团购已结束");
+            $(el)
+              .find(".time")
+              .html("团购已结束");
+          }
+        });
+        if (!flag) {
+          clearInterval(window.tuanInterval);
+        }
+      }, 1000);
+    }
+  }
+
+  // 逆向团购
+  var merchandiseDetail = $(".merchandise_detail");
+  if (merchandiseDetail.length) {
+    var merchandiseList = merchandiseDetail.find(".dao_time");
+    window.mechandiseInterval = setInterval(function() {
+      merchandiseList.each(function(index, el) {
+        var $el = $(el);
+        var second = +$el.attr("data-remain-second");
+        if (second > 0) {
+          $el.html("倒计时：" + calculateTime(second));
+          $(el).attr("data-remain-second", second - 1);
+        } else {
+          $(el).html("此商品组团已结束");
+        }
+      });
+    }, 1000);
+  }
+
+  function calculateTime(second) {
+    var s = second % 60,
+      m = Math.floor(second / 60) % 60,
+      h = Math.floor(second / 60 / 60) % 24,
+      d = Math.floor(second / 60 / 60 / 24);
+    var str = "";
+    if (d) {
+      str = "剩 " + d + " 天";
+    } else {
+      str =
+        (h < 10 ? "0" : "") +
+        h +
+        ":" +
+        (m < 10 ? "0" : "") +
+        m +
+        ":" +
+        (s < 10 ? "0" : "") +
+        s;
+    }
+    return str;
+  }
+
+  // 商品列表
+  var goodList2 = $(".good_list_2_row");
+  if (goodList2 && goodList2.length) {
+    goodList2.each(function(index, el) {
+      $(el)
+        .find(".good_item")
+        .each(function(i, e) {
+          $(e).attr("data-url", $(e).attr("href"));
+        });
+      $(el).on("click", ".good_item", function(e) {
+        if (
+          window.goodItemClickCallbak &&
+          typeof window.goodItemClickCallbak == "function"
+        ) {
+          window.goodItemClickCallbak($(this), $(el));
+          // return false;
+        }
+      });
+    });
+  }
+
+  var addBounsContainer = $(".bonus_prompt");
+  if (addBounsContainer.length) {
+    addBouns(addBounsContainer);
+    var showBouns = false;
+  }
+
+  /**
+   * 页面弹红包
+   */
+  function addBouns(container) {
+    var height = screen.height;
+    $(window).scroll(function() {
+      var y = window.scrollY;
+      if (y > height * 0.3 && !showBouns) {
+        showBouns = true;
+
+        if (getBounsUrl) {
+          $.ajax({
+            url: getBounsUrl,
+            dataType: "json",
+            success: function(result) {
+              if (result["error"]) {
+                //bravetime.info(result["msg"]);
+              } else {
+                var type = result["data"]["type"];
+                var num = result["data"]["num"];
+                if (type == 0 || type == 1 || type == 3) {
+                  return false;
+                }
+                container.find(".bonus_prompt_bonus").html(num);
+                container.addClass("show_animate");
+                setTimeout(function() {
+                  container.addClass("bonus_d");
+                }, 400);
+              }
+            }
+          });
+        }
+      }
+    });
+
+    container.find(".bonus_prompt_close").click(function() {
+      container.addClass("hide");
+    });
+  }
+
+  if (window.isShowActivity) {
+    showActivityImg();
+    setTimeout(function() {
+      // bravetime.tj.pvSend("alert_activity", (window["tj_path"] || 'other_path'));
+    }, 500);
+  }
+  /**
+   * 弹出活动图片
+   */
+  function showActivityImg() {
+    var $body = $(document.body);
+    var str =
+      '<div class="dialog_mask">' +
+      '<div class="active_container">' +
+      '<div class="pic_container">' +
+      '<div class="close"><span></span></div>' +
+      '<a href="' +
+      window.activityLink +
+      '"><img src="' +
+      window.activityImage +
+      '" alt=""></a>' +
+      "</div>" +
+      "</div>" +
+      "</div>";
+    var ac = $(str);
+    var winHeight = $(window).height();
+    var winWidht = Math.min($(window).width(), 640);
+    var w = winWidht * 0.78;
+    var l = winWidht * 0.11;
+    var h = w * 410 / 290;
+    var t = Math.max(10, (winHeight - h) / 2);
+
+    ac
+      .find(".pic_container")
+      .css("width", w + "px")
+      .css("top", t + "px")
+      .css("left", l + "px");
+    $body.append(ac);
+    ac.find(".active_container").click(function() {
+      ac.remove();
+    });
+  }
+
+  // ios fix
+  // ios fix
+  if (window.Units && Units.isIOS()) {
+    var flag = false;
+    $(document).on("touchstart", "input", function() {
+      if (
+        window.inputFocusFixFunction &&
+        typeof window.inputFocusFixFunction == "function"
+      ) {
+        window.inputFocusFixFunction();
+      }
+    });
+
+    $(document).on("focus", "input", function() {
+      flag = true;
+      if (
+        window.inputFocusFixFunction &&
+        typeof window.inputFocusFixFunction == "function"
+      ) {
+        window.inputFocusFixFunction();
+      }
+    });
+
+    $(document).on("blur", "input", function() {
+      flag = false;
+      if (
+        window.inputBlurFixFunction &&
+        typeof window.inputBlurFixFunction == "function"
+      ) {
+        window.inputBlurFixFunction();
+      }
+    });
+
+    $(document).on("touchmove", "input", function() {
+      if (!flag) {
+        if (
+          window.inputBlurFixFunction &&
+          typeof window.inputBlurFixFunction == "function"
+        ) {
+          window.inputBlurFixFunction();
+        }
+      }
+    });
+  }
+
+  if (window.app_need_update_flag) {
+    var html =
+      "<p style='font-size: 17px;text-align: center;margin-bottom: 6px;'>更新2.0.0</p>" +
+      "<p style='font-size: 14px;text-align: left;margin-bottom: 6px;'>大V店重大更新啦~!</p>" +
+      "<p style='font-size: 12px;text-align: left;'>【妈妈课堂】强力入驻大V店学院板块!</p>" +
+      "<p style='font-size: 12px;text-align: left;'>在这里就可以直接报名、听课、追回顾!<p>" +
+      "<p style='font-size: 12px;text-align: left;'>蒋佩蓉、朱芳宜等大咖课程独家放送!<p>" +
+      "<p style='font-size: 12px;text-align: left;'>马上升级 APP 才能使用哟~<p>" +
+      "<p style='font-size: 12px;text-align: left;'>不要再等了！</p>";
+    window.bravetime.newAlert(html, {
+      okText: "<span style='color:#0076FF;font-size: 16px;'>马上升级</span>",
+      // okLink:"/", //点击再逛逛跳到的链接
+      cancelText:
+        "<span style='color:#0076FF;font-size: 16px;'>马上升级</span>",
+      okLink: function() {
+        if (Units.isApp() && Units.isIOS() && Units.getAppVersion() < 200) {
+          window.location =
+            "https://itunes.apple.com/cn/app/dav-dian-rang-ma-ma-qing-song/id1042582462?mt=8";
+        }
+        if (Units.isApp() && Units.isAndroid() && Units.getAppVersion() < 200) {
+          window.location =
+            "//open.davdian.com/httpurl?url=http://a.app.qq.com/o/simple.jsp?pkgname=com.davdian.seller";
+        }
+      } //点击去结算跳到的链接
+    });
+  }
+
+  // 在cookie里写设备宽度
+  if (!!$.cookie) {
+    $.cookie(
+      "physical_width",
+      $(document.body).width() * (window.devicePixelRatio || 1)
+    );
+  }
+
+  var cookieList = document.cookie.split(";").filter(function(x) {
+    return x.indexOf("dvdsid") > -1;
+  });
+  var sid = cookieList.length && cookieList[0].split("=")[1];
+  sid && window.bughd && bughd("user", { sid: sid, ua: navigator.userAgent });
+
+  $("[url-for-login]").click(function(e) {
+    var url = $(this).attr("href");
+    nativeLoginFunction(url);
+    e.preventDefault();
+    return false;
+  });
+
+  function nativeLoginFunction(url, errorCallback) {
+    var refer = "/",
+      login = false;
+    var list = url.split("?");
+    if (list.length >= 2) {
+      var list2 = list[1];
+      if (list2.indexOf("referer=") > -1) {
+        login = true;
+        refer = list2.substr(list2.indexOf("referer=") + 8);
+      }
+    }
+    if (!login) {
+      window.goto(url);
+      return false;
+    }
+    var callback = function(result) {
+      if (result["code"] == 1 || result["code"] == 2) {
+        // alert("I will go to "+ decodeURIComponent(refer)+", but i don't go");
+        bravetime.goto(decodeURIComponent(refer));
+      } else if (result["code"] == 0) {
+        errorCallback && errorCallback();
+      }
+    };
+    var minCallback = function() {
+      bravetime.goto(url);
+    };
+    window.bravetime.nativeLogin(callback, minCallback);
+  }
+
+  window.nativeLoginFunction = nativeLoginFunction;
+
+  window.bravetime.initHead();
+
+  if (window.Units && Units.isApp()) {
+    $(document.body).addClass("in_app");
+    $("iframe").each(function(i, d) {
+      d.onload = function() {
+        window.bravetime.initHead();
+      };
+      var i1 = 0;
+      var timer1 = setInterval(function() {
+        if (i1++ >= 6) {
+          clearInterval(timer1);
+        } else {
+          window.bravetime.initHead();
+        }
+      }, 1000);
+    });
+  }
+});
+
+// 错误统计白名单
+var whiteList = [
+  {
+    url: "/index.php?c=prize&a=send_bonus",
+    code: -1
+  },
+  {
+    url: "/index.php?c=prize&a=send_bonus",
+    code: -1
+  }
+];
+
+//备份jquery的ajax方法
+var _ajax = $.ajax;
+$.ajax = function(opt) {
+  //备份opt中error和success方法
+  var fn = {
+    error: function(XMLHttpRequest, textStatus, errorThrown) {},
+    success: function(data, textStatus) {}
+  };
+  if (opt.error) {
+    fn.error = opt.error;
+  }
+  if (opt.success) {
+    fn.success = opt.success;
+  }
+
+  opt.data = opt.data || {};
+  if (typeof opt.data == "object") {
+    for (var i = 0, d; (d = ["rp", "rl", "logDp", "dp",'rq','ru'][i++]); ) {
+      var tmp_value = window.Units && Units.getQuery(d);
+      if (tmp_value) {
+        opt.data[d] = tmp_value;
+      }
+    }
+  }
+
+  //扩展增强处理
+  var _opt = $.extend(opt, {
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+      //错误方法增强处理
+
+      fn.error(XMLHttpRequest, textStatus, errorThrown);
+      var e1 = new Error("ajaxError");
+      e1.stack = "Error: ajax_error";
+      window.bughd &&
+        bughd("notifyException", e1, {
+          tj_path: window.tj_path || "other_path",
+          ajax_url: opt.url || "other_url",
+          code: "-99",
+          msg: "网络异常"
+        });
+    },
+    success: function(data, textStatus) {
+      fn.success(data, textStatus);
+      var code = data["code"] || data["error"] || data["error_code"];
+      var msg =
+        data["msg"] ||
+        data["error_msg"] ||
+        data["message"] ||
+        data["error_message"];
+      var flag = true;
+      for (var i = 0; i < whiteList.length; i++) {
+        if (whiteList[i].url == opt.url && whiteList[i].code == code) {
+          flag = false;
+          break;
+        }
+      }
+      if (code && flag) {
+        var e1 = new Error("ajaxApiError");
+        e1.stack = "Error: ajax_api_error";
+        window.bughd &&
+          bughd("notifyException", e1, {
+            tj_path: window.tj_path || "other_path",
+            ajax_url: opt.url || "other_url",
+            code: code,
+            msg: msg
+          });
+      }
+    }
+  });
+  _ajax(_opt);
+};
+
+//判断对象是否为空
+function isEmptyObject(e) {
+  var t;
+  for (t in e) return !1;
+  return !0;
+}
+
+window.isEmptyObject = isEmptyObject;
+
+// 根据屏幕大小改变html字体大小
+/*
+ (function (doc, win) {
+ var docEl = doc,
+ resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+ recalc = function () {
+ var clientWidth = docEl.body.clientWidth;
+ if (!clientWidth) return;
+ docEl.documentElement.style.fontSize = 10 * (clientWidth / 375) + 'px';
+ };
+
+ if (!doc.addEventListener) return;
+ win.addEventListener(resizeEvt, recalc, false);
+ doc.addEventListener('DOMContentLoaded', recalc, false);
+ })(document, window);*/
+
+(function(doc, win) {
+  var docEl = doc,
+    isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+    dpr = isIOS ? Math.min(win.devicePixelRatio, 3) : 1,
+    dpr = window.top === window.self ? dpr : 1, //被iframe引用时，禁止缩放
+    resizeEvt = "orientationchange" in window ? "orientationchange" : "resize";
+  docEl.documentElement.dataset.dpr = dpr;
+  var recalc = function() {
+    var width = docEl.body.clientWidth;
+
+    if (width / dpr > 750) {
+      width = 750 * dpr;
+    }
+
+    docEl.documentElement.dataset.width = width;
+    docEl.documentElement.dataset.percent = 200 * (width / 750);
+    var fz = 200 * (width / 750);
+    docEl.documentElement.style.fontSize = 200 * (width / 750) + "px";
+    var realfz =
+      ~~(
+        +window
+          .getComputedStyle(document.getElementsByTagName("html")[0])
+          .fontSize.replace("px", "") * 10000
+      ) / 10000;
+    if (fz !== realfz) {
+      document.getElementsByTagName("html")[0].style.cssText =
+        "font-size: " + fz * (fz / realfz) + "px";
+    }
+
+    docEl.body.style.fontSize = "14px";
+    var list = document.querySelectorAll("[base-on-rem]");
+    for (var i = 0; i < list.length; i++) {
+      list[i].removeAttribute("base-on-rem");
+    }
+    $(".need_js_height").css(
+      "height",
+      Math.floor((width - 20) / 2 * 600 / 531) + "px"
+    );
+    $(".need_js_height_seckill").css(
+      "height",
+      Math.floor((width - 25) / 2 * 362 / 350) + "px"
+    );
+  };
+  recalc();
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+})(document, window);
+
+try {
+  localStorage.setItem("isPrivateMode", "1");
+  localStorage.removeItem("isPrivateMode");
+  window.isPrivateMode = false;
+} catch (e) {
+  window.isPrivateMode = true;
+}
+if (!window.isPrivateMode && window.localStorage) {
+  var his = [];
+  if (sessionStorage.history) {
+    his = JSON.parse(sessionStorage.history);
+  }
+  his.push({ href: location.href, path: window.tj_path || "other" });
+  sessionStorage.history = JSON.stringify(his);
+}
+
+function setYCache(page, y) {
+  if (!window.isPrivateMode && window.sessionStorage) {
+    var y = y || window.window.scrollY;
+    var page = page || window.tj_page;
+    sessionStorage[page + "_y"] = y;
+  }
+}
+window.setYCache = setYCache;
+
+function getYCache(page) {
+  var y = null;
+  if (!window.isPrivateMode && window.sessionStorage) {
+    var page = page || window.tj_page;
+    y = sessionStorage[page + "_y"];
+  }
+  if (y) {
+    window.scrollTo(0, y);
+  }
+  return y;
+}
+window.getYCache = getYCache;
+
+function getGoodsListFromCache(p) {
+  var result = null;
+  if (!window.isPrivateMode && window.sessionStorage) {
+    var data = sessionStorage.getItem("goods_list_" + p);
+    var his = sessionStorage.getItem("history"),
+      historyList;
+    if (his) {
+      historyList = JSON.parse(his);
+    }
+    if (
+      data &&
+      historyList &&
+      historyList.length &&
+      historyList[historyList.length - 2] &&
+      historyList[historyList.length - 2].path == "detail"
+    ) {
+      result = JSON.parse(data);
+    }
+  }
+  return result;
+}
+
+function setGoodsListToCache(p, data) {
+  if (!window.isPrivateMode && window.sessionStorage) {
+    if (data && p) {
+      sessionStorage.setItem("goods_list_" + p, JSON.stringify(data));
+    }
+  }
+}
+window.getGoodsListFromCache = getGoodsListFromCache;
+window.setGoodsListToCache = setGoodsListToCache;
+
+//获取url参数
+function getUrlArgObject() {
+  var args = new Object();
+  var query = location.search.substring(1); //获取查询串
+  var pairs = query.split(","); //在逗号处断开
+  for (var i = 0; i < pairs.length; i++) {
+    var pos = pairs[i].indexOf("="); //查找name=value
+    if (pos == -1) {
+      //如果没有找到就跳过
+      continue;
+    }
+    var argname = pairs[i].substring(0, pos); //提取name
+    var value = pairs[i].substring(pos + 1); //提取value
+    args[argname] = unescape(value); //存为属性
+  }
+  return args; //返回对象
+}
+$(".groups_merchandise_title ul a").each(function(item, index) {
+  $(this).attr("data-href", $(this).attr("href"));
+  $(this).attr("href", "javascript:void(0);");
+});
+$(".groups_merchandise_title ul a").on("click", function() {
+  window.location.replace($(this).attr("data-href"));
+});
+
+// 头部标题栏
+(function() {
+  // 文章页、开店页
+  if (
+    location.pathname.indexOf("class_detail") !== -1 ||
+    (location.href.indexOf("index.php?c=ShopGoods&a=index&id=348") !== -1 &&
+      Units.isApp()) ||
+    (location.href.indexOf("index.php?c=ShopGoods&a=index&id=368") !== -1 &&
+      Units.isApp()) ||
+    location.href.indexOf("checkout.html") !== -1 ||
+    location.href.indexOf("reverse_group.html") !== -1 ||
+    location.href.indexOf("sign.html") !== -1 ||
+    location.href.indexOf("user_bonus.html") !== -1 ||
+    location.href.indexOf("index.php?c=points&a=index") !== -1 ||
+    location.href.indexOf("index.php?c=goods&a=collect_goods") !== -1 ||
+    location.href.indexOf("index.php?c=ShopGoods&a=index&id=623534") !== -1 ||
+    location.href.indexOf("/comment/") !== -1 ||
+    location.href.indexOf("/spread/") !== -1 ||
+    location.href.indexOf("/o-shipping-") !== -1 ||
+    (location.href.indexOf("/o-") !== -1 &&
+      location.href.indexOf("/o-s-") === -1) ||
+    location.href.indexOf("/index.php?m=default&c=live&a=reserve") !== -1 ||
+    location.href.indexOf("/index.php?c=points&a=points_history") !== -1 ||
+    location.href.indexOf("/index.php?c=points&a=prize_list") !== -1 ||
+    location.href.indexOf("/index.php?c=points&a=exchange_history") !== -1 ||
+    location.href.indexOf("/about.html") !== -1 ||
+    location.href.indexOf("/user_address.html") !== -1 ||
+    location.href.indexOf("/address.html?address_id=") !== -1 ||
+    location.href.indexOf("/index.php?m=default&c=userDetail&a=detail") !==
+      -1 ||
+    location.href.indexOf("/my_info.html") !== -1 ||
+    location.href.indexOf("/index.php?m=default&c=userDetail&a=edit") !== -1 ||
+    location.href.indexOf("/a-") !== -1 ||
+    location.href.indexOf("/grade-") !== -1 ||
+    location.href.indexOf("/address.html?action=add") !== -1 ||
+    location.href.indexOf("/index.php?c=points&a=exchange_prize") !== -1 ||
+    location.href.indexOf("/grade_done.html?goods_id=") !== -1 ||
+    location.href.indexOf("/book_check_info.html?address_id=") !== -1 ||
+    location.href.indexOf("/refund_new.html") !== -1 ||
+    location.href.indexOf("/refund-") !== -1 ||
+    location.href.indexOf("/refund_log-") !== -1 ||
+    location.href.indexOf("/orderComplain.html") !== -1 ||
+    location.href.indexOf("/index.php?c=points&a=points_rule") !== -1 ||
+    location.href.indexOf("/change_address.html?order_id=") !== -1 ||   // 修改发货地址 http://18686604386.davdian.com/change_address.html?order_id=30048170
+    location.href.indexOf("/change_address_list.html?order_id=") !== -1 ||   // 修改发货地址列表 http://18686604386.davdian.com/change_address_list.html?order_id=30048170
+    location.href.indexOf("/grade_append-") !== -1 ||
+    location.href.indexOf("/gift_book_address_list.html") !== -1 ||
+    location.href.indexOf("/gift_book_add_address.html") !== -1 ||
+    location.href.indexOf("/gift_book_edit_address.html") !== -1 ||
+    location.href.indexOf("/submit_gift_book_info.html") !== -1 ||
+    location.href.indexOf("/gift_book_check_info.html") !== -1 ||
+    location.href.indexOf("/vip_book_address_list.html") !== -1
+  ) {
+    // base_webpack.js
+    var version = null;
+    var scripts = document.body.querySelectorAll("script");
+    for (var i in scripts) {
+      if (
+        scripts[i].src &&
+        (scripts[i].src.indexOf("base.js") !== -1 ||
+          scripts[i].src.indexOf("orderList_comment_list.js") !== -1)
+      ) {
+        var result = /\/(\d+)\//.exec(scripts[i].src);
+        version = result && result[1];
+      }
+    }
+    if (version) {
+      var script = document.createElement("script");
+      var hostname_s = location.hostname;
+      if (hostname_s.indexOf("vyohui") > 0) {
+        script.src =
+          "//fe.vyohui.cn/wap/" + version + "/dist/base_title_webpack.js?v=3";
+      } else if (hostname_s.indexOf("bravetime") > 0) {
+        script.src =
+          "//fe.bravetime.net/wap/" +
+          version +
+          "/dist/base_title_webpack.js?v=3";
+      } else {
+        script.src =
+          "//5e.dvmama.com/wap/" +
+          version +
+          "/dist/base_title_webpack.js?v=3";
+      }
+
+      document.body.appendChild(script);
+    }
+  }
+})();
+
+// 分享统计
+var getDvdsid = function(){
+  var cookieList = document.cookie.split(";").filter(function(x) {
+    return x.indexOf("dvdsid") > -1;
+  });
+  var dvdsid = cookieList.length && cookieList[0].split("=")[1];
+    return Object.prototype.toString.call(dvdsid) === '[object String]' ? dvdsid : '';
+  }
+
+  var getUid = function(){
+    var sessionId = getDvdsid().substr(32, 7);
+    return sessionId ? parseInt(sessionId, 16) : '';
+  }
+
+  var getSession = function(){
+    return getDvdsid().substr(0, 32);
+  }
+
+  var getVisitorStatus = function(){
+    this.getDvdsid().substr(39, 1)
+  }
+
+var postStatisticsData = function postStatisticsData(opt, productionData, callback) {
+    var baseStatisticsData = {
+        "ip": "", //ip
+        "nxtime": "", //ng时间
+        "timestamp": Date.now(), //日志时间
+        "production": '1', //业务线 数据字典稍后定
+        "log_source": '1', //日志来源 数据字典稍后定
+        "user_agent": navigator.userAgent, //浏览器UA
+        "market": "", //来源市场
+        "uid": getUid(), //用户id
+        "session": getSession(), //session id
+        "status": getVisitorStatus(), //卖家状态 (0：游客 1:买家 3:卖家)
+        "device": "", //设备类型
+        "device_id": "", //设备号
+        "sys_version": "", //设备版本号
+        "resolution": window.screen.width + '*' + window.screen.height, //分辨率
+        "location": "", //当前位置
+        "app_version": "", //APP版本号
+        "action": '1', //操作action 数据字典稍后定，click，view，
+        "action_type": "1", //操作类型（元素）
+        "object_id": "", //操作对象id（url）
+        "production_data": {}
+    };
+    for (var i in opt) {
+        baseStatisticsData[i] = opt[i];
+    }
+    baseStatisticsData['production_data'] = productionData;
+    $.ajax({
+        url: '/appapi',
+        type: "post",
+        data: JSON.stringify(baseStatisticsData),
+        success: function success(result) {
+            if (result == "success_1") {
+                callback && callback();
+            }
+        }, error: function error() {}
+    });
+};
+
+var initShare = function initShare() {
+    var share_source = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+    window.tlShareCallback = function () {
+        postStatisticsData({ action_type: "0", production: "5" }, { share_source: share_source + "", source_url: location.href, share_type: "1" });
+    };
+    window.sendShareCallback = function () {
+        postStatisticsData({ action_type: "0", production: "5" }, { share_source: share_source + "", source_url: location.href, share_type: "2" });
+    };
+    window.QQShareCallback = function () {
+        postStatisticsData({ action_type: "0", production: "5" }, { share_source: share_source + "", source_url: location.href, share_type: "3" });
+    };
+    window.qZoneShareCallbackCancel = function () {
+        postStatisticsData({ action_type: "0", production: "5" }, { share_source: share_source + "", source_url: location.href, share_type: "4" });
+    };
+};
+
+// base.js的webpack版，可以使用组件
+(function(){
+  // base_webpack.js
+  var version = null;
+  var scripts = document.body.querySelectorAll("script");
+  for (var i in scripts) {
+    if (
+      scripts[i].src &&
+      (scripts[i].src.indexOf("/wap/") !== -1)
+    ) {
+      var result = /\/wap\/(\d+)\//.exec(scripts[i].src);
+      version = result && result[1];
+    }
+  }
+  if (version) {
+    var script = document.createElement("script");
+    var hostname_s = location.hostname;
+    if (hostname_s.indexOf("vyohui") > 0) {
+      script.src =
+        "//fe.vyohui.cn/wap/" + version + "/dist/base_webpack.js?v=1";
+    } else if (hostname_s.indexOf("bravetime") > 0) {
+      script.src =  "//fe.bravetime.net/wap/" + version + "/dist/base_webpack.js?v=1";
+    } else {
+      script.src = "//5e.dvmama.com/wap/" + version + "/dist/base_webpack.js?v=1";
+    }
+
+    document.body.appendChild(script);
+  }
+})();

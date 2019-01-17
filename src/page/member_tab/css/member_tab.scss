@@ -1,0 +1,436 @@
+@import "../../../common/css/util/all.scss";
+
+.app {
+  padding-bottom: 60px;
+}
+.padTop {
+  padding-bottom: 10px;
+}
+.sys-status {
+  position: fixed;
+  width: 100%;
+  max-width: 640px;
+  top: 0;
+  height: 20px;
+  background: white;
+  opacity: 0;
+  z-index: 11;
+  &.android {
+    background: #D9D9D9;
+  }
+}
+.dvd-service-com-title {
+  top: 20px;
+  z-index: 4 !important;
+}
+[v-cloak]{
+  display: none;
+}
+.top-banner {
+  position: relative;
+  .banner-pic {
+    position: relative;
+    width:100%;
+    height:r(292);
+    img {
+      display: block;
+      width:100%;
+      height:100%;
+      max-width: 100%;
+      object-fit: cover;
+    }
+  }
+  .pic-photo {
+    position: absolute;
+    left: r(9);
+    top:r(85);
+    width:r(55);
+    height:r(49);
+    .photo-pic {
+      position: absolute;
+      display: block;
+      left:r(10);
+      top:r(4);
+      width:r(39);
+      height:r(39);
+      border-radius:50%;
+    }
+    img {
+      display: inline-block;
+      width: 100%;
+      height:100%;
+      max-width: 100%;
+    }
+  }
+}
+/* 加入动态 */
+.join-message {
+  padding:r(10) r(30);
+  color: #E6D8BA;
+  font-size: r(12);
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.join-scroll {
+  position: absolute;
+  left:0;
+  right:0;
+  top:r(30);
+  height: r(17);
+  margin: r(10) auto;
+  text-align: center;
+  font-size: 0;
+  overflow: hidden;
+  z-index: 2;
+  .swiper-slide {
+    .text {
+      display: inline-block;
+      padding: 0 r(30);
+      max-width: r(335);
+      color: #E6D8BA;
+      @include height(r(17));
+      font-size: r(12);
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
+.goods-wapper {
+  padding:0 r(20);
+}
+/*商品列表*/
+.goods-list {
+  height:r(28);
+  align-content:center;
+  margin-top: 20px;
+  overflow: hidden;
+  .title {
+    float: left;
+    font-size: r(20);
+    color: #333333;
+    height:r(28);
+    line-height: r(28);
+  }
+  .num-right {
+    float: right;
+    border-radius: r(15);
+    color: #AE8438;
+    background: #E6E6E6;
+    text-align: center;
+    margin-top: r(6.5);
+    .icon {
+      display: inline-block;
+      height:r(15);
+      line-height: r(14);
+      padding:0 r(5);
+      vertical-align: middle;
+      font-size: 0;
+      img {
+        display: inline-block;
+        width:r(6);
+        vertical-align:middle;
+      }
+      .num-bg {
+        display: inline-block;
+        vertical-align: middle;
+        width:r(7);
+      }
+      span {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: r(2);
+        font-size: r(9);
+      }
+    }
+    .is_Android {
+      height:r(15);
+      line-height: r(17);
+      img {
+        display: inline-block;
+        width:r(6);
+        vertical-align:middle;
+        margin-top:r(-2);
+      }
+    }
+  }
+}
+/*图片*/
+.good-class-pic {
+  width:r(335);
+  height:r(140);
+  img {
+    display: block;
+    width:100%;
+    height:100%;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: r(8);
+  }
+}
+.goods-message {
+  font-size: r(11);
+  color: #666666;
+  line-height: r(16);
+  margin: r(2) 0 r(10);
+}
+.list-parent {
+  position: relative;
+  font-size: 0;
+  border-radius:r(8);
+  background: #ffffff;
+  z-index: 8;
+  //padding:r(10);
+}
+.list-wapper {
+  position: relative;
+  display: inline-block;
+  width:50%;
+  z-index: 1;
+  box-sizing:border-box;
+
+  .list:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: '';
+    width: 1px;
+    height:200%;
+    border-right: 1px solid #E1E1E1;
+    transform: scale(.5, .5);
+    transform-origin: left top;
+    box-sizing: border-box;
+    z-index: 2;
+  }
+  &:nth-of-type(2n) {
+    .list {
+      &:before {
+        border-right:none;
+      }
+    }
+  }
+  &:nth-last-child(2) {
+    .rule-line {
+      background: none;
+    }
+  }
+  &:nth-last-child(1) {
+    .rule-line {
+      background: none;
+    }
+  }
+}
+
+.list {
+  box-sizing:border-box;
+  display: block;
+  height:r(243);
+  padding: r(10);
+  .list-pic {
+    position: relative;
+    width: r(147);
+    height: r(147);
+    img {
+      display: block;
+      width:100%;
+      height:100%;
+      max-width: 100%;
+    }
+    .buy-icon {
+      position: absolute;
+      left:0;
+      bottom: 0;
+      display: inline-block;
+      width:r(62);
+      height:r(20);
+      background: url(//9i.dvmama.com/free/2017816/one_buy.png) no-repeat;
+      background-size: r(62) r(20);
+      color: #ffffff;
+      font-size: r(12);
+      line-height: r(20);
+      text-align: center;
+    }
+  }
+  p {
+    color: #333333;
+    font-size: r(13);
+    height:r(15);
+    line-height: r(15);
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    margin:r(10) 0;
+  }
+}
+.price {
+  margin-bottom: r(5);
+  .shop-price {
+    display: inline-block;
+    color: #666666;
+    em {
+      font-size: r(12);
+      margin-right: 2px;
+      font-style: normal;
+    }
+    .price-o {
+      font-size: r(16);
+    }
+    .price-t{
+      font-size: r(14);
+    }
+  }
+  .day-price {
+    display: inline-block;
+    margin-left: r(5);
+    em {
+      font-style: normal;
+      margin:0 2px;
+    }
+    span,
+    em {
+      font-size: r(8);
+      color: #999999;
+    }
+  }
+}
+.content {
+  position: relative;
+}
+.save-money {
+  position: absolute;
+  left:0;
+  color: #CDAF78;
+  font-size: r(14);
+  height:r(20);
+  line-height: r(20);
+}
+.more {
+  position: absolute;
+  right:r(-1);
+  top:r(-25);
+  width:r(81);
+  height:r(42);
+  line-height: r(25);
+  font-size: r(11);
+  color: #666666;
+  text-align: center;
+  background: url(//9i.dvmama.com/free/2017816/more.png) no-repeat center;
+  background-size:r(81) r(42);
+  vertical-align: middle;
+  z-index:-2;
+  span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  img {
+    width:r(4);
+    height:r(9);
+    margin-left: r(5);
+    vertical-align: middle;
+  }
+}
+.androidMore {
+  img {
+    margin-bottom:r(1);
+  }
+}
+.rule-line,
+.m-splice-line {
+  width:200%;
+  height:1px;
+  background: #E1E1E1;
+  transform: scale(0.5);
+  transform-origin: top left;
+  overflow: hidden;
+}
+.m-splice-line {
+  margin:r(10) 0;
+}
+/*一起赚钱*/
+.make-money-goods {
+  padding:r(10);
+}
+.m-m-goods {
+  position: relative;
+  overflow: hidden;
+  .pic-earn-money {
+    width:r(315);
+    height:r(120);
+    img {
+      display: block;
+      width: 100%;
+      height:100%;
+      max-width: 100%;
+      object-fit:cover;
+    }
+  }
+  .m-pic-left {
+    float: left;
+    width: r(120);
+    height:r(120);
+    img {
+      display: block;
+      width: 100%;
+      height:100%;
+      max-width: 100%;
+    }
+  }
+  .m-right {
+    float: right;
+    width:r(185);
+    vertical-align: top;
+    .m-title {
+      height:r(40);
+      font-size: r(14);
+      color: #333;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      line-height: r(20);
+    }
+    .m-price{
+      margin:r(10) 0 r(10);
+      .m-shop-price {
+        display: inline-block;
+        color: #666666;
+        em {
+          font-size: r(12);
+          font-style: normal;
+          margin-right: 2px;
+        }
+        .price-o {
+          font-size: r(16);
+        }
+        .price-t {
+          font-size: r(14);
+        }
+      }
+      .m-day-price {
+        display: inline-block;
+        margin-left: r(5);
+        em {
+          font-style: normal;
+          margin-right: 2px;
+        }
+        span,em {
+          font-size: r(8);
+          color: #999999;
+          text-decoration:line-through;
+        }
+      }
+
+    }
+    .m-save-money {
+      position: absolute;
+      right:0;
+      bottom:0;
+      color: #CDAF78;
+      font-size: r(14);
+      height:r(20);
+      line-height: r(20);
+    }
+  }
+
+}

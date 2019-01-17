@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>馆配清单页面</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <meta name="viewport" content="width=device-width, viewport-fit=cover">
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/library_config_list/css/library_config_list.css[[v]]">
+</head>
+
+<body>
+  <div class="app" v-cloak v-if="response" :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}" :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+    <!--标题-->
+    <dvd-service-com-title title="馆配清单" back></dvd-service-com-title>
+    <div class="goods_in_cart">
+      <div class="reduce_item_container">
+        <div class="goods_item_s" v-for="(goods,index) in response.goodsList" :key="index">
+          <div class="good_item checked">
+            <div class="icon_container">
+              <i @click="checkeGoods(goods)" class="icon" :class="{'dav_icon_choice_selected_40_40':goods.checked,'dav_icon_choice_no_selected_40_40':!goods.checked}"></i>
+              <!-- <i v-else class="icon dav_icon_choice_no_selected_40_40"></i> -->
+            </div>
+            <!--商品图-->
+            <a class="pic_container" :href="goods.command.content">
+              <img class="good_img" :src="goods.goods_thumb">
+              <span class="sold_out" v-if="goods.goods_stocks<=0">已抢光</span>
+              <span class="sold_out" v-if="goods.is_out">已失效</span>
+              <span class="sold_out" v-if="!goods.is_on_sale">已下架</span>
+            </a>
+            <!-- 右侧 -->
+            <div class="right_container">
+              <a class="good_title" :href="goods.command.content" v-text="goods.goods_name"></a>
+              <div class="goods_infos_wrap">
+                <div class="cart_format" :class="{ cart_format_h: goods.goods_tags && goods.goods_tags.length }">
+                  <span v-for="(tag,index) in goods.goods_tags" :key="index" v-text="tag.tag_name"></span>
+                </div>
+                <!--价格-->
+                <div class="good_price dav-color-price">
+                  <span class="dav-red s_price_number">
+                    <em>￥</em>{{goods.market_price}}</span>
+                </div>
+                <!--数量-->
+                <div class="good_number_container gray">
+                  数量：1
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 加购下单 -->
+    <div v-if="+response.order_amount < +response.min_money" class="reduce_item_container select_more">
+      <a class="reduce_item_title" href="/admin_topic.html?topicId=24091">
+        已选{{response.checked_number || 0}}册，还差{{(response.min_money - response.order_amount).toFixed(2)}}元，才能下单
+        <span class="icon_r_container">
+          <i class="icon dav_icon_dayuhao_10_22 dav-border-red dav-border-red"></i>
+        </span>
+      </a>
+    </div>
+    <!-- 底部结算 -->
+    <div class="cart_bottom">
+      <div class="select_all" @click="checkAll">
+        <i class="icon" :class="{'dav_icon_choice_selected_40_40': allCheck,'dav_icon_choice_no_selected_40_40':!allCheck}"></i> 全选 </div>
+      <div class="price_con">
+        <div class="left_price">
+          <span class="price_text" style="font-weight: bold">实际支付:</span>
+          <span class="price_number price_number_after">￥{{response.order_amount || 0}} </span>
+        </div>
+        <div class="reduce_price">
+          <span class="other_info">总计:￥{{response. market_amount || 0}}
+            <span v-if="visitor_status === 3" class="ml_10">会员返:￥{{response.total_income}}</span>
+          </span>
+        </div>
+      </div>
+      <div class="pay_button_container">
+        <div class="dav-btn2 btn-red" @click="pay">
+          <span class="text">结算({{response.checked_number}})
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <!--<script src="[[vendor]]/swiper/swiper-3.3.1.min.js"></script>-->
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/library_config_list/js/library_config_list.js[[v]]"></script>
+</body>
+
+</html>

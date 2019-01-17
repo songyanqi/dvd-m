@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">
+  <link rel="stylesheet" href="[[static]]/page/act_1018_reserve/css/act_1018_reserve.css[[v]]">
+</head>
+<body>
+  <div class="app">
+    <!--标题-->
+    <com-top-title back title="商品预定" home></com-top-title>
+
+    <com-act-reserve :response = "response"></com-act-reserve>
+
+    <!--返回顶部-->
+    <com-to-top-icon></com-to-top-icon>
+  </div>
+
+
+  <script crossorigin="anonymous" integrity="sha256-axCA4zZfWCHK3Voqm20kNdIvm0vPCz4KTRUYPVNadLA=" src="[[vendor]]/swiper/swiper-3.3.1.min.js"></script>
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/act_1018_reserve/js/act_1018_reserve.js[[v]]"></script>
+</body>
+</html>
+

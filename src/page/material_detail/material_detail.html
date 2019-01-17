@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>素材详情</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/material_detail/css/material_detail.css[[v]]">
+</head>
+<body>
+  <div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+    <!--标题-->
+    <dvd-service-com-title title="素材详情" back home></dvd-service-com-title>
+
+
+    <div class="content-box">
+      <!--多图和视频-->
+      <div class="vidio-box-list">
+        <div class="container-wapper">
+          <div class="container" v-for="(list,index) in materials" v-if="!materialId || materialId == list.materialId">
+
+            <template>
+              <div class="title-message" v-if="list.materialType == 3">
+                <div>
+                  <h3>
+                    <span>推广文案</span>
+                    <span>(长按复制后可分享)</span>
+                  </h3>
+                  <h4 v-html="list.copywriting"></h4>
+                </div>
+              </div>
+              <p v-else v-html="list.copywriting"></p>
+            </template>
+            <!--materialType==1 -->
+            <div class="more-pic-box" v-if="list.materialType == 1">
+
+              <!--多张图片展示  实现大图预览 start-->
+              <template v-for="(item,index) in list.imageList">
+                <div class="more-pic-type" @click.stop="viewBigPic(index,list.imageList)">
+                  <img v-lazy="item.imgOriginal">
+                </div>
+              </template>
+              <!--多张图片展示  实现大图预览 end-->
+            </div>
+            <!--判断如果没有materialId 显示，或者有materialId且等于list.materialId 显示-->
+            <!--materialType==2如果是视频-->
+            <div class="vidio-img" v-if="list.videoUrl && list.materialType == 2 ">
+              <video-play :video-url="list.videoUrl"
+                          :poster="list.videoImg"></video-play>
+            </div>
+
+            <!--下载分享-->
+            <template v-if="!materialId">
+              <div class="share-btn" v-if="list.materialType != 3">
+                <span class="download-icon" @click="toDownload(index+1,list)" v-if="ua.isDvdApp()"><i></i>下载</span>
+                <span class="share-icon" @click="toShare(index+1,list)"><i></i>分享</span>
+              </div>
+            </template>
+
+          </div>
+
+        </div>
+
+      </div>
+      <!--微信大图预览 文字 视频 与 多图-->
+      <template v-if="previewItem.materialType == 2">
+        <div class="preview-big-picture" v-if="opePereview">
+          <div class="close-preview" @click="closePreview"></div>
+          <!--视频链接-->
+          <div class="preview-video">
+            <div class="video-content" v-html="previewItem.copywriting"></div>
+            <span>视频链接：</span>
+            <div class="video-link">{{previewItem.videoUrl}}</div>
+            <p class="text">（长按复制文字和视频链接）</p>
+            <p class="text-cont">体验更便捷的分享，可登录app进行操作</p>
+          </div>
+        </div>
+      </template>
+      <template v-if="previewItem.materialType == 1">
+        <div class="preview-big-picture" v-if="opePereview">
+          <div class="close-preview" @click="closePreview"></div>
+          <!--多图-->
+          <div class="preview-more-pic">
+            <div class="pic-content" v-html="previewItem.copywriting"></div>
+            <!--组件-->
+            <com-swiper-item v-if="previewItem.imageList.length" :image-list="previewItem.imageList"></com-swiper-item>
+            <!--组件-->
+            <p class="text">（长按图片保存）</p>
+            <p class="text-cont">体验更便捷的分享，可登录app进行操作</p>
+          </div>
+        </div>
+      </template>
+
+    </div>
+
+    <!--返回顶部-->
+    <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <script crossorigin="anonymous" integrity="sha256-axCA4zZfWCHK3Voqm20kNdIvm0vPCz4KTRUYPVNadLA=" src="[[vendor]]/swiper/swiper-3.3.1.min.js"></script>
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/material_detail/js/material_detail.js[[v]]"></script>
+</body>
+</html>

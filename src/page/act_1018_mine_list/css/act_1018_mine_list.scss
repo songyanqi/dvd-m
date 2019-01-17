@@ -1,0 +1,212 @@
+@import "../../../common/css/common.scss";
+
+body {
+  background-color:#F1F1F1;
+}
+.app {
+  min-height: 100vh;
+
+  .text-special {
+    color: #FF4A7D;
+  }
+
+  [v-cloak] {
+    display: none !important;
+  }
+
+  //我的预定奖励
+  .prize-head {
+    padding: r(10);
+    background: linear-gradient(to right, #FF6389, #FF3857); /* 标准的语法 */
+
+    .total-prize {
+      text-align:center;
+      height: r(41);
+      line-height:r(50);
+      color: #fff;
+      font-size: r(14);
+      padding-bottom: r(15);
+
+      .money-icon {
+        font-size: r(18);
+      }
+      .prize-detail {
+        font-size: r(24);
+      }
+    }
+
+    .prize-tip {
+      padding:r(10);
+      background-color:rgba(255,255,255,.2);
+      position:relative;
+      border-radius:r(4);
+      box-sizing:border-box;
+
+      &:after {
+        content:'';
+        position:absolute;
+        top:0;
+        left:0;
+        height:200%;
+        width:200%;
+        border:1px solid rgba(255,255,255,.4);
+        transform-origin:0 0;
+        transform:scale(0.5,0.5);
+        border-radius:r(8);
+        box-sizing:border-box;
+      }
+
+      .tip-title {
+        font-size:r(14);
+        @include height(r(20));
+        color:#fff;
+        text-align:center;
+        padding-bottom:r(7);
+      }
+
+      .tip-detail {
+        li {
+          font-size:r(12);
+          color:#fff;
+          line-height:r(17);
+
+          span {
+            display:inline-block;
+            padding-left:r(12);
+          }
+        }
+        li:not(:last-child) {
+          padding-bottom:r(5);
+        }
+      }
+    }
+  }
+
+  .friend-list {
+    box-sizing:border-box;
+    position:relative;
+    // color:#333;
+    color: #FF4A7D;
+
+    .friend-show {
+      @include height(r(25));
+      padding:r(9.5) 0 0 r(10);
+
+      .user-photo {
+        width: r(25);
+        height: r(25);
+        margin-right: r(6);
+        border-radius: 50%;
+        float: left;
+      }
+
+      .user-name {
+        display: inline-block;
+        @include height(r(25));
+        font-size: r(13);
+        max-width: r(112);
+        @include ellipsis();
+      }
+    }
+    .list-text {
+      font-size:r(12);
+      padding:r(4) 0 r(10) r(10);
+      line-height:r(17);
+    }
+  }
+
+  //我预约的商品
+  .goods-list {
+    overflow:hidden;
+    padding-bottom:r(34);
+
+    .list-item {
+      width:r(172.5);
+      background-color:#fff;
+      float:left;
+      margin:r(10) 0 0 r(10);
+    }
+
+    a {
+      display:block;
+    }
+    .goods-pic {
+      width:r(172.5);
+      height:r(172.5);
+    }
+    .start-time {
+      font-size:r(10);
+      padding:0 r(10) r(12) r(10);
+    }
+    .goods-text{
+      font-size:r(12);
+      @include height(r(31));
+      padding:0 r(10) r(3.5) r(10);
+
+      .text-price {
+        font-size:r(16);
+      }
+
+      .from-app {
+        font-size: r(10);
+        float:right;
+        color:#ccc;
+      }
+    }
+  }
+  .year-list {
+    background: #fff;
+    padding: 1px 0;
+    .yearList-item {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      padding: 0.1rem;
+      background: #fff2e5;
+      margin: 0.1rem;
+      color: #b55a2b;
+      font-size: 0.12rem;
+      .yearListLeft {
+        position: relative;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+        font-size: 0.14rem;
+        .list-num,.list-date {
+          line-height: 0.16rem;
+        }
+      }
+      .yearListLeft:after {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        border-right: 1px solid #b55a2b;
+        right: 0;
+        bottom: 0;
+      }
+      .list-type {
+        margin: 0.1rem 0.1rem 0.1rem 0;
+      }
+      .yearListRight {
+        font-size: 0.18rem;
+        min-width: 0.6rem;
+        text-align: center;
+        // border-left: 1px solid #b55a2b;
+      }
+    }
+  }
+  .noMore {
+    padding: 0.1rem 0;
+    background: #fff;
+    text-align: center;
+    color: #666;
+  }
+}
+.no_wonka {
+  padding: 0.1rem;
+  text-align: center;
+}

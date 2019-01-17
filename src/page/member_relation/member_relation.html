@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>果敢时代大V店</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/member_relation/css/member_relation.css[[v]]">
+</head>
+
+<body>
+  <div class="app" v-cloak v-if="statisticData" :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}" :style="{minHeight: document.documentElement.clientHeight + 'px'}">
+    <div class="wrap">
+      <div class="card statistic-card">
+        <header class="header">经统计</header>
+        <h3 class="card-title">{{title}}</h3>
+        <p v-for="(item,key) in statisticData" :key="key">{{item}}</p>
+        <a href="/admin_topic.html?topicId=21062">非会员转化为会员秘籍，点击查看>>></a>
+        <div class="btn-box">
+          <span class="btn-tip">{{btnFlag ? '关闭此通知' : '打开此通知'}}</span>
+          <span class="btn" :class="{'off': !btnFlag}" @click="changeBtnFlag"></span>
+        </div>
+      </div>
+      <template v-if="userList.length" v-for="(item,index) in userList">
+        <div v-if="item.flag === 1" class="title" :key="index">{{item.name}}</div>
+        <dl v-if="item.flag === 2" class="card user-card" :key="index">
+          <dt class="user-img">
+            <img :src="item.avatar" alt="">
+          </dt>
+          <dd class="info">
+            <div class="phone">
+              <span class="phone-number">{{item.mobile_phone}}</span>
+              <span class="copy-btn" @click="copyPhoneNumber(item)">复制手机号</span>
+            </div>
+            <div class="user-name">{{item.wx_nickName}}</div>
+            <div class="sub-info">
+              <span v-if="item.type === 3">总计购买{{item.money_paid}}元</span>
+              <span v-if="item.type !== 3">注册时间: {{item.time}}</span>
+              <span class="elide-btn" :class="{'null': item.invite_status}" @click="changeInvite(item)">{{item.invite_status ? '恢复通知' : '忽略此人'}}</span>
+            </div>
+          </dd>
+        </dl>
+      </template>
+      <p class="no-more-tip" v-show="userList.length && isMore">没有更多了～</p>
+      <div class="no-data-tip" v-show="!userList.length">
+        <img src="//9i.dvmama.com/free/2018/05/17/no_data.png" alt="">
+        <p>15天未有用户通过您的店铺注册或购买，好商品记得分享哦</p>
+      </div>
+    </div>
+    <dvd-service-com-go-page-top></dvd-service-com-go-page-top>
+    <transition name="fade">
+      <div class="mask" v-show="copyFlag" @click="copyFlag = false"></div>
+    </transition>
+    <transition name="slide">
+      <ul class="copy-list" v-show="copyFlag">
+        <li class="phone">{{phone}}</li>
+        <li class="tip">长按上方手机号复制</li>
+        <li @click="copyFlag = false">取消</li>
+      </ul>
+    </transition>
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/member_relation/js/member_relation.js[[v]]"></script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+	<link rel="stylesheet" href="[[static]]/page/act_share_card/css/act_share_card.css[[v]]">
+</head>
+<body>
+	<div class = "app" :class = "{ appTop: !isapp }">
+		<com-top-title back title="集PINK卡，瓜分100万返现" home share></com-top-title>
+
+		<div class = "cardInfo" v-if = "data" style="display: none;" :style="{display: data ? null : 'none'}">
+			<div class = "big_card">
+				<div class = "dogWrapper">
+					<!-- 求 是求或者赠的时候狗往下移 -->
+					<img class = "giveIcon" :src="isgiveLBtn" alt="">
+				</div>
+				<img class = "cardNav" :src="currentCard" alt="">
+			</div>
+			<!-- 昵称 -->
+			<div class = "nickCont">
+				<div class = "nickPic">
+						<img :src="data.data.avatar" alt="">
+				</div>
+				<span class = "nickName"><span class = "nickLen">{{ data.data.nickName }}</span><span v-if = "data.data.status == '2'">赠</span><span v-else>求</span>Pink卡啦</span>
+			</div>
+			<!-- 向好友求救活着赠送按钮 -->
+			<div class = "operateCont">
+				<div @click = "handleOperate" class = "operateBtn">{{ isHelpBtn }}</div>
+			</div>
+			<div class = "collectCont">
+				<div @click = "hanleLookCard" class = "my_time">我的PINK卡</div>
+				<div @click = "hanleGoMain">去主会场看看</div>
+			</div>
+		</div>
+	</div>
+
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]//page/act_share_card/js/act_share_card.js[[v]]"></script>
+</body>
+</html>

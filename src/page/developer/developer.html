@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <title>H5开发者设置</title>
+  <link rel="stylesheet" href="[[static]]/page/developer/css/developer.css[[v]]">
+</head>
+<body>
+  <div class="app" v-cloak>
+    <!--标题-->
+    <com-top-title back title="H5开发者中心" home></com-top-title>
+
+    <!--选项-->
+    <ul class="options">
+      <li :class="{active: debug.checkDebugFlag()}" @click="debugClick">
+        <template v-if="debug.checkDebugFlag()">关闭</template><template v-else>开启</template>debug控制台
+      </li>
+      <li>设置环境（暂未开放）</li>
+      <li :class="{active: debug.checkDeveloperFlag()}" @click="developerClick">
+        <template v-if="debug.checkDeveloperFlag()">关闭</template><template v-else>开启</template>开发者模式
+      </li>
+    </ul>
+
+    <!--返回顶部-->
+    <com-to-top-icon></com-to-top-icon>
+  </div>
+
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/developer/js/developer.js[[v]]"></script>
+</body>
+</html>

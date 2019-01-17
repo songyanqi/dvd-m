@@ -1,0 +1,12 @@
+@import "../../../common/css/util";
+
+.app {
+  background: white;
+  .ui-list{
+    padding: 0 r(10);
+  }
+  /* 安卓hack */
+  &.android {
+
+  }
+}

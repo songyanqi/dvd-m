@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>大V店养家计划</title>
+	@@include('node_modules/dvd-base-build/html-inc/head.inc')
+	<!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css"> -->
+	<link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+	<link rel="stylesheet" href="[[static]]/page/big_gift_introduce_details/css/big_gift_introduce_details.css[[v]]">
+</head>
+<body class="loaded">
+	<div class="app" v-cloak
+		 :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos(), earn:fromEarn}"
+		 :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}" v-if=" arr!='' ">
+		<!--标题-->
+		<dvd-service-com-title title="养家计划" back :back-click="(inApp&&fromEarn)?closePage:null" >
+		</dvd-service-com-title>
+		<div class="img_container">
+			<img @load="loadedNum++" class="main_img" src="[[static]]/page/big_gift_introduce_details/img/img1.png"/>
+			<div class="imgHeader">
+				<div>{{arr.sellerName}}邀请你加入大V店推出的<br>“养家计划”</div>
+				<ul>
+					<li>￥</li>
+					<li>398</li>
+					<li>获得以下权益</li>
+				</ul>
+			</div>
+			<div class="special_spacing">
+				<img @load="loadedNum++" class="main_img" src="[[static]]/page/big_gift_introduce_details/img/img2.png"/>
+			</div>
+			<!--<template v-if=" arr.page_act_pic=='' ">-->
+				<!--<div class="sureClickImg 111">-->
+					<!--<img @load="loadedNum++" v-show="false" class="main_img firstImg" :src="arr.page_act_pic"/>-->
+				<!--</div>-->
+			<!--</template>-->
+			<template v-if=" arr.page_act_text!='' ">
+				<div class="sureClickImg" v-if="arr.page_act_pic">
+					<img @load="loadedNum++" class="main_img firstImg" @click="sureClick" :src="arr.page_act_pic"/>
+				</div>
+			</template>
+			<template v-if=" arr.page_act_text=='' && arr.page_act_pic!='' ">
+				<div class="sureClickImg">
+					<img @load="loadedNum++" class="main_img firstImg" :src="arr.page_act_pic"/>
+				</div>
+			</template>
+
+			<img @load="loadedNum++" class="main_img" src="[[static]]/page/big_gift_introduce_details/img/img4.png"/>
+
+			<div class="bagList">
+				<ul>
+					<li v-for="item in imgArr">
+						<a :href="'/'+item.goods_id+'.html?rp=introduce_detail&rl=goods_detail'">
+							<img @load="loadedNum++" class="main_img" :src="item.image"/>
+							<div>{{item.title}}</div>
+							<div>选这款</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<img @load="loadedNum++" class="main_img threeImg" src="[[static]]/page/big_gift_introduce_details/img/img5.png"/>
+			<div class="notes">
+				<div class="notesTitle">礼包订购须知</div>
+				<ul>
+					<li v-for="item in notesArr">{{item}}</li>
+				</ul>
+			</div>
+			<img @load="loadedNum++" class="main_img fourImg" src="[[static]]/page/big_gift_introduce_details/img/img8.png"/>
+
+			<div class="gift_btn" v-if="isSeller" @click="invite">
+				<template v-if="position==0">
+					<img @load="loadedNum++" class="main_img" src="[[static]]/page/big_gift_introduce_details/img/img13.png"/>
+				</template>
+				<template v-if="position==1">
+					<img @load="loadedNum++" class="main_img" src="[[static]]/page/big_gift_introduce_details/img/img13.png"/>
+				</template>
+				<template v-if="position==2">
+					<img @load="loadedNum++" class="main_img" src="[[static]]/page/big_gift_introduce_details/img/img14.png"/>
+				</template>
+				<template v-if="position==3">
+					<img @load="loadedNum++" class="main_img" src="[[static]]/page/big_gift_introduce_details/img/img11-1.png"/>
+				</template>
+			</div>
+			<div class="gift_btn invite" v-else @click="join">
+				<img @load="loadedNum++" class="main_img" src="[[static]]/page/big_gift_introduce_details/img/img12.png"/>
+			</div>
+
+			<div class="fixedBg" v-show="isShow">
+				<img src="[[static]]/page/big_gift_introduce_details/img/img9.png">
+				<div class="fixedBgContent">
+					<div class="fixedBgContent_spacing">{{arr.page_act_text}}</div>
+					<img src="[[static]]/page/big_gift_introduce_details/img/img10.png" @click="closeFixedBg">
+				</div>
+			</div>
+		</div>
+
+		<nav-footer :position="position" v-if="fromEarn"></nav-footer>
+	</div>
+
+	@@include('node_modules/dvd-base-build/html-inc/body.inc')
+	<!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+	<script src="[[static]]/common/js/common.js[[v]]"></script>
+	<script src="[[static]]/page/big_gift_introduce_details/js/big_gift_introduce_details.js[[v]]"></script>
+</body>
+</html>

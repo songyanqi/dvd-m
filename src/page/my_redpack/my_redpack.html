@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[vendor]]/swiper/4.0.7/swiper.min.css">
+  <link rel="stylesheet" href="[[static]]/page/my_redpack/css/my_redpack.css[[v]]">
+</head>
+<body>
+<div class="app" v-cloak>
+  <!--标题-->
+  <com-top-title back title="我的红包">
+    <a slot="right" href="/t-490.html"><span class="declare">红包说明</span></a>
+  </com-top-title>
+
+  <!--菜单-->
+  <div class="menu" ref="menu">
+    <span class="btn" :class="{active: listIndex === 0}" @click="changeRedpackList(0);">
+      <span class="item">未使用<span class="num"> ({{usableNum || 0}})</span></span>
+    </span>
+    <span class="btn" :class="{active: listIndex === 1}" @click="changeRedpackList(1);">
+      <span class="item">已使用<span class="num"> ({{usedNum || 0}})</span></span>
+    </span>
+    <span class="btn" :class="{active: listIndex === 2}" @click="changeRedpackList(2);">
+      <span class="item">已过期<span class="num"> ({{expiredNum || 0}})</span></span>
+    </span>
+  </div>
+
+  <!--红包列表横滑容器-->
+  <div class="swiper-container h-swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" v-for="(item, i) in redpackList">
+        <!--列表-->
+        <dvd-service-com-paging-list :class="'list-' + i"
+                                     ref="paging"
+                                     :list-height="listHeight"
+                                     :list-length="item.length"
+                                     :get-data="getData"
+                                     :is-load-first-page="false"
+                                     none-tip="还没有红包哟~">
+          <ul slot="list">
+            <!--提示消息-->
+            <div class="tips" v-if="i === 2">只显示7天内过期的红包</div>
+            <!--红包项-->
+            <li v-for="(item, j) in item">
+              <!--金额-->
+              <div class="num"><span class="symbol">￥</span>{{item.bonusMoney}}</div>
+              <!--条件-->
+              <div class="condition">满{{item.minAmount}}元可用</div>
+              <!--名称-->
+              <div class="name">{{item.bonusTitle}}</div>
+              <!--描述-->
+              <div class="desc">{{item.limitDesc}}</div>
+              <!--有效期间-->
+              <div class="valid-period">{{date.format(item.beginTime + '000', 'yyyy.MM.dd')}} - {{date.format(item.endTime + '000', 'yyyy.MM.dd')}}</div>
+              <!--剩余有效天数-->
+              <div class="remain-valid-days" v-if="i === 0 && (item.endTime - response.sys_time) < 3600 * 24 * 3 && item.endTime - response.sys_time > 0">剩{{Math.ceil((item.endTime - response.sys_time) / 3600 / 24)}}天</div>
+              <!--状态图标-->
+              <img class="state-icon" v-if="i === 1 && item.receivedStatus === 1" src="[[static]]/page/my_redpack/img/redpack-used.png">
+              <img class="state-icon" v-if="i === 1 && item.receivedStatus === 2" src="[[static]]/page/my_redpack/img/redpack-given.png">
+              <img class="state-icon" v-if="i === 2" src="[[static]]/page/my_redpack/img/redpack-overtime.png">
+              <!--顾问赠送按钮-->
+              <div class="ui-given-btn" v-if="item.isShare === 2 && i === 0" :class="{'ui-given-btn-s':is_small === true}" @click="givenRedPack(item.bonusId)">赠送</div>
+            </li>
+          </ul>
+        </dvd-service-com-paging-list>
+      </div>
+    </div>
+  </div>
+
+  <!--返回顶部-->
+  <com-to-top-icon></com-to-top-icon>
+</div>
+
+
+<script src="[[vendor]]/swiper/4.0.7/swiper.min.js"></script>
+@@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+<script src="[[static]]/page/my_redpack/js/my_redpack.js[[v]]"></script>
+</body>
+</html>

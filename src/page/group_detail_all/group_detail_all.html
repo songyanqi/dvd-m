@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>团成员列表</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/group_detail_all/css/group_detail_all.css[[v]]">
+</head>
+<body>
+  <div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+    <!--标题-->
+    <dvd-service-com-title title="团成员列表" bottom-line back home share></dvd-service-com-title>
+    <!--全部成员列表-->
+    <ul class="all-group-people">
+      <template v-for="(member, i) in memberList">
+        <li>
+          <group-head-portrait :type="member.parendId === '0' ? 'leader' : 'normal'" :src="member.founderAvater"></group-head-portrait>
+          <span class="nickname">{{member.founderName}}</span>
+          <span class="begin-time">{{member.uTime}} {{member.parendId === '0' ? '开团' : '参团'}}</span>
+        </li>
+        <div class="split-line"></div>
+      </template>
+    </ul>
+
+    <!--返回顶部-->
+    <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/group_detail_all/js/group_detail_all.js[[v]]"></script>
+</body>
+</html>

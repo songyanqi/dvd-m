@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>养家大礼包</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/big_gift_select/css/big_gift_select.css[[v]]">
+</head>
+<body>
+  <div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}" v-if="imgArr">
+    <!--标题-->
+    <dvd-service-com-title title="养家大礼包" back></dvd-service-com-title>
+    <div class="bagList">
+      <ul>
+        <li v-for="item in imgArr">
+          <a :href="'/'+item.goods_id+'.html?rp=introduce_detail&rl=goods_detail'">
+            <img class="main_img" :src="item.image"/>
+            <div>{{item.title}}</div>
+            <div>选这款</div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!--返回顶部-->
+    <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <!--<script src="[[vendor]]/swiper/swiper-3.3.1.min.js"></script>-->
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/big_gift_select/js/big_gift_select.js[[v]]"></script>
+</body>
+</html>

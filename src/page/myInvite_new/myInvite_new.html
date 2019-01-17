@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>邀请人</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/myInvite_new/css/myInvite_new.css[[v]]">
+</head>
+<body class="loaded">
+
+  <div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+    <!--标题-->
+    <dvd-service-com-title title="添加邀请码" back home></dvd-service-com-title>
+
+
+    <div class="invite">
+      <div class="banner">
+        <div class="login_text">请输入邀请码</div>
+        <div class="input-banner"><input placeholder="" v-model="inviteCode"></div>
+        <div class="submit">
+          <div class="submit-btn" @click="submit" v-if="hasRegInviter == 0">添加邀请人</div>
+          <div class="submit-btn" @click="submit" v-if="hasRegInviter == 1" :class="{'can-submit':canEdit == 1}">修改所属店铺</div>
+        </div>
+      </div>
+    </div>
+    <div class="rule">
+      <div class="rule-banner">
+        <p>邀请码规则：</p>
+        <p>1.可联系你的好友获取大V店邀请码；</p>
+        <p>2.一个用户只能绑定一个邀请码，绑定后不得修改。</p>
+        <p>3. 绑定邀请人后，您在大V店APP及果敢时代大V店公众号内都将访问邀请人店铺；</p>
+      </div>
+    </div>
+    <!--返回顶部-->
+    <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <!--<script src="[[vendor]]/swiper/swiper-3.3.1.min.js"></script>-->
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/myInvite_new/js/myInvite_new.js[[v]]"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>领取成功</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/receive_member_voucher_success/css/receive_member_voucher_success.css[[v]]">
+</head>
+<body class="loaded">
+  <div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+    <!--标题-->
+    <dvd-service-com-title title="领取成功" back></dvd-service-com-title>
+    <div class="success-icon">
+      <span class="icon"><img src="http://9i.dvmama.com/free/2018/05/08/success.png"></span>
+    </div>
+    <h3 class="success-info">领取成功</h3>
+    <main>
+      <div class="top-tip" @click="useTicket">
+        <span class="info">{{canuse == 0 ? '转赠好友，帮TA购买礼包省' + val + '元' : '购买养家大礼包，立减' + val + '元'}} </span>
+        <!-- <span class="icon">{{visitorStatus === 3 ? '' : '立即开通'}}</span> -->
+        <span class="icon">{{visitorStatus === 3 ? '' : ''}}</span>
+      </div>
+      <!-- <div class="sub-title">
+        <span>会员权益</span>
+      </div> -->
+    </main>
+    <!-- <img class="content-img" src="http://pic.davdian.com/free/2018/05/08/content.png" alt="">
+    <div class="btn" @click="useTicket">{{visitorStatus === 3 ? '查看我的会员抵用券' : '开通会员，领99元红包'}}</div> -->
+
+    <!--返回顶部-->
+    <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/receive_member_voucher_success/js/receive_member_voucher_success.js[[v]]"></script>
+</body>
+</html>

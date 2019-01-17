@@ -1,0 +1,26 @@
+{
+  "code": 0,
+  "shop_url": "https://15522634982.davdian.com",
+  "visitor_status": 3,
+  "sess_key": "42df8bf6e510c97c11afe81a96569014027bf803",
+  "data": {
+    "list": [
+      {
+        "desc": "物流长时间不更新",
+        "issueId": 1
+      },
+      {
+        "desc": "物流信息有误，被他人签收",
+        "issueId": 2
+      },
+      {
+        "desc": "物流长时间不更新物流信息有误，被他人签收物流信息有误，被他人签收",
+        "issueId": 3
+      },
+      {
+        "desc": "物流长时间不更新",
+        "issueId": 4
+      }
+    ]
+  }
+}

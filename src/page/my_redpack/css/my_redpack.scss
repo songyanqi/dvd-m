@@ -1,0 +1,185 @@
+@import "../../../common/css/util/all.scss";
+
+body {
+  background: white;
+  overflow: hidden;
+}
+
+.app {
+  /* 标题 */
+  .dvd-service-com-title {
+    z-index: 2;
+    .right-btn-wrapper {
+      .declare {
+        display: inline-block;
+        padding: 0 15px;
+        height: 44px;
+        font-size: 14px;
+        color: #FF4A7D;
+      }
+    }
+  }
+
+  /* 菜单 */
+  .menu {
+    display: flex;
+    background: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    .btn {
+      position: relative;
+      flex: 1;
+      box-sizing: border-box;
+      @include height(r(43));
+      text-align: center;
+      font-size: r(14);
+      .item {
+        position: relative;
+        display: inline-block;
+        box-sizing: border-box;
+        padding: 0 r(2);
+        height: r(44);
+        .num {
+          font-size: r(11);
+        }
+      }
+      &.active {
+        color: #FF4a7d;
+        .item {
+          border-bottom: 2px solid #FF4a7d;
+        }
+      }
+    }
+  }
+
+  /* 红包列表 */
+  .dvd-service-com-paging-list {
+    li {
+      position: relative;
+      margin: r(10) r(10) 0;
+      width: r(355);
+      height: r(100);
+      overflow: hidden;
+      &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: url([[static]]/page/my_redpack/img/redpack-bg.png) no-repeat;
+        background-size: 100% 100%;
+      }
+      > * {
+        position: absolute;
+      }
+      .num {
+        top: r(17);
+        left: r(9);
+        @include height(r(42));
+        color: white;
+        font-size: r(30);
+        .symbol {
+          font-size: r(20);
+        }
+      }
+      .condition {
+        top: r(68);
+        left: r(11);
+        @include height(r(17));
+        color: white;
+        font-size: r(12);
+      }
+      .name {
+        top: r(15);
+        left: r(141);
+        @include height(r(22));
+        font-size: r(16);
+        max-width: r(200);
+        @include ellipsis(1);
+      }
+      .desc {
+        top: r(42);
+        left: r(141);
+        @include height(r(17));
+        font-size: r(12);
+        color: #666;
+        max-width: r(180);
+        @include ellipsis(1);
+      }
+      .valid-period {
+        top: r(69);
+        left: r(141);
+        @include height(r(16));
+        font-size: r(11);
+        color: #999;
+        max-width: r(180);
+        @include ellipsis(1);
+      }
+      .remain-valid-days {
+        top: r(0);
+        //left: r(140);
+        right: r(0);
+        width: r(88);
+        @include height(r(16));
+        font-size: r(11);
+        color: white;
+        text-align: center;
+        background: #FF9ECB;
+        transform: rotate(30deg) translate(r(24), r(-5));
+      }
+      .ui-given-btn {
+        width: r(50);
+        top: r(66);
+        right: 0;
+        margin-right: r(12);
+        font-size: r(12);
+        @include height(r(22));
+        line-height: r(22);
+        border: solid 1px #FF4A7D;
+        border-radius: r(25);
+        text-align: center;
+        color: #FF4A7D;
+      }
+      .ui-given-btn-s {
+        width: r(40);
+        margin-right: r(6);
+      }
+    }
+
+    /* 已使用&已过期 红包列表 */
+    &.list-1, &.list-2 {
+      li {
+        &:before {
+          opacity: 0.5;
+        }
+        .num {
+        }
+        .condition {
+        }
+        .name {
+          max-width: r(150);
+        }
+        .desc {
+          max-width: r(150);
+        }
+        .valid-period {
+          max-width: r(150);
+        }
+        .state-icon {
+          top: r(20);
+          right: 0;
+          width: r(73);
+        }
+      }
+    }
+
+    /* 已过期红包列表 */
+    &.list-2 {
+      .tips {
+        @include height(r(27));
+        background: #FFF9FB;
+        text-align: center;
+        font-size: r(11);
+        color: #FF4a7d;
+      }
+    }
+  }
+}

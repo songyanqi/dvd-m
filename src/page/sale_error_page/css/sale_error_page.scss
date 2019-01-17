@@ -1,0 +1,35 @@
+@import "../../../common/css/util/all.scss";
+
+.app {
+	.container{
+		text-align: center;
+		img{
+			width: 1.2rem;
+			margin-top: 80px;
+		}
+		.line1{
+			width: 2.1rem;
+			height: 40px;
+			line-height: 18px;
+			font-size: 14px;
+			color: #666666;
+			margin-left: 0.9rem;
+			margin-top: 0.3rem;
+		}
+		.line2{
+			margin-top: 37px;
+			width: 2.45rem;
+			height: 1px;
+			margin-left: 0.65rem;
+			background: #979797;
+		}
+		.line3{
+			margin-top: 20px;
+			font-size: 12px;
+			color: #4A4A4A;
+			span{
+				color: #FF4D80;
+			}
+		}
+	}
+}

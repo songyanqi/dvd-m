@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+	<title>填写售后申请</title>
+	<link rel="stylesheet" href="[[static]]/page/cancle_order/css/cancle_order.css[[v]]">
+</head>
+<body>
+	<div class = "app" :class = "{ bodypd0: isapp }">
+		<!--<order-top-title v-if = "!isapp" titletext = "填写售后申请"></order-top-title>-->
+    <com-top-title back title="填写售后申请" home></com-top-title>
+		<order-top v-if = "data" :data = "data.data.statusList"></order-top>
+		<order-list :isapp = "isapp" :data = "data" :queryurl = "objUrl"></order-list>
+		<loading v-if = "isLoad"></loading>
+	</div>
+
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]//page/cancle_order/js/cancle_order.js[[v]]"></script>
+</body>
+</html>

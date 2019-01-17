@@ -1,0 +1,48 @@
+{
+  "code": "0",
+  "shop_url": "https://hellobabay.davdian.com",
+  "visitor_status": "3",
+  "sess_key": "48a275a991a0a6295706e6d9f8c3a784b62a4bbc",
+  "data_version": "xxxxxx",
+  "data": {
+    "more": "1",
+    "nextPageIndex": "10",
+    "awardPriceTotal": "1.55",
+    "double": "1",
+    "dataList": [
+      {
+        "awardId": 1,
+        "payTime": "2017-10-11 12:23",
+        "goodsName": "1测试数据测试数据测试数据测试数据测试数据"
+      },
+      {
+        "awardId": 2,
+        "payTime": "2017-10-11 12:23",
+        "goodsName": "2测试数据测试数据测试数据测试数据测试数据"
+      },
+      {
+        "awardId": 3,
+        "payTime": "2017-10-11 12:23",
+        "goodsName": "3测试数据测试数据测试数据测试数据测试数据测试数据"
+      },
+      {
+        "awardId": 4,
+        "payTime": "2017-10-11 12:23",
+        "goodsName": "4测试数据测试数据测试数据测试数据测试数据",
+        "awardPrice": "0.5"
+      },
+      {
+        "awardId": 5,
+        "payTime": "2017-10-11 12:23",
+        "goodsName": "5测试数据测试数据测试数据测试数据",
+        "awardPrice": "0.5"
+      },
+      {
+        "awardId": 6,
+        "payTime": "2017-10-11 12:23",
+        "goodsName": "6测试数据测试数据测试数据测试数据",
+        "awardPrice": "0.5"
+      }
+    ]
+  }
+}

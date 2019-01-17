@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">
+  <link rel="stylesheet" href="[[static]]/page/act_mine_dvd/css/act_mine_dvd.css[[v]]">
+</head>
+<body>
+<div class="app" :style="{'background-image': error ? 'none' : null}" :class = "{ appTop: isTop }">
+  <!--标题-->
+  <com-top-title back title="我的PinkDay" home share></com-top-title>
+
+  <!--异常情况-->
+  <div class="g-error" v-if="error" style="display: none;" :style="{display: error ? 'block' : 'none'}">
+    <!--标题-->
+    <com-top-title back title=" " home></com-top-title>
+    <img v-lazy="'[[static]]/page/act_mine_dvd/img/error.png'">
+    <div class="text">快去参加活动吧</div>
+    <a class="btn" href="/t-17610.html" @click="go1018Main">去PINKDAY节主会场</a>
+  </div>
+  <template v-else>
+    <!--标题栏占位-->
+    <div class="g-top-placeholder" :style="{display: ua.isDvdApp() ? null : 'block'}"></div>
+
+    <!--个人信息-->
+    <div class="g-info-wrapper">
+      <template>
+        <div class="g-info-no-prize" style="display: none;"
+             :class = "{padTop: isPad}"
+             :style="{display: response && response.data.header ? null : 'none'}"
+             v-if="response && response.data && response.data.header">
+          <div class="pic-wrapper">
+            <img class="head-pic" v-lazy="response.data.header.userAvatar">
+          </div>
+          <div class="nickname">{{response.data.header.nickName}}</div>
+        </div>
+        <div @click = "handleWard" class = "g-year-ward" v-if = "response && (response.data.annual || response.data.annual == 0)">
+          <div class = "g-year-bkg">
+              <span class = "year_tips">我的年终奖：</span><span class = "year_num">{{ response.data.annual }}元</span>
+          </div>
+        </div>
+      </template>
+    </div>
+    <!--周年庆按钮-->
+    <div class = "mine_pink">
+      <a href="/act_collect_card.html">
+        <img class="g-head-btn" src="[[static]]/page/act_mine_dvd/img/pink_mine.png">
+      </a>
+    </div>
+    <!--我的活动-->
+    <div class="g-act" @click="removeLocalCache" v-if="response" style="display: none;" :style="{display: response ? null : 'none'}">
+      <!-- 服务人群加油奖励 -->
+      <div class = "comeon_reward" v-if="response.data.myUserCheerCount">
+        <div class = "title-type-1">
+          <div class="main-title">顾问服务人群加油奖励</div>
+          <div v-if = "Date.now() < 1510416000000" class="sub-title"><span class="word">已获得奖励{{ response.data.myUserCheerCount.buyCount}}元，待奖励{{ response.data.myUserCheerCount.noBuyCount }}元</span></div>
+
+          <div v-else class="sub-title"><span class="word">已获得奖励{{ response.data.myUserCheerCount.buyCount}}元，错过奖励{{ response.data.myUserCheerCount.noBuyCount }}元</span></div>
+          <!-- 活动规则 -->
+          <div class = "act_rules">
+            <div class = "act_rules_tips" @click = "handleAdvisorRule">活动</br>规则</div>
+            <div class = "rules_icon1"></div>
+          </div>
+        </div>
+        <!--手滑轮播-->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(item, i) in response.data.myUserCheer" v-if="i < 10">
+              <img class="goods-pic" v-lazy="item.image">
+              <div class="service-object">
+                <!-- <img class="head" v-lazy="item.advanceAvatar"> -->
+                <span class="nickname">{{item.nickName}}</span>
+              </div>
+              <div class="award">{{ item.activityBution }}</div>
+            </div>
+            <div class="swiper-slide more" v-if="(Number(response.data.myUserCheerCount.buyCount)+Number(response.data.myUserCheerCount.noBuyCount)) > 10">
+              <a @click="isOpenWebview" href="/act_1018_mine_list.html?type=4">
+                <div class="btn">
+                  <span class="words">查看</br>更多</span>
+                  <i></i>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--服务人群预定奖励-->
+      <div class="service-award" v-if="response.data.award">
+        <!--标题-->
+        <div class="title-type-1">
+          <div class="main-title">顾问服务人群预定奖励</div>
+          <div class="sub-title"><span class="word">已获奖励{{response.data.award.totalReward}}元</span></div>
+          <!-- 活动规则 -->
+          <div class = "act_rules">
+            <div class = "act_rules_tips" @click = "handleAdvisorReserve">活动</br>规则</div>
+            <div class = "rules_icon1"></div>
+          </div>
+        </div>
+        <!--手滑轮播-->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(item, i) in response.data.award.dataList" v-if="i < 10">
+              <img class="goods-pic" v-lazy="item.imageUrl">
+              <div class="service-object">
+                <img class="head" v-lazy="item.advanceAvatar">
+                <span class="nickname">{{item.advanceName}}</span>
+              </div>
+              <div class="award">预定{{item.advanceNum}}件获得{{item.advanceReward}}元奖励</div>
+            </div>
+            <div class="swiper-slide more" v-if="response.data.award.dataList.length > 10">
+              <a @click="isOpenWebview" href="/act_1018_mine_list.html?type=1">
+                <div class="btn">
+                  <span class="words">查看</br>更多</span>
+                  <i></i>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 服务人群组团奖励 -->
+      <div class="service-award" v-if="response.data.reverseAdviser">
+        <!--标题-->
+        <div class="title-type-1">
+          <div class="main-title">顾问服务人群组团奖励</div>
+          <div class="sub-title"><span class="word">已获奖励{{response.data.reverseAdviser.totalReward}}元</span></div>
+          <!-- 活动规则 -->
+          <div class = "act_rules">
+            <div class = "act_rules_tips" @click = "handleAdvisorGroup">活动</br>规则</div>
+            <div class = "rules_icon1"></div>
+          </div>
+        </div>
+        <!--手滑轮播-->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(item, i) in response.data.reverseAdviser.dataList" v-if="i < 10">
+              <img class="goods-pic" v-lazy="item.imageUrl">
+              <div class="service-object">
+                <img class="head" v-lazy="item.advanceAvatar">
+                <span class="nickname">{{item.advanceName}}</span>
+              </div>
+              <div class="award">获{{item.advanceReward}}元奖励</div>
+            </div>
+            <div class="swiper-slide more" v-if="response.data.reverseAdviser.dataList.length > 10">
+              <a @click="isOpenWebview" href="/act_1018_mine_list.html?type=6">
+                <div class="btn">
+                  <span class="words">查看</br>更多</span>
+                  <i></i>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 组团奖励 -->
+      <div class="service-award" v-if="response.data.reverse">
+        <!--标题-->
+        <div class="title-type-1">
+          <div class="main-title">店铺组团奖励</div>
+          <div class="sub-title"><span class="word">已获奖励{{response.data.reverse.totalReward}}元</span></div>
+          <!-- 活动规则 -->
+          <div class = "act_rules">
+            <div class = "act_rules_tips" @click = "handleGroup">活动</br>规则</div>
+            <div class = "rules_icon1"></div>
+          </div>
+        </div>
+        <!--手滑轮播-->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(item, i) in response.data.reverse.dataList" v-if="i < 10">
+              <img class="goods-pic" v-lazy="item.imageUrl">
+              <div class="service-object">
+                <img class="head" v-lazy="item.advanceAvatar">
+                <span class="nickname">{{item.advanceName}}</span>
+              </div>
+              <div class="award">获{{item.advanceReward}}元奖励</div>
+            </div>
+            <div class="swiper-slide more" v-if="response.data.reverse.dataList.length > 10">
+              <a @click="isOpenWebview" href="/act_1018_mine_list.html?type=7">
+                <div class="btn">
+                  <span class="words">查看</br>更多</span>
+                  <i></i>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--我的10.18红包-->
+      <div class="redpack" v-if="response.data.myBonus">
+        <div class = "redpack_dot_l"></div>
+        <div class = "redpack_dot_r"></div>
+        <!--标题-->
+        <div class="title-type-2">我的PinkDay节红包</div>
+        <!--红包列表-->
+        <ul class="list">
+          <li v-for="(item, i) in response.data.myBonus">
+            <div class="name">{{item.typeName}}</div>
+            <div class="price">
+              <span class="symbol">￥</span>
+              <span class="num">{{item.typeMoney}}</span>
+              <span class="limit">满{{item.minGoodsAmount}}可用</span>
+            </div>
+            <div class="time">有效期：{{date.format(item.endTime + '000', 'yyyy.MM.dd hh:mm:ss')}}</div>
+          </li>
+        </ul>
+        <!--查看更多-->
+        <a @click="isOpenWebview" href="/user_bonus.html">
+          <div class="more">查看更多<i></i></div>
+        </a>
+      </div>
+      <!-- 我加油的品牌，爆品 -->
+      <div class = "rewardNavs"  v-if = "response.data.cheer">
+        <div class="title-type-1">
+          <div class="main-title">我加油的品牌、爆品</div>
+          <div v-if = "Date.now() < 1510329600000" class="sub-title">
+            <span class="word">已获加油{{ response.data.cheerPrice.price }}元</span>
+          </div>
+          <div class="sub-title sub-title_1111"  v-if = "Date.now() >= 1510329600000 && Date.now() < 1510416000000">
+            <span class="word">已获返现{{ response.data.cheerPrice.buyPrice }}元，待返现{{ response.data.cheerPrice.price }}元</span>
+          </div>
+          <div class="sub-title sub-title_1111"  v-if = "Date.now() >= 1510416000000">
+            <span class="word">已获返现{{ response.data.cheerPrice.buyPrice }}元，错过返现{{ response.data.cheerPrice.price }}元</span>
+          </div>
+          <!-- 活动规则 -->
+          <div class = "act_rules">
+            <div class = "act_rules_tips" @click = "handleComeon">活动</br>规则</div>
+            <div class = "rules_icon1"></div>
+          </div>
+        </div>
+        <!--手滑轮播-->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" @click = "handleComeOnList(item,index)" v-for = "(item,index) in response.data.cheer" :key = "index">
+              <a>
+                <img class="goods-pic" v-lazy= "item.image">
+                <div class="reward_no">{{item.activityButton}}</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--我预定的商品-->
+      <div class = "reserveCont">
+        <div class="reserve" v-if="response.data.book">
+          <!--标题-->
+          <div class="title-type-1">
+            <div class="main-title">我预定的商品</div>
+            <div class="sub-title"><span class="word">尾款支付时间: 03.08 0点-24点</span></div>
+            <!-- 活动规则 -->
+            <div class = "act_rules">
+              <div class = "act_rules_tips" @click = "handleReserveRule">活动</br>规则</div>
+              <div class = "rules_icon1"></div>
+            </div>
+          </div>
+          <!--手滑轮播-->
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide" v-for="(item, i) in response.data.book" v-if="i < 10">
+                <a @click="isOpenWebview" :href="'/'+item.goodsId+'.html'">
+                  <img class="goods-pic" v-lazy="item.imageUrl">
+                  <div class="price">定金￥{{item.advancePrice}}</div>
+                  <div class="discount">抵扣￥{{item.discountPrice}}</div>
+                </a>
+              </div>
+              <div class="swiper-slide more" v-if="response.data.book.length > 10">
+                <a @click="isOpenWebview" href="/act_1018_mine_list.html?type=3">
+                  <div class="btn">
+                    <span class="words">查看</br>更多</span>
+                    <i></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- <div @click = "handlerCourage" class = "reserve_bkg"><img src="//9i.dvmama.com/free/1111/newp/reserve_bkg.png"></div> -->
+        </div>
+        <!-- <div class = "reserveTips" v-if = "response.data.endMoney">
+          <div class = "reserveAllNum">获得预定奖励{{ reserveSum }}元</div>
+          <div class = "reserveDetailNum">其中自己购买奖{{ response.data.endMoney.userMoney }}元，其他人购买奖{{ response.data.endMoney.sellerMoney }}元</div>
+        </div> -->
+      </div>
+
+      <div ref = "collectCard" class = "collectCard" v-if = "response.data.continueData">
+        <div class="title-type-1">
+          <div class="main-title">赢大V店定制台历</div>
+          <div class="sub-title sub-title_no"><span class="word">12月12、13、14会员连续三天购物即可获得</span></div>
+
+          <div class = "act_rules">
+            <div class = "act_rules_tips" @click = "handleCollectRule">活动</br>规则</div>
+            <div class = "rules_icon1"></div>
+          </div>
+        </div>
+        <div class = "cardCont">
+          <!-- 活动未开始 -->
+          <div class = "yearTips_common" v-if = "isBuyShow == 1">
+            活动未开始哦～
+          </div>
+          <!-- 非会员 -->
+          <div class = "yearTips_common" v-if = "isBuyShow == 2">
+            只有会员才可以参加活动哦～
+          </div>
+          <div class = "cardNavs clearfix" v-if = "response.data.continueData.timeList">
+            <div v-for = "(item,index) in response.data.continueData.timeList"
+                class = "common wait_buy"
+                :class = "{waiting_card: item.isBuy == 1,due_no_card: item.isBuy == 3}"
+            >
+              <span class = "dateCard">{{item.time}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--我的抽奖记录-->
+      <div class="draw-record" v-if="response.data.drawRecord">
+        <!--标题-->
+        <div class="title-type-2">
+          <span>我的中奖记录</span>
+          <div class = "act_rules">
+            <div class = "act_rules_tips" @click = "handleFree">活动</br>规则</div>
+            <div class = "rules_icon1"></div>
+          </div>
+        </div>
+        <!--红包列表-->
+        <ul class="list">
+          <template v-for="(item, i) in response.data.drawRecord">
+            <li class="order draw" v-if="item.type == '2'">
+              <div class="title">
+                抽中{{item.money}}现金！已送到你的
+                <a class="account" href="//s[[env_num]].[[base_domain]]/index.php?m=admin&c=newIncome&a=detail&status=0&cat=5">大V账户</a>~
+              </div>
+              <div class="time">抽奖时间: {{date.format(item.time + '000', 'yyyy.MM.dd hh:mm:ss')}}</div>
+            </li>
+            <li class="assist" v-else-if="item.type == '1'">
+              <div class="title">抽中一台iPhone8</div>
+              <div class="text">请等待工作人员联系你</div>
+              <div class="time">抽奖时间: {{date.format(item.time + '000', 'yyyy.MM.dd hh:mm:ss')}}</div>
+            </li>
+            <li class="order free" v-else-if="item.type == '3'">
+              <div class="title">抽中免单机会！</div>
+              <div class="text">
+                返现金额已送到你的
+                <a class="account" href="//s[[env_num]].[[base_domain]]/index.php?m=admin&c=newIncome&a=detail&status=0&cat=5">大V账户</a>~
+              </div>
+              <div class="time">抽奖时间: {{date.format(item.time + '000', 'yyyy.MM.dd hh:mm:ss')}}</div>
+            </li>
+          </template>
+        </ul>
+      </div>
+      <!--必败清单-->
+      <div class="recommend" v-if="response.data.willBuy">
+        <!--标题-->
+        <div class="title-type-2" @click="removeLocalCache">必败清单</div>
+        <!--双排列表-->
+        <ul>
+          <li v-for="(item, i) in response.data.willBuy">
+            <a @click="isOpenWebview" :href="item.command.content">
+              <div class="pic">
+                <img :src="item.imageUrl">
+                <div class="act">{{item.actInfo}}</div>
+              </div>
+              <div class="info">
+                <div class="title">{{item.title}}</div>
+                <div class="price">
+                  <span class="price-symbol">￥</span>
+                  <span class="price-int">{{item.nowPrice.split('.')[0]}}</span>
+                  <span class="price-decimal" v-if="item.nowPrice.split('.')[1]">.{{item.nowPrice.split('.')[1]}}</span>
+                  <span class="member" v-if="isSeller">会员返<span class="symbol">￥</span>{{item.timeshopIncome}}</span>
+                </div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 开通会员的萌层 -->
+    <img style = "display: none;" src="//9i.dvmama.com/free/1111/newo/maskMem_icon.png">
+    <img style = "display: none;" src="//9i.dvmama.com/free/1111/newo/mask.png">
+    <div @touchmove = "handlePrevent($event)" class = "maskCont" v-if = "isShowMem">
+      <span @click = "handleClose" class = "maskClose"></span>
+      <span @click = "handlerOpenMem" class = "maskOpenMem"></span>
+      <img src="//9i.dvmama.com/free/1111/newo/maskMem_icon.png">
+    </div>
+    <!-- 超过总数量 -->
+    <div @touchmove = "handlePrevent($event)" class = "maskCont" v-if = "isSumMask">
+      <div class = "maskOverNum">
+        <div>不能邀请好友加油啦</div>
+        <div>此发起加油活动数量为{{ totalNum }}个</div>
+        <div>已经超过{{ totalNum }}个啦</div>
+      </div>
+      <span @click = "handleClose" class = "maskClose"></span>
+      <img src="//9i.dvmama.com/free/1111/newo/mask.png">
+    </div>
+
+    <!--返回顶部-->
+    <com-to-top-icon></com-to-top-icon>
+  </template>
+</div>
+
+
+
+<script crossorigin="anonymous" integrity="sha256-axCA4zZfWCHK3Voqm20kNdIvm0vPCz4KTRUYPVNadLA=" src="[[vendor]]/swiper/swiper-3.3.1.min.js"></script>
+@@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+<script src="[[static]]/page/act_mine_dvd/js/act_mine_dvd.js[[v]]"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+@import '../../../node_modules/dvd-service-scss-common/dvd-service-scss-common';
+
+[v-cloak] {
+  display: none;
+}
+
+body {
+  font-weight: 400;
+}

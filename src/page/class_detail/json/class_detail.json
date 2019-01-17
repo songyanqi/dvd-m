@@ -1,0 +1,115 @@
+{
+  "title": "标题",
+  "addTime": "2018-01-22",
+  "author": "作者",
+  "content": "<p>文章详情Easy Mock</p>",
+  "img": "头图",
+  "shareImg": "分享图片",
+  "onlineStatus": "1",
+  "beginTime": "开始时间",
+  "endTime": "结束时间",
+  "isDelete": "2",
+  "imgShow": "1",
+  "materials": [{
+    "materialId": 3,
+    "goodsId": 687406,
+    "materialType": 1,
+    "copywriting": "文案内容3文案内容2斤斤计较就会回家记得时刻 i 发 i 第三方第三季的方式解决急哦点上飞机哦大家死哦文案内容2斤斤kkkkkkkkkkk计较就会回家记得时刻 i 发 i 第三方第三季的方式解决急哦点上飞机哦大家死哦文案内容2斤斤计较就会回家记得时刻 i 发 i 第三方第三季的方式解决急哦点上飞机哦大家死哦文案内容2斤斤计较就会回家记得时刻 i 发 i 第三方第三季的方式解决急哦点上飞机哦大家死哦",
+    "images": "",
+    "imageList": [{
+      "imgOriginal": "http:\/\/img1.bravetime.net\/supplier\/2018\/05\/18\/640_640_e1df4ecd4cf4e230edca830cb72dee62.jpeg",
+      "imgSplice": "http:\/\/img.vyohui.cn\/speard.php?bg=http://img1.bravetime.net/supplier/2018/05/18/640_640_e1df4ecd4cf4e230edca830cb72dee62.jpeg&uri=/687406.html&left=526&top=399&width=110"
+    },
+      {
+        "imgOriginal": "http:\/\/img1.bravetime.net\/supplier\/2018\/05\/18\/640_640_6fb9314f52dc69f7ea2d11961830614e.jpg",
+        "imgSplice": "http:\/\/img.vyohui.cn\/speard.php?bg=http://img1.bravetime.net/supplier/2018/05/18/640_640_6fb9314f52dc69f7ea2d11961830614e.jpg&uri=/687406.html&left=3&top=2&width=100"
+      },
+      {
+        "imgOriginal": "http:\/\/img1.bravetime.net\/supplier\/2018\/05\/18\/640_640_d50a91801986cd3945622dce50e4b17a.jpeg",
+        "imgSplice": "http:\/\/img.vyohui.cn\/speard.php?bg=http://img1.bravetime.net/supplier/2018/05/18/640_640_d50a91801986cd3945622dce50e4b17a.jpeg&uri=/687406.html&left=271&top=542&width=100"
+      }
+    ],
+    "videoUrl": "",
+    "videoImg": "",
+    "sort": 1
+  },
+    {
+      "materialId": 2,
+      "goodsId": 687406,
+      "materialType": 2,
+      "copywriting": "文案内容2斤斤计较就会回家记得时刻 i 发 i 第三方第三季的方式解决急哦点上飞机哦大家死哦文案内容2斤斤计较就会回家记得时刻 i 发 i 第三方第三季的方式解决急哦点上飞机哦大家死哦文案内容2斤斤计较就会回家记得时刻 i 发 i 第三方第三季的方式解决急哦点上飞机哦大家死哦文案内容2斤斤计较就会回家记得时刻 i 发 i 第三方第三季的方式解决急哦点上飞机哦大家死哦文案内容2斤斤计较就会回家记得时",
+      "images": "",
+      "imageList": null,
+      "videoUrl": "http:\/\/media.davdian.com\/\/goodsVideo\/2018\/02\/27\/80453047d1973d996346c6d5b1ddcec0.mp4",
+      "videoImg": "http:\/\/img1.bravetime.net\/goodsVideo\/2018\/02\/27\/800_600_6e2506ee802028e90904b51a10b14834.png",
+      "sort": 2
+    },
+    {
+      "materialId": 14,
+      "goodsId": 687406,
+      "materialType": 1,
+      "copywriting": "了可口可乐上课时间上会计课快睡觉快睡觉快健康就是看到积极健康的手机壳健康街道上会计加到了可口可乐上课时间上会计课快睡觉快睡觉快健康就是看到积极健康的手机壳健康街道上会计加到了可口可乐上课时间上会计课快睡觉快睡觉快健康就是看到积极健康的手机壳健康街道上会计加到了可口可乐上课时间上会计课快睡觉快睡觉快健康就是看到积极健康的手机壳健康街道上会计加到了可口可乐上课时间上会计课快睡觉快睡觉快健康就是看到积极",
+      "images": "",
+      "imageList": [{
+        "imgOriginal": "http:\/\/img1.bravetime.net\/supplier\/2018\/05\/18\/640_640_6fb9314f52dc69f7ea2d11961830614e.jpg",
+        "imgSplice": ""
+      },
+        {
+          "imgOriginal": "http:\/\/img1.bravetime.net\/supplier\/2018\/05\/18\/640_640_e1df4ecd4cf4e230edca830cb72dee62.jpeg",
+          "imgSplice": ""
+        },
+        {
+          "imgOriginal": "http:\/\/img1.bravetime.net\/supplier\/2018\/05\/18\/640_640_d50a91801986cd3945622dce50e4b17a.jpeg",
+          "imgSplice": ""
+        },
+        {
+          "imgOriginal": "http:\/\/img1.bravetime.net\/supplier\/2018\/05\/18\/440_587_bb8f2552c6aa4b64438b5fecf49c702b.jpeg",
+          "imgSplice": ""
+        },
+        {
+          "imgOriginal": "http:\/\/img1.bravetime.net\/supplier\/2018\/05\/18\/962_1280_fa53f83111912b77a292d42dcd21dafb.jpeg",
+          "imgSplice": ""
+        },
+        {
+          "imgOriginal": "http:\/\/img1.bravetime.net\/supplier\/2018\/05\/18\/960_1280_a88909e103012478a13f535a33402cef.jpeg",
+          "imgSplice": ""
+        },
+        {
+          "imgOriginal": "http:\/\/img1.bravetime.net\/supplier\/2018\/05\/18\/1000_667_4266955eb2afcc5c6d06e6658873837c.jpg",
+          "imgSplice": ""
+        },
+        {
+          "imgOriginal": "http:\/\/img1.bravetime.net\/supplier\/2018\/05\/18\/1000_667_f64dab2ff63023f9bd54a6552c78f4a6.jpg",
+          "imgSplice": ""
+        },
+        {
+          "imgOriginal": "http:\/\/img1.bravetime.net\/supplier\/2018\/05\/19\/640_640_24898fc8e7152857ea8a22b665f20218.jpg",
+          "imgSplice": ""
+        }
+      ],
+      "videoUrl": "",
+      "videoImg": "",
+      "sort": 3
+    },
+    {
+      "materialId": 37,
+      "goodsId": 687406,
+      "materialType": 1,
+      "copywriting": "我是海报",
+      "images": "",
+      "imageList": [{
+        "imgOriginal": "http:\/\/img1.bravetime.net\/supplier\/2018\/05\/22\/482_714_504be7fc4c56463ae9626cd545c8752b.png",
+        "imgSplice": "http:\/\/img.vyohui.cn\/speard.php?bg=http://img1.bravetime.net/supplier/2018/05/22/482_714_504be7fc4c56463ae9626cd545c8752b.png&uri=/687406.html&left=286&top=636&width=100"
+      }],
+      "videoUrl": "",
+      "videoImg": "",
+      "sort": 4
+    },
+    {
+      "materialId": "123",
+      "topicId": "123",
+      "materialType": 3,
+      "copywriting": "素材文案"
+    }
+  ]
+}

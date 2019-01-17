@@ -1,0 +1,24 @@
+@import "../../../common/css/util";
+
+.app {
+  background: white;
+
+  /* 安卓hack */
+  &.android {
+
+  }
+}
+
+.container{
+	position: relative;
+	img{
+		width: 100%;
+	}
+	.btn{
+		 bottom: 0.38rem;
+    width: 100%;
+    position: absolute;
+    height: 0.5rem;
+    left: 0;
+	}
+}

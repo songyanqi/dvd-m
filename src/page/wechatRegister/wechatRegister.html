@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/wechatRegister/css/wechatRegister.css[[v]]">
+</head>
+<body>
+  <div class="app" v-if="groupList" v-cloak>
+    <!--标题-->
+    <com-top-title back title="微信群登记"></com-top-title>
+    <div class="top-info">请选择您目前所在的顾问微信群</div>
+    <ul class="adviser-group-list">
+      <li class="adviser-group-item" v-for="item in groupList" :key="item.id" v-if="!item.is_add">
+        <span>{{item.group_name}}</span>
+        <a :href="'/m/wechatRegisterName.html?group_id='+item.group_id">选择</a>
+      </li>
+    </ul>
+    <!--返回顶部-->
+    <com-to-top-icon></com-to-top-icon>
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/wechatRegister/js/wechatRegister.js[[v]]"></script>
+</body>
+</html>

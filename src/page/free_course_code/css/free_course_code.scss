@@ -1,0 +1,186 @@
+@import "../../../common/css/util";
+body{
+  background-image: url(../img/bg@3x.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.pt9{
+  padding-top: r(90) !important;
+}
+.t9{
+  top: r(164+50)!important;
+}
+.app {
+  font-size: 0;
+  .ui-bg{
+    width:100%;
+    height: 100%;
+    .ui-bg-img-box{
+      width: r(375);
+      height: 100%;
+      .ui-card{
+        width: r(375);
+        height: r(417);
+        position: absolute;
+        top: r(164);
+        z-index: -1;
+        background-image: url(../img/Combined@3x.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+      .ui-reminder-box{
+        width: r(279);
+        height: r(67);
+        background-image: url(../img/reminder@2x.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        position: fixed;
+        z-index: 1;
+        left: r(90);
+        top: r(5);
+      }
+      .ui-top-box{
+        text-align: center;
+        padding-top: r(40);
+        .ui-user-icon{
+          width:r(50);
+          height:r(50);
+          border-radius: r(50);
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+          position: relative;
+          left: 50%;
+          margin-left: r(-25);
+        }
+        .ui-top-name{
+          width: 100%;
+          height: r(25);
+          font-size: r(18);
+          color:#333;
+          line-height: r(25);
+          margin-top:r(10);
+        }
+        .ui-top-txt{
+          height: r(20);
+          font-size: r(14);
+          color:#333;
+          line-height: r(20);
+          text-align: center;
+        }
+      }
+      .ui-pageStatus{
+        height: r(113);
+        margin-top: r(45);
+        .ui-color-666{
+          color: #666;
+        }
+        .ui-decoration{
+          text-decoration:line-through
+        }
+        .ui-ticket-box{
+          width:r(283.3);
+          margin-left:r(45.85);
+        }
+        .ui-isVip{
+          height: r(25);
+          line-height: r(25);
+          color: #FF4a7d;
+          font-size: r(18);
+          text-align: center;
+        }
+        .ui-isVip-text{
+          height: 0.35rem !important;
+          line-height: 0.35rem !important;
+        }
+        .ui-ticket-text-box{
+          height: r(61);
+          line-height: r(61);
+          width:r(283.3);
+          margin-left:r(45.85);
+          text-align: center;
+          color: #666666;
+          font-size: r(14);
+        }
+        .ui-take-btn{
+          width: r(70);
+          height: r(30);
+          position: absolute;
+          margin-left: r(232.7);
+          margin-top: r(-45.4);
+        }
+        .ui-price-text{
+          margin-top: r(38);
+          margin-left: r(30);
+          font-size: r(14);
+          color: #FF4a7d;
+        }
+      }
+      .ui-link-btn{
+        width: r(61);
+        height: r(20);
+        line-height: r(20);
+        color: #FF4a7d;
+        border: solid 1px #FF4a7d;
+        border-radius: r(37);
+        font-size: r(12);
+        position: absolute;
+        left: r(272);
+        margin-top: r(-19);
+        padding-left: r(9);
+        div{
+          width: r(4);
+          height: r(9);
+          background-image: url(//9i.dvmama.com/free/2018/05/22/links.png);
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+          position: absolute;
+          margin-left: r(52);
+          margin-top: r(-15);
+        }
+      }
+      .ui-cnt-img{
+        width:r(315);
+        height: r(218.4);
+        margin-left: r(30);
+        margin-top: r(10);
+      }
+      .ui-remind-text{
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        color: #666666;
+        font-size: r(10);
+        height: r(14);
+        line-height: r(14);
+        margin-top: r(7);
+      }
+
+    }
+
+    .ui-bottom{
+      height: r(812 - 623);
+    }
+
+  }
+  .ui-bottom-txt{
+    width: r(126);
+    height: r(21);
+    margin-top: r(40);
+    background-image: url(../img/Group.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    left: 50%;
+    margin-left: r(-63);
+  }
+  .ui-mt-45{
+    margin-top: r(50);
+  }
+  .ui-mt-30{
+    margin-top: r(30);
+  }
+  /* 安卓hack */
+  &.android {
+
+  }
+}

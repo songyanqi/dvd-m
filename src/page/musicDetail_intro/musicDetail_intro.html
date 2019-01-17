@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/musicDetail_intro/css/musicDetail_intro.css[[v]]">
+</head>
+<body>
+  <div class="app">
+    <com-top-title back :title="music" :growth-box="true"></com-top-title>
+    <!--标题-->
+    <index @music="musicFn" @growth="growthFn"></index>
+    <!--返回顶部-->
+    <com-to-top-icon></com-to-top-icon>
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/musicDetail_intro/js/musicDetail_intro.js[[v]]"></script>
+</body>
+</html>

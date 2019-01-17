@@ -1,0 +1,52 @@
+@import "../../../common/css/util";
+
+// 页面红色部分
+$red: #FF4A7D;
+body{
+  background: white;
+}
+.app {
+  line-height: 1.5;
+  // 团成员列表
+  .all-group-people {
+    li {
+      padding: r(15) r(10);
+      display: flex;
+      > * {
+        vertical-align: middle;
+        display: inline-block;
+        @include height(r(30));
+      }
+      .group-head-portrait {
+        width: r(30);
+        margin: 0;
+      }
+      .nickname {
+        font-size: r(12);
+        flex: 1;
+        margin: 0 r(10);
+        @include ellipsis;
+      }
+      .begin-time {
+        font-size: r(12);
+        color: #999999;
+        text-align: right;
+      }
+    }
+    li.more {
+      display: inherit;
+      font-size: r(12);
+      color: #666666;
+      text-align: center;
+    }
+    .split-line {
+      border-top: 1px solid #E1E1E1;
+      transform: scaleY(0.5);
+    }
+  }
+
+  /* 安卓hack */
+  &.android {
+
+  }
+}

@@ -1,0 +1,126 @@
+
+{
+  "code":"0",
+  "shop_url":"//15201663952.davdian.com",
+  "visitor_status":"3",
+  "sess_key":"48a275a991a0a6295706e6d9f8c3a784b62a4bbc",
+  "data_version":"xxxxxx",
+  "data": {
+    "course":{
+      "id":"1",
+      "type":"1",
+      "status":"1",
+      "title":"课程标题",
+      "price":"200",
+      "img":"http://9i.dvmama.com/activity/2017/10/17/561_600_ac8528dcdc20281eca3be237ea3ba937.jpg?x-oss-process=image/quality,Q_90",
+      "teacherName":"讲师名称",
+      "command": {
+        "content" : "点击时的动作"
+      }
+    },
+    "page": [
+      {
+        "pageId":"1",
+        "name":"试用人昵称",
+        "headImg":"//5e.dvmama.com/wap/static/dist/static/page/center/img/default-head.png?v=fb9bea61d4",
+        "title":"简介文案",
+        "img":[
+          "http://9i.dvmama.com/supplier/2017/08/05/1200_1200_760b2f022221b231c49702ce4627aa6b.jpg?x-oss-process=image/format,webp",
+          "http://9i.dvmama.com/supplier/2017/08/05/1200_1200_760b2f022221b231c49702ce4627aa6b.jpg?x-oss-process=image/format,webp",
+          "http://9i.dvmama.com/supplier/2017/08/05/1200_1200_760b2f022221b231c49702ce4627aa6b.jpg?x-oss-process=image/format,webp"
+        ],
+        "command": {
+          "content" : "点击时的动作"
+        }
+      },
+      {
+        "pageId":"1",
+        "name":"试用人昵称",
+        "headImg":"//5e.dvmama.com/wap/static/dist/static/page/center/img/default-head.png?v=fb9bea61d4",
+        "title":"简介文案",
+        "tag":"V友",
+        "img":[
+          "http://9i.dvmama.com/supplier/2017/08/05/1200_1200_760b2f022221b231c49702ce4627aa6b.jpg?x-oss-process=image/format,webp",
+          "http://9i.dvmama.com/supplier/2017/08/05/1200_1200_760b2f022221b231c49702ce4627aa6b.jpg?x-oss-process=image/format,webp",
+          "http://9i.dvmama.com/supplier/2017/08/05/1200_1200_760b2f022221b231c49702ce4627aa6b.jpg?x-oss-process=image/format,webp"
+        ],
+        "command": {
+          "content" : "点击时的动作"
+        }
+      },
+      {
+        "pageId":"1",
+        "name":"试用人昵称",
+        "headImg":"//5e.dvmama.com/wap/static/dist/static/page/center/img/default-head.png?v=fb9bea61d4",
+        "title":"简介文案",
+        "tag":"V友",
+        "img":[
+          "http://9i.dvmama.com/supplier/2017/08/05/1200_1200_760b2f022221b231c49702ce4627aa6b.jpg?x-oss-process=image/format,webp",
+          "http://9i.dvmama.com/supplier/2017/08/05/1200_1200_760b2f022221b231c49702ce4627aa6b.jpg?x-oss-process=image/format,webp",
+          "http://9i.dvmama.com/supplier/2017/08/05/1200_1200_760b2f022221b231c49702ce4627aa6b.jpg?x-oss-process=image/format,webp"
+        ],
+        "command": {
+          "content" : "点击时的动作"
+        }
+      }
+    ],
+    "goodsList":[
+      {
+        "imageUrl":"http://9i.dvmama.com/supplier/2017/09/01/1200_1200_f66fc82c79224b1a0d5f3f7cf65e102e.jpg?x-oss-process=image/format,webp",
+        "title":"商品标题",
+        "nowPrice":"价格",
+        "actPrice":"act",
+        "command": {
+          "content" : "点击时的动作"
+        }
+      },
+      {
+        "imageUrl":"http://9i.dvmama.com/supplier/2017/09/01/1200_1200_f66fc82c79224b1a0d5f3f7cf65e102e.jpg?x-oss-process=image/format,webp",
+        "title":"商品标题",
+        "nowPrice":"价格",
+        "actPrice":"act",
+        "actInfo":"活动信息",
+        "command": {
+          "content" : "点击时的动作"
+        }
+      },
+      {
+        "imageUrl":"http://9i.dvmama.com/supplier/2017/09/01/1200_1200_f66fc82c79224b1a0d5f3f7cf65e102e.jpg?x-oss-process=image/format,webp",
+        "title":"商品标题",
+        "nowPrice":"价格",
+        "actPrice":"act",
+        "actInfo":"活动信息",
+        "command": {
+          "content" : "点击时的动作"
+        }
+      },
+      {
+        "imageUrl":"http://9i.dvmama.com/supplier/2017/09/01/1200_1200_f66fc82c79224b1a0d5f3f7cf65e102e.jpg?x-oss-process=image/format,webp",
+        "title":"商品标题",
+        "nowPrice":"价格",
+        "actInfo":"活动信息",
+        "command": {
+          "content" : "点击时的动作"
+        }
+      },
+      {
+        "imageUrl":"http://9i.dvmama.com/supplier/2017/09/01/1200_1200_f66fc82c79224b1a0d5f3f7cf65e102e.jpg?x-oss-process=image/format,webp",
+        "title":"商品标题",
+        "nowPrice":"价格",
+        "actInfo":"活动信息",
+        "command": {
+          "content" : "点击时的动作"
+        }
+      },
+      {
+        "imageUrl":"http://9i.dvmama.com/supplier/2017/09/01/1200_1200_f66fc82c79224b1a0d5f3f7cf65e102e.jpg?x-oss-process=image/format,webp",
+        "title":"商品标题",
+        "nowPrice":"价格",
+        "actInfo":"活动信息",
+        "command": {
+          "content" : "点击时的动作"
+        }
+      }
+    ]
+  }
+}

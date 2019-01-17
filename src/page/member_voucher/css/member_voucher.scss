@@ -1,0 +1,142 @@
+@import "../../../common/css/util";
+
+.app {
+	background: white;
+	.dvd-service-com-title{
+		z-index: 11;
+	}
+	/* 安卓hack */
+	&.android {
+
+	}
+	.declare{
+		color: #fe9cbd;
+		font-size: .14rem;
+		padding: 0 .15rem;
+	}
+	&>.tip{
+		width: 100%;
+		background: #ffeef4;
+		padding: .03rem 0;
+		color: #fe9cbd;
+		font-size: .12rem;
+		text-align: center;
+		position: relative;
+		z-index: 10;
+		p{
+			padding: .03rem 0;
+		}
+	}
+	.ticket-list{
+		overflow: hidden;
+	}
+	.getTicket{
+		padding-top: .4rem;
+		text-align: center;
+		font-size: 0.2rem;
+		a{
+			text-decoration: underline;
+			color: #fe9cbd;
+		}
+	}
+	div.getTicket{
+		padding-top: .2rem;
+	}
+	.ticket-item{
+		position: relative;
+		margin: .1rem .1rem 0;
+		width: 3.55rem;
+		height: 1rem;
+		overflow: hidden;
+		&:before{
+			content: '';
+			display: block;
+			width: 100%;
+			height: 100%;
+			background: url(//5e.dvmama.com/m/static/dist/static/page/my_redpack/img/redpack-bg.png?v=4226e17893) no-repeat;
+			background-size: 100% 100%;
+		}
+		&.null:before{
+			opacity: .5;
+		}
+		.num{
+			position: absolute;
+			top: .28rem;
+			left: .09rem;
+			height: .42rem;
+			line-height: .42rem;
+			color: #fff;
+			font-size: .38rem;
+			.symbol {
+				font-size: .2rem;
+			}
+		}
+		.info-box{
+			position: absolute;
+			top: .10rem;
+			left: 1.41rem;
+			width: 1.5rem;
+		}
+		.name {
+			height: .22rem;
+			line-height: .22rem;
+			font-size: .14rem;
+			// max-width: 2rem;
+			//white-space: nowrap;
+			//overflow: hidden;
+			//text-overflow: ellipsis;
+		}
+		.desc,.give {
+			height: .17rem;
+			line-height: .17rem;
+			font-size: .12rem;
+			color: #666;
+		}
+		.desc{
+			line-height: 0.13rem;
+		}
+		.valid-period {
+			height: .16rem;
+			line-height: .16rem;
+			font-size: .11rem;
+			color: #999;
+			max-width: 1.8rem;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.status-icon{
+			position: absolute;
+			top: .2rem;
+			right: 0;
+			width: .73rem;
+		}
+		.btn-box {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: .1rem;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			.btn{
+				display: block;
+				padding: .05rem .13rem;
+				border-radius: .05rem;
+				background: #FF4A7D;
+				color: #fff;
+				font-size: .12rem;
+				&.give-btn{
+					color: #FF4A7D;
+					border:1px solid #FF4A7D;
+					background-color: transparent;
+					box-sizing: border-box;
+				}
+				&:first-child{
+					margin-bottom: .05rem;
+				}
+			}
+		}
+	}
+
+}

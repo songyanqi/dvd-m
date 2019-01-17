@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/act_reward_dvd/css/act_reward_dvd.css[[v]]">
+</head>
+<body>
+  <div class="app" :class = "{ appTop: isTop }">
+    <!--标题-->
+    <com-top-title back title="双十二来大V店拿年终奖" home share></com-top-title>
+    <com-act-1111-reward></com-act-1111-reward>
+    <!--返回顶部-->
+    <com-to-top-icon></com-to-top-icon>
+  </div>
+
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/act_reward_dvd/js/act_reward_dvd.js[[v]]"></script>
+</body>
+</html>

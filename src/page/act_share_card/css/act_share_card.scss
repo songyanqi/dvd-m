@@ -1,0 +1,140 @@
+@import "../../../common/css/common.scss";
+
+$themeColor: #FF4A7D;
+.clearfix:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+html,body {
+  height: 100%;
+}
+.app {
+  background-image: url([[static]]/page/act_collect_card/img/collect_bkg.png[[v]]);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-color: #ff738a;
+  height: 100%;
+  .cardInfo {
+    position: relative;
+    text-align: center;
+    img {
+      vertical-align: middle;
+    }
+    
+    .cartIntroImg {
+      padding-top: 0.2rem;
+      width: 2.73rem;
+    }
+    .dogWrapper {
+      position: relative;
+      margin-bottom: -0.05rem;
+      .giveIcon {
+        position: absolute;
+        width: 0.5rem;
+        right: 50%;
+        -webkit-transform: translate(50%, -33%);
+        -ms-transform: translate(50%, -33%);
+        transform: translate(50%, -33%);
+        z-index: 5;
+      }
+    }
+    .big_card {
+      margin-top: 1.3rem;
+      img {
+        width: 100%;
+      }
+      .cardNav {
+        width: 37%;
+      }
+    }
+    .nickCont {
+      text-align: center;
+      margin: 0.2rem 0;
+      margin-top: 0.85rem;
+      font-size: 0.16rem;
+      .nickPic {
+        // display: inline-block;
+        margin-bottom: 0.05rem;
+        img {
+          width: 0.37rem;
+          height: 0.37rem;
+          border-radius: 50%;
+          overflow: hidden;
+          vertical-align: middle;
+        }
+      }
+      .nickName {
+        position: relative;
+        color: #fff;
+        display: inline-block;
+        margin-left: 0.05rem;
+      }
+      .nickName:after {
+        position: absolute;
+        left: 10%;
+        width: 90%;
+        content: "";
+        bottom: -0.04rem;
+        border-bottom: 1px solid #fff;
+        transform-origin: left top;
+      }
+
+      .nickLen {
+        width: 0.9rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+        -webkit-line-clamp: 1;
+        position: relative;
+        top: 0.02rem;
+      }
+    }
+
+    .operateCont {
+      .operateBtn {
+        margin: 0.1rem 0 0.15rem 0;
+        text-align: center;
+        background: url([[static]]/page/act_collect_card/img/banner.png[[v]]) no-repeat;
+        background-size: 100%;
+        padding: 0.13rem 0;
+        color: #fff;
+        font-size: 0.16rem;
+        img {
+          width: 1.7rem;
+        }
+      }
+      .operateInfo {
+        text-align: center;
+        text-decoration: underline;
+        font-size: 0.13rem;
+        color: #ea5148;
+        margin-bottom: 0.25rem;
+      }
+    }
+    .collectCont {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      color: #fff;
+      font-size: 0.14rem;
+      padding: 0.1rem 0.9rem 0.5rem;
+      .my_time {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+        text-align: left;
+      }
+      div {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.appTop {
+  background-position-y: 44px;
+}

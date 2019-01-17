@@ -1,0 +1,12 @@
+@import "../../../common/css/common.scss";
+
+.pull-right {
+    font-size: 14px;
+    color: #FF4A7D;
+    display: inline-block;
+    padding-right: 15px;
+    display: none;
+}
+.com-top-title .pull-right{
+  display: block;
+}

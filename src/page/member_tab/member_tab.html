@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/member_tab/css/member_tab.css[[v]]">
+</head>
+<body>
+  <div class="app" :class="{padTop: ua.isDvdApp()}" v-cloak>
+    <network-error @refresh="getData" v-if="networkError"></network-error>
+    <template v-else-if="response">
+      <!--系统状态栏-->
+      <div class="sys-status" :class="{android: ua.isAndroid()}" ref="sysStatus" v-if="ua.isDvdApp()"></div>
+      <!--内容 成为会员特权尽享-->
+      <div class="top-banner" v-if="sysTime >= userHead.start && sysTime <= userHead.end && userHead.status == 0">
+        <!--会员 非会员 动态信息循环播放-->
+        <div class="swiper-container join-scroll">
+          <div class="swiper-wrapper">
+            <template v-for="(list, i) in userHead.title">
+              <div class="swiper-slide"></div>
+              <div class="swiper-slide"><span class="text">{{list}}</span></div>
+            </template>
+          </div>
+        </div>
+
+        <div class="banner-pic" v-if="isSeller" @click="toVipBtn(userHead)">
+            <img :src="userHead.member_image" alt="">
+        </div>
+        <div class="banner-pic" v-else @click="noVipBtn(userHead)">
+          <img :src="userHead.non_member_image" alt="" >
+        </div>
+        <!--用户头像-->
+        <div class="pic-photo">
+          <img src="//9i.dvmama.com/free/2017816/bg_p.png" alt="">
+          <img :src="userHead.avatar" alt="" class="photo-pic">
+        </div>
+
+      </div>
+
+      <!--优选好物-->
+      <div class="goods-wapper" v-if="saveMoney && saveMoney.position && saveMoney.position.length > 1 ">
+        <div class="goods-list">
+          <h3 class="title">优选好物</h3>
+          <div class="num-right" v-if="saveMoney.sold != 0 ">
+            <span class="icon" :class="{is_Android : ua.isAndroid()}">
+              <img src="//9i.dvmama.com/free/2017816/p_icon.png" alt=""><span>{{saveMoney.sold}} 已购买</span>
+            </span>
+          </div>
+        </div>
+        <div class="goods-message">每日为您甄选价格最省的优质商品</div>
+        <!--商品-->
+        <div class="list-parent">
+          <template v-if="saveMoney.position[0].url && saveMoney.position[0].url != '' ">
+            <p class="more" :class="{androidMore : ua.isAndroid()}" @click="moreSaveMoney(saveMoney)">
+              <span>更多</span>
+              <img src="//9i.dvmama.com/free/2017816/right_key.png" alt="">
+            </p>
+          </template>
+          <div class="list-wapper" v-for="(item,index) in saveMoney.position" :key="index" v-if="sysTime>=item.start && sysTime<=item.end && item.status == 0">
+            <div class="list" @click='toSaveMoney(item)'>
+              <div class="list-pic">
+                <img :src="item.goods_image" alt="">
+                <!--一键购
+                <span class="buy-icon">一键购</span>-->
+              </div>
+              <!--内容-->
+              <div class="content">
+                {{item.goods_title}}
+                <p>{{item.goods_title}}</p>
+                <div class="price">
+                  <section class="shop-price">
+                    <em>¥</em>
+                    <span class="price-o">{{(item.shop_price + "").split(".")[0]}}</span>
+                    <span v-if="(item.shop_price +'').split('.').length == 2" class="price-t">.{{(item.shop_price + "").split(".")[1]}}</span>
+                  </section>
+                  <section class="day-price">
+                    <span>平日价</span>
+                    <em>¥</em>
+                    <span>{{item.marker_price}}</span>
+                  </section>
+                </div>
+                <!--已省XXX-->
+                <div class="save-money" v-if="item.marker_price != item.shop_price">已省{{Math.ceil((item.marker_price)*100 - (item.shop_price)*100)/100}}元</div>
+              </div>
+            </div>
+            <div class="rule-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <!--一起赚钱-->
+      <div class="goods-wapper" v-if="earningMoney && earningMoney.position && earningMoney.position.length > 0">
+        <div class="goods-list">
+          <h3 class="title">分享有奖</h3>
+          <div class="num-right" v-if="earningMoney.money != 0">
+            <span class="icon" :class="{is_Android : ua.isAndroid()}">
+              <img src="//9i.dvmama.com/free/2017816/b_icon.png" alt="" class="num-bg">
+              <span>已发总奖励 ¥{{earningMoney.money}}</span>
+            </span>
+          </div>
+        </div>
+        <div class="goods-message">分享商品，收获丰厚额外奖励</div>
+        <!--商品-->
+        <div class="list-parent">
+          <template v-if="earningMoney.position[0].url && earningMoney.position[0].url != '' ">
+            <div class="more" :class="{androidMore : ua.isAndroid()}" @click="moreEarningMoney(earningMoney)">
+              <span>更多</span>
+              <img src="//9i.dvmama.com/free/2017816/right_key.png" alt="">
+            </div>
+          </template>
+            <div class="make-money-goods">
+            <!--列表-->
+            <template v-for="(item,i) in earningMoney.position" v-if="sysTime >= item.start && sysTime <= item.end && item.status == 0">
+              <div class="m-splice-line" v-if="i != 0"></div>
+              <!--区分后台配置 图片内容-->
+              <div class="m-m-goods" @click="toEarnMoney(item)" v-if="item && item.member_image == '' ">
+                <!--会员-->
+                <div class="m-pic-left">
+                  <img :src="item.goods_image" alt="">
+                </div>
+
+                <div class="m-right">
+                  <div class="m-title">{{item.goods_title}}</div>
+                  <!--价钱-->
+                  <div class="m-price">
+                    <section class="m-shop-price">
+                      <em>¥</em>
+                      <span class="price-o">{{(item.shop_price + "").split(".")[0]}}</span>
+                      <span v-if="(item.shop_price +'').split('.').length == 2" class="price-t">.{{(item.shop_price + "").split(".")[1]}}</span>
+                    </section>
+                    <section class="m-day-price">
+                      <em>¥</em>
+                      <span>{{item.marker_price}}</span>
+                    </section>
+                  </div>
+                  <div class="m-save-money" v-if="isSeller">至少奖励{{item.money}}元</div>
+                  <div class="m-save-money" v-else>成为会员分享有奖</div>
+                </div>
+              </div>
+              <!--区分后台配置 图片-->
+              <div class="m-m-goods" @click="toEarnMoney(item)" v-else>
+                <div class="pic-earn-money" v-if="isSeller">
+                  <img :src="item.member_image" alt="">
+                </div>
+                <div class="pic-earn-money" v-else>
+                  <img :src="item.non_member_image" alt="">
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <!--好课推荐-->
+      <div class="goods-wapper" v-if="learn && learn.image">
+        <div class="goods-list">
+          <h3 class="title">好课推荐</h3>
+          <div class="num-right" v-if="learn.number != 0">
+            <span class="icon" :class="{is_Android : ua.isAndroid()}">
+              <img src="//9i.dvmama.com/free/2017816/p_icon.png" alt="">
+              <span>{{learn.number}} 已报名</span>
+            </span>
+          </div>
+        </div>
+        <div class="goods-message">会员免费get最好的课程和学习内容</div>
+        <!--图片-->
+        <div class="list-parent">
+          <template v-if="learn && learn.url != ''">
+            <div class="more" :class="{androidMore : ua.isAndroid()}" @click="moreLearn(learn)">
+              <span>更多</span>
+              <img src="//9i.dvmama.com/free/2017816/right_key.png" alt="">
+            </div>
+          </template>
+          <div class="good-class-pic" v-if="sysTime >= learn.start && sysTime <= learn.end && learn.status == 0" @click="toLearn(learn)">
+            <img :src="learn.image" alt="">
+          </div>
+        </div>
+      </div>
+
+      <!--社群活动-->
+      <div class="goods-wapper" v-if="activity && activity.image">
+        <div class="goods-list">
+          <h3 class="title">社群活动</h3>
+          <div class="num-right" v-if="activity.number != 0">
+            <span class="icon" :class="{is_Android : ua.isAndroid()}">
+              <img src="//9i.dvmama.com/free/2017816/p_icon.png" alt="">
+              <span>{{activity.number}} 本期已报名</span>
+            </span>
+          </div>
+        </div>
+        <div class="goods-message">会员专享的高价值线下活动</div>
+        <!--图片-->
+        <div class="list-parent">
+          <template v-if="activity && activity.url != '' ">
+            <div class="more" :class="{androidMore : ua.isAndroid()}" @click="moreActivity(activity)">
+              <span>更多</span>
+              <img src="//9i.dvmama.com/free/2017816/right_key.png" alt="">
+            </div>
+          </template>
+          <div class="good-class-pic" v-if="sysTime >= activity.start && sysTime <= activity.end && activity.status == 0" @click="toActivity(activity)">
+            <img :src="activity.image" alt="">
+          </div>
+        </div>
+      </div>
+
+      <!--返回顶部-->
+      <!--<com-to-top-icon></com-to-top-icon>-->
+
+      <!--footer-->
+      <com-footer active="configurable"></com-footer>
+    </template>
+    
+  </div>
+
+  
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <script crossorigin="anonymous" integrity="sha256-axCA4zZfWCHK3Voqm20kNdIvm0vPCz4KTRUYPVNadLA=" src="[[vendor]]/swiper/swiper-3.3.1.min.js"></script>
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/member_tab/js/member_tab.js[[v]]"></script>
+</body>
+</html>

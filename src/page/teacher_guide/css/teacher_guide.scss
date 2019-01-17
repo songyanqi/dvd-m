@@ -1,0 +1,206 @@
+@import "../../../common/css/util";
+body{
+  background-color: #ffffff;
+}
+.ui-bg-img {
+  width: 100%;
+  height: r(357);
+  position: fixed;
+  bottom: 0;
+  z-index: -999;
+  background-image: url(//9i.dvmama.com/free/2018/05/23/bg_teacher.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.ui-t13 {
+  position: relative;
+  top: r(13);
+}
+
+.app {
+  font-size: 0;
+  .ui-reload-btn {
+    width: r(90);
+    font-size: r(14);
+    color: #FF4a7d;
+    text-align: center;
+    position: fixed;
+    top: 15px;
+    right: r(14);
+    z-index: 2;
+  }
+  .ui-cnt {
+    padding: r(20);
+    .ui-title-box {
+      font-size: r(18);
+      color: #333333;
+      line-height: r(25);
+    }
+    .ui-list {
+      margin-top: r(18);
+      .ui-q {
+        margin-bottom: r(20);
+        animation: act 500ms;
+        .ui-q-title {
+          .ui-qm {
+            float: left;
+            height: r(16);
+            position: relative;
+            top: r(4);
+            div {
+              width: r(12);
+              height: r(12);
+              border-radius: r(2);
+              background-image: url(//9i.dvmama.com/free/2018/05/23/qm.png);
+              background-size: 100% 100%;
+              background-repeat: no-repeat;
+            }
+          }
+          .ui-qt {
+            max-width: r(207);
+            height: r(22);
+            line-height: r(22);
+            font-size: r(16);
+            margin-left: r(5);
+            display: inline-block;
+            box-sizing: border-box;
+          }
+          .ui-btn-group {
+            display: inline-block;
+            box-sizing: border-box;
+            width: r(110);
+            height: r(22);
+            line-height: r(22);
+            float: right;
+            .ui-btn {
+              width: r(50);
+              height: r(20);
+              line-height: r(20);
+              text-align: center;
+              color: #979797;
+              border: solid 1px #979797;
+              border-radius: r(4);
+              font-size: r(12);
+              float: right;
+            }
+            .ui-btn-act {
+              color: #FFFFFF;
+              background-color: #FF4a7d;
+              border: solid 1px #FF4a7d;
+            }
+            .ui-btn:nth-child(1) {
+              margin-left: r(5);
+            }
+          }
+        }
+        .ui-has {
+          animation: act 500ms;
+          .ui-a-text {
+            width: 100%;
+            height: r(17);
+            line-height: r(17);
+            font-size: r(12);
+            color: #999999;
+            margin-top: r(5);
+          }
+          .ui-a-courseList {
+            margin-top: r(12);
+            width: 100%;
+            .ui-a-course {
+              width: 100%;
+              margin-bottom: r(28);
+              .ui-c-left {
+                width: r(110);
+                height: r(76);
+                border-radius: r(4);
+                display: inline-block;
+                box-sizing: border-box;
+                img {
+                  border-radius: r(4);
+                }
+              }
+              .ui-a-right {
+                width: 2.15rem;
+                margin-left: 0.1rem;
+                float: right;
+                font-size: 0;
+                .ui-cnt-title {
+                  width: 2.15rem;
+                  height: 0.38rem;
+
+                  display: -webkit-box;
+                  -webkit-box-orient: vertical;
+                  -webkit-line-clamp: 2;
+                  overflow: hidden;
+                  font-size: 0.14rem;
+                  color: #333333;
+                }
+                .ui-cnt-info {
+                  color: #999999;
+                  font-size: 0;
+                  height: 0.17rem;
+                  line-height: 0.26rem;
+                  span {
+                    font-size: 0.12rem;
+                  }
+                  span:nth-child(1) {
+                    border-right: solid 1px #E1E1E1;
+                    padding-right: 0.05rem;
+                  }
+                  span:nth-child(2) {
+                    padding-left: 0.05rem;
+                  }
+                }
+                .ui-cnt-last {
+                  height: 0.17rem;
+                  margin-top: 0.03rem;
+                  font-size: 0.12rem;
+                  color: #999;
+                }
+              }
+            }
+            .ui-a-course:last-child {
+              margin-bottom: r(0);
+            }
+          }
+        }
+        .ui-nohas {
+          animation: act 500ms;
+          height: r(17);
+          line-height: r(17);
+          margin-top: r(10);
+          font-size: r(12);
+          text-align: left;
+          color: #999999;
+        }
+      }
+    }
+    .ui-null-img{
+      width: r(106);
+      position: relative;
+      left: 50%;
+      margin-top: r(166);
+      margin-left: r(-58);
+    }
+    .ui-null-text{
+      width: 100%;
+      text-align: center;
+      color: #666666;
+      font-size: r(14);
+      margin-top: r(20);
+    }
+  }
+  @keyframes act {
+    0% {
+      opacity: 0
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  /* 安卓hack */
+  &.android {
+
+  }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>成功购买督导课</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/assisting_pay_noTeacher/css/assisting_pay_noTeacher.css[[v]]">
+</head>
+
+<body>
+  <div class="app" v-cloak :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}" :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+    <!--标题-->
+    <dvd-service-com-title title="成功购买督导课" back></dvd-service-com-title>
+
+    <div v-if="seriesId" class="noTheacher">
+      <div class="title">我们将在5天内给您分配督导师，督导师会在开学典礼前邀您入群，敬请期待</div>
+      <dir class="goto" @click="courseInfoClick()">查看课程详情</dir>
+    </div>
+    <!--返回顶部-->
+    <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <!--<script src="[[vendor]]/swiper/swiper-3.3.1.min.js"></script>-->
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/assisting_pay_noTeacher/js/assisting_pay_noTeacher.js[[v]]"></script>
+</body>
+
+</html>

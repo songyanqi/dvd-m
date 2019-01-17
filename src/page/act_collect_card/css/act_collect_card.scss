@@ -1,0 +1,247 @@
+@import "../../../common/css/common.scss";
+
+$themeColor: #FF4A7D;
+.clearfix:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+html,body {
+  height: 100%;
+}
+.app {
+  background-image: url([[static]]/page/act_collect_card/img/collect_bkg.png[[v]]);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-color: #ff738a;
+  height: 100%;
+  .cardInfo {
+    position: relative;
+    text-align: center;
+    img {
+      vertical-align: middle;
+    }
+    .cardhandle {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+    }
+    .cardRecord,.compoundCard {
+      color: #fff;
+      font-size: 0.16rem;
+      text-decoration: underline;
+      padding: 0.1rem;
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+      flex: 1;
+    }
+    .cardRecord {
+      text-align: left;
+    }
+    .compoundCard {
+      text-align: right;
+      color: #ec637c;
+    }
+    .cartIntroImg {
+      padding-top: 0.2rem;
+      width: 2.73rem;
+    }
+    .dogWrapper {
+      position: relative;
+      margin-bottom: -0.05rem;
+      .giveIcon {
+        position: absolute;
+        width: 0.5rem;
+        right: 50%;
+        transform: translate(50%,-33%);
+        z-index: 5;
+      }
+    }
+    .big_card {
+      margin-top: 0.9rem;
+      margin-bottom: 0.75rem;
+      img {
+        width: 37%;
+      }
+    }
+    .bigBouns {
+      position: relative;
+      img {
+        position: absolute;
+        width: 0.4rem;
+        transform: translate(50%, -11%);
+        right: 50%;
+        z-index: 5;
+      }
+    }
+    .appBigCard {
+      margin-top: 0.95rem;
+    }
+
+    .operateCont {
+      .operateBtn {
+        margin: 0 0 0.1rem 0;
+        text-align: center;
+        background: url([[static]]/page/act_collect_card/img/banner.png) no-repeat;
+        background-size: 100%;
+        padding: 0.13rem 0;
+        color: #fff;
+        font-size: 0.16rem;
+        img {
+          width: 1.7rem;
+        }
+      }
+      .operateInfo {
+        text-align: center;
+        text-decoration: underline;
+        font-size: 0.13rem;
+        color: #fff;
+        margin-bottom: 0.25rem;
+      }
+    }
+
+    .little_card {
+      padding: 0 0.2rem;
+      .card_nav {
+        position: relative;
+        float: left;
+        width: 0.61rem;
+        margin-right: 0.05rem;
+        .cardImg {
+          width: 100%;
+        }
+        .currentCard,.currentSCard {
+          position: absolute;
+          bottom: 0;
+          display: block;
+          transform: translate(50%,50%);
+          width: 0.3rem;
+          height: 0.25rem;
+          z-index: 10;
+        }
+        .currentCard {
+          background: url([[static]]/page/act_collect_card/img/un_select.png);
+          background-size: 100%;
+        }
+        .currentSCard {
+          background: url([[static]]/page/act_collect_card/img/select.png);
+          background-size: 100%;
+        }
+        .numBkg {
+          position: absolute;
+          // bottom: 0.12rem;
+          bottom: 0;
+          right: 0;
+          color: #fff;
+          display: block;
+          width: 0.2rem;
+          height: 0.2rem;
+          line-height: 0.2rem;
+          font-weight: bold;
+          background: url([[static]]/page/act_collect_card/img/digto.png) no-repeat;
+          background-size: 100%;
+          z-index: 8;
+        }
+        .wancard {
+          position: absolute;
+          left: 0.07rem;
+          transform: translateY(-50%);
+          z-index: 5;
+          display: inline-block;
+          width: 0.45rem;
+          height: 0.2rem;
+          background: url([[static]]/page/act_collect_card/img/wan.jpg) no-repeat;
+          background-size: 100%;
+        }
+      }
+    }
+
+    .collectCont {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      color: #fff;
+      font-size: 0.14rem;
+      padding: 0.4rem 0.2rem 0.5rem;
+      .my_time {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+        text-align: left;
+      }
+      .collectRule {
+        text-decoration: underline;
+      }
+    }
+    .collectTime {
+      display: block;
+      text-align: center;
+    }
+    .timeBottom {
+      margin-bottom: 0.2rem;
+    }
+  }
+  .compoundCont {
+    position: fixed;
+    padding-top: 44px;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    .compounPic {
+      width: 100%;
+    }
+  }
+  .compoundPadding {
+    padding-top: 0;
+  }
+
+  .bounsModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    .bounsPic {
+      width: 100%;
+    }
+    .bounsInfo {
+      position: absolute;
+      top: 1.3rem;
+      color: #f9e1b3;
+      width: 100%;
+      .bounsTitle {
+        font-size: 0.20rem;
+        margin-bottom: 0.13rem;
+      }
+      .bounsMoney {
+        margin-bottom: 0.5rem;
+        .bounsM {
+          display: inline-block;
+          font-size: 0.17rem;
+          margin-right: 0.15rem;
+        }
+        .bounsLimit {
+          display: inline-block;
+          font-size: 0.12rem;
+        }
+      }
+      .bounsDate {
+        font-size: 0.12rem;
+      }
+    }
+    .bounsClose {
+      position: absolute;
+      top: 4.7rem;
+      width: 1.7rem;
+      height: 0.5rem;
+      // border: 1px solid #fff;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
+.appTop {
+  background-position-y: 44px;
+}

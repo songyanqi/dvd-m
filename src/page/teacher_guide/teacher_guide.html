@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>名师指导</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/teacher_guide/css/teacher_guide.css[[v]]">
+</head>
+<body>
+<div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+  <!--标题-->
+  <dvd-service-com-title title="名师指导" back></dvd-service-com-title>
+  <!-- 弹窗 -->
+  <user-chose-msg :show-model-tag="showModelTag" @model="closeModel" @submited="submited"></user-chose-msg>
+  <!--重新填写信息按钮-->
+  <div class="ui-reload-btn" @click="showModel()">重新填写信息</div>
+  <!-- 背景图片 -->
+  <div class="ui-bg-img"></div>
+  <!-- 页面内容 -->
+  <div v-if="showNull === false" class="ui-cnt">
+    <!--title-->
+    <div class="ui-title-box">
+      <p>{{title}}</p>
+    </div>
+    <!-- Q&A -->
+    <div class="ui-list">
+
+      <div class="ui-q" v-for="item in QList">
+        <div class="ui-q-title">
+          <div class="ui-qm">
+            <div></div>
+          </div>
+          <div class="ui-qt">{{item.title}}</div>
+          <div class="ui-btn-group" :class="{'ui-t13':item.title.length>12}">
+            <div class="ui-btn" :class="{'ui-btn-act':item.status === '0'}" @click="changeStatus('0',item.id)">否</div>
+            <div class="ui-btn" :class="{'ui-btn-act':item.status === '1'}" @click="changeStatus('1',item.id)">是</div>
+          </div>
+        </div>
+        <div class="ui-has" v-show="item.status === '1'">
+          <div class="ui-a-text">
+            <span>遇到这个问题的宝妈可以听:</span>
+          </div>
+          <course-list
+            :course-list="item.courseList"
+            :load="false"></course-list>
+        </div>
+        <div class="ui-nohas" v-show="item.status === '0'">
+          <span>宝妈厉害啦~羡慕你没有遇到这个问题！</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div v-if="showNull === true" class="ui-cnt">
+    <div class="ui-null-img">
+      <img src="//9i.dvmama.com/free/2018/01/23/1111111.png" width="100%">
+    </div>
+    <div class="ui-null-text">
+      <span>哎呀～暂时没有找到适合您的课程...</span>
+    </div>
+  </div>
+  <div v-if="showNull === ''" class="ui-cnt">
+    <div class="ui-null-img">
+      <img src="//9i.dvmama.com/free/2018/01/23/1111111.png" width="100%">
+    </div>
+    <div class="ui-null-text">
+      <span>加载中...</span>
+    </div>
+  </div>
+
+  <!--返回顶部-->
+  <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+</div>
+
+@@include('node_modules/dvd-base-build/html-inc/body.inc')
+<!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+<script src="[[static]]/common/js/common.js[[v]]"></script>
+<script src="[[static]]/page/teacher_guide/js/teacher_guide.js[[v]]"></script>
+</body>
+</html>

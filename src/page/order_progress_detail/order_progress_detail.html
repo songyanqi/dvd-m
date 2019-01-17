@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+	<title>进度详情</title>
+	<link rel="stylesheet" href="[[static]]/page/order_progress_detail/css/order_progress_detail.css[[v]]">
+</head>
+<body>
+	<div class = "app" :class = "{bodypd0: isapp}">
+    <com-top-title back title="进度详情" home></com-top-title>
+		<order-detail-goods :progresslist = "progressList" :response = "response"></order-detail-goods>
+	</div>
+
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/order_progress_detail/js/order_progress_detail.js[[v]]"></script>
+</body>
+</html>

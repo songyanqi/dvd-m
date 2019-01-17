@@ -1,0 +1,21 @@
+@import "../../../common/css/util/all.scss";
+
+.app {
+  ul.options {
+    background: white;
+    li {
+      line-height: r(40);
+      text-align: center;
+      &:after {
+        content: '';
+        display: block;
+        border-bottom: 1px solid #ddd;
+        transform: scaleY(0.5);
+      }
+      &.active {
+        background: #ff4a7d;
+        color: white;
+      }
+    }
+  }
+}

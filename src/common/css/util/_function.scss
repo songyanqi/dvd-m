@@ -1,0 +1,13 @@
+@import 'function_math';
+
+@function rem($px) {
+  @return $px / 100 * 1rem;
+}
+
+@function r($px) {
+  @return $px / 100 * 1rem;
+}
+
+@function r($px) {
+  @return $px / 100 * 1rem;
+}

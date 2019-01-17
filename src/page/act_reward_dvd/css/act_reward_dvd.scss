@@ -1,0 +1,327 @@
+@import "../../../common/css/common.scss";
+
+.app {
+	background-image: url(//9i.dvmama.com/free/1212/yearWard/yearWard_bkg_02.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+  background-color: #FE1755;
+  .act_year_rule {
+    position: absolute;
+    top: 44px;
+    right: 0rem;
+    width: 0.5rem;
+    height: 1.3rem;
+  }
+	.originPage {
+    margin-top: 3.6rem;
+    position: relative;
+  }
+  .memGoMain {
+    position: absolute;
+    bottom: -0.6rem;
+    text-align: center;
+    width: 200%;
+    left: -0.3rem;
+    font-size: 0.2rem;
+    color: #fed2ab;
+  }
+  .act_over {
+    background:#781207;
+    height: 3rem;
+  }
+  .activity_tips {
+    background: url(http://mamaj-oss.oss-cn-beijing.aliyuncs.com/free/1212/yearWard/yearReward_tips_001.png) no-repeat;
+    background-size: 100%;
+    font-size: 0.14rem;
+    padding: 0.1rem 0;
+    line-height: 0.1rem;
+
+    // font-family:
+    text-align: center;
+    color: #c25418;
+    .act_line {}
+    .actvity_t {
+      margin-right: 0.1rem;
+    }
+    .act_num {
+      font-size: 0.18rem;
+      font-weight: weight;
+    }
+  }
+  .act_invite_num {
+    margin-top: 0.2rem;
+    margin-bottom: 0.1rem;
+    font-size: 0.14rem;
+    color: #fed2ab;
+    text-align: center;
+    // font-family:
+  }
+  .activity_btn,.activity_isWx {
+    width: 2.9rem;
+		height: 0.6rem;
+    margin: auto;
+    background-position-x: 0.08rem;
+		color: #C04B0E;
+		font-size: 0.16rem;
+		line-height: 0.4rem;
+  }
+	.activity_btn {
+		background: url(//9i.dvmama.com/free/1212/yearWard/year_icon_btn.png) no-repeat;
+    background-size: 100%;
+  }
+  .activity_isWx {
+    background: url(//9i.dvmama.com/free/1212/newIcon/newweixin_icon.jpg) no-repeat;
+    background-size: 100%;
+  }
+	.activity_go {
+		text-align: center;
+		font-size: 0.14rem;
+		margin: 0.2rem 0;
+		color: #fed2ab;
+		.act_goMain {
+			display: inline-block;
+			border-bottom: 1px solid #fed2ab;
+		}
+		.act_goRule {
+			border-bottom: 1px solid #fed2ab;
+		}
+  }
+  .act_rules_cont {
+    color: #ffe7d1;
+    padding: 0.2rem;
+    .year1_icon,.year2_icon {
+      height: 0.2rem;
+      width: 1.25rem;
+      margin: 0.1rem auto;
+    }
+    .year1_icon {
+      background: url(//9i.dvmama.com/free/1212/newIcon/year_icon4.png) no-repeat center;
+      background-size: 100%;
+    }
+    .year2_icon {
+      background: url(//9i.dvmama.com/free/1212/newIcon/year_icon3.png) no-repeat center;
+      background-size: 100%;
+    }
+    .yearTipTitle {
+      // font-size: 12px;
+      line-height: 0.2rem;
+    }
+    .yearTipCont {
+      line-height: 0.2rem;
+      margin-left: 0.1rem;
+    }
+  }
+	.share_btn {
+    width: 2.4rem;
+    height: 0.32rem;
+    border: 0.04rem solid #FFFFFF;
+    border-radius: 0.32rem;
+    text-align: center;
+    line-height: 0.32rem;
+    font-size: 0.14rem;
+    color: #FFFFFF;
+    margin: 0 auto;
+  }
+
+  .mask {
+    position: fixed;
+    max-width: 640px;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.8);
+  }
+  .maskClose {
+    display: inline-block;
+    position: absolute;
+    width: 0.25rem;
+    top: 0.7rem;
+    right: 0.2rem;
+    height: 0.6rem;
+    background: url(//9i.dvmama.com/free/1212/newIcon/close.png) no-repeat;
+    background-size: 100%;
+  }
+  .maskCont {
+    position: fixed;
+    text-align: center;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    img {
+      width: 100%;
+    }
+    .maskOpenMem {
+      display: inline-block;
+      position: absolute;
+      width: 1rem;
+      bottom: -8%;
+      left: 0;
+      height: 1.5rem;
+    }
+    .memImg {
+      width: 0.62rem;
+    }
+    .maskNum {
+      display: inline-block;
+      position: absolute;
+      bottom: 42%;
+      left: 0;
+      width: 100%;
+      font-size: 0.25rem;
+      color: #ffe7d1;
+      text-align: center;
+      .maskComeTips {
+        margin-bottom: 0.2rem;
+      }
+    }
+    .maskOverNum {
+      position: absolute;
+      top: 46%;
+      width: 100%;
+      left: 0;
+      text-align: center;
+      color: #fff;
+      line-height: 0.18rem;
+    }
+    .maskLook {
+      position: absolute;
+      top: 60%;
+      width: 59%;
+      height: 5%;
+      left: 20%;
+      text-align: center;
+      color: #fff;
+      line-height: 0.18rem;
+      // border: 1px solid red;
+    }
+  }
+  .act_point {
+    text-align: center;
+    font-size: 0.16rem;
+    color: #fed2ab;
+    .act_point_num {
+      margin: 0.1rem 0 0.2rem 0;
+    }
+    .act_point_btn {
+      width: 2.9rem;
+      height: 0.6rem;
+      margin: auto;
+      background-position-x: 0.08rem;
+      color: #C04B0E;
+      font-size: 0.16rem;
+      line-height: 0.4rem;
+      background: url(//9i.dvmama.com/free/1212/yearWard/point_05.png) no-repeat;
+      background-size: 100%;
+    }
+  }
+
+  .bd_r {
+    background: -webkit-linear-gradient(left, #FF9636, #FA1862);
+    background: -webkit-gradient(linear, left left, right right, from(#FF9636), to(#FA1862));
+    background: -webkit-linear-gradient(left, #FF9636, #FA1862);
+    background: linear-gradient(to right, #FF9636, #FA1862);
+  }
+
+  .bd_p {
+    background: -webkit-linear-gradient(left, #E47CFF, #B26DE8);
+    background: -webkit-gradient(linear, left left, right right, from(#E47CFF), to(#B26DE8));
+    background: -webkit-linear-gradient(left, #E47CFF, #B26DE8);
+    background: linear-gradient(to right, #E47CFF, #B26DE8);
+  }
+    @keyframes com-alert-animation {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .com-popup-base2 {
+  	display: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    max-width: 640px;
+    height: 100%;
+    display: table;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9;
+    line-height: 1;
+  }
+  .com-popup-show {
+  	display: block;
+  }
+
+  .com-popup-base2 .table-cell {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .com-popup-base2 .table-cell .box {
+    display: inline-block;
+    border-radius: 0.04rem;
+    animation: com-alert-animation 0.5s;
+    width: 73.333%;
+    min-height: 200px;
+    position: relative;
+    text-align: center;
+    background-color: #FFFFFF;
+    padding: 0 0 15px;
+    color: #FF4A7D;
+    /*max-height: 4rem;*/
+    /*overflow-y: scroll;*/
+  }
+
+  .com-popup-base2 .table-cell .box div:nth-of-type(1) {
+    font-size: 14px;
+    text-align: center;
+    padding: 12px 0;
+    position: relative;
+  }
+
+  .com-popup-base2 .table-cell .box div:nth-of-type(2) {
+    font-size: 14px;
+    text-align: left;
+    line-height: 20px;
+    padding: 5px 10px 0;
+    max-height: 4rem;
+    overflow-y: scroll;
+  }
+
+  .com-popup-base2 .table-cell .box div:nth-of-type(3) {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 999;
+    width: 36px;
+    height: 36px;
+    background-image: url("../img/clearInput.png");
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+  }
+
+  .com-popup-base2 .table-cell .box div:nth-of-type(2) p {
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .com-popup-base2 .table-cell .box div:nth-of-type(1):after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -50%;
+    width: 200%;
+    height: 1px;
+    background: rgba(216, 216, 216, 0.51);
+    -webkit-transform: scale(0.5);
+    bottom: 0;
+    z-index: 1;
+  }
+}
+.appTop {
+  background-position-y: 44px;
+}

@@ -1,0 +1,28 @@
+@import "../../../common/css/util/all.scss";
+.app[v-cloak] {
+      display: none;
+    }
+.main{
+    padding: .2rem .2rem;
+    background: #fff;
+    p{
+        line-height: 1.5;
+    }
+    input{
+        border: .01rem solid #ccc;
+        height: .3rem ;
+        width: 70%;
+        margin: .2rem auto;
+        display: block;
+        border-radius: .05rem;
+    }
+    .btn{
+        color: #FF4A7D;
+        border: .01rem solid #FF4A7D;
+        border-radius: .05rem;
+        width: 60%;
+        padding: .1rem 0;
+        text-align: center;
+        margin: 0 auto;
+    }
+}

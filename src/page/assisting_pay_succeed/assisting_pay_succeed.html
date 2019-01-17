@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>督导课支付成功</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/assisting_pay_succeed/css/assisting_pay_succeed.css[[v]]">
+</head>
+
+<body>
+  <div class="app" v-cloak :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}" :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+    <!--标题-->
+    <dvd-service-com-title title="成功购买督导课" back></dvd-service-com-title>
+
+    <div class="content" v-if="response">
+      <!-- 支付成功 -->
+      <div class="payHeader" v-if="showPay">
+        <div class="payText">
+          <img src="[[static]]/page/assisting_pay_succeed/img/select.png" alt=""> 支付成功
+        </div>
+        <div class="headerWelcome">
+          欢迎加入本期课程学习
+        </div>
+        <div class="headerLine"></div>
+      </div>
+      <!-- 督导课信息 -->
+      <div class="courseInfo" v-if="teacherWxCode">
+        <div :class="{'title':true, 'showPayHeader': showPay }">请立即添加督导师微信</div>
+        <div class="introduce">督导师会在开学典礼前邀请您进群</div>
+        <div class="wxCode">
+          <div>
+            <img class="wxLeftImg" src="[[static]]/page/assisting_pay_succeed/img/wx_left.png" alt="">
+          </div>
+          <div>
+            <img class="wxRightImg" src="[[static]]/page/assisting_pay_succeed/img/wx_right.png" alt="">
+          </div>
+          <div>
+            <img class="wxCodeImg" :src="teacherWxCode" alt="" @click="saveCodeClick()">
+          </div>
+
+        </div>
+
+        <div class="save">{{wxCodeInfo}}</div>
+        <div class="appStep" v-if="ua.isDvdApp()">扫码步骤:在微信中点击"添加"-打开"扫一扫"-点击"相册"选择保存的二维码图片</div>
+        <dir class="goto" @click="courseInfoClick()">查看课程详情</dir>
+      </div>
+      <div v-else :class="{noTheacher:true, noPayHeader:!showPay}">
+        <div class="title">我们将在5天内给您分配督导师，督导师会在开学典礼前邀您入群，敬请期待</div>
+        <dir class="goto" @click="courseInfoClick()">查看课程详情</dir>
+      </div>
+
+
+    </div>
+
+    <!--返回顶部-->
+    <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <!--<script src="[[vendor]]/swiper/swiper-3.3.1.min.js"></script>-->
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/assisting_pay_succeed/js/assisting_pay_succeed.js[[v]]"></script>
+</body>
+
+</html>

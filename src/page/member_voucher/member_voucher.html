@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>养家大礼包抵用券</title>
+	@@include('node_modules/dvd-base-build/html-inc/head.inc')
+	<!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css"> -->
+	<link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+	<link rel="stylesheet" href="[[static]]/page/member_voucher/css/member_voucher.css[[v]]">
+</head>
+<body>
+<div class="app" v-cloak
+	 :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+	 :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+	<!--标题-->
+		<dvd-service-com-title title="养家大礼包抵用券" back :back-click="back">
+			<span slot="right" href="javascrupt:;">
+			<a :href="voucherIntroLink" class="declare">活动说明</a>
+			</span>
+		</dvd-service-com-title>
+		<div class="tip" v-if="status">
+			<p>{{status.date[0]}}期间累计支付每满{{money}}元，可获得抵用券{{num}}张</p>
+			<p>你已累计支付{{status.money}}元，获{{status.number}}张{{ticketData[0].voucherName}}</p>
+		</div>
+		<div class="getTicket" v-if="!ticketData.length&&current<=23">
+			<a :href="voucherMoreLink">获取更多抵用券</a>
+		</div>
+		<dvd-service-com-paging-list ref="paging" :list-height="listHeight" :list-length="ticketData.length" :get-data="getData" none-tip="还没有抵用券哟~">
+			<ul slot="list" class="ticket-list">
+				<li class="ticket-item" :class="{'null':item.status !== 1}" v-for="item in ticketData">
+					<!-- 金额 -->
+					<div class="num">
+						<span class="symbol">￥</span>{{item.voucherValue.substr(0,2)}}
+					</div>
+					<div class="info-box">
+						<!-- 名称 -->
+						<div class="name">{{item.voucherName}}</div>
+						<!-- 描述 -->
+						<div class="desc">{{item.voucherIntro}}</div><br>
+						<!-- 赠送 -->
+						<div class="give">{{item.ownWay}}</div>
+						<!-- 有效期 -->
+						<div class="valid-period">{{item.startDate | formatDate}}-{{item.endDate | formatDate}}</div>
+					</div>
+					<!-- 状态图标 -->
+					<img v-if="item.status === 2" class="status-icon" src="[[static]]/page/member_voucher/img/redpack-used.png" alt="">
+					<img v-if="item.status === 3" class="status-icon" src="[[static]]/page/member_voucher/img/redpack-overtime.png" alt="">
+					<img v-if="item.status === 4" class="status-icon" src="[[static]]/page/member_voucher/img/redpack-shixiao.png" alt="">
+					<img v-if="item.status === 5" class="status-icon" src="[[static]]/page/member_voucher/img/redpack-gived.png" alt="">
+					<!-- 按钮 -->
+					<div class="btn-box" v-show="item.status === 1">
+						<a class="btn" :href="voucherUseLink" v-show="canuse == 1">使用</a>
+						<span class="btn give-btn" @click="giveTicket(item)">转赠</span>
+					</div>
+				</li>
+				<li class="getTicket" v-if="ticketData.length&&current<=23">
+					<!-- <a href="/act/act_bonus_dvd.html">获取更多抵用券</a> -->
+					<a :href="voucherMoreLink">去购物 获更多抵用券</a>
+				</li>
+			</ul>
+		</dvd-service-com-paging-list>
+		<!--返回顶部-->
+		<dvd-service-com-go-page-top></dvd-service-com-go-page-top>
+	</div>
+
+	@@include('node_modules/dvd-base-build/html-inc/body.inc')
+	<script src="[[vendor]]/swiper/4.0.7/swiper.min.js"></script>
+	<script src="[[static]]/common/js/common.js[[v]]"></script>
+	<script src="[[static]]/page/member_voucher/js/member_voucher.js[[v]]"></script>
+</body>
+</html>

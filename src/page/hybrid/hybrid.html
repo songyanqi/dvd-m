@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>混合命令测试页面</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/hybrid/css/hybrid.css[[v]]">
+  <style>
+    button{
+      background: gray;
+      padding: 10px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body class="loaded">
+  <div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos()}"
+     :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}">
+    <!--标题-->
+    <dvd-service-com-title title="混合命令测试页面" back home></dvd-service-com-title>
+
+    <button @click="fn_1">上传 hybrid.Network.uploadFile type=0 limit=5 sourceType=0</button>
+    <button @click="fn_1_1">上传 hybrid.Network.uploadFile type=1 limit=5 sourceType=1</button>
+    <button @click="fn_1_2">上传 hybrid.Network.uploadFile type=2 limit=5 sourceType=2</button>
+
+    <button @click="fn_2">上传 hybrid.Network.uploadFile type=Video limit=3</button>
+
+    <button @click="fn_3">下载 hybrid.Network.downloadFile</button>
+
+    <button @click="fn_4">大图 hybrid.Image.showBigImage</button>
+
+    <button @click="fn_5">获取位置 hybrid.Location.getLocation</button>
+
+    <button @click="fn_6">用户信息 hybrid.Account.getUserInfo</button>
+
+    <button @click="fn_7">音频 hybrid.Audio.showAudioContent</button>
+
+    <button @click="fn_8">音频 hybrid.Audio.play</button>
+
+    <button @click="fn_9">音频 hybrid.Audio.pause</button>
+
+    <button @click="fn_10">音频 hybrid.Audio.stop</button>
+
+    <button @click="fn_11">音频 hybrid.Audio.next</button>
+
+    <button @click="fn_12">音频 hybrid.Audio.last</button>
+
+    <button @click="fn_13">音频 hybrid.Audio.showAudioContent showIntroduce=1</button>
+
+    <button @click="fn_14">视频 hybrid.Video.showVideoContent</button>
+
+    <button @click="fn_15">音频 hybrid.Audio.getAudioContentInfo</button>
+
+    <button @click="fn_16">音频 hybrid.Audio.onAudioChangeListener</button>
+
+    <button @click="fn_17">录音 hybrid.Record.startRecord</button>
+
+    <button @click="fn_18">录音 hybrid.Record.stopRecord</button>
+
+    <button @click="fn_19">系统信息 hybrid.System.getSystemInfo</button>
+
+    <button @click="fn_20">交互反馈 hybrid.Popup.showToast</button>
+
+    <button @click="fn_21">交互反馈 hybrid.Popup.hideToast</button>
+
+    <button @click="fn_22">交互反馈 hybrid.Popup.showLoading</button>
+
+    <button @click="fn_23">交互反馈 hybrid.Popup.hideLoading</button>
+
+    <button @click="fn_24">交互反馈 hybrid.Popup.showModal alert</button>
+
+    <button @click="fn_25">交互反馈 hybrid.Popup.showModal confirm</button>
+
+    <button @click="fn_26">交互反馈 hybrid.Popup.showModal prompt</button>
+
+    <button @click="fn_27">交互反馈 hybrid.Popup.showActionSheet</button>
+
+    <button @click="fn_28">通栏 hybrid.Browser.setStatusBar color</button>
+
+    <button @click="fn_29">通栏 hybrid.Browser.setStatusBar image</button>
+
+    <button @click="fn_30">下拉刷新 hybrid.PullDownRefresh.onPullDownRefresh</button>
+
+    <button @click="fn_31">下拉刷新 hybrid.PullDownRefresh.startPullDownRefresh</button>
+
+    <button @click="fn_32">下拉刷新 hybrid.PullDownRefresh.stopPullDownRefresh</button>
+
+    <!--返回顶部-->
+    <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+  </div>
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')
+  <script src="[[vendor]]/ali-oss/5.1.1/aliyun-oss-sdk.min.js"></script>
+  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/hybrid/js/hybrid.js[[v]]"></script>
+</body>
+</html>

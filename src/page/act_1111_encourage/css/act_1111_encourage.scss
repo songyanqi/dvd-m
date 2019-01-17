@@ -1,0 +1,173 @@
+@import "../../../common/css/common.scss";
+
+[v-cloak] {
+  display: none;
+}
+
+.app {
+  color: white;
+  img {
+    vertical-align: middle;
+  }
+  .g-head {
+    text-align: center;
+    img {
+      width: 100%;
+    }
+    .rule {
+      position: absolute;
+      top: r(200);
+      width: 100%;
+      text-align: center;
+      font-size: r(12);
+    }
+  }
+  .g-content {
+    position: relative;
+    //position: absolute;
+    //top: r(100);
+    background: linear-gradient(to bottom, #D21E4E 0%, #E9366C 30%, #E94D85 100%);
+    text-align: center;
+    padding-bottom: r(30);
+    .g-total {
+      margin: auto r(10);
+      height: r(94);
+      background: url([[static]]/page/act_1111_encourage/img/total-bg.png[[v]]);
+      background-size: 100% 100%;
+      .total {
+        position: relative;
+        top: r(30);
+        font-size: r(16);
+        text-align: center;
+        font-weight: bold;
+        span {
+          font-size: r(12);
+          position: relative;
+          top: r(-2)
+        }
+      }
+    }
+    .g-double-wrapper {
+      position: relative;
+      margin: r(10);
+      .g-double {
+        width: 100%;
+      }
+      .link {
+        position: absolute;
+        height: r(38);
+        &.link-1 {
+          top: r(-24);
+          left: r(15);
+        }
+        &.link-2 {
+          top: r(-24);
+          right: r(15);
+        }
+        &.link-3 {
+          bottom: r(-24);
+          left: r(15);
+        }
+        &.link-4 {
+          bottom: r(-24);
+          right: r(15);
+        }
+      }
+    }
+    .g-receive-list {
+      margin: r(10) r(10) 0;
+      border-radius: r(6);
+      background: rgba(255, 247, 244, 0.8);
+      padding: r(20) r(10) r(10);
+      text-align: left;
+      li {
+        background: url([[static]]/page/act_1111_encourage/img/received-bg.png[[v]]);
+        background-size: 100% 100%;
+        height: r(77);
+        padding: r(15) r(10);
+        box-sizing: border-box;
+        &:not(:first-of-type) {
+          margin-top: r(10);
+        }
+        .title {
+          font-weight: bold;
+          font-size: r(18);
+          line-height: r(25);
+        }
+        .desc {
+          @include ellipsis;
+          margin-top: r(5);
+          line-height: r(17);
+          font-size: r(12);
+        }
+      }
+      .go-subscribe {
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .g-receiving-wrapper {
+      padding-top: r(3);
+      border-radius: r(6);
+      background: #DA6A0F;
+      margin: auto r(10);
+    }
+    .g-receive-list.receiving {
+      background: #FFF06D;
+      padding: r(10) r(10) r(20);
+      margin: 0;
+      li {
+        background-image: url([[static]]/page/act_1111_encourage/img/receiving-bg.png[[v]]);
+        padding-right: r(80);
+      }
+    }
+    .g-bottom-logo {
+      width: r(175);
+      margin-top: r(20);
+    }
+  }
+  .g-prize-pop {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    max-width: $pageMaxWidth;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: table;
+    z-index: 9;
+    .wrapper {
+      vertical-align: middle;
+      text-align: center;
+      display: table-cell;
+      .info {
+        display: inline-block;
+        width: r(346);
+        height: r(277);
+        background: url([[static]]/page/act_1111_encourage/img/prize.png[[v]]) no-repeat;
+        background-size: 100% auto;
+        text-align: center;
+        .prize-title {
+          height: r(54);
+          margin-top: r(43);
+        }
+        .text {
+          font-size: r(18);
+          color: #D0021B;
+          margin-top: r(23);
+        }
+      }
+      .info.double {
+        .prize-title {
+          height: r(49);
+          margin-top: r(32);
+        }
+        .text {
+          font-size: r(16);
+          margin-top: r(9);
+          line-height: r(23);
+        }
+      }
+    }
+  }
+}

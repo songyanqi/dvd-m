@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	@@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+	<title>售后进度</title>
+	<link rel="stylesheet" href="[[static]]/page/return_progress/css/return_progress.css[[v]]">
+</head>
+<body>
+	<div class = "app" :class = "{ bodypd0: isapp }">
+		<!--<order-top-title v-if = "!isapp" titleText = "售后进度"></order-top-title>-->
+    <com-top-title back title="售后进度" home></com-top-title>
+		<order-top :data = "progressList"></order-top>
+		<progress-list :isapp = "isapp" @status-list = "handleStatus" :response = "response"></progress-list>
+		<!--<loading v-if = "isLoad"></loading>-->
+	</div>
+
+
+  @@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+  <script src="[[static]]/page/return_progress/js/return_progress.js[[v]]"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+@import "../../../common/css/common.scss";
+
+$color-red: #FF4A7D;
+
+.app {
+  color: #333;
+
+  // 保存按钮
+  .dvd-service-com-title {
+    .save-btn {
+      position: absolute;
+      right: r(15);
+      font-size: r(14);
+      color: #D0D0D0;
+      white-space: nowrap;
+      &.active {
+        color: #FF4A7D;
+      }
+    }
+  }
+
+  // 信息修改主页面
+  &.main {
+    .edit-items {
+      // 编辑项通用样式
+      .item {
+        position: relative;
+        margin-top: 1px;
+        padding: 0 r(10);
+        @include height(r(40));
+        display: flex;
+        align-items: center;
+        background: white;
+        font-size: r(14);
+        .name {
+          flex: 1;
+        }
+        .value {
+          flex: 2;
+          color: #999;
+          text-align: right;
+          @include ellipsis;
+        }
+        &:after {
+          content: '';
+          margin-left: r(10);
+          @include square(r(14));
+          background: url(../img/arrow.png) no-repeat;
+          background-size: contain;
+        }
+      }
+      // 头像
+      .item.head {
+        @include height(r(63));
+        margin-top: 0;
+        input[type="file"]{
+          position: absolute;
+          top: 0;
+          left: 0;
+          display: block;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+        }
+        .value {
+          .pic {
+            @include circle(r(40));
+            vertical-align: middle;
+          }
+        }
+      }
+      // 店铺名称
+      .item.shop-name {
+        margin-top: r(10);
+      }
+      // 店铺背景
+      .item.shop-bg {
+        @include height(r(88));
+        .value {
+          .pic {
+            // img实现居中店铺背景
+            height: r(68);
+            width: r(176);
+            vertical-align: middle;
+            object-fit: cover;
+            object-position: center;
+
+            // background实现中店店铺背景
+            //display: inline-block;
+            //height: r(68);
+            //width: r(176);
+            //flex: none;
+            //background: no-repeat center;
+            //background-size: cover;
+            //vertical-align: middle;
+          }
+        }
+      }
+    }
+  }
+
+  // 修改昵称页面
+  &.input {
+    // 昵称、店铺名称
+    .input-nickname, .input-shop-name {
+      margin: r(10);
+      padding: 0 r(10);
+      @include height(r(40));
+      background: white;
+      display: flex;
+      input {
+        margin-right: r(10);
+        border-style: none;
+        flex: 1;
+        outline-style: none;
+      }
+      @include placeholder-color(#D0D0D0);
+      .count {
+        color: #D0D0D0;
+      }
+    }
+
+    // 店铺简介
+    .input-shop-desc {
+      margin: r(10);
+      line-height: 1.5;
+      textarea {
+        padding: r(10);
+        width: 100%;
+        box-sizing: border-box;
+        outline-style: none;
+        resize: none;
+      }
+    }
+
+    // 店铺地址
+    .input-shop-url {
+      margin: r(10);
+      padding: 0 r(10);
+      @include height(r(40));
+      background: white;
+      input {
+        border-style: none;
+        outline-style: none;
+        display: inline-block;
+        width: r(155);
+        text-align: right;
+      }
+      @include placeholder-color(#D0D0D0);
+    }
+    .input-shop-url-warn {
+      font-size: r(12);
+      line-height: r(17);
+      color: $color-red;
+      i{
+        margin-left: r(10);
+        @include circle(r(12));
+        border: 1px solid $color-red;
+        text-align: center;
+        font-style: normal;
+      }
+    }
+  }
+
+}

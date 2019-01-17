@@ -1,0 +1,63 @@
+{
+  "code": "0",
+  "data_version": "d751713988987e9331980363e24189ce",
+  "suggestDomain": "",
+  "forceDomain": "",
+  "shop_url": "https://bravetime.bravetime.net",
+  "visitor_status": 0,
+  "sess_key": "1d63eac5cd62ac7e455404ef01c5a4d200000001",
+  "sys_time": 1510077397,
+  "data": {
+    "orderInfo": {
+      "orderSn": "订单编号",
+      "deliverySn": "发货单号",
+      "orderDateTime": "订单日期：0000-00-00 00:00:00",
+      "orderStatusName": "订单状态:已发货/已完成",
+      "orderUrl": "https://root.davdian.com/o-37561251.html?did=23827436",
+      "supplierName": "供应商名称：供应商/大v店..."
+    },
+    "goodsList": [{
+      "goodsName": "商品名称",
+      "thumbImg": "https://9i.dvmama.com/supplier/2017/08/08/1000_1000_2d74c715d44903a6886cbda297794e52.jpg",
+      "goodNum": "3",
+      "goodsPrice": "商品价格"
+    }],
+    "deliveryInfo": {
+      "shipperCode": "STO",
+      "logisticCode": "3366796251966",
+      "logisticName": "申通快递",
+      "state": "4",
+      "traces": [{
+        "acceptTime": "2018-07-06 16:55:57",
+        "acceptStation": "已签收,签收人是:【收发室签收】"
+      }, {
+        "acceptTime": "2018-07-06 15:37:10",
+        "acceptStation": "【北京望京公司】正在进行【第三方代收】扫描"
+      }, {
+        "acceptTime": "2018-07-06 14:03:38",
+        "acceptStation": "【北京望京公司】的【摩托罗拉代派 手机(13520307457)】正在派件,扫描员是【于涛】"
+      }, {
+        "acceptTime": "2018-07-06 13:28:47",
+        "acceptStation": "快件到达【北京望京公司】,上一站是【】,扫描员是【张海】"
+      }, {
+        "acceptTime": "2018-07-06 11:36:35",
+        "acceptStation": "快件在【北京中转部】由【市内扫描413】扫描发往【北京望京公司】"
+      }, {
+        "acceptTime": "2018-07-04 21:16:57",
+        "acceptStation": "快件在【广东广州转运中心】由【罗祖准】扫描发往【北京中转部】"
+      }, {
+        "acceptTime": "2018-07-04 06:08:24",
+        "acceptStation": "快件在【广东中山转运中心】由【岳波】扫描发往【广东广州转运中心】"
+      }, {
+        "acceptTime": "2018-07-04 05:09:00",
+        "acceptStation": "快件在【广东中山转运中心】进行装包发往扫描，发往【北京中转部】"
+      }, {
+        "acceptTime": "2018-07-04 04:28:17",
+        "acceptStation": "快件到达【广东中山转运中心】,上一站是【广东中山转运中心】,扫描员是【中山转运中心】"
+      }, {
+        "acceptTime": "2018-07-03 17:51:07",
+        "acceptStation": "【广东广州市场部综合部】的【顺德北滘市场部 手机(15874244486)】已收件,扫描员是【顺德北滘市场部】"
+      }]
+    }
+  }
+}

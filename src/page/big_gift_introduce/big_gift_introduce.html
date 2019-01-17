@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>养家计划</title>
+	@@include('node_modules/dvd-base-build/html-inc/head.inc')
+	<!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+	<link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+	<link rel="stylesheet" href="[[static]]/page/big_gift_introduce/css/big_gift_introduce.css[[v]]">
+</head>
+<body>
+	<div class="app"
+		 :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos(), earn:fromEarn}"
+		 :style="{minHeight: document.documentElement.clientHeight - 44 + 'px'}" v-if=" arr!='' ">
+		<div class="pageShow">
+			<!--标题-->
+			<dvd-service-com-title title="养家计划" back :back-click="(inApp)?closePage:null" >
+			</dvd-service-com-title>
+			<div class="raiseHome">
+				<!--<template v-if="1">-->
+				<template v-if="firstDataInfo.postion==1">
+					<div class="raiseHomeHeaderRound">
+						<img src="[[static]]/page/big_gift_introduce/img/img17.png" alt="">
+					</div>
+					<div class="raiseHomeHeader">
+						<div class="raiseHomeHeaderTitle">
+							<div>蝴蝶妈妈</div>
+						</div>
+						<div class="raiseHomeHeaderList">
+							<ul class="top-line">
+								<li>
+									<nav></nav>
+									<div>邀请好友购买礼包，你将获得{{firstDataInfo.money}}元现金</div>
+								</li>
+								<!--<li>-->
+									<!--<nav></nav>-->
+									<!--<div v-if="firstDataInfo.selfGiftNum < 10 || firstDataInfo.groupGiftNum < 30">-->
+										<!--<a href="/sm/level_system.html" class="edition2">销售<span>10</span>个礼包并且社群累积销售礼包满<span>30</span>个后，可升级成为孔雀妈妈，提升收入 &nbsp;&nbsp;<span class="raiseMore">了解更多</span>-->
+											<!--<img src="[[static]]/page/big_gift_introduce/img/img21.png" alt="" style="float:none;">-->
+										<!--</a>-->
+									<!--</div>-->
+									<!--<div v-else-if="firstDataInfo.selfGiftNum >= 10 && firstDataInfo.groupGiftNum >=30">-->
+										<!--<a class="activeMonthParamLeft">-->
+											<!--可立即升级为孔雀妈妈-->
+										<!--</a>-->
+									<!--</div>-->
+								<!--</li>-->
+                <!--<li v-if="firstDataInfo.selfGiftNum < 10 || firstDataInfo.groupGiftNum < 30">-->
+                  <!--<nav></nav>-->
+                  <!--<div>目前已销售<span>{{firstDataInfo.selfGiftNum}}</span>个礼包，社群总共销售<span>{{firstDataInfo.groupGiftNum}}</span>个礼包</div>-->
+                <!--</li>-->
+							</ul>
+              <div class="progress">
+                <div class="progress-detail">
+                  <p class="detail detail1">
+                    <span class="line" :style="{width: progress}"></span>
+                    <span class="num" :style="{left: progress}">{{progress}}</span>
+                  </p>
+                  <p class="stage">
+                    <span>蝴蝶妈妈</span>
+                    <span>孔雀妈妈</span>
+                  </p>
+                </div>
+                <p class="tip" v-if="info.progress < 100"><span v-if="firstDataInfo.selfGiftNum < 10">再销售{{10-firstDataInfo.selfGiftNum}}个礼包，</span><span v-if="firstDataInfo.groupGiftNum < 30">社群再累积销售{{30-firstDataInfo.groupGiftNum}}个礼包后可升级孔雀</span></p>
+                <a href="/sm/level_system.html" class="know-btn" v-if="info.progress < 100">了解孔雀权益</a>
+                <p v-else-if="firstDataInfo.isApply == 1" class="apply">已满足申请孔雀妈妈条件<a href="/sm/level_up.html?position=2" class="apply-btn">立即申请</a></p>
+                <p v-else class="apply-success">成功提交申请，预计3个工作日内通过</p>
+              </div>
+						</div>
+					</div>
+				</template>
+				<template v-if="firstDataInfo.postion==2">
+					<div class="raiseHomeHeaderRound">
+						<img src="[[static]]/page/big_gift_introduce/img/img18.png" alt="">
+					</div>
+					<div class="raiseHomeHeader">
+						<div class="raiseHomeHeaderTitle">
+							<div>孔雀妈妈</div>
+						</div>
+						<div class="raiseHomeHeaderList">
+							<ul class="top-line">
+								<li>
+									<nav></nav>
+									<div>邀请好友购买礼包，你获得{{firstDataInfo.money}}元现金</div>
+								</li>
+								<!--<li> -->
+									<!--<nav></nav>-->
+									<!--<div>你邀请了<span>{{firstDataInfo.invitePosition1}}</span>位蝴蝶妈妈和<span>{{firstDataInfo.invitePosition0}}</span>位普通会员，她们每销售<span>1</span>个礼包，你将获得<span>100</span>元</div>-->
+								<!--</li>-->
+								<!--<li>-->
+									<!--<nav></nav>-->
+									<!--<div>-->
+										<!--<template>-->
+
+                      <!--培养出<span>2</span>位孔雀妈妈并且社群累计销售礼包满<span>500</span>个后，可升级成为凤凰妈妈，提升收入-->
+												<!--<a href="/sm/level_system.html">-->
+													<!--<span class="raiseMore">了解详情</span>-->
+													<!--<img src="[[static]]/page/big_gift_introduce/img/img21.png" alt="">-->
+												<!--</a>-->
+
+										<!--</template>-->
+									<!--</div>-->
+								<!--</li>-->
+                <li>
+                  <nav></nav>
+                  <div>你的社群成员每销售一个礼包，你获得100元</div>
+                </li>
+                <!--<li>-->
+                  <!--<nav></nav>-->
+                  <!--<div>目前已培养<span>{{firstDataInfo.pavoNum}}</span>个孔雀妈妈，社群已累计销售<span>{{firstDataInfo.groupGiftNum}}</span>个礼包</div>-->
+                <!--</li>-->
+                <li>
+                  <nav></nav>
+                  <div>培养{{firstDataInfo.pavoNum}}位孔雀妈妈，她们社群每销售一个礼包，你获得5元</div>
+                </li>
+							</ul>
+              <div class="progress">
+                <div class="progress-detail">
+                  <p class="detail detail2">
+                    <span class="line" :style="{width: progress}"></span>
+                    <span class="num" :style="{left: progress}">{{progress}}</span>
+                  </p>
+                  <p class="stage">
+                    <span>孔雀妈妈</span>
+                    <span>凤凰妈妈</span>
+                  </p>
+                </div>
+                <p class="tip" v-if="info.progress < 100"><span v-if="info.directPavoNum < 2">再培养{{2-info.directPavoNum}}位直邀好友成为孔雀，</span><span v-if="firstDataInfo.groupGiftNum < 500">社群再销售<br v-if="firstDataInfo.pavoNum != 2"/>{{500 - firstDataInfo.groupGiftNum}}个礼包后可升级凤凰</span></p>
+                <a href="/sm/level_system.html" class="know-btn" v-if="info.progress < 100">了解凤凰权益</a>
+                <p v-else-if="firstDataInfo.isApply == 1" class="apply">已满足申请凤凰妈妈条件<a href="/sm/level_up.html?position=3" class="apply-btn">立即申请</a></p>
+                <p v-else class="apply-success">成功提交申请，预计3个工作日内通过</p>
+              </div>
+						</div>
+					</div>
+				</template>
+				<template v-if="firstDataInfo.postion==3">
+					<div class="raiseHomeHeaderRound">
+						<img src="[[static]]/page/big_gift_introduce/img/img16.png" alt="">
+					</div>
+					<div class="raiseHomeHeader">
+						<div class="raiseHomeHeaderTitle">
+							<div>凤凰妈妈</div>
+						</div>
+						<div class="raiseHomeHeaderList">
+							<ul>
+								<li>
+									<nav></nav>
+									<div>邀请好友购买礼包，你获得{{firstDataInfo.money}}元现金</div>
+								</li>
+								<li>
+									<nav></nav>
+									<!--<div>你的社群中有<span>{{firstDataInfo.pavoNum}}</span>位孔雀妈妈，她们的社群每销售<span>1</span>个礼包，你将获得<span>40</span>元</div>-->
+									<div>你旗下的孔雀社群每销售1个礼包，你获得40元</div>
+                </li>
+								<li>
+									<nav></nav>
+									<div>不在孔雀社群中的蝴蝶妈妈和普通会员，每销售1个礼包，你获得140元</div>
+								</li>
+								<!--<li>-->
+									<!--<nav></nav>-->
+									<!--<div>社群中的普通会员 和蝴蝶妈妈，如邀请人是孔雀妈妈，每销售<span>1</span>个礼包你将获得<span>50</span>元</div>-->
+								<!--</li>-->
+								<li>
+									<nav></nav>
+									<div>共培养{{firstDataInfo.phenixNum}}位凤凰妈妈，她们的社群每销售1个礼包你获得10元</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</template>
+        <a class="group" name="group_entry" cat_id="22" :dvd_user_id="userId" v-if="((firstDataInfo.isApply == 2 && firstDataInfo.postion == 1) || firstDataInfo.postion == 2) && info.isEnter != 1">
+          <img src="[[static]]/page/big_gift_introduce/img/group-icon.png" class="group-pic"/>
+          <span class="text">大V店官方孔雀群</span>
+          <span class="btn">点击加入</span>
+        </a>
+				<!-- 根据身份满足条件后可以升级 -->
+				<!--<template v-if="firstDataInfo.postion==1 && firstDataInfo.isApply==1">-->
+					<!--<div class="raiseHomeStatusShow">-->
+						<!--<a href="#">-->
+							<!--<img src="[[static]]/page/big_gift_introduce/img/img30.png" alt="" >-->
+						<!--</a>-->
+						<!--<a href="#">-->
+							<!--可升级为孔雀妈妈，提升收入-->
+						<!--</a>-->
+						<!--<a href="/sm/level_up.html?position=2">-->
+							<!--<img src="[[static]]/page/big_gift_introduce/img/img31.png" alt="">-->
+						<!--</a>-->
+					<!--</div>-->
+				<!--</template>-->
+        <!--<template v-if="firstDataInfo.isApply==2">-->
+          <!--<div class="raiseHomeStatusShow">-->
+            <!--<a href="#">-->
+              <!--<img src="[[static]]/page/big_gift_introduce/img/img30.png" alt="" >-->
+            <!--</a>-->
+            <!--<a href="#" v-if="firstDataInfo.postion==1">-->
+              <!--已申请孔雀妈妈，正在审核中-->
+            <!--</a>-->
+            <!--<a href="#" v-else-if="firstDataInfo.postion==2">-->
+              <!--已申请凤凰妈妈，正在审核中-->
+            <!--</a>-->
+          <!--</div>-->
+        <!--</template>-->
+				<!--<template v-if="firstDataInfo.postion==2 && firstDataInfo.isApply==1">-->
+					<!--<div class="raiseHomeStatusShow">-->
+						<!--<a href="#">-->
+							<!--<img src="[[static]]/page/big_gift_introduce/img/img30.png" alt="" >-->
+						<!--</a>-->
+						<!--<a href="#">-->
+							<!--可升级为凤凰妈妈，提升收入-->
+						<!--</a>-->
+						<!--<a href="/sm/level_up.html?position=3">-->
+							<!--<img src="[[static]]/page/big_gift_introduce/img/img31.png" alt="">-->
+						<!--</a>-->
+					<!--</div>-->
+				<!--</template>-->
+
+				<div class="raiseHomeSuggest">
+					<div class="raiseHomeSuggestTitle">
+						<div></div>
+						<div>邀请好友了解养家计划</div>
+					</div>
+					<div class="raiseHomeSuggestContent">
+						<img src="[[static]]/page/big_gift_introduce/img/img25.png" alt="" class="raiseHomeSuggestContentLife">
+						<ul>
+							<li>养家计划</li>
+							<li>让妈妈轻松赚钱</li>
+						</ul>
+						<div class="raiseHomeSuggestContentRight">
+							<a href="/m/big_gift_introduce_details.html">
+								<img src="[[static]]/page/big_gift_introduce/img/img26.png" alt="">
+							</a>
+							<div >
+								<!-- 邀请 -->
+								<img src="//9i.dvmama.com/free/2017/07/05/invite_btn.png" alt="" @click="invite">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="raiseHomeShare">
+					<div class="raiseHomeShareTitle">
+						<div></div>
+						<div>邀请好友购买养家大礼包</div>
+					</div>
+					<div class="raiseHomeShareContent" v-for="item in firstDataGoods">
+						<div>
+							<a :href=" '/' + item.goods_id + '.html?rp=introduce_img&rl=goods_detail&_='+ Date.now() ">
+								<img :src="item.image" alt="">
+							</a>
+						</div>
+						<div>
+							<ul>
+								<li class="raiseShareFirstLi">{{item.title}}</li>
+							</ul>
+							<ul class="raiseShareContentHeight">
+								<li class="raiseShareContentLi" v-for="item2 in item.advantage">
+									<nav></nav>
+									<nav>{{item2.title}}</nav>
+								</li>
+							</ul>
+							<ul class="raiseShareLastUl">
+								<a :href=" '/m/commodity_material.html?goodsId='+ item.goods_id +'&rp=goods_detail&rl=spread&type=1&_='+ Date.now() ">
+									<div>查看素材</div>
+									<img src="[[static]]/page/big_gift_introduce/img/img23.png" alt="">
+								</a>
+								<a @click="raiseShare(item)">
+									<img src="//9i.dvmama.com/free/2017/07/05/invite_btn_big.png" alt="">
+								</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<nav-footer :position="position"></nav-footer>
+	</div>
+	</body>
+
+	@@include('node_modules/dvd-base-build/html-inc/body.inc')
+	<!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+	<script src="[[static]]/common/js/common.js[[v]]"></script>
+	<script src="[[static]]/page/big_gift_introduce/js/big_gift_introduce.js[[v]]"></script>
+  <script src="https://3n.dvmama.com/group_entry/group_entry.v1.js"></script>
+</body>
+</html>

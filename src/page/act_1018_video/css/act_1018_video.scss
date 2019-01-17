@@ -1,0 +1,42 @@
+@import "../../../common/css/common.scss";
+
+.app {
+  background: url([[static]]/page/act_1018_video/img/bg.png[[v]]) repeat;
+  text-align: center;
+
+  .title-1 {
+    margin: r(24) auto auto;
+    width: 80%;
+  }
+  .words {
+    color: white;
+    line-height: 1.5;
+    margin-top: r(10);
+    font-size: r(12);
+  }
+  .tv {
+    margin: r(-40) auto auto;
+    padding: r(75) 0 0;
+    width: 100%;
+    height: r(210);
+    background: url([[static]]/page/act_1018_video/img/tv.png[[v]]) no-repeat;
+    background-size: 100%;
+    position: relative;
+    video {
+      width: 78%;
+      height: r(166);
+    }
+    .start {
+      position: absolute;
+      top: 43%;
+      left: 42%;
+      @include square(r(70));
+      cursor: pointer;
+    }
+  }
+  .go-main{
+    display: block;
+    margin: r(10) auto r(50);
+    width: 60%;
+  }
+}

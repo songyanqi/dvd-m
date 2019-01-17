@@ -1,0 +1,99 @@
+@import "../../../common/css/util/all.scss";
+
+[v-cloak] {
+  display: none !important;
+}
+
+.app {
+  .list1 {
+    margin-bottom: 0.1rem;
+    background: #ffffff;
+  }
+  .list1 .flist:last-child .line {
+    background: #fff;
+  }
+  .flist {
+    padding: 10px 0;
+  }
+  .line {
+    position: relative;
+    left: -50%;
+    width: 7.1rem;
+    margin-left: 0.2rem;
+    height: 1px;
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem;
+    background: #E1E1E1;
+    -webkit-transform: scale(0.5);
+  }
+  .list {
+    font-size: 0;
+    height: 0.7rem;
+    padding: 0 0.1rem;
+    position: relative;
+  }
+
+  .list > div {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .left_img {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 4px;
+
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .list_content {
+    margin-left: 0.1rem;
+    height: 0.7rem;
+    max-width: 2.59rem;
+  }
+  .list_title {
+    font-size: 0.14rem;
+    line-height: 0.2rem;
+    color: #333333;
+    max-width: 2.59rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    margin-top: -0.03rem;
+    @include ellipsis(2);
+  }
+  .list_time {
+    margin-bottom: -0.03rem;
+    height: 0.1rem;
+    font-size: 0.11rem;
+    line-height: 0.1rem;
+    color: #999999;
+  }
+  .list_name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    //white-space: nowrap;
+    max-width: 2.59rem;
+    font-size: 0.11rem;
+    line-height: 0.16rem;
+    color: #999999;
+    margin-top: 0.03rem;
+    @include ellipsis(1);
+  }
+  .se_text {
+    height: 0.1rem;
+    //margin-left: 0.05rem;
+    .ji{
+      margin-left: r(10);
+    }
+  }
+  .new_time {
+    font-size: 0;
+    height: 0.1rem;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: -0.01rem;
+  }
+}

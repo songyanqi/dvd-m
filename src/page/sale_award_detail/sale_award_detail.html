@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">
+  <link rel="stylesheet" href="[[static]]/page/sale_award_detail/css/sale_award_detail.css[[v]]">
+</head>
+<body>
+<div class="app" style="display: none;" :style="{display: response ? 'block' : 'none'}">
+  <!--标题-->
+  <com-top-title back title="活动详情" bottomLine>
+    <a v-if="response" @click="handleLink" class="pull-right invitebtn" href="javascript:void(0)" slot="right">全部活动</a >
+  </com-top-title>
+  <!-- <div id = "handl" @click="handleLink" style = "display: none;"></div> -->
+  <template>
+    <tab-item
+      :response = "response"
+      @upevent = "handleUp"
+      :gradsnum = "gradsNum"
+      :goodslist = "goodsList"
+      :ismore = "isMore"
+      :shareinfo = "shareInfo"
+      ></tab-item>
+    <!--返回顶部-->
+    <com-to-top-icon></com-to-top-icon>
+  </template>
+</div>
+
+
+
+@@include('node_modules/dvd-base-build/html-inc/body.inc')  <script src="[[static]]/common/js/common.js[[v]]"></script>
+<script src="[[static]]/page/sale_award_detail/js/sale_award_detail.js[[v]]"></script>
+</body>
+</html>

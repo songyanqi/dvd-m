@@ -1,0 +1,199 @@
+@import "../../../common/css/common.scss";
+
+.app {
+  padding-bottom: r(30);
+  background: #FBE158 url(../img/head-bg.png) no-repeat;
+  background-size: contain;
+  overflow: auto;
+}
+
+.g-act {
+  margin-top: r(209);
+  min-height: r(100);
+  .act-title {
+    //line-height: r(38);
+    //font-size: r(30);
+    text-align: center;
+    color: #FF4A7D;
+    font-weight: bold;
+    p {
+      background: linear-gradient(to bottom, #FB8F00, #FF0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    img{
+      width: r(311);
+    }
+  }
+  .act-step {
+    margin: r(20) auto 0;
+    width: r(285);
+    text-align: center;
+    .money-list {
+      display: flex;
+      color: #FF4A7D;
+      font-weight: bold;
+      .money {
+        display: block;
+        flex: 1;
+        font-size: r(14);
+        line-height: r(20);
+        padding-top: r(4);
+        &.current {
+          padding-top: 0;
+          font-size: r(18);
+          line-height: r(25);
+        }
+      }
+    }
+    .point-list {
+      margin-top: r(9);
+      display: flex;
+      height: r(3);
+      border-radius: r(100);
+      background: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      .point {
+        position: relative;
+        display: block;
+        flex: 1;
+        &.over {
+          img {
+            position: absolute;
+            top: r(-3);
+            margin-left: r(-3);
+            width: r(9);
+          }
+        }
+        &.current {
+          img {
+            position: absolute;
+            top: r(-4.5);
+            margin-left: r(-5);
+            width: r(13);
+          }
+        }
+        &.next {
+          img {
+            position: absolute;
+            top: r(-3);
+            margin-left: r(-3);
+            width: r(9);
+          }
+        }
+      }
+    }
+    .date-list {
+      margin-top: r(6);
+      display: flex;
+      .date {
+        display: block;
+        flex: 1;
+        font-size: r(14);
+        line-height: r(20);
+        color: #333;
+        &.over {
+          color: #999;
+        }
+      }
+    }
+  }
+  .act-today-info {
+    margin-top: r(22);
+    font-size: r(16);
+    line-height: r(22);
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+    .num {
+      color: #FF4A7D;
+    }
+  }
+  .act-result {
+    margin: r(20) auto;
+    padding: r(20) 0;
+    width: r(355);
+    background: rgba(255, 255, 255, 0.50);
+    border: 1px solid rgba(240, 104, 128, 0.40);
+    border-radius: r(6);
+    text-align: center;
+    &.transparent{
+      border: none;
+      background: transparent;
+      padding-top: 0;
+    }
+    .title {
+      margin-bottom: r(9);
+      font-size: r(18);
+      color: #333;
+      line-height: r(25);
+      font-weight: bold;
+      .num {
+        color: #FF4A7D;
+      }
+    }
+    p{
+      line-height: r(20);
+    }
+  }
+  .act-btn {
+    margin: r(30) auto 0;
+    padding: r(3);
+    box-sizing: border-box;
+    width: r(160);
+    background-image: linear-gradient(to right, #FEFAB0, #E0E80B);
+    box-shadow: 0 1px 3px 0 #AC6602;
+    border-radius: 100px;
+    text-align: center;
+    font-size: r(14);
+    color: #fff;
+    .text {
+      @include height(r(38));
+      background-image: linear-gradient(to right, #FF5C5C, #FA1862);
+      border-radius: 100px;
+    }
+  }
+}
+
+.g-rule {
+  margin: r(40) r(10) 0;
+  padding-top: r(41);
+  background: url("../img/rule-head.png") r(105) 0 no-repeat;
+  background-size: r(234) auto;
+  .panel {
+    padding: r(3) r(4);
+    border-radius: r(10);
+    background-image: linear-gradient(to bottom, #F8879B, #F45672);
+    .content {
+      position: relative;
+      padding: r(25) r(15) r(5);
+      background: #FFEBEF;
+      border-radius: r(7);
+      //border-image: linear-gradient(to bottom, #F8879B, #F45672);
+      box-shadow: 0 r(2) r(4) rgba(73, 61, 0, .40);
+      .title {
+        position: absolute;
+        top: r(-23);
+        left: r(10);
+        width: r(90);
+        @include height(r(40));
+        background: #FF4A7D;
+        border-radius: r(5);
+        box-shadow: 0 r(2) 0 #B60221;
+        text-align: center;
+        color: #fff;
+      }
+      .word-1 {
+        margin: r(15) 0;
+        line-height: r(20);
+        color: #333;
+        font-size: r(14);
+      }
+      .word-2 {
+        line-height: r(18);
+        color: #666;
+        font-size: r(12);
+      }
+    }
+  }
+}

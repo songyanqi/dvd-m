@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TA送你一个红包</title>
+  @@include('node_modules/dvd-base-build/html-inc/head.inc')
+  <!--<link rel="stylesheet" href="[[vendor]]/swiper/swiper-3.3.1.min.css">-->
+  <link rel="stylesheet" href="[[static]]/common/css/common.css[[v]]">
+  <link rel="stylesheet" href="[[static]]/page/red_packet_given/css/red_packet_given.css[[v]]">
+</head>
+<body>
+<div class="app" v-cloak
+     :class="{native: ua.isDvdApp(), android: ua.isAndroid(), ios: ua.isIos(),'pt-115':is_X}"
+     :style="{minHeight: document.documentElement.clientHeight}">
+  <div class="ui-bg" :class="{'t-50-d':is_X}">
+    <!-- 分享者信息 -->
+    <div class="ui-shareUser-box-l"
+         v-if="pageStatus === 0 || pageStatus === 1 || pageStatus ===2 || pageStatus ===4|| pageStatus ===5">
+      <div class="ui-portrait-l" :class="{'ui-portrait-s':is_S===true}">
+        <img :src="data.shareUserIcon || defaultIcon" width="100%" height="100%">
+      </div>
+      <div class="ui-text-l">
+        <p>{{data.shareUserName}}分享了一个红包</p>
+        <p>快来领取吧，手慢无!</p>
+      </div>
+    </div>
+
+    <div class="ui-shareUser-box-s" v-if="pageStatus === 3">
+      <div class="ui-portrait-s">
+        <img :src="data.shareUserIcon || defaultIcon" width="100%" height="100%">
+      </div>
+      <div class="ui-text-s">
+        <p>{{data.shareUserName}}分享了一个红包</p>
+        <p>快来领取吧，手慢无!</p>
+      </div>
+    </div>
+    <!-- 领取者信息 -->
+    <div class="ui-shareUser-box-l act" v-if="pageStatus === 3" style="margin-top: 1.9rem">
+      <div class="ui-portrait-l" :class="{'ui-portrait-s':is_S===true}">
+        <img :src="data.receiveUserIcon || defaultIcon" width="100%" height="100%">
+      </div>
+      <div class="ui-text-l-3">
+        <p>{{data.receiveUserName}}</p>
+        <p>恭喜你领到了红包</p>
+        <p>别忘了感谢分享人哦～</p>
+      </div>
+    </div>
+    <!--绿帽山-->
+    <div class="ui-green-mountain"
+         v-if="pageStatus === 0 || pageStatus === 1 || pageStatus ===2 || pageStatus ===9"></div>
+    <!--两边人物-->
+    <div class="ui-character"
+         v-if="pageStatus === 0 || pageStatus === 1 || pageStatus ===2 || pageStatus ===5|| pageStatus ===9"
+         style="background-image: url('//pic.davdian.com/free/2018/06/07/Group4.png')"></div>
+    <div class="ui-character" v-if="pageStatus === 3||pageStatus === 4"
+         style="background-image: url('//pic.davdian.com/free/2018/06/08/Group3.png');margin-top: 1.76rem"></div>
+    <!--红包-->
+    <div class="ui-redPack" style="background-image: url('//pic.davdian.com/free/2018/06/07/redpack.png')"
+         v-if="pageStatus === 0 || pageStatus === 2 || pageStatus === 5|| pageStatus ===9"></div>
+    <div class="ui-redPack" style="background-image: url('//pic.davdian.com/free/2018/06/08/redpack1.png')"
+         v-if="pageStatus === 1 || pageStatus === 4" :class="{'hasTaken':pageStatus === 4}"></div>
+    <!--领取成功券-->
+    <div class="ui-ticket" v-if="pageStatus === 3">
+      <div class="ui-ticket-price">
+        <span>¥</span>
+        <span>{{data.bonusMoney}}</span>
+      </div>
+      <div class="ui-ticket-txt">
+        <p>{{data.bonusTitle}}</p>
+        <p>{{data.limitDesc}}</p>
+        <p>{{data.start_time}}-{{data.end_time}}</p>
+      </div>
+    </div>
+    <!--已超时印章icon-->
+    <div class="ui-has-overTime" v-if="pageStatus === 1"></div>
+    <!--已被抢印章icon-->
+    <div class="ui-has-overTime"
+         style="background-image: url('//pic.davdian.com/free/2018/06/08/hasTaken.png');margin-top: 2.2rem"
+         v-if="pageStatus === 4"></div>
+    <!--红包面值文案-->
+    <div class="ui-price-box"
+         v-if="pageStatus === 0 || pageStatus === 1 || pageStatus ===2 || pageStatus === 4|| pageStatus ===5|| pageStatus === 9"
+         :class="{'op-02':pageStatus === 1 || pageStatus === 4,'hasTaken4':pageStatus === 4}">
+      <div class="ui-price" v-if="pageStatus !==9">{{data.bonusMoney}}</div>
+      <div class="ui-price" style="font-size: 0.16rem;width: 100%" v-if="pageStatus ===9">出错啦</div>
+      <div class="ui-price-text" v-if="pageStatus !==9">
+        <p>RMB</p>
+        <p>红包</p>
+      </div>
+    </div>
+    <!--已过期提示-->
+    <div class="ui-ovt-tip" v-if="pageStatus === 1">
+      <span>很抱歉，分享红包在领取前已过期～</span>
+    </div>
+    <!--已被抢券-->
+    <div class="ui-hasTaken-ticket" v-if="pageStatus === 4">
+      <div class="ui-hasTaken-ticket-box">
+        <div class="ui-hasTaken-ticket-user">
+          <div class="ui-hasTaken-ticket-userIcon">
+            <img :src="data.receiveUserIcon || defaultIcon" width="100%" height="100%">
+          </div>
+          <div class="ui-hasTaken-ticket-txt">
+            <p>{{data.receiveUserName}}</p>
+            <p>{{data.create_ime}}</p>
+          </div>
+          <div class="ui-hasTaken-ticket-price">
+            <span>¥</span>
+            <span>{{data.bonusMoney}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--底部按钮-->
+    <div class="ui-btn" @click="getRedPack()" v-if="isLoading === false">
+      <span v-if="pageStatus === 0">立即领取</span>
+      <span v-if="pageStatus === 1 || pageStatus === 4 || pageStatus === 9 || pageStatus === 5">逛逛大V店</span>
+      <span v-if="pageStatus === 2">点击右上角... 赠送好友</span>
+      <span v-if="pageStatus === 3">立即使用</span>
+    </div>
+    <div class="ui-btn ui-dis-btn" disabled v-if="isLoading === true">
+      <span>领取中...</span>
+    </div>
+  </div>
+
+  <!--返回顶部-->
+  <!--<dvd-service-com-go-page-top></dvd-service-com-go-page-top>-->
+</div>
+
+@@include('node_modules/dvd-base-build/html-inc/body.inc')
+<!--<script src="[[vendor]]/swiper/swiper-3.3.1.jquery.min.js"></script>-->
+<script src="[[static]]/common/js/common.js[[v]]"></script>
+<script src="[[static]]/page/red_packet_given/js/red_packet_given.js[[v]]"></script>
+</body>
+</html>

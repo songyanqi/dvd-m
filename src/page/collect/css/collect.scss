@@ -1,0 +1,14 @@
+@import "../../../common/css/common.scss";
+
+.app {
+  .tab_fixed, .tab_fixed2{
+    top:44px !important;
+    width: 100% !important;
+    max-width: 640px !important;
+  }
+
+  .tab_fixed_old_app {
+    top: 0px !important;
+  }
+}
+
