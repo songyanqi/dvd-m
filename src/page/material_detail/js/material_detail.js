@@ -199,7 +199,7 @@ new Vue({
                   for(let i = 0; i < temp.imageList.length; i ++){
                     let value = temp.imageList[i];
                     value.imgOriginal = value.imgOriginal + webPsize;
-                    //替换二维码图片
+                    // 替换二维码图片
                     if (deQrCodeUrl && value.imgSplice) {
                       //value.imgSplice = value.imgSplice + '&host=' + window.location.host;
                       let split = value.imgSplice.split('?');
